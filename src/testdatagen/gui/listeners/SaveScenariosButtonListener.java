@@ -10,8 +10,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.commons.io.FilenameUtils;
 
-import testdatagen.Utilities;
 import testdatagen.model.ScenarioTableModel;
+import testdatagen.utilities.Utilities;
 
 public class SaveScenariosButtonListener implements ActionListener
 {
@@ -51,7 +51,6 @@ public class SaveScenariosButtonListener implements ActionListener
 	    {
 		    saveScenarioObjects = new ObjectOutputStream(new FileOutputStream(fileForSaving));
 		    saveScenarioObjects.writeObject(new Long(Utilities.saveLastISBN()));
-		    // TODO: refactoring, as scenarios is not fully Serializable
 		    saveScenarioObjects.writeObject(scenarios);
 		    saveScenarioObjects.flush();
 		    JOptionPane.showMessageDialog(null, "" + scenarios.getRowCount() + " scenarios saved to file " + fileForSaving.getName(), "Info", JOptionPane.INFORMATION_MESSAGE);
@@ -59,6 +58,7 @@ public class SaveScenariosButtonListener implements ActionListener
 	    catch (IOException e)
 	    {
     		JOptionPane.showMessageDialog(null, "Error: could not save file " + e.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+    		e.printStackTrace();
 	    }
 	    finally
 	    {

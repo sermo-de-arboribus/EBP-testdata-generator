@@ -1,5 +1,8 @@
 package testdatagen;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,4 +53,22 @@ public class TestScenario implements Serializable
     {
     	return tableOfTitles.getListOfTitles();
     }
+    
+    // control serialization, because when simply using the built-in
+    // mechanism to serialize a TableModel in conjunction with our 
+    // TableCellLineWrapRenderer an error will be thrown, saying that
+    // the SizeSequence object is not serializable. 
+	private void writeObject(final ObjectOutputStream outStream) throws IOException
+	{
+		outStream.writeUTF(name);
+		outStream.writeObject(getTitleList());
+	}
+	
+	@SuppressWarnings("unchecked")
+	private void readObject(final ObjectInputStream inStream) throws IOException, ClassNotFoundException
+	{
+		name = inStream.readUTF();
+		List<Title> titleList = (List<Title>) inStream.readObject();
+		tableOfTitles = new TitleTableModel(titleList);
+	}
 }

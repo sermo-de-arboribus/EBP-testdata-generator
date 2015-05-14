@@ -10,11 +10,11 @@ import javax.swing.*;
 import testdatagen.EBookFileFactory;
 import testdatagen.GraphicFileFactory;
 import testdatagen.TestScenario;
-import testdatagen.Utilities;
 import testdatagen.gui.TitleForm;
 import testdatagen.model.Title;
 import testdatagen.model.files.EBookFile;
 import testdatagen.model.files.GraphicFile;
+import testdatagen.utilities.Utilities;
 
 public class AddTitleToScenarioListener implements ActionListener {
 

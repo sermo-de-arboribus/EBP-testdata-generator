@@ -15,8 +15,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import testdatagen.TestDataGeneratorMain;
 import testdatagen.TestScenario;
-import testdatagen.Utilities;
 import testdatagen.model.ScenarioTableModel;
+import testdatagen.utilities.Utilities;
 
 public class LoadScenariosButtonListener implements ActionListener
 {

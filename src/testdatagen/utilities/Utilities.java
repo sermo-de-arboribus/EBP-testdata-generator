@@ -1,4 +1,4 @@
-package testdatagen;
+package testdatagen.utilities;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -6,7 +6,7 @@ import java.util.Random;
 
 import javax.swing.JOptionPane;
 
-public class Utilities
+public final class Utilities
 {
 	private static long lastISBN = 97810000019L;
 	private static int lastTitleNumber =  19;

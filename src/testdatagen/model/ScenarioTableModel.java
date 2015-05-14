@@ -1,5 +1,8 @@
 package testdatagen.model;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -20,7 +23,7 @@ public class ScenarioTableModel extends AbstractTableModel
 	private static final int COLUMN_IDX_NAME = 0;
 	private static final int COLUMN_IDX_NUMBER = 1;
 
-	private final List<TestScenario> scenarios;
+	private List<TestScenario> scenarios;
 	
 	public ScenarioTableModel(final List<TestScenario> scenarioList)
 	{
@@ -70,5 +73,17 @@ public class ScenarioTableModel extends AbstractTableModel
 	public ArrayList<TestScenario> getScenarioList()
 	{
 		return new ArrayList<TestScenario>(scenarios);
+	}
+	
+	// control serialization
+	private void writeObject(final ObjectOutputStream outStream) throws IOException
+	{
+		outStream.writeObject(scenarios);
+	}
+	
+	@SuppressWarnings("unchecked")
+	private void readObject(final ObjectInputStream inStream) throws IOException, ClassNotFoundException
+	{
+		scenarios = (List<TestScenario>) inStream.readObject();
 	}
 }
