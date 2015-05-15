@@ -1,5 +1,9 @@
 package testdatagen.utilities;
 
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Insets;
+import java.awt.Toolkit;
 import java.io.Closeable;
 import java.io.IOException;
 import java.util.Random;
@@ -22,6 +26,15 @@ public final class Utilities
 		String checkDigit = calculateCheckDigit(String.valueOf(nextISBN));
 		String nextISBNWithCheckDigit = String.valueOf(nextISBN) + checkDigit;
 		return Long.parseLong(nextISBNWithCheckDigit);
+	}
+	
+	public static Dimension getScreenDimensions(Component component)
+	{
+    	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    	Insets scnMax = Toolkit.getDefaultToolkit().getScreenInsets(component.getGraphicsConfiguration());
+    	int taskBarSize = scnMax.bottom;
+    	
+    	return new Dimension(screenSize.width, screenSize.height - taskBarSize);
 	}
 	
 	public static long saveLastISBN()

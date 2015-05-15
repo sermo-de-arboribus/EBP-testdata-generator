@@ -2,6 +2,9 @@ package testdatagen;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Insets;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -16,23 +19,31 @@ import testdatagen.gui.listeners.LoadScenariosButtonListener;
 import testdatagen.gui.listeners.SaveScenariosButtonListener;
 import testdatagen.model.ScenarioTableModel;
 import testdatagen.model.Title;
+import testdatagen.utilities.Utilities;
 
 public class TestDataGeneratorMain extends JFrame
 {
 	private static final long serialVersionUID = 1L;
 	private JTable scenarioTable;
+	private Dimension screenSize;
     
 	public TestDataGeneratorMain(String name)
     {
     	super(name);
+    	
+    	// determine screen dimensions and height of task bar
+    	screenSize = Utilities.getScreenDimensions(this);
+    	
+    	// define window dimensions
+    	setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+    	setLocation(0, 0);
+    	setSize(screenSize);
     	
     	buildScenarioTable();
     	buildTopButtonPane();
     	buildBottomButtonPane();
     	
     	// display window
-    	setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-    	setSize(800, 800);
     	setVisible(true);
     }
 
@@ -62,6 +73,7 @@ public class TestDataGeneratorMain extends JFrame
 	{
 		// create pane and buttons
 	    JPanel topButtonPanel = new JPanel();
+	    topButtonPanel.setPreferredSize(new Dimension((int) screenSize.getWidth(), (int) screenSize.getHeight() / 10));
 	    JButton addButton = new JButton("Add new scenario");
 	    JButton editButton = new JButton("Edit selected scenario");
 	    JButton saveButton = new JButton("Save scenarios");
