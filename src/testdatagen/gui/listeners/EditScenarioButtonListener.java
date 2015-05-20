@@ -7,11 +7,13 @@ import javax.swing.JButton;
 import javax.swing.JTable;
 
 import testdatagen.TestDataGeneratorMain;
+import testdatagen.TestScenario;
 import testdatagen.gui.EditScenarioDialog;
+import testdatagen.model.ScenarioTableModel;
+import testdatagen.utilities.Utilities;
 
 public class EditScenarioButtonListener implements ActionListener 
 {
-	private EditScenarioDialog newProfileDialog;
 	private JTable scenarioTable;
 	
 	public EditScenarioButtonListener(JTable scenarioTable)
@@ -26,6 +28,17 @@ public class EditScenarioButtonListener implements ActionListener
 		JButton source = (JButton) evt.getSource();
 		TestDataGeneratorMain mainWindow = (TestDataGeneratorMain) source.getTopLevelAncestor();
 		
-	    newProfileDialog = new EditScenarioDialog(mainWindow, scenarioTable);
+		// check if a row is selected
+		int row = scenarioTable.getSelectedRow();
+    	if(row < 0)
+    	{
+    		Utilities.showWarnPane("No row selected");
+    	}
+    	else
+    	{
+        	ScenarioTableModel tableModel = (ScenarioTableModel) scenarioTable.getModel();
+        	TestScenario selectedScenario = tableModel.getScenarioFromRow(row);
+    	    new EditScenarioDialog(mainWindow, selectedScenario);
+    	}
 	}
 }

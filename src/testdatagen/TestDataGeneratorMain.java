@@ -3,8 +3,6 @@ package testdatagen;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Insets;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -15,10 +13,13 @@ import javax.swing.table.TableModel;
 
 import testdatagen.gui.listeners.AddScenarioButtonListener;
 import testdatagen.gui.listeners.EditScenarioButtonListener;
+import testdatagen.gui.listeners.GenerateDataButtonListener;
 import testdatagen.gui.listeners.LoadScenariosButtonListener;
 import testdatagen.gui.listeners.SaveScenariosButtonListener;
 import testdatagen.model.ScenarioTableModel;
 import testdatagen.model.Title;
+import testdatagen.utilities.ISBNUtils;
+import testdatagen.utilities.TitleUtils;
 import testdatagen.utilities.Utilities;
 
 public class TestDataGeneratorMain extends JFrame
@@ -30,6 +31,8 @@ public class TestDataGeneratorMain extends JFrame
 	public TestDataGeneratorMain(String name)
     {
     	super(name);
+    	
+    	init();
     	
     	// determine screen dimensions and height of task bar
     	screenSize = Utilities.getScreenDimensions(this);
@@ -62,6 +65,19 @@ public class TestDataGeneratorMain extends JFrame
 		scenarioTable.setModel(scenarios);
 	}
 	
+	private void addRefreshButtonListener(JButton refreshButton)
+	{
+		refreshButton.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent evt)
+			{
+				Component source = (Component) evt.getSource();
+				JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(source);
+				frame.repaint();
+			}
+		});
+	}
 	private void buildBottomButtonPane()
 	{
 		JButton refreshButton = new JButton("Refresh");
@@ -85,6 +101,7 @@ public class TestDataGeneratorMain extends JFrame
 	    editButton.addActionListener(new EditScenarioButtonListener(scenarioTable));
 	    saveButton.addActionListener(new SaveScenariosButtonListener((ScenarioTableModel) scenarioTable.getModel()));
 	    loadButton.addActionListener(new LoadScenariosButtonListener(this));
+	    generateDataButton.addActionListener(new GenerateDataButtonListener(scenarioTable));
 	    
 	    // add buttons to pane
 	    topButtonPanel.add(addButton);
@@ -96,21 +113,7 @@ public class TestDataGeneratorMain extends JFrame
 	    // add pane to frame
 	    add(topButtonPanel, BorderLayout.NORTH);
 	}
-	
-	private void addRefreshButtonListener(JButton refreshButton)
-	{
-		refreshButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent evt)
-			{
-				Component source = (Component) evt.getSource();
-				JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(source);
-				frame.repaint();
-			}
-		});
-	}
-	
+
 	private void buildScenarioTable()
 	{
 		// TODO: scenario list currently filled with sample data, needs refactoring to load data from file
@@ -157,5 +160,12 @@ public class TestDataGeneratorMain extends JFrame
 		scenarioTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		add(new JScrollPane(scenarioTable), BorderLayout.CENTER);
+	}
+	
+	private void init()
+	{
+		// this will set the ISBN and title number counter to the value it reached in the previous session
+		ISBNUtils.loadLastISBN();
+		TitleUtils.loadLastTitleNumber();
 	}
 }

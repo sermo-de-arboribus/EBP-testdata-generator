@@ -14,7 +14,7 @@ public class ScenarioTableModel extends AbstractTableModel
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 
 	// names of the columns
 	private static final String[] COLUMN_NAMES = { "Scenario name", "Number of titles" };

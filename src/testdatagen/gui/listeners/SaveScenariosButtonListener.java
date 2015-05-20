@@ -50,14 +50,13 @@ public class SaveScenariosButtonListener implements ActionListener
 	    try
 	    {
 		    saveScenarioObjects = new ObjectOutputStream(new FileOutputStream(fileForSaving));
-		    saveScenarioObjects.writeObject(new Long(Utilities.saveLastISBN()));
 		    saveScenarioObjects.writeObject(scenarios);
 		    saveScenarioObjects.flush();
-		    JOptionPane.showMessageDialog(null, "" + scenarios.getRowCount() + " scenarios saved to file " + fileForSaving.getName(), "Info", JOptionPane.INFORMATION_MESSAGE);
+		    Utilities.showInfoPane("" + scenarios.getRowCount() + " scenarios saved to file " + fileForSaving.getName());
 	    }
 	    catch (IOException e)
 	    {
-    		JOptionPane.showMessageDialog(null, "Error: could not save file " + e.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+	    	Utilities.showErrorPane("Error: could not save file", e);
     		e.printStackTrace();
 	    }
 	    finally

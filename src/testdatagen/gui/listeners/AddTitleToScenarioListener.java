@@ -14,6 +14,8 @@ import testdatagen.gui.TitleForm;
 import testdatagen.model.Title;
 import testdatagen.model.files.EBookFile;
 import testdatagen.model.files.GraphicFile;
+import testdatagen.utilities.ISBNUtils;
+import testdatagen.utilities.TitleUtils;
 import testdatagen.utilities.Utilities;
 
 public class AddTitleToScenarioListener implements ActionListener {
@@ -100,8 +102,8 @@ public class AddTitleToScenarioListener implements ActionListener {
 					}
 					
 					// instantiate a new title object
-					long nextIsbn = Utilities.getNextISBN();
-					Title newTitle = new Title(nextIsbn, "test-" + nextIsbn, Utilities.getNewTitle(), Utilities.getNewAuthor(), mfl);
+					long nextIsbn = ISBNUtils.getNextISBN();
+					Title newTitle = new Title(nextIsbn, "test-" + nextIsbn, TitleUtils.getNewTitle(), TitleUtils.getNewAuthor(), mfl);
 					
 					// instantiate selected ebook file types and add them to the title object
 					// TODO: handle extracts!

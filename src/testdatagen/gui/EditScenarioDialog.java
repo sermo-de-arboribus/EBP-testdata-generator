@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -16,7 +15,6 @@ import testdatagen.TestDataGeneratorMain;
 import testdatagen.TestScenario;
 import testdatagen.gui.listeners.AddTitleToScenarioListener;
 import testdatagen.gui.listeners.RemoveTitleFromScenarioListener;
-import testdatagen.model.ScenarioTableModel;
 
 public class EditScenarioDialog extends JDialog
 {
@@ -32,52 +30,38 @@ public class EditScenarioDialog extends JDialog
 	private JTable titleTable;
 	private TestDataGeneratorMain mainWindow;
 	
-	public EditScenarioDialog(final TestDataGeneratorMain mainWindow, JTable scenarioTable)
+	public EditScenarioDialog(final TestDataGeneratorMain mainWindow, TestScenario selectedScenario)
 	{
 		this.setTitle("edit a test scenario");
 		this.mainWindow = mainWindow;
-		
-    	ScenarioTableModel tableModel = (ScenarioTableModel) scenarioTable.getModel();
-    	
-    	int row = scenarioTable.getSelectedRow();
-    	if(row < 0)
-    	{
-    		JOptionPane.showMessageDialog(this, "No row selected", "Warning",
-    			JOptionPane.WARNING_MESSAGE);
-    		this.dispose();
-    	}
-    	else
-    	{
-        	TestScenario selectedScenario = tableModel.getScenarioFromRow(row);
 
-        	// panel for displaying currently created test data sets
-        	buildTestDataTable(selectedScenario);
-        	
-        	// panel for adding a set of test data
-        	// note: has to be built after the test data table
-        	buildTopButtonPanel(selectedScenario);
-        	
-        	// add submit button
-        	JButton submitButton = new JButton("submit");
-        	submitButton.addActionListener(new ActionListener()
-        	{
-        		public void actionPerformed(ActionEvent evt)
-        		{
-        			JButton button = (JButton) evt.getSource();
-        			JDialog dialog = (JDialog) button.getTopLevelAncestor();
-        			mainWindow.repaint();
-        			dialog.dispose();
-        		}
-        	});
-        	this.add(submitButton, BorderLayout.SOUTH);
-        	
-        	// set dialog visible
-        	this.setModalityType(ModalityType.APPLICATION_MODAL);
-        	this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        	this.setLocation(50,50);
-        	this.setSize(DIALOG_WIDTH,DIALOG_HEIGHT);
-    	    this.setVisible(true);
-    	}
+    	// panel for displaying currently created test data sets
+    	buildTestDataTable(selectedScenario);
+    	
+    	// panel for adding a set of test data
+    	// note: has to be built after the test data table
+    	buildTopButtonPanel(selectedScenario);
+    	
+    	// add submit button
+    	JButton submitButton = new JButton("submit");
+    	submitButton.addActionListener(new ActionListener()
+    	{
+    		public void actionPerformed(ActionEvent evt)
+    		{
+    			JButton button = (JButton) evt.getSource();
+    			JDialog dialog = (JDialog) button.getTopLevelAncestor();
+    			mainWindow.repaint();
+    			dialog.dispose();
+    		}
+    	});
+    	this.add(submitButton, BorderLayout.SOUTH);
+    	
+    	// set dialog visible
+    	this.setModalityType(ModalityType.APPLICATION_MODAL);
+    	this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+    	this.setLocation(50,50);
+    	this.setSize(DIALOG_WIDTH,DIALOG_HEIGHT);
+	    this.setVisible(true);
 	}
 	
 	private void buildTopButtonPanel(TestScenario scenario)
