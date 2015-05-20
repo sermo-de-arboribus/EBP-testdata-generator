@@ -12,9 +12,9 @@ import javax.swing.JTable;
 import javax.swing.WindowConstants;
 
 import testdatagen.TestDataGeneratorMain;
-import testdatagen.TestScenario;
 import testdatagen.gui.listeners.AddTitleToScenarioListener;
 import testdatagen.gui.listeners.RemoveTitleFromScenarioListener;
+import testdatagen.model.TestScenario;
 
 public class EditScenarioDialog extends JDialog
 {

@@ -17,6 +17,7 @@ import testdatagen.gui.listeners.GenerateDataButtonListener;
 import testdatagen.gui.listeners.LoadScenariosButtonListener;
 import testdatagen.gui.listeners.SaveScenariosButtonListener;
 import testdatagen.model.ScenarioTableModel;
+import testdatagen.model.TestScenario;
 import testdatagen.model.Title;
 import testdatagen.utilities.ISBNUtils;
 import testdatagen.utilities.TitleUtils;

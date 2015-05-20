@@ -13,9 +13,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
-import testdatagen.TestScenario;
 import testdatagen.gui.listeners.AddTitleToScenarioListener;
 import testdatagen.model.ProductType;
+import testdatagen.model.TestScenario;
 
 public class TitleForm extends JDialog
 {

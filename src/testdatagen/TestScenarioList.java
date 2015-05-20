@@ -3,6 +3,8 @@ package testdatagen;
 import java.util.ArrayList;
 import java.util.List;
 
+import testdatagen.model.TestScenario;
+
 public class TestScenarioList
 {
     private List<TestScenario> listOfConfigurations;

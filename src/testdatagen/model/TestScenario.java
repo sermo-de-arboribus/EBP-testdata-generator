@@ -1,4 +1,4 @@
-package testdatagen;
+package testdatagen.model;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -14,7 +14,7 @@ public class TestScenario implements Serializable
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 	private TitleTableModel tableOfTitles;
 	private String name;
 	

@@ -7,9 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JTable;
 
 import testdatagen.TestDataGeneratorMain;
-import testdatagen.TestScenario;
 import testdatagen.gui.EditScenarioDialog;
 import testdatagen.model.ScenarioTableModel;
+import testdatagen.model.TestScenario;
 import testdatagen.utilities.Utilities;
 
 public class EditScenarioButtonListener implements ActionListener 

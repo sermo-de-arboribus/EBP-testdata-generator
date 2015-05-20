@@ -6,8 +6,8 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import testdatagen.TestDataGeneratorMain;
-import testdatagen.TestScenario;
 import testdatagen.gui.NewScenarioDialog;
+import testdatagen.model.TestScenario;
 
 public class AddScenarioButtonListener implements ActionListener
 {
