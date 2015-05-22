@@ -25,6 +25,22 @@ public class ISBNUtils
 		return Long.parseLong(nextISBNWithCheckDigit);
 	}
 	
+	public static String hyphenateISBN(long isbn)
+	{
+		String simpleString = String.valueOf(isbn);
+		char[] isbnChars = simpleString.toCharArray();
+		StringBuffer isbnBuffer = new StringBuffer();
+		for(int i = 0; i < isbnChars.length; i++)
+		{
+			isbnBuffer.append(isbnChars[i]);
+			if(i == 2 || i == 3 || i == 5 || i == 9)
+			{
+				isbnBuffer.append('-');
+			}
+		}
+		return isbnBuffer.toString();
+	}
+	
 	public static void loadLastISBN()
 	{
 		File configDir = Utilities.getConfigDir();
