@@ -28,12 +28,10 @@ public class EditScenarioDialog extends JDialog
 	private static final int DIALOG_HEIGHT = 800;
 
 	private JTable titleTable;
-	private TestDataGeneratorMain mainWindow;
 	
 	public EditScenarioDialog(final TestDataGeneratorMain mainWindow, TestScenario selectedScenario)
 	{
 		this.setTitle("edit a test scenario");
-		this.mainWindow = mainWindow;
 
     	// panel for displaying currently created test data sets
     	buildTestDataTable(selectedScenario);

@@ -65,6 +65,8 @@ public class GenerateDataButtonListener implements ActionListener
     			Utilities.showErrorPane("Error: could not create output directory", exc);
     		}
     		
+    		// TODO: The task of generating and saving files should not be done in the event dispatcher thread. 
+    		// This must go into a separate SwingWorker thread.
     		List<Title> titleList = selectedScenario.getTitleList();
     		ListIterator<Title> titleIterator = titleList.listIterator();
     		while(titleIterator.hasNext())
