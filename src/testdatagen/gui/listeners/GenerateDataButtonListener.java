@@ -3,19 +3,17 @@ package testdatagen.gui.listeners;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 
 import javax.swing.JFileChooser;
 import javax.swing.JTable;
 
 import org.apache.commons.io.FilenameUtils;
 
+import testdatagen.GeneratorThread;
 import testdatagen.model.ScenarioTableModel;
 import testdatagen.model.TestScenario;
 import testdatagen.model.Title;
-import testdatagen.model.files.GraphicFile;
 import testdatagen.utilities.Utilities;
 
 public class GenerateDataButtonListener implements ActionListener
@@ -65,23 +63,11 @@ public class GenerateDataButtonListener implements ActionListener
     			Utilities.showErrorPane("Error: could not create output directory", exc);
     		}
     		
+    		List<Title> titleList = selectedScenario.getTitleList();
     		// TODO: The task of generating and saving files should not be done in the event dispatcher thread. 
     		// This must go into a separate SwingWorker thread.
-    		List<Title> titleList = selectedScenario.getTitleList();
-    		ListIterator<Title> titleIterator = titleList.listIterator();
-    		while(titleIterator.hasNext())
-    		{
-    			Title title = titleIterator.next();
-    			// TODO: generate cover
-    			ArrayList<GraphicFile> coversList = title.getCoverFiles();
-    			for(GraphicFile coverFile : coversList)
-    			{
-    				coverFile.generate(title, destDir);
-    			}
-    			// TODO: check, if cover is handled by MediaFileLink
-    			// TODO: generate ONIX file
-    			// TODO: iterate over all file Objects and generate the files
-    		}
+    		GeneratorThread genThread = new GeneratorThread(titleList, destDir);
+    		genThread.start();
     	}
 	}
 }

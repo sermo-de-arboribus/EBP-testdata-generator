@@ -1,24 +1,15 @@
 package testdatagen.model.files;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Dimension;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.GregorianCalendar;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
-import javax.swing.CellRendererPane;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-import javax.swing.WindowConstants;
 
 import org.apache.commons.io.FilenameUtils;
 
@@ -63,125 +54,80 @@ public class JpegFile extends GraphicFile
 	
 	private BufferedImage paintCover(Title title)
 	{
-		JComponent c = new JpegCover(title);
-		BufferedImage img = paintComponent(c);
-		
-		// Debug data
-		JFrame testframe = new JFrame();
-		testframe.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		testframe.setLayout(new BorderLayout());
-		testframe.setLocation(20,20);
-		testframe.add(c, BorderLayout.CENTER);
-		testframe.pack();
-		testframe.setVisible(true);
-		System.out.println("Generated new JpegCover: " + c.toString());
-		
-		return img;
-	}
-	
-	public static BufferedImage paintComponent(Component c)
-	{
-		c.setSize(c.getPreferredSize());
-		layoutComponent(c);
-		
-		BufferedImage img = new BufferedImage(c.getWidth(), c.getHeight(), BufferedImage.TYPE_INT_RGB);
-		CellRendererPane crp = new CellRendererPane();
-		crp.add(c);
-		crp.paintComponent(img.createGraphics(), c, crp, c.getBounds());
-		return img;
-	}
-	
-	public static void layoutComponent(Component c)
-	{
-		synchronized(c.getTreeLock())
-		{
-			c.doLayout();
-			if(c instanceof Container)
-			{
-				for(Component child : ((Container) c).getComponents())
-				{
-					layoutComponent(child);
-				}
-			}
-		}
+		// generate random dimensions within certain bounds
+		Random random = new Random();
+		int width = random.nextInt(2100) + 300;
+		int height = (int) (width * 1.38);
+		BufferedImage bufImg = new JpegCover(title, width, height);
+		return bufImg;
 	}
 }
 
 // non-public helper class for painting a cover
-class JpegCover extends JPanel
-{
-	private Title title;
-	
-	JpegCover(Title title)
+class JpegCover extends BufferedImage
+{	
+	JpegCover(Title title, int width, int height)
 	{
-		this.title = title;
-	}
-	
-	@Override
-	public void paint(Graphics g)
-	{
-		paintComponent(g);
-	}
-	
-	@Override
-	public void paintComponent(Graphics g)
-	{
-		super.paintComponent(g);
-		System.out.println("Entering the JpegCover's paintComponent method");
+		super(width, height, TYPE_INT_RGB);
 		
-		// random dimensions within certain bounds
+		Graphics2D gra = this.createGraphics();
+		
+		// set random, but bright background colour
 		Random random = new Random();
-		double width = random.nextDouble() * 2100.0 + 300.0;
-		double height = width * 1.38;
-		Dimension canvasSize = new Dimension((int) width, (int) height);
+		int r1 = (int) (random.nextFloat() * 127.0 + 128.0);
+		int g1 = (int) (random.nextFloat() * 127.0 + 128.0);
+		int b1 = (int) (random.nextFloat() * 127.0 + 128.0);
+		Color bgcolor = new Color(r1, g1, b1);
+		gra.setBackground(bgcolor);
+		gra.clearRect(0, 0, width, height);
+		System.out.println("Background colour is " + bgcolor);
 		
-		setPreferredSize(canvasSize);
-		setSize(canvasSize);
+		// set random, but dark font colour
+		int r2 = (int) (random.nextFloat() * 127);
+		int g2 = (int) (random.nextFloat() * 127);
+		int b2 = (int) (random.nextFloat() * 127);
+		Color fcolor = new Color(r2, g2, b2);
+		gra.setColor(fcolor);
+		System.out.println("Font colour is " + bgcolor);
+		
 		Font largeFont = new Font(Font.SERIF, Font.BOLD, (int) (height * 0.75 * 0.05)); // 1 px is approximately 0.75 pt, and large font should be about 5% of the canvas height
 		Font mediumFont = new Font(Font.SERIF, Font.BOLD, (int) (height * 0.75 * 0.035));
 		Font smallFont = new Font(Font.SERIF, Font.PLAIN, (int) (height * 0.75 * 0.028));
-		FontMetrics largeMetrics = g.getFontMetrics(largeFont);
-		FontMetrics mediumMetrics = g.getFontMetrics(mediumFont);
-		FontMetrics smallMetrics = g.getFontMetrics(smallFont);
+		FontMetrics largeMetrics = gra.getFontMetrics(largeFont);
+		FontMetrics mediumMetrics = gra.getFontMetrics(mediumFont);
+		FontMetrics smallMetrics = gra.getFontMetrics(smallFont);
 		
 		// print title
-		g.setFont(largeFont);
-		g.drawString(title.getName(), 
+		gra.setFont(largeFont);
+		gra.drawString(title.getName(), 
 				(getWidth() - largeMetrics.stringWidth(title.getName())) / 2,  // centered title in x dimension 
 				getHeight() / 10); // y location of title
 		
 		// print author
-		g.setFont(mediumFont);
-		g.drawString("von " + title.getAuthor(),
+		gra.setFont(mediumFont);
+		gra.drawString("von " + title.getAuthor(),
 				(getWidth() - mediumMetrics.stringWidth("von " + title.getAuthor())) / 2, // centered author in x dimension
 				(int) ((getHeight() / 10.0) * 2.5)); // y location of title
 		
 		// print publisher string
-		g.setFont(smallFont);
-		g.drawString("erschienen im",
+		gra.setFont(smallFont);
+		gra.drawString("erschienen im",
 				(getWidth() - smallMetrics.stringWidth("erschienen im")) / 2,
-				(int) ((getHeight() / 5.0)));
-		g.drawString("IT-E-Books-Verlag", 
+				(int) ((getHeight() / 2.0)));
+		gra.drawString("IT-E-Books-Verlag", 
 				(getWidth() - smallMetrics.stringWidth("IT-E-Books-Verlag")) / 2,
-				(int) ((getHeight() / 2.5)));
-		g.drawString("Stuttgart",
+				(int) ((getHeight() / 1.5)));
+		gra.drawString("Stuttgart",
 				(getWidth() - smallMetrics.stringWidth("Stuttgart")) / 2,
-				(int) ((getHeight() / 2.5)) + smallMetrics.getHeight());
+				(int) ((getHeight() / 1.5)) + smallMetrics.getHeight());
 		int year = new GregorianCalendar().getWeekYear();
 		String yearString = Integer.toString(year);
-		g.drawString(yearString,
+		gra.drawString(yearString,
 				(getWidth() - smallMetrics.stringWidth(yearString)) / 2,
-				(int) ((getHeight() / 2.5)) + 2 * smallMetrics.getHeight());
+				(int) ((getHeight() / 1.5)) + 2 * smallMetrics.getHeight());
 		String isbnString = ISBNUtils.hyphenateISBN(title.getIsbn13()); 
-		g.drawString(isbnString, 
+		gra.drawString(isbnString, 
 				(getWidth() - smallMetrics.stringWidth(isbnString)) / 2, 
-				(int) ((getHeight() / 2.5)) + 4 * smallMetrics.getHeight());
-		
-		CellRendererPane crp = new CellRendererPane();
-		crp.add(this);
-		
-		g.dispose();
-		
-		this.revalidate();
-	} 
+				(int) ((getHeight() / 1.5)) + 4 * smallMetrics.getHeight());
+	}
 }
