@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
+import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.GregorianCalendar;
@@ -57,7 +58,8 @@ public class JpegFile extends GraphicFile
 		// generate random dimensions within certain bounds
 		Random random = new Random();
 		int width = random.nextInt(2100) + 300;
-		int height = (int) (width * 1.38);
+		double ratio = random.nextDouble() / 5.0;
+		int height = (int) (width * (1.28 + ratio));
 		BufferedImage bufImg = new JpegCover(title, width, height);
 		return bufImg;
 	}
@@ -83,16 +85,22 @@ class JpegCover extends BufferedImage
 		System.out.println("Background colour is " + bgcolor);
 		
 		// set random, but dark font colour
-		int r2 = (int) (random.nextFloat() * 127);
-		int g2 = (int) (random.nextFloat() * 127);
-		int b2 = (int) (random.nextFloat() * 127);
+		int r2 = (int) (random.nextFloat() * 127.0);
+		int g2 = (int) (random.nextFloat() * 127.0);
+		int b2 = (int) (random.nextFloat() * 127.0);
 		Color fcolor = new Color(r2, g2, b2);
 		gra.setColor(fcolor);
-		System.out.println("Font colour is " + bgcolor);
+		System.out.println("Font colour is " + fcolor);
 		
-		Font largeFont = new Font(Font.SERIF, Font.BOLD, (int) (height * 0.75 * 0.05)); // 1 px is approximately 0.75 pt, and large font should be about 5% of the canvas height
-		Font mediumFont = new Font(Font.SERIF, Font.BOLD, (int) (height * 0.75 * 0.035));
-		Font smallFont = new Font(Font.SERIF, Font.PLAIN, (int) (height * 0.75 * 0.028));
+		// select a font randomly
+		GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		Font[] fonts = env.getAllFonts();
+		int fontNumber = random.nextInt(fonts.length - 1);
+		Font baseFont = fonts[fontNumber];
+		
+		Font largeFont = new Font(baseFont.getName(), Font.BOLD, (int) (height * 0.75 * 0.05)); // 1 px is approximately 0.75 pt, and large font should be about 5% of the canvas height
+		Font mediumFont = new Font(baseFont.getName(), Font.BOLD, (int) (height * 0.75 * 0.035));
+		Font smallFont = new Font(baseFont.getName(), Font.PLAIN, (int) (height * 0.75 * 0.028));
 		FontMetrics largeMetrics = gra.getFontMetrics(largeFont);
 		FontMetrics mediumMetrics = gra.getFontMetrics(mediumFont);
 		FontMetrics smallMetrics = gra.getFontMetrics(smallFont);
