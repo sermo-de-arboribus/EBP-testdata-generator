@@ -1,6 +1,7 @@
 package testdatagen.model.files;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
@@ -15,6 +16,7 @@ import javax.imageio.ImageIO;
 import org.apache.commons.io.FilenameUtils;
 
 import testdatagen.model.Title;
+import testdatagen.utilities.CoverUtils;
 import testdatagen.utilities.ISBNUtils;
 import testdatagen.utilities.Utilities;
 
@@ -40,7 +42,6 @@ public class JpegFile extends GraphicFile
 		try
 		{
 			ImageIO.write(coverImage,  "jpg", new java.io.File(FilenameUtils.concat(destDir.getPath(), title.getIsbn13() + ".jpg")));
-			System.out.println("Saved file to path " + destDir.getPath());
 		}
 		catch (IOException e)
 		{
@@ -55,12 +56,8 @@ public class JpegFile extends GraphicFile
 	
 	private BufferedImage paintCover(Title title)
 	{
-		// generate random dimensions within certain bounds
-		Random random = new Random();
-		int width = random.nextInt(2100) + 300;
-		double ratio = random.nextDouble() / 5.0;
-		int height = (int) (width * (1.28 + ratio));
-		BufferedImage bufImg = new JpegCover(title, width, height);
+		Dimension coverDimension = CoverUtils.getRandomCoverDimension();
+		BufferedImage bufImg = new JpegCover(title, (int) coverDimension.getWidth(), (int) coverDimension.getHeight());
 		return bufImg;
 	}
 }
@@ -82,7 +79,6 @@ class JpegCover extends BufferedImage
 		Color bgcolor = new Color(r1, g1, b1);
 		gra.setBackground(bgcolor);
 		gra.clearRect(0, 0, width, height);
-		System.out.println("Background colour is " + bgcolor);
 		
 		// set random, but dark font colour
 		int r2 = (int) (random.nextFloat() * 127.0);
@@ -90,7 +86,6 @@ class JpegCover extends BufferedImage
 		int b2 = (int) (random.nextFloat() * 127.0);
 		Color fcolor = new Color(r2, g2, b2);
 		gra.setColor(fcolor);
-		System.out.println("Font colour is " + fcolor);
 		
 		// select a font randomly
 		GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
