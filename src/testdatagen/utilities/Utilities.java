@@ -49,19 +49,6 @@ public final class Utilities
 		return configDir;
 	}
 	
-	public static String getRandomCoverFormat()
-	{
-		float rnd = random.nextFloat();
-		if(rnd < 0.8)
-		{
-			return "JPEG";
-		}
-		else
-		{
-			return "PDF";
-		}
-	}
-	
 	public static String productTypeToFileType(String prodType)
 	{
 		switch(prodType)

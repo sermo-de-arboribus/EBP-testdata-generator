@@ -14,6 +14,7 @@ import testdatagen.model.TestScenario;
 import testdatagen.model.Title;
 import testdatagen.model.files.EBookFile;
 import testdatagen.model.files.GraphicFile;
+import testdatagen.utilities.CoverUtils;
 import testdatagen.utilities.ISBNUtils;
 import testdatagen.utilities.TitleUtils;
 import testdatagen.utilities.Utilities;
@@ -126,7 +127,7 @@ public class AddTitleToScenarioListener implements ActionListener {
 					// instantiate selected graphic file types and add them to the title object
 					GraphicFileFactory gff = GraphicFileFactory.getInstance();
 					// a cover file is needed in any case, choose randomly between jpg or pdf cover
-					GraphicFile coverFile = gff.generateFile(Utilities.getRandomCoverFormat(), nextIsbn, GraphicFile.Type.COVER);
+					GraphicFile coverFile = gff.generateFile(CoverUtils.getRandomCoverFormat(), nextIsbn, GraphicFile.Type.COVER);
 					newTitle.addFile(coverFile);
 					// check for optional graphic files and generate if requested
 					if(screenshot)
