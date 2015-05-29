@@ -21,6 +21,7 @@ public class ConfigurationRegistry
 		 regMap.put("cover.minXYRatio", "1.28");
 		 regMap.put("cover.maxXYRatio", "1.48");
 		 regMap.put("cover.likelinessOfPDFCovers", "0.2");
+		 regMap.put("file.tempFolder", "temp");
 	}
 	
 	public static synchronized ConfigurationRegistry getRegistry()

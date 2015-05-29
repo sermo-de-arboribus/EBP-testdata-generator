@@ -16,7 +16,13 @@ public abstract class GraphicFile extends File
 		this.type = type;
 	}
 	
-	public abstract void generate(Title title, java.io.File destDir);
+	/*
+	 * generates a graphic file and saves it to disc
+	 * @title Title: the title object to create the graphic file for
+	 * @destDir File: the destination directory for saving the file
+	 * @return File: the file path of the stored file.
+	 */
+	public abstract java.io.File generate(Title title, java.io.File destDir);
 	
 	public Type getType()
 	{

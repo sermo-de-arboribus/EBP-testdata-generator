@@ -25,13 +25,20 @@ public class GeneratorThread extends Thread
 		while(titleIterator.hasNext())
 		{
 			Title title = titleIterator.next();
-			// TODO: generate cover
+			// generate covers
 			ArrayList<GraphicFile> coversList = title.getCoverFiles();
 			for(GraphicFile coverFile : coversList)
 			{
-				coverFile.generate(title, destDir);
-			}
-			// TODO: check, if cover is handled by MediaFileLink
+				java.io.File storedFile = coverFile.generate(title, destDir);
+				// TODO: check, if cover is handled by MediaFileLink
+				if(title.hasMediaFileLink())
+				{
+					// TODO: upload cover file(s) to Dropbox and delete them from the local disc; keep file for later usage by ONIX builder
+					DropboxUploaderThread uploader = new DropboxUploaderThread(storedFile);
+					uploader.start();
+					// TODO: how to handle notification when upload is finished?
+				}
+			}			
 			// TODO: generate ONIX file
 			// TODO: iterate over all file Objects and generate the files
 		}

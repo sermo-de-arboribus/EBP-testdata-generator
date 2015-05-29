@@ -1,7 +1,6 @@
 package testdatagen.model.files;
 
 import java.awt.Dimension;
-import java.awt.Font;
 import java.io.IOException;
 import java.util.GregorianCalendar;
 
@@ -32,7 +31,7 @@ public class PDFCoverFile extends GraphicFile
 		this.ISBN = ISBN;
 	}
 	
-	public void generate(Title title, java.io.File destDir)
+	public java.io.File generate(Title title, java.io.File destDir)
 	{
 		Dimension coverDimension = CoverUtils.getRandomCoverDimension();
 		
@@ -90,21 +89,25 @@ public class PDFCoverFile extends GraphicFile
 			ex.printStackTrace();
 		}
 		
+		java.io.File storedFile = new java.io.File(FilenameUtils.concat(destDir.getPath(), title.getIsbn13() + "_cover.pdf"));
 		try
 		{
-			coverDoc.save(new java.io.File(FilenameUtils.concat(destDir.getPath(), title.getIsbn13() + "_cover.pdf")));
+			coverDoc.save(storedFile);
 			coverDoc.close();
 		}
 		catch (COSVisitorException cve)
 		{
 			System.out.println("An exception that represents something gone wrong when visiting a PDF object, thrown by the Apache PDFBox library");
 			cve.printStackTrace();
+			storedFile = null;
 		}
 		catch (IOException ex)
 		{
 			System.out.println("I/O error occurred during saving of cover PDF");
 			ex.printStackTrace();
+			storedFile = null;
 		}
+		return storedFile;
 	}
 	
 	public String toString()

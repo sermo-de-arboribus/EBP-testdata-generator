@@ -34,19 +34,22 @@ public class JpegFile extends GraphicFile
 		this.ISBN = ISBN;
 	}
 		
-	public void generate(Title title, java.io.File destDir)
+	public java.io.File generate(Title title, java.io.File destDir)
 	{
 		BufferedImage coverImage = paintCover(title);
+		java.io.File storedFile = new java.io.File(FilenameUtils.concat(destDir.getPath(), title.getIsbn13() + ".jpg"));
 
 		// save buffered image to file
 		try
 		{
-			ImageIO.write(coverImage,  "jpg", new java.io.File(FilenameUtils.concat(destDir.getPath(), title.getIsbn13() + ".jpg")));
+			ImageIO.write(coverImage,  "jpg", storedFile);
 		}
 		catch (IOException e)
 		{
-			Utilities.showErrorPane("Error: could not create output directory", e);
+			Utilities.showErrorPane("Error: could not write Jpeg file to disk", e);
+			storedFile = null;
 		}
+		return storedFile;
 	}
 	
 	public String toString()
