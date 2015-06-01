@@ -13,11 +13,44 @@ public class TitleUtils
 {
 	private static int lastTitleNumber =  19;
 	private static final String COMMON_TITLE_COMPONENT = "Testtitel ";
+	private static final String[] CURRENCIES = {"EUR", "GBP", "USD", "HKD", "CZK"};
 	private static final String[] GENRES = {"Roman", "Gedichte", "Komödie", "Ratgeber"};
-	private static final String[] FIRST_NAMES = {"Gesine", "Arnold", "Jascha", "Evelyne", "Horst", "Winfried", "Susanne", "Grazia"};
-	private static final String[] LAST_NAMES = {"Testautor-Schmidt", "Testautor-Meier", "Testautor-Tiedenhub"};
+	private static final String[] FIRST_NAMES = {"Gesine", "Arnold", "Jascha", "Evelyne", "Horst", "Winfried", "Susanne", "Grazia", "Kasimir", "Kajetan", "Caille", "Nadine", "Fenja", "Robin", "Kalle", "Frieda", "Nanjiang", "Jianhuang", "René", "Jiří", "Joyce", "Jean", "Eleftheria", "Alessandro", "Alexander", "Alexandra"};
+	private static final String[] LAST_NAMES = {"Schmidt", "Meier", "Tiedenhub", "Sully", "Prudhomme", "Mommsen", "Björnson", "Mistral", "Neruda", "Faulkner", "Hemingway", "Pynchon", "Joyce", "Zappa", "Frith", "Balcı", "Lodówka", "Lutosławski"};
 	private static Random random = new Random();
-
+	
+	public static String getNewAuthor()
+	{
+		return getRandomFirstName() + " Testautor-" + getRandomLastName();
+	}
+	
+	public static String getNewTitle()
+	{
+		int titleNumber = ++lastTitleNumber;
+		saveLastTitleNumber();
+		return COMMON_TITLE_COMPONENT + titleNumber + ". " + GENRES[random.nextInt(GENRES.length)];
+	}
+	
+	public static String getRandomCurrencyCode()
+	{
+		return CURRENCIES[random.nextInt(CURRENCIES.length)];
+	}
+	
+	public static String getRandomFirstName()
+	{
+		return FIRST_NAMES[random.nextInt(FIRST_NAMES.length)];
+	}
+	
+	public static String getRandomFullName()
+	{
+		return getRandomFirstName() + " " + getRandomLastName();
+	}
+	
+	public static String getRandomLastName()
+	{
+		return LAST_NAMES[random.nextInt(LAST_NAMES.length)];
+	}
+	
 	public static void loadLastTitleNumber()
 	{
 		File configDir = Utilities.getConfigDir();
@@ -71,17 +104,5 @@ public class TitleUtils
 				Utilities.safeClose(saveTNoStream);
 			}
 		}
-	}
-	
-	public static String getNewTitle()
-	{
-		int titleNumber = ++lastTitleNumber;
-		saveLastTitleNumber();
-		return COMMON_TITLE_COMPONENT + titleNumber + ". " + GENRES[random.nextInt(GENRES.length)];
-	}
-	
-	public static String getNewAuthor()
-	{
-		return FIRST_NAMES[random.nextInt(FIRST_NAMES.length)] + " " + LAST_NAMES[random.nextInt(LAST_NAMES.length)];
 	}
 }

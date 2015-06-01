@@ -8,10 +8,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import javax.swing.JOptionPane;
-
-import testdatagen.model.ScenarioTableModel;
-
 public class ISBNUtils
 {
 	private static long lastISBN = 97810000019L;

@@ -7,14 +7,13 @@ import java.awt.Toolkit;
 import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
-import java.util.Random;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.JOptionPane;
 
 public final class Utilities
 {
-	private static Random random = new Random();
-
 	public static Dimension getScreenDimensions(Component component)
 	{
     	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -49,7 +48,15 @@ public final class Utilities
 		return configDir;
 	}
 	
-	public static String productTypeToFileType(String prodType)
+	public static String getDateForONIX2(Date date)
+	{
+		String DATE_FORMAT = "yyyyMMddHHmm";
+		SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
+		return sdf.format(date);
+	}
+	
+	// TODO: Refactor - this method belongs into the Title class
+	public static String formatToFileType(String prodType)
 	{
 		switch(prodType)
 		{

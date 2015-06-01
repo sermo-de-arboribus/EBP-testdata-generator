@@ -7,6 +7,7 @@ import java.util.ListIterator;
 
 import testdatagen.model.Title;
 import testdatagen.model.files.GraphicFile;
+import testdatagen.model.files.ONIXFile;
 
 public class GeneratorThread extends Thread
 {
@@ -38,8 +39,12 @@ public class GeneratorThread extends Thread
 					uploader.start();
 					// TODO: how to handle notification when upload is finished?
 				}
-			}			
+			}
 			// TODO: generate ONIX file
+			ONIXFile onixFile = new ONIXFile(title.getIsbn13());
+			// TODO: do we need the return value of generate()? 
+			onixFile.generate(title, destDir);
+			
 			// TODO: iterate over all file Objects and generate the files
 		}
 	}

@@ -6,6 +6,7 @@ import java.util.HashSet;
 
 import testdatagen.model.files.File;
 import testdatagen.model.files.GraphicFile;
+import testdatagen.utilities.Utilities;
 
 public class Title implements Serializable
 {
@@ -13,10 +14,16 @@ public class Title implements Serializable
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static final String[] validEpubTypes = {"Epub", "PDF", "Mobi", "EpubMobi", "IBook", "SoftwareZip", "AudioZip"};
+	private static final String[] validFormats = {"PDF", "WMPDF", "NDPDF", "EPUB", "WMPEUB", "NDEPUB", "ZIP", "IBOOOK", "NDMOBI", "WMMOBI", "AUDIO"};
+	
 	private long isbn13;
     private String uid, name, author;
     private boolean mediaFileLink;
     private HashSet<File> files;
+    private String epubType;
+    private String format; // format = protection + epubType
+    private String protection; // WM = watermarked, ND = no protection, DRM = hard DRM
     
     public Title(final long isbn13, final String uid, final String name, final String author, final boolean mediaFileLink)
     {
@@ -46,7 +53,7 @@ public class Title implements Serializable
 	public ArrayList<GraphicFile> getCoverFiles()
 	{
 		ArrayList<GraphicFile> returnList = new ArrayList<>();
-		for( File file : files)
+		for(File file : files)
 		{
 			if(file instanceof GraphicFile)
 			{
@@ -58,6 +65,55 @@ public class Title implements Serializable
 			}
 		}
 		return returnList;
+	}
+	
+	public String getEpubType()
+	{
+		if(epubType == null)
+		{
+			return "Unknown";
+		}
+		return epubType;
+	}
+	
+	public String getEpubTypeForONIX()
+	{
+		switch(epubType)
+		{
+		case "PDF":
+			return "002";
+		case "Epub":
+			return "029";
+		case "IBook":
+			return "044";
+		case "SoftwareZip":
+		case "AudioZip":
+			return "099";
+		case "Mobi":
+			return "022";
+		default:
+			return "Unknown";
+		}
+	}
+	
+	public String getProtectionTypeForONIX()
+	{
+		if(protection == null)
+		{
+			Utilities.showErrorPane("Something went wrong with title " + this.isbn13 + ": protection type is not initialized", new NullPointerException());
+		}
+		switch(protection)
+		{
+		case("WM"):
+			return "02";
+		case("ND"):
+			return "00";
+		case("DRM"):
+			return "03";
+		default:
+			Utilities.showErrorPane("Something went wrong with title " + this.isbn13 + ": protection has unsupported value", new IllegalArgumentException());
+			return "";
+		}
 	}
 	
 	public HashSet<File> getFiles()
@@ -89,4 +145,49 @@ public class Title implements Serializable
     {
         return files.remove(remFile);
     }
+
+    /*
+     * setFormat takes in an EBP format string like "WMPDF" or "NDEPUB", validates it and stores file format,
+     * protection type and the format string itself as object attributes
+     */
+    public void setFormat(String formatString)
+    {
+    	if(isValidFormat(formatString))
+    	{
+    		format = formatString;
+    		setEpubType(Utilities.formatToFileType(formatString));
+    		if(formatString.startsWith("ND"))
+    		{
+    			protection = "ND";
+    		}
+    		else if(formatString.startsWith("WM"))
+    		{
+    			protection = "WM";
+    		}
+    		else 
+    		{
+    			protection = "DRM";
+    		}
+    	}
+    }
+	
+	private boolean isValidFormat(String formatString)
+	{
+		boolean valid = false;
+		for(String format : validFormats)
+		{
+			if(format.equals(formatString))
+			{
+				valid = true;
+			}
+		}
+		return valid;
+	}
+	
+    // this is private, because epubType is set based on the format String -> see setFormat()
+	private void setEpubType(String epubType)
+	{
+		
+		this.epubType = epubType;
+	}
 }

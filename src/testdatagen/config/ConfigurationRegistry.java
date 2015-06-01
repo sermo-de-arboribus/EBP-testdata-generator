@@ -22,6 +22,11 @@ public class ConfigurationRegistry
 		 regMap.put("cover.maxXYRatio", "1.48");
 		 regMap.put("cover.likelinessOfPDFCovers", "0.2");
 		 regMap.put("file.tempFolder", "temp");
+		 regMap.put("ssl.pathToCacerts", "R:\\git\\EBP-testdata-generator\\lib\\cacerts");
+		 regMap.put("ssl.pathToCacerts", "R:\\git\\EBP-testdata-generator\\lib\\cacerts");
+		 regMap.put("net.useProxy", "yes");
+		 regMap.put("net.proxy.host", "proxy.knonet.de");
+		 regMap.put("net.proxy.port", "8080");
 	}
 	
 	public static synchronized ConfigurationRegistry getRegistry()
@@ -31,6 +36,14 @@ public class ConfigurationRegistry
 			registry = new ConfigurationRegistry();
 		}
 		return registry;
+	}
+	
+	public boolean getBooleanValue(String key)
+	{
+		String value = regMap.get(key);
+		if(value == null) return false;
+		if(value.equals("yes") | value.equals("y") | value.equals("j") | value.equals("ja")) return true;
+		return false;
 	}
 	
 	public double getDoubleValue(String key)
@@ -59,5 +72,10 @@ public class ConfigurationRegistry
 			value = Integer.MIN_VALUE;
 		}
 		return value;
+	}
+	
+	public String getString(String key)
+	{
+		return regMap.get(key);
 	}
 }
