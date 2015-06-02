@@ -89,6 +89,10 @@ public class ONIXFile extends File
 		b040.appendChild(new Text(title.getAuthorLastName()));
 		contributorNode.appendChild(b040);
 		
+		// author blurb
+		Element b044 = new Element("b044");
+		b044.appendChild(new Text(title.getAuthorBlurb()));
+		contributorNode.appendChild(b044);
 		
 		return contributorNode;
 	}

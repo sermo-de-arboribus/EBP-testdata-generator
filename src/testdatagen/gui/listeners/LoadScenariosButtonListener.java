@@ -8,12 +8,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import testdatagen.TestDataGeneratorMain;
 import testdatagen.model.ScenarioTableModel;
-import testdatagen.utilities.ISBNUtils;
 import testdatagen.utilities.Utilities;
 
 public class LoadScenariosButtonListener implements ActionListener
@@ -36,28 +34,29 @@ public class LoadScenariosButtonListener implements ActionListener
 	    if(returnVal == JFileChooser.APPROVE_OPTION)
 	    {
 	    	fileForOpening = chooser.getSelectedFile();
-	    }
-	    ObjectInputStream loadScenarioObjects = null;
-	    try
-	    {
-	    	loadScenarioObjects = new ObjectInputStream(new FileInputStream(fileForOpening));
-	    	ScenarioTableModel scenarios = (ScenarioTableModel) loadScenarioObjects.readObject();
-	    	mainFrame.setScenarios(scenarios);
-	    }
-	    catch (IOException e)
-	    {
-	    	Utilities.showErrorPane("Error: could not open file", e);
-	    }
-	    catch (ClassNotFoundException e)
-	    {
-	    	Utilities.showErrorPane("Error: could not read object from File", e);
-	    }
-	    finally
-	    {
-	    	if(loadScenarioObjects != null)
-	    	{
-	    		Utilities.safeClose(loadScenarioObjects);
-	    	}
+
+		    ObjectInputStream loadScenarioObjects = null;
+		    try
+		    {
+		    	loadScenarioObjects = new ObjectInputStream(new FileInputStream(fileForOpening));
+		    	ScenarioTableModel scenarios = (ScenarioTableModel) loadScenarioObjects.readObject();
+		    	mainFrame.setScenarios(scenarios);
+		    }
+		    catch (IOException e)
+		    {
+		    	Utilities.showErrorPane("Error: could not open file", e);
+		    }
+		    catch (ClassNotFoundException e)
+		    {
+		    	Utilities.showErrorPane("Error: could not read object from File", e);
+		    }
+		    finally
+		    {
+		    	if(loadScenarioObjects != null)
+		    	{
+		    		Utilities.safeClose(loadScenarioObjects);
+		    	}
+		    }
 	    }
 	}
 }

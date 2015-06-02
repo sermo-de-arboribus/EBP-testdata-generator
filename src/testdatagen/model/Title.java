@@ -3,6 +3,7 @@ package testdatagen.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Locale;
 
 import testdatagen.model.files.EBookFile;
 import testdatagen.model.files.File;
@@ -36,24 +37,24 @@ public class Title implements Serializable
     	files = new HashSet<File>();
     }
     
-    public void addFile(final File newFile)
+    public synchronized void addFile(final File newFile)
     {
     	files.add(newFile);
     }
 
 
-	public void addMainProductFile(EBookFile ebookFile, String format)
+	public synchronized void addMainProductFile(EBookFile ebookFile, String format)
 	{
 		files.add(ebookFile);
 		setFormat(format);
 	}
 	
-	public String getAuthor()
+	public synchronized String getAuthor()
 	{
 		return author;
 	}
 	
-	public String getAuthorFirstName()
+	public synchronized String getAuthorFirstName()
 	{
 		if(author.contains(" "))
 		{
@@ -65,7 +66,7 @@ public class Title implements Serializable
 		}
 	}
 	
-	public String getAuthorLastName()
+	public synchronized String getAuthorLastName()
 	{
 		if(author.contains(" "))
 		{
@@ -82,7 +83,7 @@ public class Title implements Serializable
 	 * Other types of GraphicFiles are not considered to be cover files.
 	 * @return an ArrayList of cover files, an empty list if the title has no cover files.
 	 */
-	public ArrayList<GraphicFile> getCoverFiles()
+	public synchronized ArrayList<GraphicFile> getCoverFiles()
 	{
 		ArrayList<GraphicFile> returnList = new ArrayList<>();
 		for(File file : files)
@@ -99,7 +100,13 @@ public class Title implements Serializable
 		return returnList;
 	}
 	
-	public String getEpubType()
+	public synchronized String getAuthorBlurb()
+	{
+		AuthorBlurbTemplate template = new AuthorBlurbTemplate(new Locale("de"), this);
+		return template.fillWithText();
+	}
+	
+	public synchronized String getEpubType()
 	{
 		if(epubType == null)
 		{
@@ -108,7 +115,7 @@ public class Title implements Serializable
 		return epubType;
 	}
 	
-	public String getEpubTypeForONIX()
+	public synchronized String getEpubTypeForONIX()
 	{
 		switch(epubType)
 		{
@@ -133,7 +140,7 @@ public class Title implements Serializable
 		return format;
 	}
 	
-	public String getProtectionTypeForONIX()
+	public synchronized String getProtectionTypeForONIX()
 	{
 		if(protection == null)
 		{
@@ -153,7 +160,7 @@ public class Title implements Serializable
 		}
 	}
 	
-	public HashSet<File> getFiles()
+	public synchronized HashSet<File> getFiles()
 	{
 		return files;
 	}
@@ -178,7 +185,7 @@ public class Title implements Serializable
 		return mediaFileLink;
 	}
     
-    public boolean removeFile(final File remFile)
+    public synchronized boolean removeFile(final File remFile)
     {
         return files.remove(remFile);
     }
@@ -198,8 +205,7 @@ public class Title implements Serializable
 	
     // this is private, because epubType is set based on the format String -> see setFormat()
 	private void setEpubType(String epubType)
-	{
-		
+	{	
 		this.epubType = epubType;
 	}
 	
