@@ -10,7 +10,7 @@ import java.io.ObjectOutputStream;
 
 public class ISBNUtils
 {
-	private static long lastISBN = 97810000019L;
+	private static long lastISBN = 978710000019L;
 	
 	public static long getNextISBN()
 	{
@@ -29,7 +29,7 @@ public class ISBNUtils
 		for(int i = 0; i < isbnChars.length; i++)
 		{
 			isbnBuffer.append(isbnChars[i]);
-			if(i == 2 || i == 3 || i == 5 || i == 10)
+			if(i == 2 || i == 3 || i == 6 || i == 11)
 			{
 				isbnBuffer.append('-');
 			}

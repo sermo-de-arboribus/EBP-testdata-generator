@@ -107,11 +107,10 @@ public class AddTitleToScenarioListener implements ActionListener {
 					Title newTitle = new Title(nextIsbn, "test-" + nextIsbn, TitleUtils.getNewTitle(), TitleUtils.getNewAuthor(), mfl);
 					
 					// instantiate selected ebook file types and add them to the title object
-					// TODO: handle extracts!
 					EBookFileFactory eff = EBookFileFactory.getInstance();
+					
 					EBookFile ebookFile = eff.generateFile(Utilities.formatToFileType(format), nextIsbn);
-					newTitle.setFormat(format);
-					newTitle.addFile(ebookFile);
+					newTitle.addMainProductFile(ebookFile, format);
 					
 					// check for optional product content files and generate if needed
 					if(epubmobi)

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import testdatagen.model.files.EBookFile;
 import testdatagen.model.files.File;
 import testdatagen.model.files.GraphicFile;
 import testdatagen.utilities.Utilities;
@@ -18,7 +19,7 @@ public class Title implements Serializable
 	private static final String[] validFormats = {"PDF", "WMPDF", "NDPDF", "EPUB", "WMPEUB", "NDEPUB", "ZIP", "IBOOOK", "NDMOBI", "WMMOBI", "AUDIO"};
 	
 	private long isbn13;
-    private String uid, name, author;
+    private String uid, name, author; // TODO: a book could have several authors with different author types. Expand model to reflect that
     private boolean mediaFileLink;
     private HashSet<File> files;
     private String epubType;
@@ -40,9 +41,40 @@ public class Title implements Serializable
     	files.add(newFile);
     }
 
+
+	public void addMainProductFile(EBookFile ebookFile, String format)
+	{
+		files.add(ebookFile);
+		setFormat(format);
+	}
+	
 	public String getAuthor()
 	{
 		return author;
+	}
+	
+	public String getAuthorFirstName()
+	{
+		if(author.contains(" "))
+		{
+			return author.substring(0, author.lastIndexOf(' '));	
+		}
+		else
+		{
+			return author;
+		}
+	}
+	
+	public String getAuthorLastName()
+	{
+		if(author.contains(" "))
+		{
+			return author.substring(author.lastIndexOf(' ') + 1);
+		}
+		else
+		{
+			return author;
+		}
 	}
 	
 	/**
@@ -96,6 +128,11 @@ public class Title implements Serializable
 		}
 	}
 	
+	public String getFormat()
+	{
+		return format;
+	}
+	
 	public String getProtectionTypeForONIX()
 	{
 		if(protection == null)
@@ -146,31 +183,6 @@ public class Title implements Serializable
         return files.remove(remFile);
     }
 
-    /*
-     * setFormat takes in an EBP format string like "WMPDF" or "NDEPUB", validates it and stores file format,
-     * protection type and the format string itself as object attributes
-     */
-    public void setFormat(String formatString)
-    {
-    	if(isValidFormat(formatString))
-    	{
-    		format = formatString;
-    		setEpubType(Utilities.formatToFileType(formatString));
-    		if(formatString.startsWith("ND"))
-    		{
-    			protection = "ND";
-    		}
-    		else if(formatString.startsWith("WM"))
-    		{
-    			protection = "WM";
-    		}
-    		else 
-    		{
-    			protection = "DRM";
-    		}
-    	}
-    }
-	
 	private boolean isValidFormat(String formatString)
 	{
 		boolean valid = false;
@@ -190,4 +202,29 @@ public class Title implements Serializable
 		
 		this.epubType = epubType;
 	}
+	
+    /*
+     * setFormat takes in an EBP format string like "WMPDF" or "NDEPUB", validates it and stores file format,
+     * protection type and the format string itself as object attributes
+     */
+    private void setFormat(String formatString)
+    {
+    	if(isValidFormat(formatString))
+    	{
+    		format = formatString;
+    		setEpubType(Utilities.formatToFileType(formatString));
+    		if(formatString.startsWith("ND"))
+    		{
+    			protection = "ND";
+    		}
+    		else if(formatString.startsWith("WM"))
+    		{
+    			protection = "WM";
+    		}
+    		else 
+    		{
+    			protection = "DRM";
+    		}
+    	}
+    }
 }

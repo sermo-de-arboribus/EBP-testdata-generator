@@ -8,6 +8,7 @@ import java.util.ListIterator;
 import testdatagen.model.Title;
 import testdatagen.model.files.GraphicFile;
 import testdatagen.model.files.ONIXFile;
+import testdatagen.utilities.Utilities;
 
 public class GeneratorThread extends Thread
 {

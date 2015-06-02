@@ -51,6 +51,48 @@ public class ONIXFile extends File
 		return outputFile;
 	}
 	
+	/*
+	 * The contributor node currently expects one title to have only one author. This needs to be modified when we allow
+	 * for multiple authors and different author types per title
+	 */
+	private Element buildContributorNode(Title title)
+	{
+		Element contributorNode = new Element("contributor");
+		
+		// Contributor Role
+		Element b035 = new Element("b035");
+		b035.appendChild(new Text("A01"));
+		contributorNode.appendChild(b035);
+		
+		// Sequence Number within role
+		Element b340 = new Element("b340");
+		b340.appendChild(new Text("1"));
+		contributorNode.appendChild(b340);
+		
+		// complete author name
+		Element b036 = new Element("b036");
+		b036.appendChild(new Text(title.getAuthor()));
+		contributorNode.appendChild(b036);
+		
+		// complete author name inverted
+		Element b037 = new Element("b037");
+		b037.appendChild(new Text(title.getAuthorLastName() + ", " + title.getAuthorFirstName()));
+		contributorNode.appendChild(b037);
+		
+		// author's first name(s)
+		Element b039 = new Element("b039");
+		b039.appendChild(new Text(title.getAuthorFirstName()));
+		contributorNode.appendChild(b039);
+		
+		// author's last name
+		Element b040 = new Element("b040");
+		b040.appendChild(new Text(title.getAuthorLastName()));
+		contributorNode.appendChild(b040);
+		
+		
+		return contributorNode;
+	}
+	
 	private Element buildHeader()
 	{
 		Element header = new Element("header");
@@ -137,6 +179,62 @@ public class ONIXFile extends File
 		b277.appendChild(new Text(title.getProtectionTypeForONIX()));
 		product.appendChild(b277);
 		
+		// Title
+		Element titleNode = buildTitleNode("01", title);
+		product.appendChild(titleNode);
+		
+		Element shortTitleNode = buildTitleNode("05", title);
+		product.appendChild(shortTitleNode);
+		
+		// Contributor
+		Element contributorNode = buildContributorNode(title);
+		product.appendChild(contributorNode);
+		
 		return product;
+	}
+	
+	private Element buildTitleNode(String titleType, Title title)
+	{
+		Element titleNode = new Element("title");
+		Element b202 = new Element("b202");
+		b202.appendChild(new Text(titleType)); // do we need to validate titleTypes?
+		titleNode.appendChild(b202);
+		// split titleString into main title and subtitle, if titleString contains a full-stop.
+		String titleString = title.getName();
+		String mainTitle = "";
+		String subTitle = "";
+		if(titleString.contains("."))
+		{
+			mainTitle = titleString.substring(0, titleString.lastIndexOf('.'));
+			subTitle = titleString.substring(titleString.lastIndexOf('.') + 1).trim();
+		}
+		else 
+		{
+			mainTitle = titleString;
+		}
+		Element b203 = new Element("b203");
+		// if titleType is "05", this is meant to be a shortened title
+		if(titleType.equals("05"))
+		{
+			String abbrevTitle = mainTitle;
+			if(mainTitle.length() > 12)
+			{
+				abbrevTitle = mainTitle.substring(0, 10);
+			}
+			b203.appendChild(new Text(title.getAuthorLastName() + ", " + abbrevTitle + "..."));
+			titleNode.appendChild(b203);
+		}
+		else
+		{
+			b203.appendChild(new Text(mainTitle));
+			titleNode.appendChild(b203);
+			if(subTitle != "")
+			{
+				Element b029 = new Element("b029");
+				b029.appendChild(new Text(subTitle));
+				titleNode.appendChild(b029);
+			}
+		}
+		return titleNode;
 	}
 }
