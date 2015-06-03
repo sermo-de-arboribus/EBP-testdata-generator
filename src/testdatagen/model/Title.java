@@ -160,6 +160,12 @@ public class Title implements Serializable
 		}
 	}
 	
+	public synchronized String getShortBlurb()
+	{
+		TitleBlurbTemplate template = new TitleBlurbTemplate(new Locale("de"), this, TitleBlurbTemplateType.SHORT);
+		return template.fillWithText();
+	}
+	
 	public synchronized HashSet<File> getFiles()
 	{
 		return files;

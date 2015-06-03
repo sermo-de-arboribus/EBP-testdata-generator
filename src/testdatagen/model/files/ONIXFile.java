@@ -3,9 +3,11 @@ package testdatagen.model.files;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
+import java.util.Locale;
 
 import org.apache.commons.io.FilenameUtils;
 
+import nu.xom.Attribute;
 import nu.xom.Document;
 import nu.xom.Element;
 import nu.xom.Serializer;
@@ -132,6 +134,57 @@ public class ONIXFile extends File
 		return header;
 	}
 	
+	private Element buildLanguageNode(String langCode)
+	{
+		Element langNode = new Element("language");
+		
+		Element b253 = new Element("b253");
+		b253.appendChild(new Text("01"));
+		langNode.appendChild(b253);
+		
+		Element b252 = new Element("b252");
+		b252.appendChild(new Text(langCode));
+		langNode.appendChild(b252);
+		
+		return langNode;
+	}
+	
+	private Element buildMainSubjectNode()
+	{
+		Element msn = new Element("mainsubject");
+		
+		Element b191 = new Element("b191");
+		b191.appendChild(new Text("26"));
+		msn.appendChild(b191);
+		
+		Element b068 = new Element("b068");
+		b068.appendChild(new Text("2.0"));
+		msn.appendChild(b068);
+		
+		Element b069 = new Element("b069");
+		b069.appendChild(new Text(TitleUtils.getRandomWarengruppeCode()));
+		msn.appendChild(b069);
+		
+		return msn;
+	}
+	
+	private Element buildOtherTextNode(Title title)
+	{
+		Element otNode = new Element("othertext");
+		
+		// TODO: add some variety to the generated othertext types
+		Element d102 = new Element("d102");
+		d102.appendChild(new Text("01"));
+		otNode.appendChild(d102);
+		
+		Element d104 = new Element("d104");
+		d104.addAttribute(new Attribute("textformat", "07"));
+		d104.appendChild(new Text(title.getShortBlurb()));
+		otNode.appendChild(d104);
+		
+		return otNode;
+	}
+	
 	private Element buildProductIdentifier(String ProdIDType, long ISBN)
 	{
 		Element productIdNode = new Element("productidentifier");
@@ -194,9 +247,44 @@ public class ONIXFile extends File
 		Element contributorNode = buildContributorNode(title);
 		product.appendChild(contributorNode);
 		
+		// Language
+		Element languageNode = buildLanguageNode("ger");
+		product.appendChild(languageNode);
+		
+		// Number of Pages
+		Element b061 = new Element("b061");
+		b061.appendChild(new Text("320"));
+		product.appendChild(b061);
+		
+		// Main subject
+		Element mainsubject = buildMainSubjectNode();
+		product.appendChild(mainsubject);
+		
+		// Subjects
+		Element subject = buildSubjectNode();
+		product.appendChild(subject);
+		
+		// Othertext
+		Element ot = buildOtherTextNode(title);
+		product.appendChild(ot);
+		
 		return product;
 	}
 	
+	private Element buildSubjectNode()
+	{
+		Element subjectNode = new Element("subject");
+		
+		Element b067 = new Element("b067");
+		b067.appendChild(new Text("20"));
+		subjectNode.appendChild(b067);
+		
+		Element b069 = new Element("b069");
+		b069.appendChild(new Text(TitleUtils.getRandomTopic(new Locale("de"))));
+		subjectNode.appendChild(b069);
+		
+		return subjectNode;
+	}
 	private Element buildTitleNode(String titleType, Title title)
 	{
 		Element titleNode = new Element("title");

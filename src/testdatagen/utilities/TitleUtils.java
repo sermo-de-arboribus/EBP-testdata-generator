@@ -7,7 +7,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Locale;
 import java.util.Random;
+import java.util.StringTokenizer;
+
+import testdatagen.config.ConfigurationRegistry;
 
 public class TitleUtils
 {
@@ -49,6 +53,31 @@ public class TitleUtils
 	public static String getRandomLastName()
 	{
 		return LAST_NAMES[random.nextInt(LAST_NAMES.length)];
+	}
+	
+	public static String getRandomTopic(Locale loc)
+	{
+		ConfigurationRegistry registry = ConfigurationRegistry.getRegistry();
+		String[] topics = registry.getLocalizedText(loc, "topic");
+		String topic = topics[random.nextInt(topics.length)];
+		topic = topic.substring(0, 1).toUpperCase() + topic.substring(1);
+		return topic;
+	}
+	
+	public static String getRandomWarengruppeCode()
+	{
+		String code = "9";
+		ConfigurationRegistry registry = ConfigurationRegistry.getRegistry();
+		StringTokenizer tokenizer = new StringTokenizer(registry.getString("onix.WarengruppeCodes"));
+		String[] codelist = new String[tokenizer.countTokens()];
+		int i = 0;
+		while(tokenizer.hasMoreTokens())
+		{
+			codelist[i] = tokenizer.nextToken();
+			i++;
+		}
+		code += codelist[random.nextInt(codelist.length)];
+		return code;
 	}
 	
 	public static void loadLastTitleNumber()
