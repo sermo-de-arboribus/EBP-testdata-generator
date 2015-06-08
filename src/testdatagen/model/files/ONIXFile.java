@@ -4,6 +4,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Random;
 
 import org.apache.commons.io.FilenameUtils;
 
@@ -268,7 +269,85 @@ public class ONIXFile extends File
 		Element ot = buildOtherTextNode(title);
 		product.appendChild(ot);
 		
+		// TODO: Add handling of mediafile nodes
+		
+		// Publisher information
+		Element publisher = buildPublisherNode();
+		product.appendChild(publisher);
+		
+		// Publishing Status
+		Element pubStatus = new Element("b394");
+		pubStatus.appendChild(new Text("04")); // TODO: would be nice to have some variation of the publishing status, but 04 ("active") is most common
+		product.appendChild(pubStatus);
+		
+		// Publication date
+		Random random = new Random();
+		Element pubDate = new Element("b003");
+		long currentDateMillis = new Date().getTime();
+		long randomPubDate = random.nextInt(10) * 86400000L;
+		randomPubDate = random.nextBoolean() ? randomPubDate : randomPubDate * -1;
+		pubDate.appendChild(new Text(Utilities.getDateForONIX2(new Date(currentDateMillis + randomPubDate)).substring(0, 8)));
+		product.appendChild(pubDate);
+
+		// Sales Rights
+		Element sr = buildSalesRightsNode();
+		product.appendChild(sr);
+		
 		return product;
+	}
+	
+	private Element buildPublisherNode()
+	{
+		Element pubNode = new Element("publisher");
+		
+		Element b291 = new Element("b291");
+		b291.appendChild(new Text("01"));
+		pubNode.appendChild(b291);
+		
+		Element b241 = new Element("b241");
+		b241.appendChild(new Text("04"));
+		pubNode.appendChild(b241);
+		
+		Element b243 = new Element("b243");
+		b243.appendChild(new Text("56789"));
+		pubNode.appendChild(b243);
+		
+		Element b081 = new Element("b081");
+		b081.appendChild(new Text("IT E-Books-Verlag"));
+		pubNode.appendChild(b081);
+		
+		return pubNode;
+	}
+	
+	private Element buildSalesRightsNode()
+	{
+		Random random = new Random();
+		Element salesRights = new Element("salesrights");
+		
+		Element b089 = new Element("b089");
+		b089.appendChild(new Text("0" + (random.nextInt(1) + 1)));
+		salesRights.appendChild(b089);
+		
+		Element rightsRegion = random.nextBoolean() ? new Element("b090") : new Element("b388");
+		if(rightsRegion.getLocalName().equals("b090"))
+		{
+			int j = random.nextInt(6) + 1;
+			for(int i = 0; i < j; i++)
+			{
+				rightsRegion.appendChild(new Text(Utilities.getCountryForONIX()));
+				if(i < j - 1)
+				{
+					rightsRegion.appendChild(new Text(" "));
+				}
+			}
+		}
+		else
+		{
+			rightsRegion.appendChild(new Text("WORLD"));
+		}
+		salesRights.appendChild(rightsRegion);
+		
+		return salesRights;
 	}
 	
 	private Element buildSubjectNode()

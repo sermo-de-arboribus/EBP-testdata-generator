@@ -9,8 +9,11 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 
 import javax.swing.JOptionPane;
+
+import testdatagen.config.ConfigurationRegistry;
 
 public final class Utilities
 {
@@ -46,6 +49,15 @@ public final class Utilities
 			showErrorPane("Error: could not create or find configuration directory",exc);
 		}
 		return configDir;
+	}
+	
+	public static String getCountryForONIX()
+	{
+		ConfigurationRegistry registry = ConfigurationRegistry.getRegistry();
+		Random random = new Random();
+		String codeList = registry.getString("iso3166-1.countryCodes");
+		int index = random.nextInt(codeList.length() / 3);
+		return codeList.substring(index * 3, index * 3 + 2);
 	}
 	
 	public static String getDateForONIX2(Date date)

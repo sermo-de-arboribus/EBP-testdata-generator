@@ -17,7 +17,7 @@ public class Title implements Serializable
 	 */
 	private static final long serialVersionUID = 1L;
 	private static final String[] validEpubTypes = {"Epub", "PDF", "Mobi", "EpubMobi", "IBook", "SoftwareZip", "AudioZip"};
-	private static final String[] validFormats = {"PDF", "WMPDF", "NDPDF", "EPUB", "WMPEUB", "NDEPUB", "ZIP", "IBOOOK", "NDMOBI", "WMMOBI", "AUDIO"};
+	private static final String[] validFormats = {"PDF", "WMPDF", "NDPDF", "EPUB", "WMEPUB", "NDEPUB", "ZIP", "IBOOOK", "NDMOBI", "WMMOBI", "AUDIO"};
 	
 	private long isbn13;
     private String uid, name, author; // TODO: a book could have several authors with different author types. Expand model to reflect that
@@ -117,6 +117,8 @@ public class Title implements Serializable
 	
 	public synchronized String getEpubTypeForONIX()
 	{
+		if(epubType == null) return "Unknown";
+		
 		switch(epubType)
 		{
 		case "PDF":
@@ -145,18 +147,22 @@ public class Title implements Serializable
 		if(protection == null)
 		{
 			Utilities.showErrorPane("Something went wrong with title " + this.isbn13 + ": protection type is not initialized", new NullPointerException());
-		}
-		switch(protection)
-		{
-		case("WM"):
-			return "02";
-		case("ND"):
-			return "00";
-		case("DRM"):
-			return "03";
-		default:
-			Utilities.showErrorPane("Something went wrong with title " + this.isbn13 + ": protection has unsupported value", new IllegalArgumentException());
 			return "";
+		}
+		else 
+		{
+			switch(protection)
+			{
+			case("WM"):
+				return "02";
+			case("ND"):
+				return "00";
+			case("DRM"):
+				return "03";
+			default:
+				Utilities.showErrorPane("Something went wrong with title " + this.isbn13 + ": protection has unsupported value", new IllegalArgumentException());
+				return "";
+			}	
 		}
 	}
 	
@@ -237,6 +243,10 @@ public class Title implements Serializable
     		{
     			protection = "DRM";
     		}
+    	}
+    	else
+    	{
+    		Utilities.showWarnPane("The format for this E-Book product is not valid: " + formatString + " (title is " + isbn13);
     	}
     }
 }
