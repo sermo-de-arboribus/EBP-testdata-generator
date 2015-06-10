@@ -142,6 +142,39 @@ public class Title implements Serializable
 		return format;
 	}
 	
+	public EBookFile getMainProductFile()
+	{
+		for(File file : files)
+		{
+			if(file instanceof EBookFile)
+			{
+				EBookFile mainProductFile = (EBookFile) file;
+				if(!mainProductFile.isDemoFile())
+				{
+					return mainProductFile;
+				}
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * getNonCoverFiles returns all Files that are not a cover file.
+	 * @return an ArrayList of non-cover files, an empty list if the title has no non-cover files.
+	 */
+	public synchronized ArrayList<File> getNonCoverFiles()
+	{
+		ArrayList<File> returnList = new ArrayList<>();
+		for(File file : files)
+		{
+			if(!(file instanceof GraphicFile))
+			{
+				returnList.add(file);
+			}
+		}
+		return returnList;
+	}
+	
 	public synchronized String getProtectionTypeForONIX()
 	{
 		if(protection == null)

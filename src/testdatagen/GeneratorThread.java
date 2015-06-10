@@ -47,6 +47,7 @@ public class GeneratorThread extends Thread
 			onixFile.generate(title, destDir);
 			
 			// TODO: iterate over all file Objects and generate the files
+			
 		}
 	}
 }
