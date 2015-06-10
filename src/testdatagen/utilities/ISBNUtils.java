@@ -92,7 +92,7 @@ public class ISBNUtils
 		}
 	}
 	
-    private static String calculateCheckDigit(String code)
+    public static String calculateCheckDigit(String code)
     {
         if (code == null || code.length() == 0)
         {
