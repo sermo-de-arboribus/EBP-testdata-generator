@@ -8,7 +8,6 @@ import java.util.ListIterator;
 import testdatagen.model.Title;
 import testdatagen.model.files.GraphicFile;
 import testdatagen.model.files.ONIXFile;
-import testdatagen.utilities.Utilities;
 
 public class GeneratorThread extends Thread
 {
@@ -47,7 +46,11 @@ public class GeneratorThread extends Thread
 			onixFile.generate(title, destDir);
 			
 			// TODO: iterate over all file Objects and generate the files
-			
+			ArrayList<testdatagen.model.files.File> fileList = title.getNonCoverFiles();
+			for(testdatagen.model.files.File file : fileList)
+			{
+				file.generate(title, destDir);
+			}
 		}
 	}
 }

@@ -1,6 +1,7 @@
-package testdatagen.model;
+package testdatagen.templates;
 
 import java.util.Locale;
+import java.util.Map;
 import java.util.Random;
 
 import testdatagen.config.ConfigurationRegistry;
@@ -18,7 +19,7 @@ public abstract class TextTemplate
 	
 	public abstract String fillWithText();
 	
-	protected void replaceVars(Title title, StringBuffer resultBuffer, String unprocessedText)
+	protected void replaceVars(StringBuffer resultBuffer, String unprocessedText, Map<String, String> predefinedValues)
 	{
 		ConfigurationRegistry registry = ConfigurationRegistry.getRegistry();
 		Random random = new Random();
@@ -30,15 +31,12 @@ public abstract class TextTemplate
 			resultBuffer.append(unprocessedText.substring(0, varStart));
 			String variable = unprocessedText.substring(varStart + 2, varEnd);
 			
-			if(variable.equals("authorname"))
+			// first check if the variable is defined in the predefined values map...
+			if(predefinedValues.containsKey(variable))
 			{
-				resultBuffer.append(title.getAuthor());
+				resultBuffer.append(predefinedValues.get(variable));
 			}
-			else if(variable.equals("birthyear"))
-			{
-				int year = random.nextInt(80) + 1930;
-				resultBuffer.append(year);
-			}
+			// ... if not, take the variable value from the configuration registry
 			else
 			{
 				String[] replacementOptions = registry.getLocalizedText(locale, variable);
@@ -52,7 +50,7 @@ public abstract class TextTemplate
 					resultBuffer.append(replacement);	
 				}
 			}
-			replaceVars(title, resultBuffer, unprocessedText.substring(varEnd + 1));
+			replaceVars(resultBuffer, unprocessedText.substring(varEnd + 1), predefinedValues);
 		}
 		else
 		{

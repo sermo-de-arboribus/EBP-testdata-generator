@@ -8,6 +8,9 @@ import java.util.Locale;
 import testdatagen.model.files.EBookFile;
 import testdatagen.model.files.File;
 import testdatagen.model.files.GraphicFile;
+import testdatagen.templates.AuthorBlurbTemplate;
+import testdatagen.templates.TitleBlurbTemplate;
+import testdatagen.templates.TitleBlurbTemplateType;
 import testdatagen.utilities.Utilities;
 
 public class Title implements Serializable

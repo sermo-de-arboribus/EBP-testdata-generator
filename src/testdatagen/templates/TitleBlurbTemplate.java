@@ -1,8 +1,10 @@
-package testdatagen.model;
+package testdatagen.templates;
 
+import java.util.HashMap;
 import java.util.Locale;
 
 import testdatagen.config.ConfigurationRegistry;
+import testdatagen.model.Title;
 
 public class TitleBlurbTemplate extends TextTemplate
 {
@@ -10,7 +12,7 @@ public class TitleBlurbTemplate extends TextTemplate
 	private TitleBlurbTemplateType type; // TODO: make use of the value to create blurb text of different length
 	private Title title;
 	
-	TitleBlurbTemplate(Locale loc, Title title, TitleBlurbTemplateType type)
+	public TitleBlurbTemplate(Locale loc, Title title, TitleBlurbTemplateType type)
 	{
 		super(loc);
 		this.title = title;
@@ -23,12 +25,7 @@ public class TitleBlurbTemplate extends TextTemplate
 	public String fillWithText()
 	{
 		StringBuffer sb = new StringBuffer();
-		replaceVars(title, sb, templateText);
+		replaceVars(sb, templateText, new HashMap<String, String>());
 		return sb.toString();
 	}
-}
-
-enum TitleBlurbTemplateType
-{
-	SHORT, MEDIUM, LONG;
 }
