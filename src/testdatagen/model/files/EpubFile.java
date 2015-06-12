@@ -1,6 +1,5 @@
 package testdatagen.model.files;
 
-import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -19,6 +18,7 @@ import nu.xom.Element;
 import nu.xom.Serializer;
 import nu.xom.Text;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 
 import testdatagen.model.Title;
@@ -49,19 +49,33 @@ public class EpubFile extends EBookFile
 		isBooklet = true;
 	}
 	
-	public java.io.File generate(Title title, java.io.File destDir)
-	{	
-		java.io.File tempDir = new java.io.File(destDir.getPath() + "temp");
+	public java.io.File generate(Title title, java.io.File destPath)
+	{
+		java.io.File tempDir = null;
+		SimpleDateFormat df = new SimpleDateFormat("HHmmssSSS");
+		if(destPath.isDirectory())
+		{
+			tempDir = new java.io.File(FilenameUtils.concat(destPath.getPath(),"temp" + df.format(new Date())));
+		}
+		else
+		{
+			tempDir = new java.io.File(FilenameUtils.concat(destPath.getParent(), "temp" + df.format(new Date())));
+		}
+		
 		// generate cover file
 		JpegFile cover = new JpegFile(title.getIsbn13(), GraphicFile.Type.COVER);
-		cover.generate(title, new java.io.File(FilenameUtils.concat(tempDir.getPath(), "/OEBPS/images/")));
+		java.io.File imageFilePath = new java.io.File(FilenameUtils.concat(tempDir.getPath(), "OEBPS/images/" + title.getIsbn13() + ".jpg"));
+		
+		cover.generate(title, imageFilePath);
 		
 		// generate title page file
 		EPUBTitlePageTemplate template = new EPUBTitlePageTemplate(new Locale("de"), title);
 		String HTMLTitlePage = template.fillWithText();
+		java.io.File HTMLTitlePagePath = new java.io.File (FilenameUtils.concat(tempDir.getPath(), "OEBPS/text/Section0001.xhtml"));
+		HTMLTitlePagePath.getParentFile().mkdirs();
 		try
 		{
-			PrintWriter out = new PrintWriter(FilenameUtils.concat(tempDir.getPath(), "OEBPS/text/Section0001.xhtml"));
+			PrintWriter out = new PrintWriter(HTMLTitlePagePath);
 			out.print(HTMLTitlePage);
 			out.close();
 		}
@@ -78,11 +92,11 @@ public class EpubFile extends EBookFile
 		
 		ncxRoot.addAttribute(new Attribute("version", "2005-1"));
 		
-		Element ncxHead = new Element("head");
-		Element meta1 = new Element("meta");
-		Element meta2 = new Element("meta");
-		Element meta3 = new Element("meta");
-		Element meta4 = new Element("meta");
+		Element ncxHead = new Element("head", "http://www.daisy.org/z3986/2005/ncx/");
+		Element meta1 = new Element("meta", "http://www.daisy.org/z3986/2005/ncx/");
+		Element meta2 = new Element("meta", "http://www.daisy.org/z3986/2005/ncx/");
+		Element meta3 = new Element("meta", "http://www.daisy.org/z3986/2005/ncx/");
+		Element meta4 = new Element("meta", "http://www.daisy.org/z3986/2005/ncx/");
 		
 		meta1.addAttribute(new Attribute("name", "dtb:uid"));
 		meta1.addAttribute(new Attribute("content", "urn:isbn:" + title.getIsbn13()));
@@ -100,28 +114,28 @@ public class EpubFile extends EBookFile
 		
 		ncxRoot.appendChild(ncxHead);
 		
-		Element ncxTitle = new Element("docTitle");
-		Element titleText = new Element("text");
+		Element ncxTitle = new Element("docTitle", "http://www.daisy.org/z3986/2005/ncx/");
+		Element titleText = new Element("text", "http://www.daisy.org/z3986/2005/ncx/");
 		titleText.appendChild(new Text(title.getName()));
 		ncxTitle.appendChild(titleText);
 		ncxRoot.appendChild(ncxTitle);
 		
-		Element navMap = new Element("navMap");
-		Element navPoint = new Element("navPoint");
+		Element navMap = new Element("navMap", "http://www.daisy.org/z3986/2005/ncx/");
+		Element navPoint = new Element("navPoint", "http://www.daisy.org/z3986/2005/ncx/");
 		navPoint.addAttribute(new Attribute("id", "navPoint-1"));
 		navPoint.addAttribute(new Attribute("playOrder", "1"));
 		navMap.appendChild(navPoint);
-		Element navLabel = new Element("navLabel");
-		Element labelText = new Element("text");
+		Element navLabel = new Element("navLabel", "http://www.daisy.org/z3986/2005/ncx/");
+		Element labelText = new Element("text", "http://www.daisy.org/z3986/2005/ncx/");
 		labelText.appendChild(new Text("Startseite"));
 		navLabel.appendChild(labelText);
 		navPoint.appendChild(navLabel);
-		Element content = new Element("content");
+		Element content = new Element("content", "http://www.daisy.org/z3986/2005/ncx/");
 		content.addAttribute(new Attribute("src", "text/Section0001.xhtml"));
 		navPoint.appendChild(content);
 		ncxRoot.appendChild(navMap);
 		
-		java.io.File ncxFilePath = new java.io.File(FilenameUtils.concat(tempDir.getPath(), "/OEBPS/" + title.getIsbn13() + "toc.ncx"));
+		java.io.File ncxFilePath = new java.io.File(FilenameUtils.concat(tempDir.getPath(), "OEBPS/toc.ncx"));
 		try
 		{
 			FileOutputStream fos = new FileOutputStream(ncxFilePath);
@@ -145,46 +159,46 @@ public class EpubFile extends EBookFile
 		metadata.addNamespaceDeclaration("dc", "http://purl.org/dc/elements/1.1/");
 		metadata.addNamespaceDeclaration("opf", "http://www.idpf.org/2007/opf");
 		
-		Element identifier = new Element("identifier", "http://purl.org/dc/elements/1.1/");
+		Element identifier = new Element("dc:identifier", "http://purl.org/dc/elements/1.1/");
 		identifier.addAttribute(new Attribute("id", "BookId"));
-		identifier.addAttribute(new Attribute("scheme", "http://www.idpf.org/2007/opf", "UUID"));
+		identifier.addAttribute(new Attribute("opf:scheme", "http://www.idpf.org/2007/opf", "UUID"));
 		identifier.appendChild(new Text("urn:isbn:" + title.getIsbn13()));
 		metadata.appendChild(identifier);
 		
-		Element dcTitle = new Element("title", "http://purl.org/dc/elements/1.1/");
+		Element dcTitle = new Element("dc:title", "http://purl.org/dc/elements/1.1/");
 		dcTitle.appendChild(new Text(title.getName()));
 		metadata.appendChild(dcTitle);
 		
-		Element dcCreator = new Element("creator", "http://purl.org/dc/elements/1.1/");
-		dcCreator.addAttribute(new Attribute("file-as", "http://www.idpf.org/2007/opf", title.getAuthorLastName() + ", " + title.getAuthorFirstName()));
-		dcCreator.addAttribute(new Attribute("role", "http://www.idpf.org/2007/opf", "aut"));
+		Element dcCreator = new Element("dc:creator", "http://purl.org/dc/elements/1.1/");
+		dcCreator.addAttribute(new Attribute("opf:file-as", "http://www.idpf.org/2007/opf", title.getAuthorLastName() + ", " + title.getAuthorFirstName()));
+		dcCreator.addAttribute(new Attribute("opf:role", "http://www.idpf.org/2007/opf", "aut"));
 		dcCreator.appendChild(new Text(title.getAuthor()));
 		metadata.appendChild(dcCreator);
 		
-		Element dcLanguage = new Element("language", "http://purl.org/dc/elements/1.1/");
+		Element dcLanguage = new Element("dc:language", "http://purl.org/dc/elements/1.1/");
 		dcLanguage.appendChild(new Text("de")); // TODO: use current locale?
 		metadata.appendChild(dcLanguage);
 		
-		Element dcDate = new Element("date", "http://purl.org/dc/elements/1.1/");
-		dcDate.addAttribute(new Attribute("event", "http://www.idpf.org/2007/opf", "modification"));
+		Element dcDate = new Element("dc:date", "http://purl.org/dc/elements/1.1/");
+		dcDate.addAttribute(new Attribute("opf:event", "http://www.idpf.org/2007/opf", "modification"));
 		dcDate.appendChild(new Text(new SimpleDateFormat("yyyy-MM-dd").format(new Date())));
 		metadata.appendChild(dcDate);
 		
-		Element isbn = new Element("identifier", "http://purl.org/dc/elements/1.1/");
-		isbn.addAttribute(new Attribute("scheme", "http://www.idpf.org/2007/opf", "ISBN"));
+		Element isbn = new Element("dc:identifier", "http://purl.org/dc/elements/1.1/");
+		isbn.addAttribute(new Attribute("opf:scheme", "http://www.idpf.org/2007/opf", "ISBN"));
 		isbn.appendChild(new Text("" + title.getIsbn13()));
 		metadata.appendChild(isbn);
 		
-		Element dcPublisher = new Element("publisher", "http://purl.org/dc/elements/1.1/");
+		Element dcPublisher = new Element("dc:publisher", "http://purl.org/dc/elements/1.1/");
 		dcPublisher.appendChild(new Text("KNV IT E-Books-verlag"));
 		metadata.appendChild(dcPublisher);
 		
 		opfRoot.appendChild(metadata);
 		
-		Element manifest = new Element("manifest");
-		Element item1 = new Element("item");
-		Element item2 = new Element("item");
-		Element item3 = new Element("item");
+		Element manifest = new Element("manifest", "http://www.idpf.org/2007/opf");
+		Element item1 = new Element("item", "http://www.idpf.org/2007/opf");
+		Element item2 = new Element("item", "http://www.idpf.org/2007/opf");
+		Element item3 = new Element("item", "http://www.idpf.org/2007/opf");
 		
 		item1.addAttribute(new Attribute("href", "toc.ncx"));
 		item1.addAttribute(new Attribute("id", "ncx"));
@@ -204,17 +218,17 @@ public class EpubFile extends EBookFile
 		
 		opfRoot.appendChild(manifest);
 		
-		Element spine = new Element("spine");
+		Element spine = new Element("spine", "http://www.idpf.org/2007/opf");
 		spine.addAttribute(new Attribute("toc", "ncx"));
 		
-		Element itemref = new Element("itemref");
-		itemref.addAttribute(new Attribute("idref", "Section0001.xhtml"));
+		Element itemref = new Element("itemref", "http://www.idpf.org/2007/opf");
+		itemref.addAttribute(new Attribute("idref", "Section0001"));
 		spine.appendChild(itemref);
 		
 		opfRoot.appendChild(spine);
 		
-		Element guide = new Element("guide");
-		Element guideRef = new Element("reference");
+		Element guide = new Element("guide", "http://www.idpf.org/2007/opf");
+		Element guideRef = new Element("reference", "http://www.idpf.org/2007/opf");
 		guideRef.addAttribute(new Attribute("type", "cover"));
 		guideRef.addAttribute(new Attribute("title", "Cover"));
 		guideRef.addAttribute(new Attribute("href", "images/" + title.getIsbn13() + ".jpg"));
@@ -224,13 +238,13 @@ public class EpubFile extends EBookFile
 		
 		Document opfDoc = new Document(opfRoot);
 		
-		java.io.File opfFilePath = new java.io.File(FilenameUtils.concat(tempDir.getPath(), "/OEBPS/" + title.getIsbn13() + "content.opf"));
+		java.io.File opfFilePath = new java.io.File(FilenameUtils.concat(tempDir.getPath(), "OEBPS/content.opf"));
 		try
 		{
 			FileOutputStream fos = new FileOutputStream(opfFilePath);
 			Serializer ser = new Serializer(fos);
 			ser.setIndent(4);
-			ser.write(ncxFile);
+			ser.write(opfDoc);
 			ser.flush();
 			fos.close();
 		}
@@ -243,16 +257,16 @@ public class EpubFile extends EBookFile
 		Element container = new Element("container", "urn:oasis:names:tc:opendocument:xmlns:container");
 		container.addAttribute(new Attribute("version", "1.0"));
 		
-		Element rootfiles = new Element("rootfiles");
-		Element rootfile = new Element("rootfile");
+		Element rootfiles = new Element("rootfiles", "urn:oasis:names:tc:opendocument:xmlns:container");
+		Element rootfile = new Element("rootfile", "urn:oasis:names:tc:opendocument:xmlns:container");
 		rootfile.addAttribute(new Attribute("full-path", "OEBPS/content.opf"));
 		rootfile.addAttribute(new Attribute("media-type", "application/oebps-package+xml"));
 		rootfiles.appendChild(rootfile);
-		container.appendChild(rootfile);
+		container.appendChild(rootfiles);
 		
 		Document containerDoc = new Document(container);
-		
-		java.io.File containerFilePath = new java.io.File(FilenameUtils.concat(tempDir.getPath(), "/META-INF/container.xml"));
+		java.io.File containerFilePath = new java.io.File(FilenameUtils.concat(tempDir.getPath(), "META-INF/container.xml"));
+		containerFilePath.getParentFile().mkdirs();
 		try
 		{
 			FileOutputStream fos = new FileOutputStream(containerFilePath);
@@ -268,8 +282,27 @@ public class EpubFile extends EBookFile
 		}
 		
 		// zip epub in a way that is conformant with the EPUB spec
-		String dest = FilenameUtils.concat(destDir.getPath(), "" + title.getIsbn13() + ".epub");
-		zipEpub(dest, destDir.getPath());
+		String dest = null;
+		if(destPath.isDirectory())
+		{
+			dest = FilenameUtils.concat(destPath.getPath(), "" + title.getIsbn13() + ".epub");
+		}
+		else
+		{
+			dest = destPath.getPath();
+		}
+		
+		zipEpub(dest, tempDir.getPath());
+		
+		// delete temp folder
+		try
+		{
+			FileUtils.deleteDirectory(tempDir);
+		}
+		catch (IOException ex)
+		{
+			Utilities.showWarnPane("Could not delete temporary directory " + tempDir.getPath() + " for " + title.getIsbn13());
+		}
 		
 		return new java.io.File(dest);
 	}
@@ -292,14 +325,17 @@ public class EpubFile extends EBookFile
 		    ZipOutputStream out = new ZipOutputStream(new FileOutputStream(zipFileName));
 		    
 		    // write uncompressed mimetype file
-			out.setLevel(ZipOutputStream.STORED);
 			ZipEntry zipEntry = new ZipEntry("mimetype");
+			zipEntry.setMethod(ZipOutputStream.STORED);
+			zipEntry.setSize(20);
+			zipEntry.setCompressedSize(20);
+			zipEntry.setCrc(0x2CAB616F);
 			out.putNextEntry(zipEntry);
 			out.write(mimetypeASCII, 0, mimetypeASCII.length);
 			out.closeEntry();
 			
-			out.setLevel(ZipOutputStream.DEFLATED);
-			addDir(dirObj, out);
+			// add all the remaining files
+			addDir("", dirObj, out);
 		    out.close();
 		}
 		catch(IOException ex)
@@ -308,7 +344,7 @@ public class EpubFile extends EBookFile
 		}
 	}
 
-	private void addDir(java.io.File dirObj, ZipOutputStream out) throws IOException
+	private void addDir(String basePath, java.io.File dirObj, ZipOutputStream out) throws IOException
 	{
 		java.io.File[] files = dirObj.listFiles();
 	    byte[] tmpBuf = new byte[1024];
@@ -317,11 +353,14 @@ public class EpubFile extends EBookFile
 	    {
 	      if (files[i].isDirectory())
 	      {
-	        addDir(files[i], out);
+	    	String path = basePath + files[i].getName() + "/";
+	    	out.putNextEntry(new ZipEntry(path));
+	        addDir(path, files[i], out);
+	        out.closeEntry();
 	        continue;
 	      }
 	      FileInputStream in = new FileInputStream(files[i].getAbsolutePath());
-	      out.putNextEntry(new ZipEntry(files[i].getAbsolutePath()));
+	      out.putNextEntry(new ZipEntry(basePath + files[i].getName()));
 	      int len;
 	      while ((len = in.read(tmpBuf)) > 0)
 	      {

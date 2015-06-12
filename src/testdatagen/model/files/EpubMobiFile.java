@@ -1,5 +1,7 @@
 package testdatagen.model.files;
 
+import testdatagen.model.Title;
+
 public class EpubMobiFile extends EBookFile
 {
 	/**
@@ -12,6 +14,13 @@ public class EpubMobiFile extends EBookFile
 	{
 		super(Long.toString(ISBN) + (demoFlag ? "_Extract" : "" ) + "_EpubMobi.epub", demoFlag);
 		this.ISBN = ISBN;
+	}
+	
+	public java.io.File generate(Title title, java.io.File destPath)
+	{
+		EpubFile epubFile = new EpubFile(ISBN, this.isDemoFile());
+		java.io.File epubMobiFile = epubFile.generate(title, destPath);
+		return epubMobiFile;
 	}
 	
 	public String toString()

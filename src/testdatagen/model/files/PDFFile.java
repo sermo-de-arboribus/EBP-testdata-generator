@@ -1,5 +1,9 @@
 package testdatagen.model.files;
 
+import java.io.File;
+
+import testdatagen.model.Title;
+
 public class PDFFile extends EBookFile
 {
 	/**
@@ -17,5 +21,13 @@ public class PDFFile extends EBookFile
 	public String toString()
 	{
 		return "PDF["+ISBN+"]";
+	}
+
+	@Override
+	public File generate(Title title, File destDir)
+	{
+		PDFCoverFile pcf = new PDFCoverFile(title.getIsbn13());
+		java.io.File pdf = pcf.generate(title, destDir);
+		return pdf;
 	}
 }

@@ -29,7 +29,7 @@ public class AudioZipFile extends EBookFile
 	}
 
 	@Override
-	public java.io.File generate(Title title, java.io.File destDir)
+	public java.io.File generate(Title title, java.io.File destPath)
 	{
 		Random random = new Random();
 		ConfigurationRegistry registry = ConfigurationRegistry.getRegistry();
@@ -49,11 +49,11 @@ public class AudioZipFile extends EBookFile
 			
 		}
 		
-		// generate sample file
+		// TODO: generate sample file
 		
-		// generate audio file container
+		// TODO: generate audio file container
 		
-		// Zip it up
+		// TODO: Zip it up
 		return null;
 	}
 }

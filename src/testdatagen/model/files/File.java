@@ -20,5 +20,5 @@ public abstract class File extends java.io.File
 	 * @destDir File: the destination directory for saving the file
 	 * @return File: the file path of the stored file.
 	 */
-	public abstract java.io.File generate(Title title, java.io.File destDir);
+	public abstract java.io.File generate(Title title, java.io.File destPath);
 }

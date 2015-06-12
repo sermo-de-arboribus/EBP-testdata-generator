@@ -1,5 +1,9 @@
 package testdatagen.model.files;
 
+import java.io.File;
+
+import testdatagen.model.Title;
+
 public class IBookFile extends EBookFile
 {
 	/**
@@ -17,5 +21,12 @@ public class IBookFile extends EBookFile
 	public String toString()
 	{
 		return "iBook["+ISBN+"]";
+	}
+
+	@Override
+	public File generate(Title title, File destDir)
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -31,7 +31,7 @@ public class PDFCoverFile extends GraphicFile
 		this.ISBN = ISBN;
 	}
 	
-	public java.io.File generate(Title title, java.io.File destDir)
+	public java.io.File generate(Title title, java.io.File destPath)
 	{
 		Dimension coverDimension = CoverUtils.getRandomCoverDimension();
 		
@@ -89,11 +89,19 @@ public class PDFCoverFile extends GraphicFile
 			ex.printStackTrace();
 		}
 		
-		java.io.File storedFile = new java.io.File(FilenameUtils.concat(destDir.getPath(), title.getIsbn13() + "_cover.pdf"));
+		java.io.File storedFile = null;
+		if(destPath.isDirectory())
+		{
+			 storedFile = new java.io.File(FilenameUtils.concat(destPath.getPath(), title.getIsbn13() + "_cover.pdf"));
+		}
+		else
+		{
+			storedFile = new java.io.File(destPath.getName());
+		}
+		
 		try
 		{
 			coverDoc.save(storedFile);
-			coverDoc.close();
 		}
 		catch (COSVisitorException cve)
 		{
@@ -106,6 +114,17 @@ public class PDFCoverFile extends GraphicFile
 			System.out.println("I/O error occurred during saving of cover PDF");
 			ex.printStackTrace();
 			storedFile = null;
+		}
+		finally
+		{
+			try
+			{
+				coverDoc.close();	
+			}
+			catch(IOException ex)
+			{
+				// nop
+			}
 		}
 		return storedFile;
 	}
