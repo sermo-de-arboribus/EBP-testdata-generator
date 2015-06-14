@@ -14,16 +14,17 @@ import testdatagen.utilities.Utilities;
 
 public class EditScenarioButtonListener implements ActionListener 
 {
-	private JTable scenarioTable;
+	TestDataGeneratorMain programWindow;
 	
-	public EditScenarioButtonListener(JTable scenarioTable)
+	public EditScenarioButtonListener(final TestDataGeneratorMain programWindow)
 	{
-		this.scenarioTable = scenarioTable;
+		this.programWindow = programWindow;
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent evt)
+	public void actionPerformed(final ActionEvent evt)
 	{
+		JTable scenarioTable = programWindow.getScenarioTable();
 		// get the source of the event
 		JButton source = (JButton) evt.getSource();
 		TestDataGeneratorMain mainWindow = (TestDataGeneratorMain) source.getTopLevelAncestor();

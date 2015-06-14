@@ -5,21 +5,21 @@ import java.awt.event.ActionListener;
 import java.io.*;
 
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.commons.io.FilenameUtils;
 
+import testdatagen.TestDataGeneratorMain;
 import testdatagen.model.ScenarioTableModel;
 import testdatagen.utilities.Utilities;
 
 public class SaveScenariosButtonListener implements ActionListener
 {
-	private ScenarioTableModel scenarios;
+	TestDataGeneratorMain programWindow;
 
-	public SaveScenariosButtonListener(final ScenarioTableModel scenarios)
+	public SaveScenariosButtonListener(final TestDataGeneratorMain programWindow)
 	{
-		this.scenarios = scenarios;
+		this.programWindow = programWindow;
 	}
 	
 	@Override
@@ -49,6 +49,7 @@ public class SaveScenariosButtonListener implements ActionListener
 	    ObjectOutputStream saveScenarioObjects = null;
 	    try
 	    {
+	    	ScenarioTableModel scenarios = programWindow.getScenarioTableModel();
 		    saveScenarioObjects = new ObjectOutputStream(new FileOutputStream(fileForSaving));
 		    saveScenarioObjects.writeObject(scenarios);
 		    saveScenarioObjects.flush();

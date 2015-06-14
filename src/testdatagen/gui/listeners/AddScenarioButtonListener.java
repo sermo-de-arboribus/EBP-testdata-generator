@@ -11,8 +11,14 @@ import testdatagen.model.TestScenario;
 
 public class AddScenarioButtonListener implements ActionListener
 {
+	TestDataGeneratorMain programWindow;
 	JDialog newProfileDialog;
 	TestScenario newScenario;
+	
+	public AddScenarioButtonListener(TestDataGeneratorMain programWindow)
+	{
+		this.programWindow = programWindow;
+	}
 	
 	@Override
 	public void actionPerformed(ActionEvent evt)
@@ -26,12 +32,8 @@ public class AddScenarioButtonListener implements ActionListener
         		// generate a new scenario object
         		newScenario = new TestScenario(scenarioTitle);
         		
-        		// get the source of the event
-        		JButton source = (JButton) evt.getSource();
-        		TestDataGeneratorMain mainWindow = (TestDataGeneratorMain) source.getTopLevelAncestor();
-        		
         		// set up the main dialog page for the new scenario
-    	    	newProfileDialog = new NewScenarioDialog(mainWindow, newScenario);
+    	    	newProfileDialog = new NewScenarioDialog(programWindow, newScenario);
     	    	
     	    	// set dialog visible
     	    	newProfileDialog.setVisible(true);	

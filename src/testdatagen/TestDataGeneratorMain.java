@@ -60,8 +60,13 @@ public class TestDataGeneratorMain extends JFrame
 	{
 		return scenarioTable;
 	}
+
+	public ScenarioTableModel getScenarioTableModel()
+	{
+		return (ScenarioTableModel) scenarioTable.getModel();
+	}
 	
-	public void setScenarios(ScenarioTableModel scenarios)
+	public void setScenarios(final ScenarioTableModel scenarios)
 	{
 		scenarioTable.setModel(scenarios);
 	}
@@ -98,11 +103,11 @@ public class TestDataGeneratorMain extends JFrame
 	    JButton generateDataButton = new JButton("Generate test data");
 	    
 	    // register action listeners
-	    addButton.addActionListener(new AddScenarioButtonListener());
-	    editButton.addActionListener(new EditScenarioButtonListener(scenarioTable));
-	    saveButton.addActionListener(new SaveScenariosButtonListener((ScenarioTableModel) scenarioTable.getModel()));
+	    addButton.addActionListener(new AddScenarioButtonListener(this));
+	    editButton.addActionListener(new EditScenarioButtonListener(this));
+	    saveButton.addActionListener(new SaveScenariosButtonListener(this));
 	    loadButton.addActionListener(new LoadScenariosButtonListener(this));
-	    generateDataButton.addActionListener(new GenerateDataButtonListener(scenarioTable));
+	    generateDataButton.addActionListener(new GenerateDataButtonListener(this));
 	    
 	    // add buttons to pane
 	    topButtonPanel.add(addButton);

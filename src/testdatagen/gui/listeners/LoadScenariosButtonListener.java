@@ -8,25 +8,23 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import testdatagen.TestDataGeneratorMain;
 import testdatagen.model.ScenarioTableModel;
-import testdatagen.utilities.ISBNUtils;
 import testdatagen.utilities.Utilities;
 
 public class LoadScenariosButtonListener implements ActionListener
 {
-	private TestDataGeneratorMain mainFrame;
+	private TestDataGeneratorMain programWindow;
 	
-	public LoadScenariosButtonListener(TestDataGeneratorMain mainFrame)
+	public LoadScenariosButtonListener(final TestDataGeneratorMain mainFrame)
 	{
-		this.mainFrame = mainFrame;
+		this.programWindow = mainFrame;
 	}
 	
 	@Override
-	public void actionPerformed(ActionEvent evt)
+	public void actionPerformed(final ActionEvent evt)
 	{
 		JFileChooser chooser = new JFileChooser();
 	    FileNameExtensionFilter filter = new FileNameExtensionFilter("E-Book-Plant data files", "ebp");
@@ -42,7 +40,7 @@ public class LoadScenariosButtonListener implements ActionListener
 	    {
 	    	loadScenarioObjects = new ObjectInputStream(new FileInputStream(fileForOpening));
 	    	ScenarioTableModel scenarios = (ScenarioTableModel) loadScenarioObjects.readObject();
-	    	mainFrame.setScenarios(scenarios);
+	    	programWindow.setScenarios(scenarios);
 	    }
 	    catch (IOException e)
 	    {
