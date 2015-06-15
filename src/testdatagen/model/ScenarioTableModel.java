@@ -67,11 +67,18 @@ public class ScenarioTableModel extends AbstractTableModel
 	public void addScenario(TestScenario scenario)
 	{
 		scenarios.add(scenario);
+		fireTableDataChanged();
 	}
 	
 	public ArrayList<TestScenario> getScenarioList()
 	{
 		return new ArrayList<TestScenario>(scenarios);
+	}
+	
+	public void removeScenario(final TestScenario selectedScenario)
+	{
+		scenarios.remove(selectedScenario);
+		fireTableDataChanged();
 	}
 	
 	// control serialization

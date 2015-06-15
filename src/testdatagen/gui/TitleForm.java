@@ -38,10 +38,10 @@ public class TitleForm extends JDialog
 		// The form elements
 		String[] coverOptions = {"Media file link", "Cover upload"};
 		JLabel coverSelection = new JLabel("Choose cover delivery method");
-		JComboBox covertype = new JComboBox(coverOptions);
+		JComboBox<String> covertype = new JComboBox<String>(coverOptions);
 		covertype.setName("covertype");
 		JLabel productTypeSelection = new JLabel("Choose product type");
-		JComboBox product = new JComboBox(ProductType.productTypeNames());
+		JComboBox<String> product = new JComboBox<String>(ProductType.productTypeNames());
 		product.setName("product");
 		JCheckBox scrBox = new JCheckBox("Add screenshot assets");
 		scrBox.setName("screenshot");

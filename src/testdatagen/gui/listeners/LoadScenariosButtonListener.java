@@ -16,11 +16,11 @@ import testdatagen.utilities.Utilities;
 
 public class LoadScenariosButtonListener implements ActionListener
 {
-	private TestDataGeneratorMain mainFrame;
+	private TestDataGeneratorMain programWindow;
 	
 	public LoadScenariosButtonListener(TestDataGeneratorMain mainFrame)
 	{
-		this.mainFrame = mainFrame;
+		this.programWindow = mainFrame;
 	}
 	
 	@Override
@@ -40,7 +40,7 @@ public class LoadScenariosButtonListener implements ActionListener
 		    {
 		    	loadScenarioObjects = new ObjectInputStream(new FileInputStream(fileForOpening));
 		    	ScenarioTableModel scenarios = (ScenarioTableModel) loadScenarioObjects.readObject();
-		    	mainFrame.setScenarios(scenarios);
+		    	programWindow.setScenarios(scenarios);
 		    }
 		    catch (IOException e)
 		    {

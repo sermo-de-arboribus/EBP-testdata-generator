@@ -13,6 +13,7 @@ import javax.swing.*;
 import javax.swing.table.TableModel;
 
 import testdatagen.gui.listeners.AddScenarioButtonListener;
+import testdatagen.gui.listeners.DeleteScenarioButtonListener;
 import testdatagen.gui.listeners.EditScenarioButtonListener;
 import testdatagen.gui.listeners.GenerateDataButtonListener;
 import testdatagen.gui.listeners.LoadScenariosButtonListener;
@@ -65,6 +66,11 @@ public class TestDataGeneratorMain extends JFrame
 		return scenarioTable;
 	}
 	
+	public ScenarioTableModel getScenarioTableModel()
+	{
+		return (ScenarioTableModel) scenarioTable.getModel();
+	}
+	
 	public void setScenarios(ScenarioTableModel scenarios)
 	{
 		scenarioTable.setModel(scenarios);
@@ -97,16 +103,18 @@ public class TestDataGeneratorMain extends JFrame
 	    topButtonPanel.setPreferredSize(new Dimension((int) screenSize.getWidth(), (int) screenSize.getHeight() / 10));
 	    JButton addButton = new JButton("Add new scenario");
 	    JButton editButton = new JButton("Edit selected scenario");
+	    JButton delButton = new JButton("Delete scenario");
 	    JButton saveButton = new JButton("Save scenarios");
 	    JButton loadButton = new JButton("Load scenarios");
 	    JButton generateDataButton = new JButton("Generate test data");
 	    
 	    // register action listeners
-	    addButton.addActionListener(new AddScenarioButtonListener());
-	    editButton.addActionListener(new EditScenarioButtonListener(scenarioTable));
-	    saveButton.addActionListener(new SaveScenariosButtonListener((ScenarioTableModel) scenarioTable.getModel()));
+	    addButton.addActionListener(new AddScenarioButtonListener(this));
+	    editButton.addActionListener(new EditScenarioButtonListener(this));
+	    delButton.addActionListener(new DeleteScenarioButtonListener(this));
+	    saveButton.addActionListener(new SaveScenariosButtonListener(this));
 	    loadButton.addActionListener(new LoadScenariosButtonListener(this));
-	    generateDataButton.addActionListener(new GenerateDataButtonListener(scenarioTable));
+	    generateDataButton.addActionListener(new GenerateDataButtonListener(this));
 	    
 	    // add buttons to pane
 	    topButtonPanel.add(addButton);

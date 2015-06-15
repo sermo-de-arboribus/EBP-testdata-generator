@@ -19,8 +19,8 @@ import testdatagen.utilities.ISBNUtils;
 import testdatagen.utilities.TitleUtils;
 import testdatagen.utilities.Utilities;
 
-public class AddTitleToScenarioListener implements ActionListener {
-
+public class AddTitleToScenarioListener implements ActionListener
+{
 	private TestScenario scenario;
 	private JDialog parentDialog;
 	
@@ -69,12 +69,14 @@ public class AddTitleToScenarioListener implements ActionListener {
 						switch(compName)
 						{
 							case("covertype"):
-								JComboBox jcb1 = (JComboBox) tcomp;
+								@SuppressWarnings("unchecked")
+								JComboBox<String> jcb1 = (JComboBox<String>) tcomp;
 								String boxString = (String) jcb1.getSelectedItem();
 								mfl = boxString.equals("Media file link") ? true : false;
 								break;
 							case("product"):
-								JComboBox jcb2 = (JComboBox) tcomp;
+								@SuppressWarnings("unchecked")
+								JComboBox<String> jcb2 = (JComboBox<String>) tcomp;
 								format = (String) jcb2.getSelectedItem();
 								break;
 							case("screenshot"):

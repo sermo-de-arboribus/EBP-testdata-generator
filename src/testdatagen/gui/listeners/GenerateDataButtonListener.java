@@ -11,6 +11,7 @@ import javax.swing.JTable;
 import org.apache.commons.io.FilenameUtils;
 
 import testdatagen.GeneratorThread;
+import testdatagen.TestDataGeneratorMain;
 import testdatagen.model.ScenarioTableModel;
 import testdatagen.model.TestScenario;
 import testdatagen.model.Title;
@@ -18,15 +19,16 @@ import testdatagen.utilities.Utilities;
 
 public class GenerateDataButtonListener implements ActionListener
 {
-	private JTable scenarioTable;
+	private TestDataGeneratorMain programWindow;
 	
-	public GenerateDataButtonListener(JTable scenarioTable)
+	public GenerateDataButtonListener(TestDataGeneratorMain programWindow)
 	{
-		this.scenarioTable = scenarioTable;
+		this.programWindow = programWindow;
 	}
 	
 	public void actionPerformed(ActionEvent evt)
 	{
+		JTable scenarioTable = programWindow.getScenarioTable();
 		// check if a row is selected
 		int row = scenarioTable.getSelectedRow();
 		// no row selected

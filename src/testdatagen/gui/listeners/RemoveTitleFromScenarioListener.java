@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
-import testdatagen.model.Title;
 import testdatagen.model.TitleTableModel;
 
 public class RemoveTitleFromScenarioListener implements ActionListener 
