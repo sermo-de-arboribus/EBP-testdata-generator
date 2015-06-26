@@ -217,6 +217,10 @@ public class ONIXFile extends File
 		b251.appendChild(new Text(countryCode));
 		price.appendChild(b251);
 		
+		Element b153 = new Element("b153");
+		b153.appendChild(new Text("S"));
+		price.appendChild(b153);
+		
 		return price;
 	}
 	
