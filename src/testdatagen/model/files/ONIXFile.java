@@ -29,14 +29,17 @@ public class ONIXFile extends File
 {
 	private static Random random = new Random();
 	private static ConfigurationRegistry registry = ConfigurationRegistry.getRegistry();
+	private ArrayList<Element> prices;
 	
 	public ONIXFile(long ISBN)
 	{
 		super(Long.toString(ISBN) + "_onix.xml");
+		prices = new ArrayList<Element>();
 	}
 	
 	public java.io.File generate(Title title, java.io.File destDir)
 	{
+		System.out.println("Generating ONIX for " + title.getIsbn13());
 		Element ONIXroot = new Element("ONIXmessage");
 		Element ONIXheader = buildHeader();
 		Element ONIXproduct = buildProductNode(title);
@@ -221,7 +224,29 @@ public class ONIXFile extends File
 		j153.appendChild(new Text("S"));
 		price.appendChild(j153);
 		
-		return price;
+		// check if a price node with the same data already exists
+		if(prices.isEmpty())
+		{
+			prices.add(price);
+			return price;
+		}
+		else
+		{
+			Iterator<Element> it = prices.iterator();
+			while(it.hasNext())
+			{
+				// if price node with the same data already exists, create a new one.
+				Element compElement = it.next();
+				System.out.println("Comparing: " + compElement.getValue() + " with " + price.getValue());
+				if(compElement.getValue().equals(price.getValue()))
+				{
+					System.out.println("Price exists, creating new one");
+					return buildPriceNode(nodeType, basePrice);
+				}
+			}
+			prices.add(price);
+			return price;
+		}
 	}
 	
 	private Element buildPriceNode(String nodeType, double basePrice)
@@ -486,6 +511,8 @@ public class ONIXFile extends File
 		Element j142 = new Element("j142");
 		j142.appendChild(new Text(Utilities.getDateForONIX2(new Date(currentDateMillis + randomShipDate)).substring(0, 8)));
 		suppDet.appendChild(j142);
+		
+		// TODO: refactor price node handling. There are currently two ArrayLists kept with price node elements, one locally, one as an instance variable. That's overdoing it!
 		
 		// price nodes
 		double basePrice = Math.round((random.nextDouble() * 28.99 + 1) * 100) / 100.0;	

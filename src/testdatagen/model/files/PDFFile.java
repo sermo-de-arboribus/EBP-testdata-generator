@@ -26,6 +26,7 @@ public class PDFFile extends EBookFile
 	@Override
 	public File generate(Title title, File destDir)
 	{
+		System.out.println("Generating PDF e-book file in folder: " + destDir);
 		PDFCoverFile pcf = new PDFCoverFile(title.getIsbn13());
 		java.io.File pdf = pcf.generate(title, destDir);
 		return pdf;
