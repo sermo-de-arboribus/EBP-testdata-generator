@@ -314,7 +314,16 @@ public class EpubFile extends EBookFile
 	
 	public String toString()
 	{
-		return "Epub["+ISBN+"]" + (isBooklet ? "_Booklet" : "");
+		String fileString = "Epub";
+		if(this.isDemoFile())
+		{
+			fileString += "_extract";
+		}
+		if(this.isBooklet())
+		{
+			fileString += "_booklet";
+		}
+		return fileString + "[" +ISBN+ "]";
 	}
 	
 	private void zipEpub(String zipFileName, String dir)

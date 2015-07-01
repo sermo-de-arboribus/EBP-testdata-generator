@@ -96,7 +96,7 @@ public class PDFCoverFile extends GraphicFile
 		}
 		else
 		{
-			storedFile = new java.io.File(destPath.getName());
+			storedFile = new java.io.File(destPath.getPath());
 		}
 		
 		try

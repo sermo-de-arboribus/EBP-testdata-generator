@@ -25,6 +25,11 @@ public class EpubMobiFile extends EBookFile
 	
 	public String toString()
 	{
-		return "EpubMobi["+ISBN+"]";
+		String fileString = "EpubMobi";
+		if(this.isDemoFile())
+		{
+			fileString += "_extract";
+		}
+		return fileString + "[" +ISBN+ "]";
 	}
 }

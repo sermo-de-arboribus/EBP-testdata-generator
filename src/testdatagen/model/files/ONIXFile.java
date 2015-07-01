@@ -39,7 +39,6 @@ public class ONIXFile extends File
 	
 	public java.io.File generate(Title title, java.io.File destDir)
 	{
-		System.out.println("Generating ONIX for " + title.getIsbn13());
 		Element ONIXroot = new Element("ONIXmessage");
 		Element ONIXheader = buildHeader();
 		Element ONIXproduct = buildProductNode(title);
@@ -237,7 +236,6 @@ public class ONIXFile extends File
 			{
 				// if price node with the same data already exists, create a new one.
 				Element compElement = it.next();
-				System.out.println("Comparing: " + compElement.getValue() + " with " + price.getValue());
 				if(compElement.getValue().equals(price.getValue()))
 				{
 					System.out.println("Price exists, creating new one");

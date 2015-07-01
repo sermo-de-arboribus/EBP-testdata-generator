@@ -19,7 +19,12 @@ public class MobiFile extends EBookFile
 	
 	public String toString()
 	{
-		return "Mobi["+ISBN+"]";
+		String fileString = "Mobi";
+		if(this.isDemoFile())
+		{
+			fileString += "_extract";
+		}
+		return fileString + "[" +ISBN+ "]";
 	}
 
 	@Override
