@@ -83,7 +83,7 @@ public class TitleUtils
 	public static void loadLastTitleNumber()
 	{
 		File configDir = Utilities.getConfigDir();
-		File ISBNFile = new File(configDir.getPath() + "/titleno.ebp");
+		File ISBNFile = new File(configDir.toURI().getPath() + "/titleno.ebp");
 		ObjectInputStream loadTNoStream = null;
 	    try
 	    {

@@ -71,7 +71,7 @@ public class ISBNUtils
 	public static void saveLastISBN()
 	{
 		File configDir = Utilities.getConfigDir();
-		File ISBNFile = new File(configDir.getPath() + "/isbn.ebp");
+		File ISBNFile = new File(configDir.toURI().getPath() + "/isbn.ebp");
 		ISBNFile.getParentFile().mkdirs();
 		ObjectOutputStream saveISBNStream = null;
 		try
