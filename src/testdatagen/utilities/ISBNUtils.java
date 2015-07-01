@@ -40,7 +40,7 @@ public class ISBNUtils
 	public static void loadLastISBN()
 	{
 		File configDir = Utilities.getConfigDir();
-		File ISBNFile = new File(configDir.getPath() + "/isbn.ebp");
+		File ISBNFile = new File(configDir.toURI().getPath() + "/isbn.ebp");
 		ObjectInputStream loadISBNStream = null;
 	    try
 	    {
@@ -53,11 +53,11 @@ public class ISBNUtils
 	    }
 	    catch (IOException e)
 	    {
-	    	Utilities.showErrorPane("Error: could not read from config from File", e);
+	    	Utilities.showErrorPane("Error: could not read from config from File\n", e);
 	    }
 	    catch (ClassNotFoundException e)
 	    {
-	    	Utilities.showErrorPane("Error: could not read from config from File", e);
+	    	Utilities.showErrorPane("Error: could not read from config from File\n", e);
 	    }
 	    finally
 	    {
@@ -71,8 +71,7 @@ public class ISBNUtils
 	public static void saveLastISBN()
 	{
 		File configDir = Utilities.getConfigDir();
-		File ISBNFile = new File(configDir.toURI().getPath() + "/isbn.ebp");
-		ISBNFile.getParentFile().mkdirs();
+		File ISBNFile = new File(configDir.getPath() + "/isbn.ebp");
 		ObjectOutputStream saveISBNStream = null;
 		try
 		{
@@ -82,7 +81,7 @@ public class ISBNUtils
 		}
 		catch(IOException e)
 		{
-			Utilities.showErrorPane("Error: could not save ISBN to config file " + e.toString(), e);
+			Utilities.showErrorPane("Error: could not save ISBN to config file " + e.toString() + "\n", e);
 		}
 		finally
 		{

@@ -96,11 +96,11 @@ public class TitleUtils
 	    }
 	    catch (IOException e)
 	    {
-	    	Utilities.showErrorPane("Error: could not read from title number configuration file", e);
+	    	Utilities.showErrorPane("Error: could not read from title number configuration file\n", e);
 	    }
 	    catch (ClassNotFoundException e)
 	    {
-	    	Utilities.showErrorPane("Error: could not read class information from title number configuration file", e);
+	    	Utilities.showErrorPane("Error: could not read class information from title number configuration file\n", e);
 	    }
 	    finally
 	    {
@@ -114,8 +114,7 @@ public class TitleUtils
 	public static void saveLastTitleNumber()
 	{
 		File configDir = Utilities.getConfigDir();
-		File ISBNFile = new File(configDir.getPath() + "/titleno.ebp");
-		ISBNFile.getParentFile().mkdirs();
+		File ISBNFile = new File(configDir.toURI().getPath() + "/titleno.ebp");
 		ObjectOutputStream saveTNoStream = null;
 		try
 		{
@@ -125,7 +124,7 @@ public class TitleUtils
 		}
 		catch(IOException e)
 		{
-			Utilities.showErrorPane("Error: could not save title number to config file " + e.toString(), e);
+			Utilities.showErrorPane("Error: could not save title number to config file " + e.toString() + "\n", e);
 		}
 		finally
 		{

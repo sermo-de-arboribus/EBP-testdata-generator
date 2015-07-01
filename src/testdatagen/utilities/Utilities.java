@@ -6,7 +6,9 @@ import java.awt.Insets;
 import java.awt.Toolkit;
 import java.io.Closeable;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -39,14 +41,19 @@ public final class Utilities
 			appDirectory += ISBNUtils.class.getName().replace('.', '/');
 			appDirectory = new File(appDirectory).getParent();
 		}
-		File configDir = new File(appDirectory + "/config");
-		try
+		String configURI = appDirectory + "/config";
+		System.out.println("appDirectory is: " + appDirectory + ", configURI is: " + configURI);
+		File configDir = new File(configURI.replaceAll("%20", " "));
+		if(!configDir.exists())
 		{
-			configDir.mkdir();
-		}
-		catch (SecurityException exc)
-		{
-			showErrorPane("Error: could not create or find configuration directory",exc);
+			if(configDir.mkdirs())
+			{
+				showInfoPane("Created new config directory: " + configDir.getPath());
+			}
+			else
+			{
+				showErrorPane("Error: could not create or find a configuration directory\nFailed creating dir " + configDir.getPath(), new FileNotFoundException());
+			}
 		}
 		return configDir;
 	}
