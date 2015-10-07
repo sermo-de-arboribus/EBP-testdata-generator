@@ -7,8 +7,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import testdatagen.model.*;
-
 public class TestScenario implements Serializable
 {
 	/**
