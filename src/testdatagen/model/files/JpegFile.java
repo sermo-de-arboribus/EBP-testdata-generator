@@ -119,8 +119,13 @@ class JpegCover extends BufferedImage
 		{
 			// title too long, break it up into two lines
 			int breakpoint = title.getName().length() / 2;
-			String titleComponent1 = title.getName().substring(0, title.getName().indexOf(' ', breakpoint));
-			String titleComponent2 = title.getName().substring(title.getName().indexOf(' ', breakpoint) + 1);
+			int spaceAfterBreakpoint = title.getName().indexOf(' ', breakpoint);
+			if(spaceAfterBreakpoint > 0)
+			{
+				breakpoint = spaceAfterBreakpoint;
+			}
+			String titleComponent1 = title.getName().substring(0, breakpoint);
+			String titleComponent2 = title.getName().substring(breakpoint + 1);
 			
 			gra.drawString(titleComponent1, 
 					(getWidth() - largeMetrics.stringWidth(titleComponent1)) / 2,  // centered title in x dimension 

@@ -95,7 +95,7 @@ public abstract class OnixPartsBuilder
 		{
 			elementContent = getArgument(argName);
 		}
-		else if(defValue.matches("\\{\\$.\\}"))
+		else if(defValue.matches("\\{\\$.+\\}"))
 		{
 			switch(defValue)
 			{
