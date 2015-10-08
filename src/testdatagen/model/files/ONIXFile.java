@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.Random;
@@ -18,6 +19,8 @@ import nu.xom.Element;
 import nu.xom.Serializer;
 import nu.xom.Text;
 import testdatagen.config.ConfigurationRegistry;
+import testdatagen.controller.OnixHeaderBuilder;
+import testdatagen.controller.OnixPartsBuilder;
 import testdatagen.model.Title;
 import testdatagen.utilities.ISBNUtils;
 import testdatagen.utilities.TitleUtils;
@@ -112,37 +115,8 @@ public class ONIXFile extends File
 	
 	private Element buildHeader()
 	{
-		Element header = new Element("header");
-		
-		Element m174 = new Element("m174");
-		m174.appendChild(new Text("IT-E-Books-Verlag"));
-		header.appendChild(m174);
-		
-		Element m175 = new Element("m175");
-		m175.appendChild(new Text(TitleUtils.getRandomFullName()));
-		header.appendChild(m175);
-		
-		Element m283 = new Element("m283");
-		m283.appendChild(new Text("noreply@kno-va.de"));
-		header.appendChild(m283);
-		
-		Element m182 = new Element("m182");
-		m182.appendChild(new Text(Utilities.getDateForONIX2(new Date())));
-		header.appendChild(m182);
-		
-		Element m184 = new Element("m184");
-		m184.appendChild(new Text("ger"));
-		header.appendChild(m184);
-		
-		Element m185 = new Element("m185");
-		m185.appendChild(new Text("04"));
-		header.appendChild(m185);
-		
-		Element m186 = new Element("m186");
-		m186.appendChild(new Text(TitleUtils.getRandomCurrencyCode()));
-		header.appendChild(m186);
-		
-		return header;
+		OnixHeaderBuilder ohb = new OnixHeaderBuilder("2.1", OnixPartsBuilder.SHORTTAG, new HashMap<String, String>());
+		return ohb.build();
 	}
 	
 	private Element buildLanguageNode(String langCode)
