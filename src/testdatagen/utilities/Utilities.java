@@ -74,6 +74,13 @@ public final class Utilities
 		return sdf.format(date);
 	}
 	
+	public static String getDateTimeForONIX3(Date date)
+	{
+		String DATE_FORMAT = "yyyyMMdd'T'HHmm";
+		SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
+		return sdf.format(date);
+	}
+	
 	// TODO: Refactor - this method belongs into the Title class
 	public static String formatToFileType(String prodType)
 	{
