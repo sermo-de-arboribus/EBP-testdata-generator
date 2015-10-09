@@ -19,9 +19,7 @@ import nu.xom.Element;
 import nu.xom.Serializer;
 import nu.xom.Text;
 import testdatagen.config.ConfigurationRegistry;
-import testdatagen.controller.OnixHeaderBuilder;
-import testdatagen.controller.OnixPartsBuilder;
-import testdatagen.controller.OnixRecordReferenceBuilder;
+import testdatagen.controller.*;
 import testdatagen.model.Title;
 import testdatagen.utilities.ISBNUtils;
 import testdatagen.utilities.TitleUtils;
@@ -46,7 +44,7 @@ public class ONIXFile extends File
 	public java.io.File generate(Title title, java.io.File destDir)
 	{
 		// configure the arguments for the OnixPartsBuilders
-		// argumentsMap.put("recordreference", title.getUid());
+		argumentsMap.put("recordreference", title.getUid());
 		
 		Element ONIXroot = new Element("ONIXmessage");
 		Element ONIXheader = buildHeader();
@@ -272,9 +270,9 @@ public class ONIXFile extends File
 		product.appendChild(recordReference);
 		
 		// Notification Type
-		Element a002 = new Element("a002");
-		a002.appendChild(new Text("03"));
-		product.appendChild(a002);
+		OnixNotificationTypeBuilder notitypeb = new OnixNotificationTypeBuilder("2.1", OnixPartsBuilder.SHORTTAG, argumentsMap);
+		Element notiType = notitypeb.build();
+		product.appendChild(notiType);
 		
 		// Product Identifier
 		Element prodId1 = buildProductIdentifier("03", title.getIsbn13());
