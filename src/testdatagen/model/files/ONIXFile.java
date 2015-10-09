@@ -21,6 +21,7 @@ import nu.xom.Text;
 import testdatagen.config.ConfigurationRegistry;
 import testdatagen.controller.OnixHeaderBuilder;
 import testdatagen.controller.OnixPartsBuilder;
+import testdatagen.controller.OnixRecordReferenceBuilder;
 import testdatagen.model.Title;
 import testdatagen.utilities.ISBNUtils;
 import testdatagen.utilities.TitleUtils;
@@ -33,15 +34,20 @@ public class ONIXFile extends File
 	private static Random random = new Random();
 	private static ConfigurationRegistry registry = ConfigurationRegistry.getRegistry();
 	private ArrayList<Element> prices;
+	private HashMap<String, String> argumentsMap;
 	
 	public ONIXFile(long ISBN)
 	{
 		super(Long.toString(ISBN) + "_onix.xml");
 		prices = new ArrayList<Element>();
+		argumentsMap = new HashMap<String, String>();
 	}
 	
 	public java.io.File generate(Title title, java.io.File destDir)
 	{
+		// configure the arguments for the OnixPartsBuilders
+		// argumentsMap.put("recordreference", title.getUid());
+		
 		Element ONIXroot = new Element("ONIXmessage");
 		Element ONIXheader = buildHeader();
 		Element ONIXproduct = buildProductNode(title);
@@ -63,6 +69,11 @@ public class ONIXFile extends File
 		catch (IOException ex)
 		{
 			Utilities.showErrorPane("Could not save ONIX XML file", ex);
+		}
+		finally
+		{
+			// remove all arguments from arguments map
+			argumentsMap.clear();
 		}
 		return outputFile;
 	}
@@ -256,9 +267,9 @@ public class ONIXFile extends File
 		Element product = new Element("product");
 		
 		// Record Reference
-		Element a001 = new Element("a001");
-		a001.appendChild(new Text(title.getUid()));
-		product.appendChild(a001);
+		OnixRecordReferenceBuilder recrefb = new OnixRecordReferenceBuilder("2.1", OnixPartsBuilder.SHORTTAG, argumentsMap); 
+		Element recordReference = recrefb.build();
+		product.appendChild(recordReference);
 		
 		// Notification Type
 		Element a002 = new Element("a002");
