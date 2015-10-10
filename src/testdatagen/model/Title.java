@@ -20,7 +20,7 @@ public class Title implements Serializable
 	 */
 	private static final long serialVersionUID = 1L;
 	private static final String[] validEpubTypes = {"Epub", "PDF", "Mobi", "EpubMobi", "IBook", "SoftwareZip", "AudioZip"};
-	private static final String[] validFormats = {"PDF", "WMPDF", "NDPDF", "EPUB", "WMEPUB", "NDEPUB", "ZIP", "IBOOOK", "NDMOBI", "WMMOBI", "AUDIO"};
+	private static final String[] validFormats = ProductType.productTypeNames();
 	
 	private long isbn13;
     private String uid, name, author; // TODO: a book could have several authors with different author types. Expand model to reflect that

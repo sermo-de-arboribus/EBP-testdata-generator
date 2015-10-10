@@ -15,7 +15,7 @@ public abstract class File extends java.io.File
 	}
 	
 	/*
-	 * generates a graphic file and saves it to disc
+	 * generates a file and saves it to disc
 	 * @title Title: the title object to create the graphic file for
 	 * @destDir File: the destination directory for saving the file
 	 * @return File: the file path of the stored file.
