@@ -333,17 +333,23 @@ public class ONIXFile extends File
 		parentNode.appendChild(pfb.build());
 
 		// ProductFormDetail
+		OnixProductFormDetailBuilder pfdb = new OnixProductFormDetailBuilder(version, tagType, argumentsMap); 
+
+		// ProductFormDetail #1: is e-book reflowable or fixed layout?
+		String layoutType = random.nextBoolean() ? "E200" : "E201";
+		argumentsMap.put("productformdetail", layoutType);
+		parentNode.appendChild(pfdb.build());
+		argumentsMap.remove("productformdetail");
+		// ProductFormDetail #2: give information about EpubType
+		argumentsMap.put("productformdetail", title.getEpubTypeForProductFormDetail());
+		parentNode.appendChild(pfdb.build());
+		argumentsMap.remove("productformdetail");
 		
-		
-		// Epub Type
-		Element b211 = new Element("b211");
-		b211.appendChild(new Text(title.getEpubTypeForONIX()));
-		product.appendChild(b211);
-		
-		// Epub Type Note (with protection information)
-		Element b277 = new Element("b277");
-		b277.appendChild(new Text(title.getProtectionTypeForONIX()));
-		product.appendChild(b277);
+		// output protection type
+		OnixTechnicalProtectionBuilder tpb = new OnixTechnicalProtectionBuilder(version, tagType, argumentsMap);
+		argumentsMap.put("technicalprotection", title.getProtectionTypeForONIX());
+		parentNode.appendChild(tpb.build());
+		argumentsMap.remove("technicalprotection");
 		
 		// Title
 		Element titleNode = buildTitleNode("01", title);

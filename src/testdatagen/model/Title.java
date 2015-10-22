@@ -124,19 +124,41 @@ public class Title implements Serializable
 		
 		switch(epubType)
 		{
-		case "PDF":
-			return "002";
-		case "Epub":
-			return "029";
-		case "IBook":
-			return "044";
-		case "SoftwareZip":
-		case "AudioZip":
-			return "099";
-		case "Mobi":
-			return "022";
-		default:
-			return "Unknown";
+			case "PDF":
+				return "002";
+			case "Epub":
+				return "029";
+			case "IBook":
+				return "044";
+			case "SoftwareZip":
+			case "AudioZip":
+				return "099";
+			case "Mobi":
+				return "022";
+			default:
+				return "Unknown";
+		}
+	}
+	
+	public synchronized String getEpubTypeForProductFormDetail()
+	{
+		if(epubType == null) return "Unknown";
+		
+		switch(getEpubTypeForONIX())
+		{
+			case "002":
+				return "E107";
+			case "029":
+				return "E101";
+			case "044":
+				return "E141";
+			case "022":
+				return "127";
+				//TODO: how to represent software / audio products in ProductFormDetail?
+			case "099":
+				return "WARNING! Software / Audio Products not implemented yet";
+			default:
+				return "Unknown";
 		}
 	}
 	
