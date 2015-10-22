@@ -1,4 +1,4 @@
-package testdatagen.controller;
+package testdatagen.onixbuilder;
 
 import java.util.HashMap;
 

@@ -7,10 +7,10 @@ import java.util.ListIterator;
 
 import org.apache.commons.io.FilenameUtils;
 
-import testdatagen.controller.OnixPartsBuilder;
 import testdatagen.model.Title;
 import testdatagen.model.files.GraphicFile;
 import testdatagen.model.files.ONIXFile;
+import testdatagen.onixbuilder.OnixPartsBuilder;
 
 public class GeneratorThread extends Thread
 {

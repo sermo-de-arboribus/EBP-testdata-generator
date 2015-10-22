@@ -19,8 +19,8 @@ import nu.xom.Element;
 import nu.xom.Serializer;
 import nu.xom.Text;
 import testdatagen.config.ConfigurationRegistry;
-import testdatagen.controller.*;
 import testdatagen.model.Title;
+import testdatagen.onixbuilder.*;
 import testdatagen.utilities.ISBNUtils;
 import testdatagen.utilities.TitleUtils;
 import testdatagen.utilities.Utilities;
@@ -332,6 +332,9 @@ public class ONIXFile extends File
 		OnixProductFormBuilder pfb = new OnixProductFormBuilder(version, tagType, argumentsMap);
 		parentNode.appendChild(pfb.build());
 
+		// ProductFormDetail
+		
+		
 		// Epub Type
 		Element b211 = new Element("b211");
 		b211.appendChild(new Text(title.getEpubTypeForONIX()));
