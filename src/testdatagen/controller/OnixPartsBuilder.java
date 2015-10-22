@@ -34,14 +34,13 @@ public abstract class OnixPartsBuilder
 	 * @args HashMap<String, String>: this hash map may contain key-value pairs for providing certain ONIX elements' text content.
 	 * 		The key names to be used have to match the 5th column (index 4) of the elementDefinitions array.
 	 */
-	@SuppressWarnings("unchecked")
 	public OnixPartsBuilder(String onixVersion, int tagType, HashMap<String, String> args)
 	{
 		validateTagType(tagType);
 		validateOnixVersion(onixVersion);
 		this.onixVersion = onixVersion;
 		this.tagType = tagType;
-		arguments = (HashMap<String, String>) args.clone();
+		arguments = args;
 	}
 	
 	/*
@@ -120,7 +119,7 @@ public abstract class OnixPartsBuilder
 					elementContent = TitleUtils.getRandomCurrencyCode();
 					break;
 				default:
-					elementContent = "ERROR! Could not create element content";
+					elementContent = "ERROR! Could not create element content for " + defValue;
 			}
 		}
 		else

@@ -7,6 +7,7 @@ import java.util.ListIterator;
 
 import org.apache.commons.io.FilenameUtils;
 
+import testdatagen.controller.OnixPartsBuilder;
 import testdatagen.model.Title;
 import testdatagen.model.files.GraphicFile;
 import testdatagen.model.files.ONIXFile;
@@ -42,9 +43,22 @@ public class GeneratorThread extends Thread
 					// TODO: how to handle notification when upload is finished?
 				}
 			}
-			// TODO: generate ONIX file
-			ONIXFile onixFile = new ONIXFile(title.getIsbn13());
+			// generate ONIX 2.1 file with long tag names
+			ONIXFile onixFile = new ONIXFile(title.getIsbn13(), OnixPartsBuilder.REFERENCETAG, "2.1");
 			// TODO: do we need the return value of generate()? 
+			onixFile.generate(title, destDir);
+			
+			// generate ONIX 2.1 file with short tag names
+			onixFile = new ONIXFile(title.getIsbn13(), OnixPartsBuilder.SHORTTAG, "2.1");
+			// TODO: do we need the return value of generate()? 
+			onixFile.generate(title, destDir);
+			
+			// generate ONIX 3.0 file with long tag names
+			onixFile = new ONIXFile(title.getIsbn13(), OnixPartsBuilder.REFERENCETAG, "3.0");
+			onixFile.generate(title, destDir);
+			
+			// generate ONIX 3.0 file with short tag names
+			onixFile = new ONIXFile(title.getIsbn13(), OnixPartsBuilder.SHORTTAG, "3.0");
 			onixFile.generate(title, destDir);
 			
 			// TODO: iterate over all file Objects and generate the files
