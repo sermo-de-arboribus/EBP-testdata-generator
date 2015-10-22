@@ -6,6 +6,6 @@
 	<classpathentry kind="lib" path="lib/commons-io-2.4.jar"/>
 	<classpathentry kind="lib" path="lib/dropbox-core-sdk-1.7.7.jar"/>
 	<classpathentry kind="lib" path="lib/jackson-core-2.2.4.jar"/>
-	<classpathentry kind="lib" path="lib/xom-1.1.jar"/>
+	<classpathentry kind="lib" path="lib/xom-1.2.10.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

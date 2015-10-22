@@ -150,7 +150,7 @@ public class TestDataGeneratorMain extends JFrame
 		Title testtitle010 = new Title(9780030549823L, "test-9780030549823", "A Glossary of Literary Terms", "Meyer Howard Abrams", true);
 		Title testtitle011 = new Title(9787229004385L, "test-978-7-229-00438-5", "Anthills of the Savannah", "Chinua Achebe", false);
 		Title testtitle012 = new Title(9780435905255L, "test-9780435905255", "Things Fall Apart", "Chinua Achebe", false);
-		Title testtitle013 = new Title(9402008, "test-9402008", "Das Laubenspiel", "Adam de la Halle", true);
+		Title testtitle013 = new Title(9789402008005L, "test-9789402008005", "Das Laubenspiel", "Adam de la Halle", true);
 		
 		scenario01.addTitle(testtitle001);
 		scenario01.addTitle(testtitle002);

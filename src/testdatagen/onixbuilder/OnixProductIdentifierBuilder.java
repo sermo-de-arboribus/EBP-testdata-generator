@@ -1,0 +1,96 @@
+package testdatagen.onixbuilder;
+
+import java.util.HashMap;
+
+import testdatagen.utilities.OnixUtils;
+import nu.xom.Element;
+import nu.xom.Text;
+
+public class OnixProductIdentifierBuilder extends OnixPartsBuilder
+{
+	/* 
+	 * For a comment on this string array's table format see the parent class
+	 */
+	private static final String[][] PRODUCT_IDENTIFIER_DEFINITIONS = 
+		{
+			{"productidentifier", "ProductIdentifier", "productidentifier", "ProductIdentifier", "", ""},
+			{"b221", "ProductIDType", "b221", "ProductIDType", "productidtype", "15"},
+			{"b233", "IDTypeName", "b233", "IDTypeName", "productidtypename", "{$productidtypename}"},
+			{"b244", "IDValue", "b244", "IDValue", "productidvalue", "WARNING! NO PRODUCT ID ARGUMENT PASSED"}
+		};
+	
+	public OnixProductIdentifierBuilder(String onixVersion, int tagType, HashMap<String, String> args)
+	{
+		super(onixVersion, tagType, args);
+		elementDefinitions = PRODUCT_IDENTIFIER_DEFINITIONS;
+	}
+	
+	@Override
+	public Element build()
+	{
+		Element productidentifier = new Element(getTagName(0));
+		
+		for(int i = 1; i < elementDefinitions.length; i++)
+		{
+			Element nextElement = new Element(getTagName(i));
+			nextElement.appendChild(new Text(determineElementContent(i)));
+			productidentifier.appendChild(nextElement);
+		}
+		
+		return productidentifier;
+	}
+	
+	@Override
+	protected String determineElementContent(int row)
+	{
+		String argName = elementDefinitions[row][4];
+		String defValue = elementDefinitions[row][5];
+		String elementContent = "";
+		if(hasArgument(argName))
+		{
+			elementContent = getArgument(argName);
+		}
+		else if(defValue.matches("\\{\\$.+\\}"))
+		{
+			switch(defValue)
+			{
+				case "{$productidtypename}":
+					// determine productidtype
+					elementContent = getNameForIDType(getProductIDType());
+					break;
+				default:
+					elementContent = "ERROR! Could not create element content for " + defValue;
+			}
+		}
+		else
+		{
+			elementContent = defValue;
+		}
+		
+		return elementContent;
+	}
+	
+	private String getNameForIDType(String idType)
+	{
+		// names for ID types can be found in ONIX code list 5
+		return OnixUtils.getCodeListDescription(5, idType);
+	}
+	
+	private String getProductIDType()
+	{
+		String idType = "";
+		String argName = elementDefinitions[1][4];
+		if(hasArgument(argName))
+		{
+			idType = getArgument(argName);
+		}
+		else
+		{
+			// return default ID Type
+			idType = elementDefinitions[1][5];
+		}
+		
+		return idType;
+	}
+
+}

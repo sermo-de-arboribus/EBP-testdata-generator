@@ -1,5 +1,6 @@
 package testdatagen.config;
 
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -12,12 +13,12 @@ public class ConfigurationRegistry
 	private static ConfigurationRegistry registry;
 	private Map<String, String> regMap;
 	private Map<Locale, Map<String, String[]>> localeTextMap;
+	private Map<Integer, Map<String, String>> onixCodeListMap;
 	
 	private ConfigurationRegistry()
 	{
 		 regMap = new ConcurrentHashMap<String, String>();
 		 
-		 // add cover generation data to register
 		 regMap.put("cover.maxWidth", "2400");
 		 regMap.put("cover.minWidth", "300");
 		 regMap.put("cover.minXYRatio", "1.28");
@@ -74,6 +75,31 @@ public class ConfigurationRegistry
 		 putLocalizedText(deLocale, "ONIXTitlePageTemplate", "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?><!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\"><html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>Titelseite {$title}</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/></head><body style=\"text-align:center\"><h1>{$title}</h1><div><br/></div><h2>von {$author}</h2><div><br/></div><div>erschienen im</div><div><br/></div><div><br/></div><div>{$publishername}</div><div>{$publisherlocation}</div><div>{$year}</div><div><br/></div><div>ISBN {$isbn}</div></body></html>");
 		 putLocalizedText(deLocale, "publisherlocation", new String[]{"Stuttgart", "Stuttgart-Vaihingen", "Stuttgart-Möhringen", "Stuttgart-Kaltental"});
 		 putLocalizedText(deLocale, "publishername", new String[]{"KNV IT-E-Books-Verlag", "Koch, Neff &amp; Volckmar IT-E-Books-Verlag", "KNO DiVA &amp; KNV IT-E-Books-Verlag"});
+		 
+		 onixCodeListMap = new ConcurrentHashMap<Integer, Map<String, String>>();
+		 
+		 // assuming this HashMap is only used in read-only mode, so no need to consider concurrency
+		 HashMap<String, String> list5 = new HashMap<String, String>();
+		 list5.put("01", "Proprietary");
+		 list5.put("02", "ISBN-10");
+		 list5.put("03", "GTIN-13");
+		 list5.put("04", "UPC");
+		 list5.put("05", "ISMN-10");
+		 list5.put("06", "DOI");
+		 list5.put("13", "LCCN");
+		 list5.put("14", "GTIN-14");
+		 list5.put("15", "ISBN-13");
+		 list5.put("17", "Legal deposit number");
+		 list5.put("22", "URN");
+		 list5.put("23", "OCLC number");
+		 list5.put("24", "Co-publisher's ISBN-13");
+		 list5.put("25", "ISMN-13");
+		 list5.put("26", "ISBN-A");
+		 list5.put("27", "JP e-code");
+		 list5.put("28", "OLCC number");
+		 list5.put("29", "JP Magazine ID");
+		 
+		 onixCodeListMap.put(new Integer(5), list5);
 	}
 	
 	public static synchronized ConfigurationRegistry getRegistry()
@@ -130,6 +156,11 @@ public class ConfigurationRegistry
 	public String getString(String key)
 	{
 		return regMap.get(key);
+	}
+	
+	public Map<Integer, Map<String, String>> getOnixCodeMap()
+	{
+		return onixCodeListMap;
 	}
 	
 	/*

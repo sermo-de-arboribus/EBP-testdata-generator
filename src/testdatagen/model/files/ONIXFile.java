@@ -22,35 +22,52 @@ import testdatagen.config.ConfigurationRegistry;
 import testdatagen.controller.OnixHeaderBuilder;
 import testdatagen.controller.OnixPartsBuilder;
 import testdatagen.model.Title;
+import testdatagen.onixbuilder.*;
 import testdatagen.utilities.ISBNUtils;
 import testdatagen.utilities.TitleUtils;
 import testdatagen.utilities.Utilities;
 
-// This class depends on the XOM library: Currently project directory contains version XOM 1.1;
-// TODO: better replace this with newer version XOM 1.2.10;
 public class ONIXFile extends File
 {
 	private static Random random = new Random();
 	private static ConfigurationRegistry registry = ConfigurationRegistry.getRegistry();
 	private ArrayList<Element> prices;
+	private HashMap<String, String> argumentsMap;
+	private String version;
+	private int tagType;
 	
-	public ONIXFile(long ISBN)
+	public ONIXFile(long ISBN, int tagType, String version)
 	{
 		super(Long.toString(ISBN) + "_onix.xml");
 		prices = new ArrayList<Element>();
+		argumentsMap = new HashMap<String, String>();
+		this.version = version;
+		this.tagType = tagType;
 	}
 	
 	public java.io.File generate(Title title, java.io.File destDir)
 	{
+		// configure the arguments for the OnixPartsBuilders
+		argumentsMap.put("recordreference", title.getUid());
+		
 		Element ONIXroot = new Element("ONIXmessage");
 		Element ONIXheader = buildHeader();
 		Element ONIXproduct = buildProductNode(title);
 		
+		String tagTypeString = "";
+		if(tagType == OnixPartsDirector.REFERENCETAG)
+		{
+			tagTypeString = "reference";
+		}
+		else
+		{
+			tagTypeString = "short";
+		}
 		ONIXroot.appendChild(ONIXheader);
 		ONIXroot.appendChild(ONIXproduct);
 		
 		Document doc = new Document(ONIXroot);
-		java.io.File outputFile = new java.io.File(FilenameUtils.concat(destDir.getPath(), title.getIsbn13() + "_onix.xml"));
+		java.io.File outputFile = new java.io.File(FilenameUtils.concat(destDir.getPath(), title.getIsbn13() + "_onix" + version + "_" + tagTypeString + ".xml"));
 		try
 		{
 			FileOutputStream fos = new FileOutputStream(outputFile);
@@ -63,6 +80,11 @@ public class ONIXFile extends File
 		catch (IOException ex)
 		{
 			Utilities.showErrorPane("Could not save ONIX XML file", ex);
+		}
+		finally
+		{
+			// remove all arguments from arguments map
+			argumentsMap.clear();
 		}
 		return outputFile;
 	}
@@ -115,7 +137,7 @@ public class ONIXFile extends File
 	
 	private Element buildHeader()
 	{
-		OnixHeaderBuilder ohb = new OnixHeaderBuilder("2.1", OnixPartsBuilder.SHORTTAG, new HashMap<String, String>());
+		OnixHeaderBuilder ohb = new OnixHeaderBuilder(version, tagType, new HashMap<String, String>());
 		return ohb.build();
 	}
 	
@@ -212,7 +234,6 @@ public class ONIXFile extends File
 				Element compElement = it.next();
 				if(compElement.getValue().equals(price.getValue()))
 				{
-					System.out.println("Price exists, creating new one");
 					return buildPriceNode(nodeType, basePrice);
 				}
 			}
@@ -236,56 +257,101 @@ public class ONIXFile extends File
 		return buildPriceNode(nodeType, basePrice, thisCountryCode, thisPriceCode);
 	}
 	
-	private Element buildProductIdentifier(String ProdIDType, long ISBN)
-	{
-		Element productIdNode = new Element("productidentifier");
-		
-		Element b221 = new Element("b221");
-		b221.appendChild(new Text(ProdIDType)); // ProdIDTypes are not validated. Should we?
-		productIdNode.appendChild(b221);
-		
-		Element b244 = new Element("b244");
-		b244.appendChild(new Text(String.valueOf(ISBN)));
-		productIdNode.appendChild(b244);
-		
-		return productIdNode;
-	}
-	
 	private Element buildProductNode(Title title)
 	{
 		Element product = new Element("product");
 		
 		// Record Reference
-		Element a001 = new Element("a001");
-		a001.appendChild(new Text(title.getUid()));
-		product.appendChild(a001);
+		OnixRecordReferenceBuilder recrefb = new OnixRecordReferenceBuilder(version, tagType, argumentsMap); 
+		Element recordReference = recrefb.build();
+		product.appendChild(recordReference);
 		
 		// Notification Type
-		Element a002 = new Element("a002");
-		a002.appendChild(new Text("03"));
-		product.appendChild(a002);
+		OnixNotificationTypeBuilder notitypeb = new OnixNotificationTypeBuilder(version, tagType, argumentsMap);
+		Element notiType = notitypeb.build();
+		product.appendChild(notiType);
 		
 		// Product Identifier
-		Element prodId1 = buildProductIdentifier("03", title.getIsbn13());
+		OnixProductIdentifierBuilder pidb = new OnixProductIdentifierBuilder(version, tagType, argumentsMap);
+		
+		argumentsMap.put("productidtype", "03");
+		argumentsMap.put("productidvalue", Long.toString(title.getIsbn13()));
+		Element prodId1 = pidb.build();
+		argumentsMap.remove("productidvalue");
+		argumentsMap.remove("productidtype");
+		
 		product.appendChild(prodId1);
 		
-		Element prodId2 = buildProductIdentifier("15", title.getIsbn13());
+		argumentsMap.put("productidvalue", Long.toString(title.getIsbn13()));
+		Element prodId2 = pidb.build();
+		argumentsMap.remove("productidvalue");
+		
 		product.appendChild(prodId2);
 		
-		// Product Form
-		Element b012 = new Element("b012");
-		b012.appendChild(new Text("DG")); // TODO: implement "AJ" products later
-		product.appendChild(b012);
-
-		// Epub Type
-		Element b211 = new Element("b211");
-		b211.appendChild(new Text(title.getEpubTypeForONIX()));
-		product.appendChild(b211);
+		argumentsMap.put("productidtype", "06");
+		argumentsMap.put("productidvalue", "10.2379/" + title.getIsbn13());
+		Element prodId3 = pidb.build();
+		argumentsMap.remove("productidvalue");
+		argumentsMap.remove("productidtype");
 		
-		// Epub Type Note (with protection information)
-		Element b277 = new Element("b277");
-		b277.appendChild(new Text(title.getProtectionTypeForONIX()));
-		product.appendChild(b277);
+		product.appendChild(prodId3);
+		
+		argumentsMap.put("productidtype", "01");
+		argumentsMap.put("productidvalue", Long.toString(title.getIsbn13()).substring(6, 12));
+		argumentsMap.put("productidtypename", "Verlagsnummer");
+		Element prodId4 = pidb.build();
+		argumentsMap.remove("productidtypename");
+		argumentsMap.remove("productidvalue");
+		argumentsMap.remove("productidtype");
+		
+		product.appendChild(prodId4);
+		
+		// In ONIX 2.1 we need to append the following elements directly to the product node, in ONIX 3 they need to be appended to 
+		// <descriptivedetail>
+		Element parentNode;
+		if(version.equals("2.1"))
+		{
+			parentNode = product;
+			argumentsMap.put("productform", "DG"); // code represents a digital book in ONIX 2.1
+		}
+		else
+		{
+			// handle version 3, distinguish between long and short tag names
+			if (tagType == OnixPartsBuilder.REFERENCETAG)
+			{
+				parentNode = new Element("DescriptiveDetail");
+			}
+			else
+			{
+				parentNode = new Element("descriptivedetail");
+			}
+			product.appendChild(parentNode);
+			argumentsMap.put("productform", "ED"); // code represents a downloadable book in ONIX 3.0
+		}
+		
+		// TODO: implement "AJ" products later
+		// Product Form
+		OnixProductFormBuilder pfb = new OnixProductFormBuilder(version, tagType, argumentsMap);
+		parentNode.appendChild(pfb.build());
+
+		// ProductFormDetail
+		OnixProductFormDetailBuilder pfdb = new OnixProductFormDetailBuilder(version, tagType, argumentsMap); 
+
+		// ProductFormDetail #1: is e-book reflowable or fixed layout?
+		String layoutType = random.nextBoolean() ? "E200" : "E201";
+		argumentsMap.put("productformdetail", layoutType);
+		parentNode.appendChild(pfdb.build());
+		argumentsMap.remove("productformdetail");
+		// ProductFormDetail #2: give information about EpubType
+		argumentsMap.put("productformdetail", title.getEpubTypeForProductFormDetail());
+		parentNode.appendChild(pfdb.build());
+		argumentsMap.remove("productformdetail");
+		
+		// output protection type
+		OnixTechnicalProtectionBuilder tpb = new OnixTechnicalProtectionBuilder(version, tagType, argumentsMap);
+		argumentsMap.put("technicalprotection", title.getProtectionTypeForONIX());
+		parentNode.appendChild(tpb.build());
+		argumentsMap.remove("technicalprotection");
 		
 		// Title
 		Element titleNode = buildTitleNode("01", title);
@@ -390,7 +456,12 @@ public class ONIXFile extends File
 		ISBNString = ISBNString + checkDigit;
 		long relISBN = Long.parseLong(ISBNString);
 		
-		Element identifier = buildProductIdentifier("15", relISBN);
+		OnixProductIdentifierBuilder pidb = new OnixProductIdentifierBuilder("2.1", tagType, argumentsMap);
+		
+		argumentsMap.put("productidvalue", Long.toString(relISBN));
+		Element identifier = pidb.build();
+		argumentsMap.remove("productidvalue");
+		
 		relProd.appendChild(identifier);
 		
 		Element b012 = new Element("b012");
