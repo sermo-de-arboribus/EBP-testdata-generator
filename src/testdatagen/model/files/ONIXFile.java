@@ -47,7 +47,7 @@ public class ONIXFile extends File
 	{
 		// configure the arguments for the OnixPartsBuilders
 		argumentsMap.put("recordreference", title.getUid());
-		
+		// TODO: distinguish between reference and short tags; add release attribute
 		Element ONIXroot = new Element("ONIXmessage");
 		Element ONIXheader = buildHeader();
 		Element ONIXproduct = buildProductNode(title);
@@ -351,12 +351,17 @@ public class ONIXFile extends File
 		parentNode.appendChild(tpb.build());
 		argumentsMap.remove("technicalprotection");
 		
-		// Title
-		Element titleNode = buildTitleNode("01", title);
-		product.appendChild(titleNode);
+		// output title
+		OnixTitleBuilder otb = new OnixTitleBuilder(version, tagType, argumentsMap);
+		argumentsMap.put("titletext", determineTitleStringByType("01", title));
+		argumentsMap.put("subtitle", determineTitleStringByType("subtitle", title));
+		parentNode.appendChild(otb.build());
+		argumentsMap.remove("subtitle");
+		argumentsMap.remove("titletext");
 		
-		Element shortTitleNode = buildTitleNode("05", title);
-		product.appendChild(shortTitleNode);
+		argumentsMap.put("titletext", determineTitleStringByType("05", title));
+		parentNode.appendChild(otb.build());
+		argumentsMap.remove("titletext");
 		
 		// Contributor
 		Element contributorNode = buildContributorNode(title);
@@ -605,16 +610,13 @@ public class ONIXFile extends File
 		return suppDet;
 	}
 
-	private Element buildTitleNode(String titleType, Title title)
+	private String determineTitleStringByType(String titleType, Title title)
 	{
-		Element titleNode = new Element("title");
-		Element b202 = new Element("b202");
-		b202.appendChild(new Text(titleType)); // do we need to validate titleTypes?
-		titleNode.appendChild(b202);
 		// split titleString into main title and subtitle, if titleString contains a full-stop.
 		String titleString = title.getName();
 		String mainTitle = "";
 		String subTitle = "";
+		String abbrevTitle = "";
 		if(titleString.contains("."))
 		{
 			mainTitle = titleString.substring(0, titleString.lastIndexOf('.'));
@@ -624,30 +626,25 @@ public class ONIXFile extends File
 		{
 			mainTitle = titleString;
 		}
-		Element b203 = new Element("b203");
 		// if titleType is "05", this is meant to be a shortened title
 		if(titleType.equals("05"))
 		{
-			String abbrevTitle = mainTitle;
+			abbrevTitle = mainTitle;
 			if(mainTitle.length() > 12)
 			{
 				abbrevTitle = mainTitle.substring(0, 10);
 			}
-			b203.appendChild(new Text(title.getAuthorLastName() + ", " + abbrevTitle + "..."));
-			titleNode.appendChild(b203);
 		}
-		else
+		switch(titleType)
 		{
-			b203.appendChild(new Text(mainTitle));
-			titleNode.appendChild(b203);
-			if(subTitle != "")
-			{
-				Element b029 = new Element("b029");
-				b029.appendChild(new Text(subTitle));
-				titleNode.appendChild(b029);
-			}
+			case "subtitle": return subTitle;
+			case "01":
+			case "title":
+			case "distinctivetitle": return mainTitle;
+			case "05":
+			case "abbreviatedtitle": return abbrevTitle;
+			default: return "";
 		}
-		return titleNode;
 	}
 }
 
