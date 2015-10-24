@@ -95,43 +95,26 @@ public class ONIXFile extends File
 	 */
 	private Element buildContributorNode(Title title)
 	{
-		Element contributorNode = new Element("contributor");
-		
-		// Contributor Role
-		Element b035 = new Element("b035");
-		b035.appendChild(new Text("A01"));
-		contributorNode.appendChild(b035);
-		
-		// Sequence Number within role
-		Element b340 = new Element("b340");
-		b340.appendChild(new Text("1"));
-		contributorNode.appendChild(b340);
-		
-		// complete author name
-		Element b036 = new Element("b036");
-		b036.appendChild(new Text(title.getAuthor()));
-		contributorNode.appendChild(b036);
-		
-		// complete author name inverted
-		Element b037 = new Element("b037");
-		b037.appendChild(new Text(title.getAuthorLastName() + ", " + title.getAuthorFirstName()));
-		contributorNode.appendChild(b037);
-		
-		// author's first name(s)
-		Element b039 = new Element("b039");
-		b039.appendChild(new Text(title.getAuthorFirstName()));
-		contributorNode.appendChild(b039);
-		
-		// author's last name
-		Element b040 = new Element("b040");
-		b040.appendChild(new Text(title.getAuthorLastName()));
-		contributorNode.appendChild(b040);
-		
-		// author blurb
-		Element b044 = new Element("b044");
-		b044.appendChild(new Text(title.getAuthorBlurb()));
-		contributorNode.appendChild(b044);
-		
+		OnixContributorBuilder ocb = new OnixContributorBuilder(version, tagType, argumentsMap);
+		argumentsMap.put("fullname", title.getAuthor());
+		argumentsMap.put("invertedname", title.getAuthorLastName() + ", " + title.getAuthorFirstName());
+		argumentsMap.put("namesbeforekey", title.getAuthorFirstName());
+		argumentsMap.put("keynames", title.getAuthorLastName());
+		argumentsMap.put("biographicalnote", title.getAuthorBlurb());
+		argumentsMap.put("birthdate", "19440704");
+		argumentsMap.put("deathdate", "20131228");
+		argumentsMap.put("professionalaffiliation", "");
+		argumentsMap.put("websitelink", "http://www.purple.com/");
+		Element contributorNode = ocb.build();
+		argumentsMap.remove("fullname");
+		argumentsMap.remove("invertedname");
+		argumentsMap.remove("namesbeforekey");
+		argumentsMap.remove("keynames");
+		argumentsMap.remove("biographicalnote");
+		argumentsMap.remove("birthdate");
+		argumentsMap.remove("deathdate");
+		argumentsMap.remove("professionalaffiliation");
+		argumentsMap.remove("websitelink");
 		return contributorNode;
 	}
 	
