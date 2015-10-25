@@ -3,7 +3,6 @@ package testdatagen.gui.listeners;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JTable;
 
 import testdatagen.TestDataGeneratorMain;
@@ -14,7 +13,7 @@ import testdatagen.utilities.Utilities;
 
 public class EditScenarioButtonListener implements ActionListener 
 {
-	TestDataGeneratorMain programWindow;
+	private TestDataGeneratorMain programWindow;
 	
 	public EditScenarioButtonListener(final TestDataGeneratorMain programWindow)
 	{
@@ -25,9 +24,6 @@ public class EditScenarioButtonListener implements ActionListener
 	public void actionPerformed(final ActionEvent evt)
 	{
 		JTable scenarioTable = programWindow.getScenarioTable();
-		// get the source of the event
-		JButton source = (JButton) evt.getSource();
-		TestDataGeneratorMain mainWindow = (TestDataGeneratorMain) source.getTopLevelAncestor();
 		
 		// check if a row is selected
 		int row = scenarioTable.getSelectedRow();
@@ -39,7 +35,7 @@ public class EditScenarioButtonListener implements ActionListener
     	{
         	ScenarioTableModel tableModel = (ScenarioTableModel) scenarioTable.getModel();
         	TestScenario selectedScenario = tableModel.getScenarioFromRow(row);
-    	    new EditScenarioDialog(mainWindow, selectedScenario);
+    	    new EditScenarioDialog(programWindow, selectedScenario);
     	}
 	}
 }

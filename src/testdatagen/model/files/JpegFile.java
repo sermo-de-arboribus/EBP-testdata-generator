@@ -34,11 +34,20 @@ public class JpegFile extends GraphicFile
 		this.ISBN = ISBN;
 	}
 		
-	public java.io.File generate(Title title, java.io.File destDir)
+	public java.io.File generate(Title title, java.io.File destPath)
 	{
 		BufferedImage coverImage = paintCover(title);
-		java.io.File storedFile = new java.io.File(FilenameUtils.concat(destDir.getPath(), title.getIsbn13() + ".jpg"));
-
+		java.io.File storedFile = null;
+		if(destPath.isDirectory())
+		{
+			storedFile = new java.io.File(FilenameUtils.concat(destPath.getPath(), title.getIsbn13() + ".jpg"));	
+		}
+		else
+		{
+			storedFile = new java.io.File(destPath.getPath());
+		}
+		storedFile.getParentFile().mkdirs();
+		
 		// save buffered image to file
 		try
 		{
@@ -96,18 +105,42 @@ class JpegCover extends BufferedImage
 		int fontNumber = random.nextInt(fonts.length - 1);
 		Font baseFont = fonts[fontNumber];
 		
-		Font largeFont = new Font(baseFont.getName(), Font.BOLD, (int) (height * 0.75 * 0.05)); // 1 px is approximately 0.75 pt, and large font should be about 5% of the canvas height
-		Font mediumFont = new Font(baseFont.getName(), Font.BOLD, (int) (height * 0.75 * 0.035));
-		Font smallFont = new Font(baseFont.getName(), Font.PLAIN, (int) (height * 0.75 * 0.028));
+		Font largeFont = new Font(baseFont.getName(), Font.BOLD, (int) (height * 0.75 * 0.08)); // 1 px is approximately 0.75 pt, and large font should be about 5% of the canvas height
+		Font mediumFont = new Font(baseFont.getName(), Font.BOLD, (int) (height * 0.75 * 0.05));
+		Font smallFont = new Font(baseFont.getName(), Font.PLAIN, (int) (height * 0.75 * 0.035));
 		FontMetrics largeMetrics = gra.getFontMetrics(largeFont);
 		FontMetrics mediumMetrics = gra.getFontMetrics(mediumFont);
 		FontMetrics smallMetrics = gra.getFontMetrics(smallFont);
 		
 		// print title
 		gra.setFont(largeFont);
-		gra.drawString(title.getName(), 
-				(getWidth() - largeMetrics.stringWidth(title.getName())) / 2,  // centered title in x dimension 
-				getHeight() / 10); // y location of title
+		int titleWidth = largeMetrics.stringWidth(title.getName());
+		if(titleWidth > getWidth())
+		{
+			// title too long, break it up into two lines
+			int breakpoint = title.getName().length() / 2;
+			int spaceAfterBreakpoint = title.getName().indexOf(' ', breakpoint);
+			if(spaceAfterBreakpoint > 0)
+			{
+				breakpoint = spaceAfterBreakpoint;
+			}
+			String titleComponent1 = title.getName().substring(0, breakpoint);
+			String titleComponent2 = title.getName().substring(breakpoint + 1);
+			
+			gra.drawString(titleComponent1, 
+					(getWidth() - largeMetrics.stringWidth(titleComponent1)) / 2,  // centered title in x dimension 
+					getHeight() / 10); // y location of title
+			gra.drawString(titleComponent2, 
+					(getWidth() - largeMetrics.stringWidth(titleComponent2)) / 2,  // centered title in x dimension 
+					(getHeight() / 10) + largeMetrics.getHeight()); // y location of title
+		}
+		else
+		{
+			// title fits into one line
+			gra.drawString(title.getName(), 
+					(getWidth() - titleWidth) / 2,  // centered title in x dimension 
+					getHeight() / 10); // y location of title
+		}
 		
 		// print author
 		gra.setFont(mediumFont);

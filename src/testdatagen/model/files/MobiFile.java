@@ -1,5 +1,9 @@
 package testdatagen.model.files;
 
+import java.io.File;
+
+import testdatagen.model.Title;
+
 public class MobiFile extends EBookFile
 {
 	/**
@@ -15,6 +19,17 @@ public class MobiFile extends EBookFile
 	
 	public String toString()
 	{
-		return "Mobi["+ISBN+"]";
+		String fileString = "Mobi";
+		if(this.isDemoFile())
+		{
+			fileString += "_extract";
+		}
+		return fileString + "[" +ISBN+ "]";
+	}
+
+	@Override
+	public File generate(Title title, File destDir) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

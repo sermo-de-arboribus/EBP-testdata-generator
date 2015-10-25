@@ -1,5 +1,9 @@
 package testdatagen.model.files;
 
+import java.io.File;
+
+import testdatagen.model.Title;
+
 public class SoftwareZipFile extends EBookFile
 {
 	/**
@@ -17,5 +21,12 @@ public class SoftwareZipFile extends EBookFile
 	public String toString()
 	{
 		return "SoftwareZip["+ISBN+"]";
+	}
+
+	@Override
+	public File generate(Title title, File destDir) 
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

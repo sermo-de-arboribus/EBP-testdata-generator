@@ -1,14 +1,17 @@
 package testdatagen;
 
 import com.dropbox.core.*;
+import com.dropbox.core.util.IOUtil;
 
-import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.InputStream;
 import java.util.Locale;
+import java.util.Properties;
 
 import org.apache.commons.io.FilenameUtils;
 
+import testdatagen.config.ConfigurationRegistry;
 import testdatagen.utilities.Utilities;
 
 public class DropboxUploaderThread extends Thread
@@ -20,21 +23,73 @@ public class DropboxUploaderThread extends Thread
 	public DropboxUploaderThread(java.io.File file)
 	{
 		fileToUpload = file;
+		ConfigurationRegistry registry = ConfigurationRegistry.getRegistry();
+		Properties properties = System.getProperties();
+		properties.setProperty("javax.net.ssl.trustStore", FilenameUtils.normalize(registry.getString("ssl.pathToCacerts")));
+		properties.setProperty("javax.net.ssl.trustStorePassword", "changeit");
+		if(registry.getBooleanValue("net.useProxy"))
+		{
+			properties.setProperty("http.proxyHost", registry.getString("net.proxy.host"));
+			properties.setProperty("http.proxyPort", registry.getString("net.proxy.port"));
+			properties.setProperty("https.proxyHost", registry.getString("net.proxy.host"));
+			properties.setProperty("https.proxyPort", registry.getString("net.proxy.port"));
+		}
 	}
 	
 	public void run()
 	{
 		DbxAppInfo appInfo = new DbxAppInfo(APP_KEY, APP_SECRET);
 		DbxRequestConfig config = new DbxRequestConfig("EBP-Testdata-Generator", Locale.getDefault().toString());
-		DbxWebAuthNoRedirect webAuth = new DbxWebAuthNoRedirect(config, appInfo);
+		DbxClient dbxClient = new DbxClient(config, "ch5YeQ5Sn0AAAAAAAAADEIsTX_J03cOV88I5ha-17ME9b_hVBAy3dCsfo11Qjxqe", appInfo.host);
 		
+		String dropboxPath = "/" + FilenameUtils.getName(fileToUpload.getPath());
+        String pathError = DbxPath.findError(dropboxPath);
+        if (pathError != null)
+        {
+            System.err.println("Invalid <dropbox-path>: " + pathError);
+        }
+        
+		DbxEntry.File metadata = null;
+        try
+        {
+            InputStream in = new FileInputStream(fileToUpload);
+            try
+            {
+                metadata = dbxClient.uploadFile(dropboxPath, DbxWriteMode.add(), -1, in);
+            }
+            catch (DbxException ex)
+            {
+                System.out.println("Error uploading to Dropbox: " + ex.getMessage());
+            }
+            finally
+            {
+                IOUtil.closeInput(in);
+            }
+        }
+        catch (IOException ex)
+        {
+            System.out.println("Error reading from file \"" + fileToUpload + "\": " + ex.getMessage());
+        }
+        
+        if(metadata == null)
+        {
+        	Utilities.showWarnPane("Cover file upload to Dropbox has failed. You must upload the file yourself and set the MediaFileLink in the ONIX manually");
+        }
+        else
+        {
+            System.out.print(metadata.toStringMultiline());
+            // TODO: publish file, get download token, save download token and add download token to ONIX
+        }
+
+        /* This would be code for using user authentication / user's own Dropbox account.
+		DbxWebAuthNoRedirect webAuth = new DbxWebAuthNoRedirect(config, appInfo);
 		String authorizeUrl = webAuth.start();
         System.out.println("1. Go to " + authorizeUrl);
         System.out.println("2. Click \"Allow\" (you might have to log in first).");
         System.out.println("3. Copy the authorization code.");
-        System.out.print("Enter the authorization code here: ");
-        
-        String code = null;;
+        System.out.print("Enter the authorization code here: ");      
+        String code = null;
+
 		try
 		{
 			code = new BufferedReader(new InputStreamReader(System.in)).readLine();
@@ -54,7 +109,7 @@ public class DropboxUploaderThread extends Thread
         DbxAuthFinish authFinish;
         try
         {
-            authFinish = webAuth.finish(code);
+            authFinish = webAuth.finish("ch5YeQ5Sn0AAAAAAAAADEIsTX_J03cOV88I5ha-17ME9b_hVBAy3dCsfo11Qjxqe");
         }
         catch (DbxException ex)
         {
@@ -82,6 +137,6 @@ public class DropboxUploaderThread extends Thread
             System.err.println("Dumping to stderr instead:");
             System.exit(1); 
             return;
-        }
+        }*/
 	}
 }

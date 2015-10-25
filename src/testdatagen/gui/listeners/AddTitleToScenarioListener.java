@@ -43,7 +43,7 @@ public class AddTitleToScenarioListener implements ActionListener
 		else if (eventName.equals("title submitted"))
 		{
 			// some local variables for title form data
-			String prodType = "";
+			String format = "";
 			boolean mfl = false, screenshot = false, packshot = false, extract = false, backcover = false, epubmobi = false;
 			
 			// get reference to the form
@@ -69,13 +69,15 @@ public class AddTitleToScenarioListener implements ActionListener
 						switch(compName)
 						{
 							case("covertype"):
-								JComboBox jcb1 = (JComboBox) tcomp;
+								@SuppressWarnings("unchecked")
+								JComboBox<String> jcb1 = (JComboBox<String>) tcomp;
 								String boxString = (String) jcb1.getSelectedItem();
 								mfl = boxString.equals("Media file link") ? true : false;
 								break;
 							case("product"):
-								JComboBox jcb2 = (JComboBox) tcomp;
-								prodType = (String) jcb2.getSelectedItem();
+								@SuppressWarnings("unchecked")
+								JComboBox<String> jcb2 = (JComboBox<String>) tcomp;
+								format = (String) jcb2.getSelectedItem();
 								break;
 							case("screenshot"):
 								JCheckBox jcb3 = (JCheckBox) tcomp;
@@ -107,10 +109,10 @@ public class AddTitleToScenarioListener implements ActionListener
 					Title newTitle = new Title(nextIsbn, "test-" + nextIsbn, TitleUtils.getNewTitle(), TitleUtils.getNewAuthor(), mfl);
 					
 					// instantiate selected ebook file types and add them to the title object
-					// TODO: handle extracts!
 					EBookFileFactory eff = EBookFileFactory.getInstance();
-					EBookFile ebookFile = eff.generateFile(Utilities.productTypeToFileType(prodType), nextIsbn);
-					newTitle.addFile(ebookFile);
+					
+					EBookFile ebookFile = eff.generateFile(Utilities.formatToFileType(format), nextIsbn);
+					newTitle.addMainProductFile(ebookFile, format);
 					
 					// check for optional product content files and generate if needed
 					if(epubmobi)
@@ -120,7 +122,7 @@ public class AddTitleToScenarioListener implements ActionListener
 					}
 					if(extract)
 					{
-						EBookFile extractFile = eff.generateDemoFile(Utilities.productTypeToFileType(prodType), nextIsbn);
+						EBookFile extractFile = eff.generateDemoFile(Utilities.formatToFileType(format), nextIsbn);
 						newTitle.addFile(extractFile);
 					}
 					

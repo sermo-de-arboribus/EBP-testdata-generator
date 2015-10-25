@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
+import org.apache.commons.io.FilenameUtils;
+
 import testdatagen.model.Title;
 import testdatagen.model.files.GraphicFile;
+import testdatagen.model.files.ONIXFile;
 
 public class GeneratorThread extends Thread
 {
@@ -38,9 +41,18 @@ public class GeneratorThread extends Thread
 					uploader.start();
 					// TODO: how to handle notification when upload is finished?
 				}
-			}			
+			}
 			// TODO: generate ONIX file
+			ONIXFile onixFile = new ONIXFile(title.getIsbn13());
+			// TODO: do we need the return value of generate()? 
+			onixFile.generate(title, destDir);
+			
 			// TODO: iterate over all file Objects and generate the files
+			ArrayList<testdatagen.model.files.File> fileList = title.getNonCoverFiles();
+			for(testdatagen.model.files.File file : fileList)
+			{
+				file.generate(title, new java.io.File(FilenameUtils.concat(destDir.getPath(), file.getName())));
+			}
 		}
 	}
 }

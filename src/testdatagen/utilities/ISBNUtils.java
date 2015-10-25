@@ -8,13 +8,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import javax.swing.JOptionPane;
-
-import testdatagen.model.ScenarioTableModel;
-
 public class ISBNUtils
 {
-	private static long lastISBN = 97810000019L;
+	private static long lastISBN = 978710000019L;
 	
 	public static long getNextISBN()
 	{
@@ -33,7 +29,7 @@ public class ISBNUtils
 		for(int i = 0; i < isbnChars.length; i++)
 		{
 			isbnBuffer.append(isbnChars[i]);
-			if(i == 2 || i == 3 || i == 5 || i == 10)
+			if(i == 2 || i == 3 || i == 6 || i == 11)
 			{
 				isbnBuffer.append('-');
 			}
@@ -44,7 +40,7 @@ public class ISBNUtils
 	public static void loadLastISBN()
 	{
 		File configDir = Utilities.getConfigDir();
-		File ISBNFile = new File(configDir.getPath() + "/isbn.ebp");
+		File ISBNFile = new File(configDir.toURI().getPath() + "/isbn.ebp");
 		ObjectInputStream loadISBNStream = null;
 	    try
 	    {
@@ -57,11 +53,11 @@ public class ISBNUtils
 	    }
 	    catch (IOException e)
 	    {
-	    	Utilities.showErrorPane("Error: could not read from config from File", e);
+	    	Utilities.showErrorPane("Error: could not read from config from File\n", e);
 	    }
 	    catch (ClassNotFoundException e)
 	    {
-	    	Utilities.showErrorPane("Error: could not read from config from File", e);
+	    	Utilities.showErrorPane("Error: could not read from config from File\n", e);
 	    }
 	    finally
 	    {
@@ -85,7 +81,7 @@ public class ISBNUtils
 		}
 		catch(IOException e)
 		{
-			Utilities.showErrorPane("Error: could not save ISBN to config file " + e.toString(), e);
+			Utilities.showErrorPane("Error: could not save ISBN to config file " + e.toString() + "\n", e);
 		}
 		finally
 		{
@@ -96,7 +92,7 @@ public class ISBNUtils
 		}
 	}
 	
-    private static String calculateCheckDigit(String code)
+    public static String calculateCheckDigit(String code)
     {
         if (code == null || code.length() == 0)
         {

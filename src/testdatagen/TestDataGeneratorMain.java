@@ -6,12 +6,14 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.*;
 import javax.swing.table.TableModel;
 
 import testdatagen.gui.listeners.AddScenarioButtonListener;
+import testdatagen.gui.listeners.DeleteScenarioButtonListener;
 import testdatagen.gui.listeners.EditScenarioButtonListener;
 import testdatagen.gui.listeners.GenerateDataButtonListener;
 import testdatagen.gui.listeners.LoadScenariosButtonListener;
@@ -19,6 +21,9 @@ import testdatagen.gui.listeners.SaveScenariosButtonListener;
 import testdatagen.model.ScenarioTableModel;
 import testdatagen.model.TestScenario;
 import testdatagen.model.Title;
+import testdatagen.model.files.EBookFile;
+import testdatagen.model.files.GraphicFile;
+import testdatagen.utilities.CoverUtils;
 import testdatagen.utilities.ISBNUtils;
 import testdatagen.utilities.TitleUtils;
 import testdatagen.utilities.Utilities;
@@ -66,7 +71,12 @@ public class TestDataGeneratorMain extends JFrame
 		return (ScenarioTableModel) scenarioTable.getModel();
 	}
 	
-	public void setScenarios(final ScenarioTableModel scenarios)
+	public ScenarioTableModel getScenarioTableModel()
+	{
+		return (ScenarioTableModel) scenarioTable.getModel();
+	}
+	
+	public void setScenarios(ScenarioTableModel scenarios)
 	{
 		scenarioTable.setModel(scenarios);
 	}
@@ -98,6 +108,7 @@ public class TestDataGeneratorMain extends JFrame
 	    topButtonPanel.setPreferredSize(new Dimension((int) screenSize.getWidth(), (int) screenSize.getHeight() / 10));
 	    JButton addButton = new JButton("Add new scenario");
 	    JButton editButton = new JButton("Edit selected scenario");
+	    JButton delButton = new JButton("Delete scenario");
 	    JButton saveButton = new JButton("Save scenarios");
 	    JButton loadButton = new JButton("Load scenarios");
 	    JButton generateDataButton = new JButton("Generate test data");
@@ -105,6 +116,7 @@ public class TestDataGeneratorMain extends JFrame
 	    // register action listeners
 	    addButton.addActionListener(new AddScenarioButtonListener(this));
 	    editButton.addActionListener(new EditScenarioButtonListener(this));
+	    delButton.addActionListener(new DeleteScenarioButtonListener(this));
 	    saveButton.addActionListener(new SaveScenariosButtonListener(this));
 	    loadButton.addActionListener(new LoadScenariosButtonListener(this));
 	    generateDataButton.addActionListener(new GenerateDataButtonListener(this));
@@ -122,7 +134,7 @@ public class TestDataGeneratorMain extends JFrame
 
 	private void buildScenarioTable()
 	{
-		// TODO: scenario list currently filled with sample data, needs refactoring to load data from file
+		// TODO: scenario list currently filled with sample data at program start; remove this later?
 		List<TestScenario> scenarios = new ArrayList<>();
 		TestScenario scenario01 = new TestScenario("Testszenario Nr. 1");
 		TestScenario scenario02 = new TestScenario("Testszenario Nr. 2");
@@ -131,20 +143,20 @@ public class TestDataGeneratorMain extends JFrame
 		scenarios.add(scenario02);
 		scenarios.add(scenario03);
 		
-		Title testtitle001 = new Title(9783497600014L, "test-9783497600014", "Testtitel Nr. 1", "Riemann, Fritz", true);
+		Title testtitle001 = new Title(9783497600014L, "test-9783497600014", "Testtitel Nr. 1", "Fritz Riemann", true);
 		Title testtitle002 = new Title(9787561333068L, "test-9787561333068", "Testtitel Nr. 2", "李叔同", false);
-		Title testtitle003 = new Title(9787561331163L, "test-9787561331163", "Testtitel Nr. 3", "Li Shutong", false);
-		Title testtitle004 = new Title(9783888146466L, "test-3-88814-646-1", "Changing New York", "Abbott, Berenice", true);
-		Title testtitle005 = new Title(9783458058649L, "test-9783458058649", "Die vierte Zwischeneiszeit", "Abe, Kobo", true);
-		Title testtitle006 = new Title(9780679733782L, "test-9780679733782", "The Woman in the Dunes", "Abe, Kōbō", false);
-		Title testtitle007 = new Title(9783499504723L, "test-9783499504723", "Franz Werfel in Selbstzeugnissen und Bilddokumenten", "Abels, Norbert", true);
-		Title testtitle008 = new Title(9783836925266L, "test-9783836925266", "Theater. Die wichtigsten Schauspiele von der Antike bis heute", "Abels, Norbert", false);
-		Title testtitle009 = new Title(9783923854561L, "test-9783923854561", "Xuma. Ein Roman aus Südafrika", "Abrahams, Peter", false);
-		Title testtitle010 = new Title(9780030549823L, "test-9780030549823", "A Glossary of Literary Terms", "Abrams, Meyer Howard", true);
-		Title testtitle011 = new Title(9787229004385L, "test-978-7-229-00438-5", "Anthills of the Savannah", "Achebe, Chinua", false);
-		Title testtitle012 = new Title(9780435905255L, "test-9780435905255", "Things Fall Apart", "Achebe, Chinua", false);
-		Title testtitle013 = new Title(9402008, "test-9402008", "Das Laubenspiel", "Adam de la Halle", true);
-
+		Title testtitle003 = new Title(9787561331163L, "test-9787561331163", "Testtitel Nr. 3", "Shutong Li", false);
+		Title testtitle004 = new Title(9783888146466L, "test-3-88814-646-1", "Changing New York", "Berenice Abbott", true);
+		Title testtitle005 = new Title(9783458058649L, "test-9783458058649", "Die vierte Zwischeneiszeit", "Kobo Abe", true);
+		Title testtitle006 = new Title(9780679733782L, "test-9780679733782", "The Woman in the Dunes", "Kōbō Abe", false);
+		Title testtitle007 = new Title(9783499504723L, "test-9783499504723", "Franz Werfel in Selbstzeugnissen", "Norbert Abels", true);
+		Title testtitle008 = new Title(9783836925266L, "test-9783836925266", "Theater. Schauspiele von der Antike bis heute", "Norbert Abels", false);
+		Title testtitle009 = new Title(9783923854561L, "test-9783923854561", "Xuma. Ein Roman aus Südafrika", "Peter Abrahams", false);
+		Title testtitle010 = new Title(9780030549823L, "test-9780030549823", "A Glossary of Literary Terms", "Meyer Howard Abrams", true);
+		Title testtitle011 = new Title(9787229004385L, "test-978-7-229-00438-5", "Anthills of the Savannah", "Chinua Achebe", false);
+		Title testtitle012 = new Title(9780435905255L, "test-9780435905255", "Things Fall Apart", "Chinua Achebe", false);
+		Title testtitle013 = new Title(9789402008005L, "test-9789402008005", "Das Laubenspiel", "Adam de la Halle", true);
+		
 		scenario01.addTitle(testtitle001);
 		scenario01.addTitle(testtitle002);
 		scenario01.addTitle(testtitle003);
@@ -165,6 +177,25 @@ public class TestDataGeneratorMain extends JFrame
 		scenarioTable = new JTable(scenarioTableModel);
 		scenarioTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
+		EBookFileFactory eff = EBookFileFactory.getInstance();
+		GraphicFileFactory gff = GraphicFileFactory.getInstance();
+		Iterator<TestScenario> itr = scenarios.iterator();
+		while(itr.hasNext())
+		{
+			TestScenario sc = itr.next();
+			List<Title> titl = sc.getTitleList();
+			Iterator<Title> titr = titl.iterator();
+			while(titr.hasNext())
+			{
+				Title tit = titr.next();
+				EBookFile ebookFile = eff.generateFile(Utilities.formatToFileType("EPUB"), tit.getIsbn13());
+				tit.addMainProductFile(ebookFile, "EPUB");
+				
+				GraphicFile coverFile = gff.generateFile(CoverUtils.getRandomCoverFormat(), tit.getIsbn13(), GraphicFile.Type.COVER);
+				tit.addFile(coverFile);
+			}
+		}
+		
 		add(new JScrollPane(scenarioTable), BorderLayout.CENTER);
 	}
 	

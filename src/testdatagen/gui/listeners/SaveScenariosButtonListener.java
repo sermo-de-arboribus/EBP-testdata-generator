@@ -15,7 +15,8 @@ import testdatagen.utilities.Utilities;
 
 public class SaveScenariosButtonListener implements ActionListener
 {
-	TestDataGeneratorMain programWindow;
+	// private ScenarioTableModel scenarios;
+	private TestDataGeneratorMain programWindow;
 
 	public SaveScenariosButtonListener(final TestDataGeneratorMain programWindow)
 	{
@@ -49,11 +50,11 @@ public class SaveScenariosButtonListener implements ActionListener
 	    ObjectOutputStream saveScenarioObjects = null;
 	    try
 	    {
-	    	ScenarioTableModel scenarios = programWindow.getScenarioTableModel();
+	    	ScenarioTableModel stm = programWindow.getScenarioTableModel();
 		    saveScenarioObjects = new ObjectOutputStream(new FileOutputStream(fileForSaving));
-		    saveScenarioObjects.writeObject(scenarios);
+		    saveScenarioObjects.writeObject(stm);
 		    saveScenarioObjects.flush();
-		    Utilities.showInfoPane("" + scenarios.getRowCount() + " scenarios saved to file " + fileForSaving.getName());
+		    Utilities.showInfoPane("" + stm.getRowCount() + " scenarios saved to file " + fileForSaving.getName());
 	    }
 	    catch (IOException e)
 	    {

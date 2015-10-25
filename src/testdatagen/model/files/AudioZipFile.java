@@ -1,5 +1,13 @@
 package testdatagen.model.files;
 
+import java.util.Random;
+
+import org.apache.commons.io.FilenameUtils;
+
+import testdatagen.config.ConfigurationRegistry;
+import testdatagen.model.Title;
+import testdatagen.utilities.Utilities;
+
 
 public class AudioZipFile extends EBookFile
 {
@@ -18,5 +26,34 @@ public class AudioZipFile extends EBookFile
 	public String toString()
 	{
 		return "AudioZip["+ISBN+"]";
+	}
+
+	@Override
+	public java.io.File generate(Title title, java.io.File destPath)
+	{
+		Random random = new Random();
+		ConfigurationRegistry registry = ConfigurationRegistry.getRegistry();
+		java.io.File tempDir = new java.io.File(FilenameUtils.concat(Utilities.getConfigDir().getPath(), registry.getString("file.tempFolder") + "/" + title.getIsbn13()));
+		// generate booklet
+		if(random.nextBoolean())
+		{
+			// PDF booklet: simply use another PDFCoverFile as a PDF booklet
+			PDFCoverFile PDFBooklet = new PDFCoverFile(title.getIsbn13());
+			PDFBooklet.generate(title, tempDir);
+		}
+		else
+		{
+			// EPUB booklet
+			EpubFile EpubBooklet = new EpubFile(title.getIsbn13(), false, true);
+			EpubBooklet.generate(title, tempDir);
+			
+		}
+		
+		// TODO: generate sample file
+		
+		// TODO: generate audio file container
+		
+		// TODO: Zip it up
+		return null;
 	}
 }

@@ -6,5 +6,9 @@
 	<classpathentry kind="lib" path="lib/commons-io-2.4.jar"/>
 	<classpathentry kind="lib" path="lib/dropbox-core-sdk-1.7.7.jar"/>
 	<classpathentry kind="lib" path="lib/jackson-core-2.2.4.jar"/>
+<<<<<<< HEAD
+=======
+	<classpathentry kind="lib" path="lib/xom-1.1.jar"/>
+>>>>>>> refs/remotes/origin/master
 	<classpathentry kind="output" path="bin"/>
 </classpath>

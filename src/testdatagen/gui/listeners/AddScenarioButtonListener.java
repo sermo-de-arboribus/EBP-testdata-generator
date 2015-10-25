@@ -12,10 +12,8 @@ import testdatagen.model.TestScenario;
 public class AddScenarioButtonListener implements ActionListener
 {
 	TestDataGeneratorMain programWindow;
-	JDialog newProfileDialog;
-	TestScenario newScenario;
 	
-	public AddScenarioButtonListener(TestDataGeneratorMain programWindow)
+	public AddScenarioButtonListener(final TestDataGeneratorMain programWindow)
 	{
 		this.programWindow = programWindow;
 	}
@@ -28,12 +26,9 @@ public class AddScenarioButtonListener implements ActionListener
     	
     		// check if user entered a value
     		if((scenarioTitle != null) && scenarioTitle.length() > 0)
-    		{
-        		// generate a new scenario object
-        		newScenario = new TestScenario(scenarioTitle);
-        		
+    		{	
         		// set up the main dialog page for the new scenario
-    	    	newProfileDialog = new NewScenarioDialog(programWindow, newScenario);
+    			JDialog newProfileDialog = new NewScenarioDialog(programWindow, new TestScenario(scenarioTitle));
     	    	
     	    	// set dialog visible
     	    	newProfileDialog.setVisible(true);	
