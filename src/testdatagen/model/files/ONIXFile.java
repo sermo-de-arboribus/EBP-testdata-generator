@@ -13,14 +13,11 @@ import java.util.Random;
 
 import org.apache.commons.io.FilenameUtils;
 
-import nu.xom.Attribute;
 import nu.xom.Document;
 import nu.xom.Element;
 import nu.xom.Serializer;
 import nu.xom.Text;
 import testdatagen.config.ConfigurationRegistry;
-import testdatagen.controller.OnixHeaderBuilder;
-import testdatagen.controller.OnixPartsBuilder;
 import testdatagen.model.Title;
 import testdatagen.onixbuilder.*;
 import testdatagen.utilities.ISBNUtils;
@@ -126,53 +123,24 @@ public class ONIXFile extends File
 	
 	private Element buildLanguageNode(String langCode)
 	{
-		Element langNode = new Element("language");
-		
-		Element b253 = new Element("b253");
-		b253.appendChild(new Text("01"));
-		langNode.appendChild(b253);
-		
-		Element b252 = new Element("b252");
-		b252.appendChild(new Text(langCode));
-		langNode.appendChild(b252);
+		OnixLanguageBuilder olb = new OnixLanguageBuilder(version, tagType, argumentsMap);
+		argumentsMap.put("languagecode", langCode);
+		Element langNode = olb.build();
+		argumentsMap.remove("languagecode");
 		
 		return langNode;
 	}
 	
 	private Element buildMainSubjectNode()
 	{
-		Element msn = new Element("mainsubject");
-		
-		Element b191 = new Element("b191");
-		b191.appendChild(new Text("26"));
-		msn.appendChild(b191);
-		
-		Element b068 = new Element("b068");
-		b068.appendChild(new Text("2.0"));
-		msn.appendChild(b068);
-		
-		Element b069 = new Element("b069");
-		b069.appendChild(new Text(TitleUtils.getRandomWarengruppeCode()));
-		msn.appendChild(b069);
+		OnixSubjectBuilder omainsubb = new OnixSubjectBuilder(version, tagType, OnixSubjectBuilder.SUBJECTTYPE_MAIN, argumentsMap);
+		argumentsMap.put("subjectcode", TitleUtils.getRandomWarengruppeCode());
+		argumentsMap.put("subjectheadingtext", TitleUtils.getRandomTopic(new Locale("de")));
+		Element msn = omainsubb.build();
+		argumentsMap.remove("subjectheadingtext");
+		argumentsMap.remove("subjectcode");
 		
 		return msn;
-	}
-	
-	private Element buildOtherTextNode(Title title)
-	{
-		Element otNode = new Element("othertext");
-		
-		// TODO: add some variety to the generated othertext types
-		Element d102 = new Element("d102");
-		d102.appendChild(new Text("01"));
-		otNode.appendChild(d102);
-		
-		Element d104 = new Element("d104");
-		d104.addAttribute(new Attribute("textformat", "07"));
-		d104.appendChild(new Text(title.getShortBlurb()));
-		otNode.appendChild(d104);
-		
-		return otNode;
 	}
 	
 	private Element buildPriceNode(String nodeType, double basePrice, String countryCode, String currencyCode)
@@ -350,28 +318,72 @@ public class ONIXFile extends File
 		
 		// Contributor
 		Element contributorNode = buildContributorNode(title);
-		product.appendChild(contributorNode);
+		parentNode.appendChild(contributorNode);
 		
 		// Language
 		Element languageNode = buildLanguageNode("ger");
-		product.appendChild(languageNode);
+		parentNode.appendChild(languageNode);
 		
-		// Number of Pages
-		Element b061 = new Element("b061");
-		b061.appendChild(new Text("320"));
-		product.appendChild(b061);
+		// Extent / Page numbering information
+		OnixExtentBuilder oextb = new OnixExtentBuilder(version, tagType, argumentsMap);
+		if(version.equals("2.1"))
+		{
+			argumentsMap.put("numberofpages", "320");
+			parentNode.appendChild(oextb.build());
+			argumentsMap.remove("numberofpages");
+			
+			// we could also append some pagesroman or pagesarabic here, if we wanted to
+		}
+		if(version.equals("3.0"))
+		{
+			argumentsMap.put("extenttype", "07");
+			argumentsMap.put("extentvalue", "320");
+			argumentsMap.put("extentvalueroman", "CCCXX");
+			argumentsMap.put("extentunit", "03");
+			parentNode.appendChild(oextb.build());
+			argumentsMap.remove("extenttype");
+			argumentsMap.remove("extentvalue");
+			argumentsMap.remove("extentvalueroman");
+			argumentsMap.remove("extentunit");
+		}
+		// add an extent node for file size
+		argumentsMap.put("extenttype", "22");
+		argumentsMap.put("extentvalue", "1.3");
+		argumentsMap.put("extentunit", "19");
+		parentNode.appendChild(oextb.build());
+		argumentsMap.remove("extenttype");
+		argumentsMap.remove("extentvalue");
+		argumentsMap.remove("extentunit");
 		
 		// Main subject
 		Element mainsubject = buildMainSubjectNode();
-		product.appendChild(mainsubject);
+		parentNode.appendChild(mainsubject);
 		
 		// Subjects
 		Element subject = buildSubjectNode();
-		product.appendChild(subject);
+		parentNode.appendChild(subject);
 		
-		// Othertext
-		Element ot = buildOtherTextNode(title);
-		product.appendChild(ot);
+		subject = buildSubjectNode();
+		parentNode.appendChild(subject);
+		
+		// In ONIX 2.1 we need to append the following elements directly to the product node, in ONIX 3 they need to be appended to 
+		// <collateraldetail>
+		if(version.equals("3.0"))
+		{
+			// handle version 3, distinguish between long and short tag names
+			if (tagType == OnixPartsBuilder.REFERENCETAG)
+			{
+				parentNode = new Element("CollateralDetail");
+			}
+			else
+			{
+				parentNode = new Element("collateraldetail");
+			}
+		}
+		
+		// descriptive / advertising text content 
+		Element textNode = buildTextNode(title);
+		product.appendChild(textNode);
 		
 		// TODO: Add handling of mediafile nodes
 		
@@ -444,7 +456,7 @@ public class ONIXFile extends File
 		ISBNString = ISBNString + checkDigit;
 		long relISBN = Long.parseLong(ISBNString);
 		
-		OnixProductIdentifierBuilder pidb = new OnixProductIdentifierBuilder("2.1", tagType, argumentsMap);
+		OnixProductIdentifierBuilder pidb = new OnixProductIdentifierBuilder(version, tagType, argumentsMap);
 		
 		argumentsMap.put("productidvalue", Long.toString(relISBN));
 		Element identifier = pidb.build();
@@ -491,15 +503,10 @@ public class ONIXFile extends File
 	
 	private Element buildSubjectNode()
 	{
-		Element subjectNode = new Element("subject");
-		
-		Element b067 = new Element("b067");
-		b067.appendChild(new Text("20"));
-		subjectNode.appendChild(b067);
-		
-		Element b069 = new Element("b069");
-		b069.appendChild(new Text(TitleUtils.getRandomTopic(new Locale("de"))));
-		subjectNode.appendChild(b069);
+		OnixSubjectBuilder osubb = new OnixSubjectBuilder(version, tagType, argumentsMap);
+		argumentsMap.put("subjectheadingtext", TitleUtils.getRandomTopic(new Locale("de")));
+		Element subjectNode = osubb.build();
+		argumentsMap.remove("subjectheadingtext");
 		
 		return subjectNode;
 	}
@@ -594,7 +601,26 @@ public class ONIXFile extends File
 		
 		return suppDet;
 	}
-
+	
+	private Element buildTextNode(Title title)
+	{
+		OnixTextBuilder otextb = new OnixTextBuilder(version, tagType, argumentsMap);
+		argumentsMap.put("texttypecode", "03");
+		if(version.equals("3.0"))
+		{
+			argumentsMap.put("contentaudience", "00");
+		}
+		argumentsMap.put("text", title.getShortBlurb());
+		
+		Element otNode = otextb.build();
+		
+		argumentsMap.remove("texttypecode");
+		argumentsMap.remove("contentaudience");
+		argumentsMap.remove("text");
+		
+		return otNode;
+	}
+	
 	private String determineTitleStringByType(String titleType, Title title)
 	{
 		// split titleString into main title and subtitle, if titleString contains a full-stop.
@@ -619,6 +645,10 @@ public class ONIXFile extends File
 			{
 				abbrevTitle = mainTitle.substring(0, 10);
 			}
+		}
+		if(subTitle.equals(""))
+		{
+			subTitle = "Kein Untertitel";
 		}
 		switch(titleType)
 		{

@@ -24,7 +24,7 @@ public class OnixContributorBuilder extends OnixPartsBuilder
 		/* 9 */	{"b039", "NamesBeforeKey", "b039", "NamesBeforeKey", "namesbeforekey", ""},
 		/*10 */	{"b040", "KeyNames", "b040", "KeyNames", "keynames", ""},
 		/*11 */	{"b047", "CorporateName", "b047", "CorporateaName", "corporatename", "No corporate name"},
-		/*12 */	{"contributordate", "contributorDate", "persondate", "ProductContributorPersonDate", "", ""},
+		/*12 */	{"contributordate", "ContributorDate", "persondate", "ProductContributorPersonDate", "", ""},
 		/*13 */	{"x417", "ContributorDateRole", "b305", "PersonDateRole", "contributordaterole", "50"},
 		/*14 */	{"j260", "DateFormat", "j260", "DateFormat", "persondateformat", "00"},
 		/*15 */	{"b306", "Date", "b306", "Date", "birthdate", "19500101"},
