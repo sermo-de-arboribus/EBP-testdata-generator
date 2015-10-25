@@ -42,7 +42,12 @@ public class GeneratorThread extends Thread
 					// TODO: how to handle notification when upload is finished?
 				}
 			}
-			// TODO: generate ONIX file
+			// TODO: figure out a good notification strategy among threads with wait() and notify()
+			// for the time being: just sleep a while, to give the Dropbox uploader the opportunity
+			// to upload the cover file
+			sleep(5000);
+			
+			System.out.println("MediaFileLink is: " + title.getMediaFileUrl());
 			ONIXFile onixFile = new ONIXFile(title.getIsbn13());
 			// TODO: do we need the return value of generate()? 
 			onixFile.generate(title, destDir);
