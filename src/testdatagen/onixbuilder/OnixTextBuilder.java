@@ -42,7 +42,7 @@ public class OnixTextBuilder extends OnixPartsBuilder
 		}
 		
 		Element textContent = new Element(getTagName(3));
-		textContent.appendChild(new Attribute("textformat", "07"));
+		textContent.addAttribute(new Attribute("textformat", "07"));
 		textContent.appendChild(new Text(determineElementContent(3)));
 		textNode.appendChild(textContent);
 		

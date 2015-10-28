@@ -374,18 +374,25 @@ public class ONIXFile extends File
 			if (tagType == OnixPartsBuilder.REFERENCETAG)
 			{
 				parentNode = new Element("CollateralDetail");
+				product.appendChild(parentNode);
 			}
 			else
 			{
 				parentNode = new Element("collateraldetail");
+				product.appendChild(parentNode);
 			}
 		}
 		
 		// descriptive / advertising text content 
 		Element textNode = buildTextNode(title);
-		product.appendChild(textNode);
+		parentNode.appendChild(textNode);
 		
-		// TODO: Add handling of mediafile nodes
+		// add a media resource node
+		OnixMediaResourceBuilder omrb = new OnixMediaResourceBuilder(version, tagType, argumentsMap);
+		Element mediaResource = omrb.build();
+		parentNode.appendChild(mediaResource);
+		
+		
 		
 		// Publisher information
 		Element publisher = buildPublisherNode();
