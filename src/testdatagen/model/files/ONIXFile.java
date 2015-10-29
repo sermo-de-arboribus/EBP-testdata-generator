@@ -389,10 +389,28 @@ public class ONIXFile extends File
 		
 		// add a media resource node
 		OnixMediaResourceBuilder omrb = new OnixMediaResourceBuilder(version, tagType, argumentsMap);
-		Element mediaResource = omrb.build();
-		parentNode.appendChild(mediaResource);
+		parentNode.appendChild(omrb.build());
 		
+		// In ONIX 2.1 we need to append the following elements directly to the product node, in ONIX 3 they need to be appended to 
+		// <publishingdetail>
+		if(version.equals("3.0"))
+		{
+			// handle version 3, distinguish between long and short tag names
+			if (tagType == OnixPartsBuilder.REFERENCETAG)
+			{
+				parentNode = new Element("PublishingDetail");
+				product.appendChild(parentNode);
+			}
+			else
+			{
+				parentNode = new Element("publishingdetail");
+				product.appendChild(parentNode);
+			}
+		}
 		
+		// add an imprint node
+		OnixImprintBuilder impb = new OnixImprintBuilder(version, tagType, argumentsMap);
+		parentNode.appendChild(impb.build());
 		
 		// Publisher information
 		Element publisher = buildPublisherNode();
@@ -428,23 +446,8 @@ public class ONIXFile extends File
 	
 	private Element buildPublisherNode()
 	{
-		Element pubNode = new Element("publisher");
-		
-		Element b291 = new Element("b291");
-		b291.appendChild(new Text("01"));
-		pubNode.appendChild(b291);
-		
-		Element b241 = new Element("b241");
-		b241.appendChild(new Text("04"));
-		pubNode.appendChild(b241);
-		
-		Element b243 = new Element("b243");
-		b243.appendChild(new Text("56789"));
-		pubNode.appendChild(b243);
-		
-		Element b081 = new Element("b081");
-		b081.appendChild(new Text("IT E-Books-Verlag"));
-		pubNode.appendChild(b081);
+		OnixPublisherBuilder opubb = new OnixPublisherBuilder(version, tagType, argumentsMap);
+		Element pubNode = opubb.build();
 		
 		return pubNode;
 	}
