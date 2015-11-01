@@ -414,20 +414,27 @@ public class ONIXFile extends File
 		
 		// Publisher information
 		Element publisher = buildPublisherNode();
-		product.appendChild(publisher);
+		parentNode.appendChild(publisher);
+		
+		// Place and country of publication
+		OnixCityOfPublicationBuilder ocopb = new OnixCityOfPublicationBuilder(version, tagType, argumentsMap);
+		parentNode.appendChild(ocopb.build());
+		
+		OnixCountryOfPublicationBuilder ocountpb = new OnixCountryOfPublicationBuilder(version, tagType, argumentsMap);
+		parentNode.appendChild(ocountpb.build());
 		
 		// Publishing Status
-		Element pubStatus = new Element("b394");
-		pubStatus.appendChild(new Text("04")); // TODO: would be nice to have some variation of the publishing status, but 04 ("active") is most common
-		product.appendChild(pubStatus);
+		OnixPublishingStatusBuilder opubstatb = new OnixPublishingStatusBuilder(version, tagType, argumentsMap);
+		parentNode.appendChild(opubstatb.build());
 		
 		// Publication date
-		Element pubDate = new Element("b003");
+		OnixPublishingDateBuilder odateb = new OnixPublishingDateBuilder(version, tagType, argumentsMap);
 		long currentDateMillis = new Date().getTime();
-		long randomPubDate = random.nextInt(10) * 86400000L;
+		long randomPubDate = random.nextInt(10) * 86400000L;	
 		randomPubDate = random.nextBoolean() ? randomPubDate : randomPubDate * -1;
-		pubDate.appendChild(new Text(Utilities.getDateForONIX2(new Date(currentDateMillis + randomPubDate)).substring(0, 8)));
-		product.appendChild(pubDate);
+		argumentsMap.put("publishingdate", Utilities.getDateForONIX2(new Date(currentDateMillis + randomPubDate)).substring(0, 8));
+		parentNode.appendChild(odateb.build());
+		argumentsMap.remove("publishingdate");
 
 		// Sales Rights
 		Element sr = buildSalesRightsNode();
