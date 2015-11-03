@@ -2,11 +2,10 @@ package testdatagen.model.files;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.Random;
@@ -16,7 +15,6 @@ import org.apache.commons.io.FilenameUtils;
 import nu.xom.Document;
 import nu.xom.Element;
 import nu.xom.Serializer;
-import nu.xom.Text;
 import testdatagen.config.ConfigurationRegistry;
 import testdatagen.model.Title;
 import testdatagen.onixbuilder.*;
@@ -28,7 +26,6 @@ public class ONIXFile extends File
 {
 	private static Random random = new Random();
 	private static ConfigurationRegistry registry = ConfigurationRegistry.getRegistry();
-	private ArrayList<Element> prices;
 	private HashMap<String, String> argumentsMap;
 	private String version;
 	private int tagType;
@@ -36,7 +33,6 @@ public class ONIXFile extends File
 	public ONIXFile(long ISBN, int tagType, String version)
 	{
 		super(Long.toString(ISBN) + "_onix.xml");
-		prices = new ArrayList<Element>();
 		argumentsMap = new HashMap<String, String>();
 		this.version = version;
 		this.tagType = tagType;
@@ -141,71 +137,6 @@ public class ONIXFile extends File
 		argumentsMap.remove("subjectcode");
 		
 		return msn;
-	}
-	
-	private Element buildPriceNode(String nodeType, double basePrice, String countryCode, String currencyCode)
-	{	
-		double thisPrice = Math.round(basePrice * registry.getDoubleValue("currency.rate." + currencyCode) * 100) / 100.0;
-		
-		Element price = new Element("price");
-		
-		// Price Type Code
-		Element j148 = new Element("j148");
-		j148.appendChild(new Text(nodeType));
-		price.appendChild(j148);
-		
-		Element j151 = new Element("j151");
-		j151.appendChild(new Text("" + thisPrice));
-		price.appendChild(j151);
-		
-		Element j152 = new Element("j152");
-		j152.appendChild(new Text(currencyCode));
-		price.appendChild(j152);
-		
-		Element b251 = new Element("b251");
-		b251.appendChild(new Text(countryCode));
-		price.appendChild(b251);
-		
-		Element j153 = new Element("j153");
-		j153.appendChild(new Text("S"));
-		price.appendChild(j153);
-		
-		// check if a price node with the same data already exists
-		if(prices.isEmpty())
-		{
-			prices.add(price);
-			return price;
-		}
-		else
-		{
-			Iterator<Element> it = prices.iterator();
-			while(it.hasNext())
-			{
-				// if price node with the same data already exists, create a new one.
-				Element compElement = it.next();
-				if(compElement.getValue().equals(price.getValue()))
-				{
-					return buildPriceNode(nodeType, basePrice);
-				}
-			}
-			prices.add(price);
-			return price;
-		}
-	}
-	
-	private Element buildPriceNode(String nodeType, double basePrice)
-	{
-		// select a random currency code and calculate the price for this currency
-		String priceCodeString = registry.getString("currency.codes");
-		String[] priceCodes = priceCodeString.split(" ");
-		String thisPriceCode = priceCodes[random.nextInt(priceCodes.length)];
-		
-		// select a country code for the selected currency
-		String countryCodeString = registry.getString("currency.country." + thisPriceCode);
-		String[] countryCodes = countryCodeString.split(" ");
-		String thisCountryCode = countryCodes[random.nextInt(countryCodes.length)];
-		
-		return buildPriceNode(nodeType, basePrice, thisCountryCode, thisPriceCode);
 	}
 	
 	private Element buildProductNode(Title title)
@@ -437,16 +368,49 @@ public class ONIXFile extends File
 		argumentsMap.remove("publishingdate");
 
 		// Sales Rights
-		Element sr = buildSalesRightsNode();
-		product.appendChild(sr);
+		parentNode.appendChild(buildSalesRightsNode());
+		
+		// In ONIX 2.1 we need to append the following elements directly to the product node, in ONIX 3 they need to be appended to 
+		// <relatedmaterial>
+		if(version.equals("3.0"))
+		{
+			// handle version 3, distinguish between long and short tag names
+			if (tagType == OnixPartsBuilder.REFERENCETAG)
+			{
+				parentNode = new Element("RelatedMaterial");
+				product.appendChild(parentNode);
+			}
+			else
+			{
+				parentNode = new Element("relatedmaterial");
+				product.appendChild(parentNode);
+			}
+		}
 		
 		// Related products
 		Element relProd = buildRelatedProductNode(title);
-		product.appendChild(relProd);
+		parentNode.appendChild(relProd);
+		
+		// In ONIX 2.1 we need to append the following elements directly to the product node, in ONIX 3 they need to be appended to 
+		// <productsupply>
+		if(version.equals("3.0"))
+		{
+			// handle version 3, distinguish between long and short tag names
+			if (tagType == OnixPartsBuilder.REFERENCETAG)
+			{
+				parentNode = new Element("ProductSupply");
+				product.appendChild(parentNode);
+			}
+			else
+			{
+				parentNode = new Element("productsupply");
+				product.appendChild(parentNode);
+			}
+		}
 		
 		// Supply Detail, including prices
 		Element suppDetail = buildSupplyDetailNode();
-		product.appendChild(suppDetail);
+		parentNode.appendChild(suppDetail);
 		
 		return product;
 	}
@@ -461,59 +425,45 @@ public class ONIXFile extends File
 	
 	private Element buildRelatedProductNode(Title title)
 	{
-		Element relProd = new Element("relatedproduct");
-		
-		Element h208 = new Element("h208");
-		h208.appendChild(new Text("13")); // TODO: a wider range of code list values could be implemented
-		relProd.appendChild(h208);
-		
+		// determine the ISBN to be used for a related product
 		String ISBNString = Long.toString(title.getIsbn13());
 		ISBNString = ISBNString.substring(0, 6) + "5" + ISBNString.substring(7, 12);
 		String checkDigit = ISBNUtils.calculateCheckDigit(ISBNString);
 		ISBNString = ISBNString + checkDigit;
 		long relISBN = Long.parseLong(ISBNString);
 		
-		OnixProductIdentifierBuilder pidb = new OnixProductIdentifierBuilder(version, tagType, argumentsMap);
-		
 		argumentsMap.put("productidvalue", Long.toString(relISBN));
-		Element identifier = pidb.build();
+		argumentsMap.put("productform", "BC");
+		OnixRelatedProductBuilder orelpb = new OnixRelatedProductBuilder(version, tagType, argumentsMap);
+		Element relProd = orelpb.build();
+		argumentsMap.remove("productform");
 		argumentsMap.remove("productidvalue");
-		
-		relProd.appendChild(identifier);
-		
-		Element b012 = new Element("b012");
-		b012.appendChild(new Text("BC"));
-		relProd.appendChild(b012);
 		
 		return relProd;
 	}
 	
 	private Element buildSalesRightsNode()
 	{
-		Element salesRights = new Element("salesrights");
+		OnixSalesRightsBuilder osalrb = new OnixSalesRightsBuilder(version, tagType, argumentsMap);
+		argumentsMap.put("salesrightstype", "0" + (random.nextInt(1) + 1));
 		
-		Element b089 = new Element("b089");
-		b089.appendChild(new Text("0" + (random.nextInt(1) + 1)));
-		salesRights.appendChild(b089);
-		
-		Element rightsRegion = random.nextBoolean() ? new Element("b090") : new Element("b388");
-		if(rightsRegion.getLocalName().equals("b090"))
+		StringBuffer countryList = new StringBuffer("");
+		int j = random.nextInt(6) + 1;
+		for(int i = 0; i < j; i++)
 		{
-			int j = random.nextInt(6) + 1;
-			for(int i = 0; i < j; i++)
+			countryList.append(Utilities.getCountryForONIX());
+			if(i < j - 1)
 			{
-				rightsRegion.appendChild(new Text(Utilities.getCountryForONIX()));
-				if(i < j - 1)
-				{
-					rightsRegion.appendChild(new Text(" "));
-				}
+				countryList.append(" ");
 			}
 		}
-		else
-		{
-			rightsRegion.appendChild(new Text("WORLD"));
-		}
-		salesRights.appendChild(rightsRegion);
+		
+		argumentsMap.put("countriesincluded", countryList.toString());
+		
+		Element salesRights = osalrb.build();
+		
+		argumentsMap.remove("salesrightstype");
+		argumentsMap.remove("countriesincluded");
 		
 		return salesRights;
 	}
@@ -529,94 +479,112 @@ public class ONIXFile extends File
 	}
 	
 	private Element buildSupplyDetailNode()
-	{	
-		Element suppDet = new Element("supplydetail");
+	{
+		OnixSupplierBuilder osupb = new OnixSupplierBuilder(version, tagType, argumentsMap);
+		Element supplyDetailNode = osupb.build();
 		
-		// Supplier Name
-		Element j137 = new Element("j137");
-		j137.appendChild(new Text("KNV IT E-Books-Verlag"));
-		suppDet.appendChild(j137);
+		// add supplier information
+		osupb.appendElementsTo(supplyDetailNode);
 		
-		// Supplier's website
-		Element website = new Element("website");
-		Element b295 = new Element("b295");
-		b295.appendChild(new Text("http://www.buchkatalog.de/"));
-		website.appendChild(b295);
-		suppDet.appendChild(website);
+		OnixProductAvailabilityBuilder oprodavb = new OnixProductAvailabilityBuilder(version, tagType, argumentsMap);
+		oprodavb.appendElementsTo(supplyDetailNode);
 		
-		// Supplier Role
-		Element j292 = new Element("j292");
-		j292.appendChild(new Text("01"));
-		suppDet.appendChild(j292);
+		OnixSupplyDateBuilder osdateb = new OnixSupplyDateBuilder(version, tagType, argumentsMap);
 		
-		// Availability Code
-		Element j141 = new Element("j141");
-		j141.appendChild(new Text("IP"));
-		suppDet.appendChild(j141);
-		
-		// Product Availability
-		Element j396 = new Element("j396");
-		j396.appendChild(new Text("20"));
-		suppDet.appendChild(j396);
-		
+		// calculate a random expected ship date
 		// Expected Ship Date, +/- 10 days from today
 		long currentDateMillis = new Date().getTime();
 		long randomShipDate = random.nextInt(10) * 86400000L;
 		randomShipDate = random.nextBoolean() ? randomShipDate : randomShipDate * -1;
-		Element j142 = new Element("j142");
-		j142.appendChild(new Text(Utilities.getDateForONIX2(new Date(currentDateMillis + randomShipDate)).substring(0, 8)));
-		suppDet.appendChild(j142);
+		Date actualShipDate = new Date(currentDateMillis + randomShipDate);
+		String shipDateString = Utilities.getDateForONIX2(actualShipDate).substring(0, 8);
 		
-		// TODO: refactor price node handling. There are currently two ArrayLists kept with price node elements, one locally, one as an instance variable. That's overdoing it!
+		argumentsMap.put("supplydaterole", "08");
+		argumentsMap.put("date", shipDateString);
 		
-		// price nodes
-		double basePrice = Math.round((random.nextDouble() * 28.99 + 1) * 100) / 100.0;	
-		// create a list of price nodes
-		ArrayList<Element> priceNodeList = new ArrayList<>();
+		osdateb.appendElementsTo(supplyDetailNode);
 		
-		Element germanFixedPrice = buildPriceNode("04", basePrice, "DE", "EUR");
-		priceNodeList.add(germanFixedPrice);
+		argumentsMap.remove("supplydaterole");
+		argumentsMap.remove("date");
+		
+		// Create an OnSaleDate / Embargo date in the same way as an Expected Ship Date
+		randomShipDate = random.nextInt(10) * 86400000L;
+		randomShipDate = random.nextBoolean() ? randomShipDate : randomShipDate * -1;
+		actualShipDate = new Date(currentDateMillis + randomShipDate);
+		shipDateString = Utilities.getDateForONIX2(actualShipDate).substring(0, 8);
+		
+		argumentsMap.put("supplydaterole", "02");
+		argumentsMap.put("date", shipDateString);
+		
+		osdateb.appendElementsTo(supplyDetailNode);
+		
+		argumentsMap.remove("supplydaterole");
+		argumentsMap.remove("date");
+
+		// determine random base price
+		double basePrice = Math.round((random.nextDouble() * 28.99 + 1) * 100) / 100.0;
+		
+		// create a set of prices
+		HashSet<Price> priceSet = new HashSet<>();
+		
+		Price germanFixedPrice = new Price("04", "" + basePrice, "DE", "EUR");
+		priceSet.add(germanFixedPrice);
 		
 		// random number of additional price nodes
-		int nodes = random.nextInt(registry.getIntValue("onix.maxNumberOfPriceNodes") - registry.getIntValue("onix.minNumberOfPriceNodes")) + registry.getIntValue("onix.minNumberOfPriceNodes") - 1;
-		for(int i = 0; i < nodes; i++)
+		int numberOfPrices = random.nextInt(registry.getIntValue("onix.maxNumberOfPriceNodes") - registry.getIntValue("onix.minNumberOfPriceNodes")) + registry.getIntValue("onix.minNumberOfPriceNodes") - 1;
+		for(int i = 0; i < numberOfPrices; i++)
 		{
-			int nodeNumber = random.nextInt(5);
-			String nodeType;
-			switch(nodeNumber)
+			int randomPriceType = random.nextInt(5);
+			String priceType;
+			switch(randomPriceType)
 			{
 			case(1):
-				nodeType = "24";
+				priceType = "24";
 				break;
 			case(2):
-				nodeType = "02";
+				priceType = "02";
 				break;
 			case(3):
-				nodeType = "22";
+				priceType = "22";
 				break;
 			case(4):
-				nodeType = "42";
+				priceType = "42";
 				break;
 			case(0):
 			default:
-				nodeType = "04";
+				priceType = "04";
 			}
-			Element priceNode = buildPriceNode(nodeType, basePrice);
-			priceNodeList.add(priceNode);
+			Price nextPrice = buildPriceObject(priceType, basePrice);
+			priceSet.add(nextPrice);
 		}
 		
-		// sort list of price nodes
-		Collections.sort(priceNodeList, new ONIXPriceComparator());
-		
-		// add sorted list of price nodes to the supply detail node
-		Iterator<Element> iterator = priceNodeList.iterator();
+		// generate a price element for every price in the set
+		OnixPriceBuilder oprb = new OnixPriceBuilder(version, tagType, argumentsMap);
+		Iterator<Price> iterator = priceSet.iterator();
 		while(iterator.hasNext())
 		{
-			Element element = iterator.next();
-			suppDet.appendChild(element);
+			Price price = iterator.next();
+			price.addPriceArguments(argumentsMap);
+			oprb.appendElementsTo(supplyDetailNode);
+			price.removePriceArguments(argumentsMap);
 		}
 		
-		return suppDet;
+		return supplyDetailNode;
+	}
+	
+	private Price buildPriceObject(String nodeType, double basePrice)
+	{
+		// select a random currency code and calculate the price for this currency
+		String priceCodeString = registry.getString("currency.codes");
+		String[] priceCodes = priceCodeString.split(" ");
+		String thisPriceCode = priceCodes[random.nextInt(priceCodes.length)];
+		
+		// select a country code for the selected currency
+		String countryCodeString = registry.getString("currency.country." + thisPriceCode);
+		String[] countryCodes = countryCodeString.split(" ");
+		String thisCountryCode = countryCodes[random.nextInt(countryCodes.length)];
+		
+		return new Price(nodeType, "" + basePrice, thisCountryCode, thisPriceCode);
 	}
 	
 	private Element buildTextNode(Title title)
@@ -680,27 +648,63 @@ public class ONIXFile extends File
 	}
 }
 
-class ONIXPriceComparator implements Comparator<Element>
+class PriceComparator implements Comparator<Price>
 {
 	@Override
-	public int compare(Element price1, Element price2)
+	public int compare(Price price1, Price price2)
 	{
-		String codeType1 = price1.getFirstChildElement("j148").getValue();
-		String codeType2 = price2.getFirstChildElement("j148").getValue();
-		int compareValue = codeType1.compareTo(codeType2);
+		int compareValue = price1.type.compareTo(price2.type);
 		if(compareValue > 0)
 		{
 			return 1;
 		}
 		else if(compareValue == 0)
 		{
-			String countryCode1 = price1.getFirstChildElement("b251").getValue();
-			String countryCode2 = price2.getFirstChildElement("b251").getValue();
-			return countryCode1.compareTo(countryCode2);
+			return price1.country.compareTo(price2.country);
 		}
 		else
 		{
 			return -1;
 		}
+	}
+}
+
+class Price
+{
+	String type, amount, currency, country;
+	
+	Price(String type, String amount, String currency, String country)
+	{
+		this.type = type;
+		this.amount = amount;
+		this.currency = currency;
+		this.country = country;
+	}
+	
+	void addPriceArguments(HashMap<String, String> argumentsMap)
+	{
+		argumentsMap.put("pricetype", type);
+		argumentsMap.put("priceamount", amount);
+		argumentsMap.put("currencycode", currency);
+		argumentsMap.put("countriesincluded", country);
+	}
+	
+	void removePriceArguments(HashMap<String, String> argumentsMap)
+	{
+		argumentsMap.remove("pricetype");
+		argumentsMap.remove("priceamount");
+		argumentsMap.remove("currencycode");
+		argumentsMap.remove("countriesincluded");
+	}
+	
+	public boolean equals(Price otherPrice)
+	{
+		return type.equals(otherPrice.type) && country.equals(otherPrice.country);
+	}
+	
+	public int hashCode()
+	{
+		String concatenatedValues = type + amount + currency + country;
+		return concatenatedValues.hashCode();
 	}
 }
