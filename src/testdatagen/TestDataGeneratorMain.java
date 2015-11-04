@@ -71,11 +71,6 @@ public class TestDataGeneratorMain extends JFrame
 		return (ScenarioTableModel) scenarioTable.getModel();
 	}
 	
-	public ScenarioTableModel getScenarioTableModel()
-	{
-		return (ScenarioTableModel) scenarioTable.getModel();
-	}
-	
 	public void setScenarios(ScenarioTableModel scenarios)
 	{
 		scenarioTable.setModel(scenarios);

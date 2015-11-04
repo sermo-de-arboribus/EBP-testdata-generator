@@ -12,6 +12,7 @@ import java.util.Properties;
 import org.apache.commons.io.FilenameUtils;
 
 import testdatagen.config.ConfigurationRegistry;
+import testdatagen.model.Title;
 import testdatagen.utilities.Utilities;
 
 public class DropboxUploaderThread extends Thread
@@ -76,7 +77,7 @@ public class DropboxUploaderThread extends Thread
         
         if(metadata == null)
         {
-        	Utilities.showWarnPane("Cover file upload to Dropbox has failed. You must upload the file yourself and set the MediaFileLink in the ONIX manually");
+        	Utilities.showWarnPane("Cover file upload for title " + title.getName()  + " to Dropbox has failed.\nYou must upload the file yourself and set the MediaFileLink in the ONIX manually");
         }
         else
         {
@@ -85,20 +86,18 @@ public class DropboxUploaderThread extends Thread
         
         try
         {
-            shareableURL = dbxClient.createShareableUrl(dropboxPath);
+            shareableUrl = dbxClient.createShareableUrl(dropboxPath);
         }
         catch (DbxException ex)
         {
-        	Utilities.showWarnPane("Uploaded file to Dropbox, but cannot create a shareable link");
+        	Utilities.showWarnPane("Uploaded file for title " + title.getName()  + " to Dropbox, but cannot create a shareable link");
         }
         
-        if(shareableURL)
+        if(shareableUrl != null)
         {
-        	String url = shareableURL.replace("?dl=0", "?dl=1");
+        	String url = shareableUrl.replace("?dl=0", "?dl=1");
         	title.setMediaFileUrl(url);
         }
-        
-        // TODO: publish file, get download token, save download token and add download token to ONIX
         
         /* This would be code for using user authentication / user's own Dropbox account.
 		DbxWebAuthNoRedirect webAuth = new DbxWebAuthNoRedirect(config, appInfo);

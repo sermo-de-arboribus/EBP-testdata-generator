@@ -21,7 +21,6 @@ public class GenerateDataButtonListener implements ActionListener
 {
 	private TestDataGeneratorMain programWindow;
 	
-	public GenerateDataButtonListener(final TestDataGeneratorMain programWindow)
 	public GenerateDataButtonListener(TestDataGeneratorMain programWindow)
 	{
 		this.programWindow = programWindow;
@@ -51,26 +50,6 @@ public class GenerateDataButtonListener implements ActionListener
     	    int returnVal = chooser.showSaveDialog(null);
     	    File parentOfDestDir = null;
     		if(returnVal == JFileChooser.APPROVE_OPTION)
-    		{
-    			parentOfDestDir = chooser.getSelectedFile();
-    		}
-    		
-    		// create output directory, using the scenario name as dir name
-    		File destDir = new File(FilenameUtils.concat(parentOfDestDir.getPath(), selectedScenario.getName()));
-    		try
-    		{
-    			destDir.mkdir();
-    		}
-    		catch (SecurityException exc)
-    		{
-    			Utilities.showErrorPane("Error: could not create output directory", exc);
-    		}
-    		
-    		List<Title> titleList = selectedScenario.getTitleList();
-    		// TODO: The task of generating and saving files should not be done in the event dispatcher thread. 
-    		// This must go into a separate SwingWorker thread.
-    		GeneratorThread genThread = new GeneratorThread(titleList, destDir);
-    		genThread.start();
 	    	{
 	    		parentOfDestDir = chooser.getSelectedFile();
 	    		// create output directory, using the scenario name as dir name

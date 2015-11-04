@@ -37,7 +37,7 @@ public class GeneratorThread extends Thread
 				if(title.hasMediaFileLink())
 				{
 					// TODO: upload cover file(s) to Dropbox and delete them from the local disc; keep file for later usage by ONIX builder
-					DropboxUploaderThread uploader = new DropboxUploaderThread(storedFile);
+					DropboxUploaderThread uploader = new DropboxUploaderThread(storedFile, title);
 					uploader.start();
 					// TODO: how to handle notification when upload is finished?
 				}
@@ -45,7 +45,14 @@ public class GeneratorThread extends Thread
 			// TODO: figure out a good notification strategy among threads with wait() and notify()
 			// for the time being: just sleep a while, to give the Dropbox uploader the opportunity
 			// to upload the cover file
-			sleep(5000);
+			try
+			{
+				sleep(5000);
+			}
+			catch(InterruptedException e)
+			{
+				//
+			}
 			
 			System.out.println("MediaFileLink is: " + title.getMediaFileUrl());
 			ONIXFile onixFile = new ONIXFile(title.getIsbn13());
