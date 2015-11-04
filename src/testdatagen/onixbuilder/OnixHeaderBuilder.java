@@ -13,6 +13,7 @@ public class OnixHeaderBuilder extends OnixPartsBuilder
 	private static final String[][] HEADER_ELEMENT_DEFINITIONS = 
 		{
 			{"header", "Header", "header", "Header", "", ""},
+			{"sender", "Sender", "", "", "", ""},
 			{"x298", "SenderName", "m174", "FromCompany", "sender", "IT-E-Books-Verlag"},
 			{"x299", "ContactName", "m175", "FromPerson", "person", "{$randomFullName}"},
 			{"j172", "EmailAddress", "m283", "FromEmail", "email", "noreply@kno-va.de"},
@@ -33,11 +34,24 @@ public class OnixHeaderBuilder extends OnixPartsBuilder
 	{
 		Element header = new Element(getTagName(0));
 		
+		Element senderNode;
+		Element parentElement;
+		if(onixVersion.equals("3.0"))
+		{
+			senderNode = new Element(getTagName(1));
+			header.appendChild(senderNode);
+			parentElement = senderNode;
+		}
+		else
+		{
+			parentElement = header;
+		}
+
 		for(int i = 1; i < elementDefinitions.length; i++)
 		{
 			Element nextElement = new Element(getTagName(i));
 			nextElement.appendChild(new Text(determineElementContent(i)));
-			header.appendChild(nextElement);
+			parentElement.appendChild(nextElement);
 		}
 		
 		return header;
