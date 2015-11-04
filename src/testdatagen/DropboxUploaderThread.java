@@ -12,17 +12,20 @@ import java.util.Properties;
 import org.apache.commons.io.FilenameUtils;
 
 import testdatagen.config.ConfigurationRegistry;
+import testdatagen.model.Title;
 import testdatagen.utilities.Utilities;
 
 public class DropboxUploaderThread extends Thread
 {
 	private java.io.File fileToUpload;
+	private Title title;
 	private static final String APP_KEY = "4iwecg3jddfa352";
 	private static final String APP_SECRET = "6kqbbwd54m0jsjn";
 	
-	public DropboxUploaderThread(java.io.File file)
+	public DropboxUploaderThread(java.io.File file, Title title)
 	{
 		fileToUpload = file;
+		this.title = title;
 		ConfigurationRegistry registry = ConfigurationRegistry.getRegistry();
 		Properties properties = System.getProperties();
 		properties.setProperty("javax.net.ssl.trustStore", FilenameUtils.normalize(registry.getString("ssl.pathToCacerts")));
@@ -43,6 +46,7 @@ public class DropboxUploaderThread extends Thread
 		DbxClient dbxClient = new DbxClient(config, "ch5YeQ5Sn0AAAAAAAAADEIsTX_J03cOV88I5ha-17ME9b_hVBAy3dCsfo11Qjxqe", appInfo.host);
 		
 		String dropboxPath = "/" + FilenameUtils.getName(fileToUpload.getPath());
+		String shareableUrl = null;
         String pathError = DbxPath.findError(dropboxPath);
         if (pathError != null)
         {
@@ -73,14 +77,28 @@ public class DropboxUploaderThread extends Thread
         
         if(metadata == null)
         {
-        	Utilities.showWarnPane("Cover file upload to Dropbox has failed. You must upload the file yourself and set the MediaFileLink in the ONIX manually");
+        	Utilities.showWarnPane("Cover file upload for title " + title.getName()  + " to Dropbox has failed.\nYou must upload the file yourself and set the MediaFileLink in the ONIX manually");
         }
         else
         {
             System.out.print(metadata.toStringMultiline());
-            // TODO: publish file, get download token, save download token and add download token to ONIX
         }
-
+        
+        try
+        {
+            shareableUrl = dbxClient.createShareableUrl(dropboxPath);
+        }
+        catch (DbxException ex)
+        {
+        	Utilities.showWarnPane("Uploaded file for title " + title.getName()  + " to Dropbox, but cannot create a shareable link");
+        }
+        
+        if(shareableUrl != null)
+        {
+        	String url = shareableUrl.replace("?dl=0", "?dl=1");
+        	title.setMediaFileUrl(url);
+        }
+        
         /* This would be code for using user authentication / user's own Dropbox account.
 		DbxWebAuthNoRedirect webAuth = new DbxWebAuthNoRedirect(config, appInfo);
 		String authorizeUrl = webAuth.start();

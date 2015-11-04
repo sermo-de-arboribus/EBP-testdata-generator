@@ -18,13 +18,13 @@ public class LoadScenariosButtonListener implements ActionListener
 {
 	private TestDataGeneratorMain programWindow;
 	
-	public LoadScenariosButtonListener(TestDataGeneratorMain mainFrame)
+	public LoadScenariosButtonListener(final TestDataGeneratorMain mainFrame)
 	{
 		this.programWindow = mainFrame;
 	}
 	
 	@Override
-	public void actionPerformed(ActionEvent evt)
+	public void actionPerformed(final ActionEvent evt)
 	{
 		JFileChooser chooser = new JFileChooser();
 	    FileNameExtensionFilter filter = new FileNameExtensionFilter("E-Book-Plant data files", "ebp");

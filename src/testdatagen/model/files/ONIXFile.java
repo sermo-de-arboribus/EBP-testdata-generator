@@ -333,7 +333,13 @@ public class ONIXFile extends File
 		
 		// add a media resource node
 		OnixMediaResourceBuilder omrb = new OnixMediaResourceBuilder(version, tagType, argumentsMap);
+		String resourceUrl = title.getMediaFileUrl();
+		if(resourceUrl != null)
+		{
+			argumentsMap.put("resourcelink", resourceUrl);
+		}
 		parentNode.appendChild(omrb.build());
+		argumentsMap.remove("resourcelink");
 		
 		// In ONIX 2.1 we need to append the following elements directly to the product node, in ONIX 3 they need to be appended to 
 		// <publishingdetail>

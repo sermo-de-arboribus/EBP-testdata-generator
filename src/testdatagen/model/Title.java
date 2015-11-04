@@ -25,6 +25,7 @@ public class Title implements Serializable
 	private long isbn13;
     private String uid, name, author; // TODO: a book could have several authors with different author types. Expand model to reflect that
     private boolean mediaFileLink;
+    private String mediaFileUrl;
     private HashSet<File> files;
     private String epubType;
     private String format; // format = protection + epubType
@@ -240,6 +241,11 @@ public class Title implements Serializable
 		return isbn13;
 	}
 
+	public String getMediaFileUrl()
+	{
+		return mediaFileUrl;
+	}
+	
 	public String getName()
 	{
 		return name;
@@ -306,5 +312,10 @@ public class Title implements Serializable
     	{
     		Utilities.showWarnPane("The format for this E-Book product is not valid: " + formatString + " (title is " + isbn13);
     	}
+    }
+    
+    public void setMediaFileUrl(String url)
+    {
+    	mediaFileUrl = url;
     }
 }

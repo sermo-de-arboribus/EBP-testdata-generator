@@ -24,14 +24,14 @@ public class AddTitleToScenarioListener implements ActionListener
 	private TestScenario scenario;
 	private JDialog parentDialog;
 	
-	public AddTitleToScenarioListener(JDialog parentDialog, TestScenario scenario)
+	public AddTitleToScenarioListener(final JDialog parentDialog, final TestScenario scenario)
 	{
 		this.scenario = scenario;
 		this.parentDialog = parentDialog;
 	}
 	
 	@Override
-	public void actionPerformed(ActionEvent evt)
+	public void actionPerformed(final ActionEvent evt)
 	{
 		// check where the event occurred
 		String eventName = evt.getActionCommand();

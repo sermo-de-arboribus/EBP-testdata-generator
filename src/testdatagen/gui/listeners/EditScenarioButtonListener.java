@@ -21,7 +21,7 @@ public class EditScenarioButtonListener implements ActionListener
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent evt)
+	public void actionPerformed(final ActionEvent evt)
 	{
 		JTable scenarioTable = programWindow.getScenarioTable();
 		

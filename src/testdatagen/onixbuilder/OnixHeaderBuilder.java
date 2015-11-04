@@ -47,7 +47,16 @@ public class OnixHeaderBuilder extends OnixPartsBuilder
 			parentElement = header;
 		}
 
-		for(int i = 1; i < elementDefinitions.length; i++)
+		for(int i = 2; i <= 4; i++)
+		{
+			Element nextElement = new Element(getTagName(i));
+			nextElement.appendChild(new Text(determineElementContent(i)));
+			parentElement.appendChild(nextElement);
+		}
+		
+		parentElement = header;
+		
+		for(int i = 5; i <= 8; i++)
 		{
 			Element nextElement = new Element(getTagName(i));
 			nextElement.appendChild(new Text(determineElementContent(i)));
