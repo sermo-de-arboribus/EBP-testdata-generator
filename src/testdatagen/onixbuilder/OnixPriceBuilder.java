@@ -70,8 +70,13 @@ public class OnixPriceBuilder extends OnixSupplyDetailPartsBuilder
 		{
 			temporaryParentNode = new Element(getTagName(8));
 			priceNode.appendChild(temporaryParentNode);
+			appendElementsFromTo(temporaryParentNode, 9, 12);
 		}
-		appendElementsFromTo(temporaryParentNode, 9, 12);
+		else
+		{
+			appendElementsFromTo(temporaryParentNode, 10, 12);
+		}
+
 		
 		// add currency code
 		appendElementsFromTo(priceNode, 13, 13);

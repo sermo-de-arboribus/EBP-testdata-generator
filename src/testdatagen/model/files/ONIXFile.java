@@ -12,6 +12,7 @@ import java.util.Random;
 
 import org.apache.commons.io.FilenameUtils;
 
+import nu.xom.Attribute;
 import nu.xom.Document;
 import nu.xom.Element;
 import nu.xom.Serializer;
@@ -43,7 +44,19 @@ public class ONIXFile extends File
 		// configure the arguments for the OnixPartsBuilders
 		argumentsMap.put("recordreference", title.getUid());
 		// TODO: distinguish between reference and short tags; add release attribute
-		Element ONIXroot = new Element("ONIXmessage");
+		String rootElementName;
+		if(tagType == OnixPartsBuilder.REFERENCETAG)
+		{
+			rootElementName = "ONIXMessage";
+		}
+		else
+		{
+			rootElementName = "ONIXmessage";
+		}
+
+		Element ONIXroot = new Element(rootElementName);
+		ONIXroot.addAttribute(new Attribute("release", version));
+		
 		Element ONIXheader = buildHeader();
 		Element ONIXproduct = buildProductNode(title);
 		
