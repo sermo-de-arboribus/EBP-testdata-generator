@@ -30,6 +30,7 @@ public class GeneratorThread extends Thread
 			Title title = titleIterator.next();
 			// generate covers
 			ArrayList<GraphicFile> coversList = title.getCoverFiles();
+			ArrayList<Thread> uploadThreads = new ArrayList<Thread>();
 			for(GraphicFile coverFile : coversList)
 			{
 				java.io.File storedFile = coverFile.generate(title, destDir);
@@ -38,28 +39,28 @@ public class GeneratorThread extends Thread
 				{
 					// TODO: upload cover file(s) to Dropbox and delete them from the local disc; keep file for later usage by ONIX builder
 					DropboxUploaderThread uploader = new DropboxUploaderThread(storedFile, title);
+					uploadThreads.add(uploader);
 					uploader.start();
-					// TODO: how to handle notification when upload is finished?
 				}
 			}
-			// TODO: figure out a good notification strategy among threads with wait() and notify()
-			// for the time being: just sleep a while, to give the Dropbox uploader the opportunity
-			// to upload the cover file
+			
+			// wait for dropbox upload threads to finish
 			try
 			{
-				sleep(5000);
+				for(Thread uploadThread : uploadThreads)
+				{
+					uploadThread.join();
+				}
 			}
 			catch(InterruptedException e)
 			{
-				//
+				System.out.println("Warning: interrupted while waiting for results of dropbox upload threads");
 			}
 			
 			System.out.println("MediaFileLink is: " + title.getMediaFileUrl());
 			ONIXFile onixFile = new ONIXFile(title.getIsbn13());
-			// TODO: do we need the return value of generate()? 
 			onixFile.generate(title, destDir);
 			
-			// TODO: iterate over all file Objects and generate the files
 			ArrayList<testdatagen.model.files.File> fileList = title.getNonCoverFiles();
 			for(testdatagen.model.files.File file : fileList)
 			{

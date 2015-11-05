@@ -219,7 +219,7 @@ public class Title implements Serializable
 		return isbn13;
 	}
 
-	public String getMediaFileUrl()
+	public synchronized String getMediaFileUrl()
 	{
 		return mediaFileUrl;
 	}
@@ -292,7 +292,7 @@ public class Title implements Serializable
     	}
     }
     
-    public void setMediaFileUrl(String url)
+    public synchronized void setMediaFileUrl(String url)
     {
     	mediaFileUrl = url;
     }
