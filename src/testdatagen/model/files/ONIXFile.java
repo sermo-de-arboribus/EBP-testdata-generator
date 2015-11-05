@@ -245,6 +245,13 @@ public class ONIXFile extends File
 			argumentsMap.put("productform", "ED"); // code represents a downloadable book in ONIX 3.0
 		}
 		
+		// ONIX 3.0 requires a mandatory ProductComposition element
+		if(version.equals("3.0"))
+		{
+			OnixProductCompositionBuilder oprocob = new OnixProductCompositionBuilder(version, tagType, argumentsMap);
+			parentNode.appendChild(oprocob.build());
+		}
+		
 		// TODO: implement "AJ" products later
 		// Product Form
 		OnixProductFormBuilder pfb = new OnixProductFormBuilder(version, tagType, argumentsMap);
