@@ -12,17 +12,17 @@ public class OnixMediaResourceBuilder extends OnixPartsBuilder
 	 */
 	private static final String[][] MEDIA_RESOURCE_ELEMENT_DEFINITIONS = 
 		{
-			{"supportingsresource", "SupportingResource", "mediafile", "MediaFile", "", ""},
-			{"x436", "ResourceContentType", "f114", "MediaFileTypeCode", "resourcecontenttype", "01"},
-			{"x427", "ContentAudience", "", "", "contentaudience", "00"},
-			{"x437", "ResourceMode", "", "", "resourcemode", "03"},
-			{"resourceversion", "ResourceVersion", "", "", "", ""},
-			{"x441", "ResourceForm", "", "", "resourceform", "02"},
-			{"x435", "ResourceLink", "f117", "MediaFileLink", "resourcelink", "http://www.example.com/"},
-			{"contentdate", "ContentDate", "", "", "", ""},
-			{"x429", "ContentDateRole", "", "", "contentdaterole", "17"},
-			{"b306", "Date", "f373", "MediaFileDate", "mediafiledate", "20151025"},
-			{"", "", "f116", "MediaFileLinkTypeCode", "", "01"}
+	/*0 */	{"supportingsresource", "SupportingResource", "mediafile", "MediaFile", "", ""},
+	/*1 */	{"x436", "ResourceContentType", "f114", "MediaFileTypeCode", "resourcecontenttype", "01"},
+	/*2 */	{"x427", "ContentAudience", "", "", "contentaudience", "00"},
+	/*3 */	{"x437", "ResourceMode", "", "", "resourcemode", "03"},
+	/*4 */	{"resourceversion", "ResourceVersion", "", "", "", ""},
+	/*5 */	{"x441", "ResourceForm", "", "", "resourceform", "02"},
+	/*6 */	{"x435", "ResourceLink", "f117", "MediaFileLink", "resourcelink", "http://www.example.com/"},
+	/*7 */	{"contentdate", "ContentDate", "", "", "", ""},
+	/*8 */	{"x429", "ContentDateRole", "", "", "contentdaterole", "17"},
+	/*9 */	{"b306", "Date", "f373", "MediaFileDate", "mediafiledate", "20151025"},
+	/*10*/	{"", "", "f116", "MediaFileLinkTypeCode", "", "01"}
 		};
 	/*
 	 * Map for determining the ONIX 2.1 MediaFileTypeCode out of ONIX 3.0 ResourceMode + ResourceContentType information
@@ -109,15 +109,16 @@ public class OnixMediaResourceBuilder extends OnixPartsBuilder
 		mediaFileTypeCode.appendChild(new Text(mediaFileTypeCodeContent));
 		mediaResource.appendChild(mediaFileTypeCode);
 		
-		Element mediaFileLink = new Element(getTagName(6));
 		String url = determineElementContent(6);
-		mediaFileLink.appendChild(new Text(url));
-		mediaResource.appendChild(mediaFileLink);
 		
 		Element mediaFileLinkType = new Element(getTagName(10));
 		String mfltCode = determineMediaFileLinkTypeCode(url);
 		mediaFileLinkType.appendChild(new Text(mfltCode));
 		mediaResource.appendChild(mediaFileLinkType);
+		
+		Element mediaFileLink = new Element(getTagName(6));
+		mediaFileLink.appendChild(new Text(url));
+		mediaResource.appendChild(mediaFileLink);
 		
 		Element mediaFileDate = new Element(getTagName(9));
 		mediaFileDate.appendChild(new Text(determineElementContent(9)));

@@ -35,12 +35,12 @@ public class OnixSupplierBuilder extends OnixSupplyDetailPartsBuilder
 			Element supplier = new Element(getTagName(0));
 			parentNode.appendChild(supplier);
 			parentNode = supplier;
+			
+			// Supplier Role
+			Element supplierRole = new Element(getTagName(1));
+			supplierRole.appendChild(new Text(determineElementContent(1)));
+			parentNode.appendChild(supplierRole);
 		}
-		
-		// Supplier Role
-		Element supplierRole = new Element(getTagName(1));
-		supplierRole.appendChild(new Text(determineElementContent(1)));
-		parentNode.appendChild(supplierRole);
 		
 		// Supplier Identifier
 		Element supplierIdentifier = new Element(getTagName(2));
@@ -50,6 +50,14 @@ public class OnixSupplierBuilder extends OnixSupplyDetailPartsBuilder
 			Element nextElement = new Element(getTagName(i));
 			nextElement.appendChild(new Text(determineElementContent(i)));
 			supplierIdentifier.appendChild(nextElement);	
+		}
+		
+		if(onixVersion.equals("2.1"))
+		{
+			// Supplier Role
+			Element supplierRole = new Element(getTagName(1));
+			supplierRole.appendChild(new Text(determineElementContent(1)));
+			parentNode.appendChild(supplierRole);
 		}
 		
 		// Supplier Name

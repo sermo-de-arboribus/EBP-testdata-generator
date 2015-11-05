@@ -104,6 +104,12 @@ class JpegCover extends BufferedImage
 		Font[] fonts = env.getAllFonts();
 		int fontNumber = random.nextInt(fonts.length - 1);
 		Font baseFont = fonts[fontNumber];
+		// select a random font that can display title and author of this product. 
+		// Font.canDisplayUpTo return -1, if the selected font can display all characters in a given string
+		while(baseFont.canDisplayUpTo(title.getAuthor() + title.getName() + title.getIsbn13()) > -1)
+		{
+			baseFont = fonts[random.nextInt(fonts.length - 1)];
+		}
 		
 		Font largeFont = new Font(baseFont.getName(), Font.BOLD, (int) (height * 0.75 * 0.08)); // 1 px is approximately 0.75 pt, and large font should be about 5% of the canvas height
 		Font mediumFont = new Font(baseFont.getName(), Font.BOLD, (int) (height * 0.75 * 0.05));
@@ -118,14 +124,14 @@ class JpegCover extends BufferedImage
 		if(titleWidth > getWidth())
 		{
 			// title too long, break it up into two lines
-			int breakpoint = title.getName().length() / 2;
+			int breakpoint = title.getName().length() / 3;
 			int spaceAfterBreakpoint = title.getName().indexOf(' ', breakpoint);
 			if(spaceAfterBreakpoint > 0)
 			{
 				breakpoint = spaceAfterBreakpoint;
 			}
 			String titleComponent1 = title.getName().substring(0, breakpoint);
-			String titleComponent2 = title.getName().substring(breakpoint + 1);
+			String titleComponent2 = title.getName().substring(breakpoint);
 			
 			gra.drawString(titleComponent1, 
 					(getWidth() - largeMetrics.stringWidth(titleComponent1)) / 2,  // centered title in x dimension 

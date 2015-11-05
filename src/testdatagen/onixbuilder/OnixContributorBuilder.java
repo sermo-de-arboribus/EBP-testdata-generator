@@ -130,14 +130,14 @@ public class OnixContributorBuilder extends OnixPartsBuilder
 				{
 					Element contributorDate = getDeathDateComposite();
 					contributorNode.appendChild(contributorDate);
-				}	
-			}
-			
-			// add professionalaffiliation only if argument professionalaffiliation is defined
-			if(hasArgument("professionalaffiliation"))
-			{
-				Element professionalAffiliation = getProfessionalAffiliationComposite();
-				contributorNode.appendChild(professionalAffiliation);
+				}
+				
+				// add professionalaffiliation only if argument professionalaffiliation is defined
+				if(hasArgument("professionalaffiliation"))
+				{
+					Element professionalAffiliation = getProfessionalAffiliationComposite();
+					contributorNode.appendChild(professionalAffiliation);
+				}
 			}
 			
 			// add biographical note
