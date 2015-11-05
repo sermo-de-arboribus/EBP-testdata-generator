@@ -77,7 +77,6 @@ public class OnixPriceBuilder extends OnixSupplyDetailPartsBuilder
 			appendElementsFromTo(temporaryParentNode, 10, 12);
 		}
 
-		
 		// add currency code
 		appendElementsFromTo(priceNode, 13, 13);
 		

@@ -53,7 +53,7 @@ public class OnixSupplyDateBuilder extends OnixSupplyDetailPartsBuilder
 			supplyDateNode.appendChild(supplyDateRole);
 			
 			Element dateNode = new Element(getTagName(2));
-			supplyDateRole.appendChild(new Text(determineElementContent(2)));
+			dateNode.appendChild(new Text(determineElementContent(2)));
 			supplyDateNode.appendChild(dateNode);
 			
 			parentNode.appendChild(supplyDateNode);

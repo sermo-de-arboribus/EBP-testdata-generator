@@ -15,8 +15,8 @@ public class OnixSupplierBuilder extends OnixSupplyDetailPartsBuilder
 			{"supplier", "Supplier", "", "", "", ""},
 			{"j292", "SupplierRole", "j292", "SupplierRole", "supplierrole", "01"},
 			{"supplieridentifier", "SupplierIdentifier", "supplieridentifier", "SupplierIdentifier", "", ""},
-			{"j345", "SupplierIDType", "j345", "SupplierIDType", "supplieridtype", "15"},
-			{"b233", "IDTypeName", "b233", "IDTypeName", "supplieridtypename", "No Supplier ID Type Name given"},
+			{"j345", "SupplierIDType", "j345", "SupplierIDType", "supplieridtype", "04"},
+			{"b233", "IDTypeName", "b233", "IDTypeName", "supplieridtypename", "Börsenverein Verkehrsnummer"},
 			{"b244", "IDValue", "b244", "IDValue", "productidvalue", "No Supplier ID Value given"},
 			{"j137", "SupplierName", "j137", "SupplierName", "suppliername", "IT E-Books-Supllier"}
 		};
@@ -44,6 +44,7 @@ public class OnixSupplierBuilder extends OnixSupplyDetailPartsBuilder
 		
 		// Supplier Identifier
 		Element supplierIdentifier = new Element(getTagName(2));
+		parentNode.appendChild(supplierIdentifier);
 		for (int i = 3; i <= 5; i++)
 		{
 			Element nextElement = new Element(getTagName(i));
@@ -54,7 +55,7 @@ public class OnixSupplierBuilder extends OnixSupplyDetailPartsBuilder
 		// Supplier Name
 		Element supplierName = new Element(getTagName(6));
 		supplierName.appendChild(new Text(determineElementContent(6)));
-		supplierIdentifier.appendChild(supplierName);
+		parentNode.appendChild(supplierName);
 	}
 
 }

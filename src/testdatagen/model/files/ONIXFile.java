@@ -578,7 +578,7 @@ public class ONIXFile extends File
 		// create a set of prices
 		HashSet<Price> priceSet = new HashSet<>();
 		
-		Price germanFixedPrice = new Price("04", "" + basePrice, "DE", "EUR");
+		Price germanFixedPrice = new Price("04", "" + basePrice, "EUR", "DE");
 		priceSet.add(germanFixedPrice);
 		
 		// random number of additional price nodes
@@ -635,7 +635,7 @@ public class ONIXFile extends File
 		String[] countryCodes = countryCodeString.split(" ");
 		String thisCountryCode = countryCodes[random.nextInt(countryCodes.length)];
 		
-		return new Price(nodeType, "" + basePrice, thisCountryCode, thisPriceCode);
+		return new Price(nodeType, "" + basePrice, thisPriceCode, thisCountryCode);
 	}
 	
 	private Element buildTextNode(Title title)
