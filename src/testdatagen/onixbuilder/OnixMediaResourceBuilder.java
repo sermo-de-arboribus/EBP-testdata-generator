@@ -134,7 +134,7 @@ public class OnixMediaResourceBuilder extends OnixPartsBuilder
 		appendElementsFromTo(resourceVersion, 5, 6);
 		
 		Element contentDate = new Element(getTagName(7));
-		mediaResource.appendChild(contentDate);
+		resourceVersion.appendChild(contentDate);
 		
 		appendElementsFromTo(contentDate, 8, 9);
 	}
