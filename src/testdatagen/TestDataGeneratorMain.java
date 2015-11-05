@@ -17,6 +17,8 @@ import testdatagen.gui.listeners.DeleteScenarioButtonListener;
 import testdatagen.gui.listeners.EditScenarioButtonListener;
 import testdatagen.gui.listeners.GenerateDataButtonListener;
 import testdatagen.gui.listeners.LoadScenariosButtonListener;
+import testdatagen.gui.listeners.MenuAboutInfoListener;
+import testdatagen.gui.listeners.MenuGeneralInfoListener;
 import testdatagen.gui.listeners.SaveScenariosButtonListener;
 import testdatagen.model.ScenarioTableModel;
 import testdatagen.model.TestScenario;
@@ -48,6 +50,7 @@ public class TestDataGeneratorMain extends JFrame
     	setLocation(0, 0);
     	setSize(screenSize);
     	
+    	buildMenuBar();
     	buildScenarioTable();
     	buildTopButtonPane();
     	buildBottomButtonPane();
@@ -89,11 +92,30 @@ public class TestDataGeneratorMain extends JFrame
 			}
 		});
 	}
+	
 	private void buildBottomButtonPane()
 	{
 		JButton refreshButton = new JButton("Refresh");
 		addRefreshButtonListener(refreshButton);
 		add(refreshButton, BorderLayout.SOUTH);
+	}
+	
+	private void buildMenuBar()
+	{
+		JMenuBar menubar = new JMenuBar();
+		JMenu infoMenu = new JMenu("Info");
+		JMenuItem generalInfoItem = new JMenuItem("How to use TDG");
+		JMenuItem aboutInfoItem = new JMenuItem("About TDG");
+		
+		infoMenu.add(generalInfoItem);
+		generalInfoItem.addActionListener(new MenuGeneralInfoListener());
+		infoMenu.add(aboutInfoItem);
+		aboutInfoItem.addActionListener(new MenuAboutInfoListener());
+		
+		menubar.add(Box.createHorizontalGlue());
+		menubar.add(infoMenu);
+		
+		this.setJMenuBar(menubar);
 	}
 	
 	private void buildTopButtonPane()
