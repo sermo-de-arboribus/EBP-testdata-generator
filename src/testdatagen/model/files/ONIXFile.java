@@ -99,19 +99,31 @@ public class ONIXFile extends File
 	 * The contributor node currently expects one title to have only one author. This needs to be modified when we allow
 	 * for multiple authors and different author types per title
 	 */
-	private Element buildContributorNode(Title title)
+	private Element buildContributorNode(Title title, boolean corporateContributor)
 	{
-		OnixContributorBuilder ocb = new OnixContributorBuilder(version, tagType, argumentsMap);
-		argumentsMap.put("fullname", title.getAuthor());
-		argumentsMap.put("invertedname", title.getAuthorLastName() + ", " + title.getAuthorFirstName());
-		argumentsMap.put("namesbeforekey", title.getAuthorFirstName());
-		argumentsMap.put("keynames", title.getAuthorLastName());
-		argumentsMap.put("biographicalnote", title.getAuthorBlurb());
-		argumentsMap.put("birthdate", "19440704");
-		argumentsMap.put("deathdate", "20131228");
+		if(corporateContributor)
+		{
+			argumentsMap.put("sequencenumber", "2");
+			argumentsMap.put("contributorrole", "D01");
+			argumentsMap.put("corporatename", "KNO DiVA corporation");
+		}
+		else
+		{
+			argumentsMap.put("fullname", title.getAuthor());
+			argumentsMap.put("invertedname", title.getAuthorLastName() + ", " + title.getAuthorFirstName());
+			argumentsMap.put("namesbeforekey", title.getAuthorFirstName());
+			argumentsMap.put("keynames", title.getAuthorLastName());
+			argumentsMap.put("biographicalnote", title.getAuthorBlurb());
+			argumentsMap.put("birthdate", "19440704");
+			argumentsMap.put("deathdate", "20131228");
+		}
 		argumentsMap.put("professionalaffiliation", "");
 		argumentsMap.put("websitelink", "http://www.purple.com/");
+		OnixContributorBuilder ocb = new OnixContributorBuilder(version, tagType, argumentsMap);
 		Element contributorNode = ocb.build();
+		argumentsMap.remove("sequencenumber");
+		argumentsMap.remove("contributorrole");
+		argumentsMap.remove("contributorname");
 		argumentsMap.remove("fullname");
 		argumentsMap.remove("invertedname");
 		argumentsMap.remove("namesbeforekey");
@@ -154,7 +166,16 @@ public class ONIXFile extends File
 	
 	private Element buildProductNode(Title title)
 	{
-		Element product = new Element("product");
+		String productTagName;
+		if(tagType == OnixPartsBuilder.REFERENCETAG)
+		{
+			productTagName = "Product";
+		}
+		else
+		{
+			productTagName = "product";
+		}
+		Element product = new Element(productTagName);
 		
 		// Record Reference
 		OnixRecordReferenceBuilder recrefb = new OnixRecordReferenceBuilder(version, tagType, argumentsMap); 
@@ -260,9 +281,13 @@ public class ONIXFile extends File
 		parentNode.appendChild(otb.build());
 		argumentsMap.remove("titletext");
 		
-		// Contributor
-		Element contributorNode = buildContributorNode(title);
+		// person name contributor
+		Element contributorNode = buildContributorNode(title, false);
 		parentNode.appendChild(contributorNode);
+		
+		// add a corporate contributor
+		Element corporateContributorNode = buildContributorNode(title, true);
+		parentNode.appendChild(corporateContributorNode);
 		
 		// Language
 		Element languageNode = buildLanguageNode("ger");

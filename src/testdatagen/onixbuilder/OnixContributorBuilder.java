@@ -49,7 +49,8 @@ public class OnixContributorBuilder extends OnixPartsBuilder
 		Element contributorNode = new Element(getTagName(0));
 
 		// Onix 2.1 and Onix 3.0 have different element sequences and nesting, so we need to distinguish
-		// between the formats here
+		// between the formats here. Within each format we also need to distinguish between personal
+		// contributors and corporate contributors.
 		if(onixVersion.equals("3.0"))
 		{
 			// append b034 & b035
@@ -60,23 +61,28 @@ public class OnixContributorBuilder extends OnixPartsBuilder
 			Element nameIdentifier = getNameIdentifier();
 			contributorNode.appendChild(nameIdentifier);
 			
-			// add main name elements
-			addMainNameElements(contributorNode);
-			appendElement(11, contributorNode);
+			if(hasArgument("corporatename")) // we're creating a contributor node for a corporation
+			{
+				addCorporateNameElements(contributorNode);
+			}
+			else // we're creating a contributor node for a person
+			{
+				// add main name elements
+				addMainNameElements(contributorNode);
 
-			// add contributordates only if arguments are defined
-			if(hasArgument("birthdate"))
-			{
-				Element contributorDate = getBirthDateComposite();
-				contributorNode.appendChild(contributorDate);
+				// add contributordates only if arguments are defined
+				if(hasArgument("birthdate"))
+				{
+					Element contributorDate = getBirthDateComposite();
+					contributorNode.appendChild(contributorDate);
+				}
+				
+				if(hasArgument("deathdate"))
+				{
+					Element contributorDate = getDeathDateComposite();
+					contributorNode.appendChild(contributorDate);
+				}
 			}
-			
-			if(hasArgument("deathdate"))
-			{
-				Element contributorDate = getDeathDateComposite();
-				contributorNode.appendChild(contributorDate);
-			}
-			
 			// add professionalaffiliation only if argument professionalaffiliation is defined
 			if(hasArgument("professionalaffiliation"))
 			{
@@ -100,23 +106,31 @@ public class OnixContributorBuilder extends OnixPartsBuilder
 			// append b034 & b035
 			appendElement(1, contributorNode);
 			appendElement(2, contributorNode);
-			addMainNameElements(contributorNode);
 			
-			// add a person name identifier composite
-			Element nameIdentifier = getNameIdentifier();
-			contributorNode.appendChild(nameIdentifier);
-			
-			// add contributordates only if arguments are defined
-			if(hasArgument("birthdate"))
+			if(hasArgument("contributornode"))
 			{
-				Element contributorDate = getBirthDateComposite();
-				contributorNode.appendChild(contributorDate);
+				addCorporateNameElements(contributorNode);
 			}
-			
-			if(hasArgument("deathdate"))
+			else
 			{
-				Element contributorDate = getDeathDateComposite();
-				contributorNode.appendChild(contributorDate);
+				addMainNameElements(contributorNode);
+				
+				// add a person name identifier composite
+				Element nameIdentifier = getNameIdentifier();
+				contributorNode.appendChild(nameIdentifier);
+				
+				// add contributordates only if arguments are defined
+				if(hasArgument("birthdate"))
+				{
+					Element contributorDate = getBirthDateComposite();
+					contributorNode.appendChild(contributorDate);
+				}
+				
+				if(hasArgument("deathdate"))
+				{
+					Element contributorDate = getDeathDateComposite();
+					contributorNode.appendChild(contributorDate);
+				}	
 			}
 			
 			// add professionalaffiliation only if argument professionalaffiliation is defined
@@ -141,13 +155,17 @@ public class OnixContributorBuilder extends OnixPartsBuilder
 		return contributorNode;
 	}
 
+	private void addCorporateNameElements(Element parentNode)
+	{
+		appendElement(11, parentNode);
+	}
+	
 	private void addMainNameElements(Element parentNode)
 	{
 		appendElement(7, parentNode);
 		appendElement(8, parentNode);
 		appendElement(9, parentNode);
 		appendElement(10, parentNode);
-		appendElement(11, parentNode);
 	}
 	
 	// helper method for appending next required element
