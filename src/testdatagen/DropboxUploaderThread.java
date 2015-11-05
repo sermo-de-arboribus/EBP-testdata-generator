@@ -77,20 +77,19 @@ public class DropboxUploaderThread extends Thread
         
         if(metadata == null)
         {
-        	Utilities.showWarnPane("Cover file upload for title " + title.getName()  + " to Dropbox has failed.\nYou must upload the file yourself and set the MediaFileLink in the ONIX manually");
+        	Utilities.showWarnPane("Cover file upload for title \"" + title.getName()  + "\" to Dropbox has failed.\nYou must upload the file yourself and set the MediaFileLink in the ONIX manually");
         }
         else
         {
             System.out.print(metadata.toStringMultiline());
-        }
-        
-        try
-        {
-            shareableUrl = dbxClient.createShareableUrl(dropboxPath);
-        }
-        catch (DbxException ex)
-        {
-        	Utilities.showWarnPane("Uploaded file for title " + title.getName()  + " to Dropbox, but cannot create a shareable link");
+            try
+            {
+                shareableUrl = dbxClient.createShareableUrl(dropboxPath);
+            }
+            catch (DbxException ex)
+            {
+            	Utilities.showWarnPane("Uploaded file for title \"" + title.getName()  + "\" to Dropbox, but cannot create a shareable link");
+            }
         }
         
         if(shareableUrl != null)
