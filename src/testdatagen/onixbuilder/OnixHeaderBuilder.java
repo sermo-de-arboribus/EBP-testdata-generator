@@ -22,16 +22,19 @@ public class OnixHeaderBuilder extends OnixPartsBuilder
 			{"x310", "DefaultPriceType", "m185", "DefaultPriceTypeCode", "defaultpricetype", "04"},
 			{"m186", "DefaultCurrencyCode", "m186", "DefaultCurrencyCode", "defaultcurrency", "{$randomCurrencyCode}"}
 		};
+	private static final int SEQUENCE_NUMBER = 100;
 	
-	public OnixHeaderBuilder(String onixVersion, int tagType, HashMap<String, String> args)
+	public OnixHeaderBuilder(HashMap<String, String> args)
 	{
-		super(onixVersion, tagType, args);
+		super(args);
 		elementDefinitions = HEADER_ELEMENT_DEFINITIONS;
 	}
 	
 	@Override
-	public Element build()
+	public Element build(String onixVersion, int tagType)
 	{
+		initialize(onixVersion, tagType);
+		
 		Element header = new Element(getTagName(0));
 		
 		Element senderNode;
@@ -65,5 +68,10 @@ public class OnixHeaderBuilder extends OnixPartsBuilder
 		
 		return header;
 	}
-
+	
+	@Override
+	public int getSequenceNumber()
+	{
+		return SEQUENCE_NUMBER;
+	}
 }

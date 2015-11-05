@@ -18,15 +18,16 @@ public class OnixProductIdentifierBuilder extends OnixPartsBuilder
 			{"b233", "IDTypeName", "b233", "IDTypeName", "productidtypename", "{$productidtypename}"},
 			{"b244", "IDValue", "b244", "IDValue", "productidvalue", "WARNING! NO PRODUCT ID ARGUMENT PASSED"}
 		};
+	private static final int SEQUENCE_NUMBER = 400;
 	
-	public OnixProductIdentifierBuilder(String onixVersion, int tagType, HashMap<String, String> args)
+	public OnixProductIdentifierBuilder(HashMap<String, String> args)
 	{
-		super(onixVersion, tagType, args);
+		super(args);
 		elementDefinitions = PRODUCT_IDENTIFIER_DEFINITIONS;
 	}
 	
 	@Override
-	public Element build()
+	public Element build(String onixVersion, int tagType)
 	{
 		Element productidentifier = new Element(getTagName(0));
 		
@@ -38,6 +39,12 @@ public class OnixProductIdentifierBuilder extends OnixPartsBuilder
 		}
 		
 		return productidentifier;
+	}
+	
+	@Override
+	public int getSequenceNumber()
+	{
+		return SEQUENCE_NUMBER;
 	}
 	
 	@Override

@@ -43,7 +43,6 @@ public class ONIXFile extends File
 	{
 		// configure the arguments for the OnixPartsBuilders
 		argumentsMap.put("recordreference", title.getUid());
-		// TODO: distinguish between reference and short tags; add release attribute
 		String rootElementName;
 		if(tagType == OnixPartsBuilder.REFERENCETAG)
 		{
@@ -138,8 +137,8 @@ public class ONIXFile extends File
 	
 	private Element buildHeader()
 	{
-		OnixHeaderBuilder ohb = new OnixHeaderBuilder(version, tagType, new HashMap<String, String>());
-		return ohb.build();
+		OnixHeaderBuilder ohb = new OnixHeaderBuilder(new HashMap<String, String>());
+		return ohb.build(version, tagType);
 	}
 	
 	private Element buildLanguageNode(String langCode)
@@ -178,35 +177,35 @@ public class ONIXFile extends File
 		Element product = new Element(productTagName);
 		
 		// Record Reference
-		OnixRecordReferenceBuilder recrefb = new OnixRecordReferenceBuilder(version, tagType, argumentsMap); 
-		Element recordReference = recrefb.build();
+		OnixRecordReferenceBuilder recrefb = new OnixRecordReferenceBuilder(argumentsMap); 
+		Element recordReference = recrefb.build(version, tagType);
 		product.appendChild(recordReference);
 		
 		// Notification Type
-		OnixNotificationTypeBuilder notitypeb = new OnixNotificationTypeBuilder(version, tagType, argumentsMap);
-		Element notiType = notitypeb.build();
+		OnixNotificationTypeBuilder notitypeb = new OnixNotificationTypeBuilder(argumentsMap);
+		Element notiType = notitypeb.build(version, tagType);
 		product.appendChild(notiType);
 		
 		// Product Identifier
-		OnixProductIdentifierBuilder pidb = new OnixProductIdentifierBuilder(version, tagType, argumentsMap);
+		OnixProductIdentifierBuilder pidb = new OnixProductIdentifierBuilder(argumentsMap);
 		
 		argumentsMap.put("productidtype", "03");
 		argumentsMap.put("productidvalue", Long.toString(title.getIsbn13()));
-		Element prodId1 = pidb.build();
+		Element prodId1 = pidb.build(version, tagType);
 		argumentsMap.remove("productidvalue");
 		argumentsMap.remove("productidtype");
 		
 		product.appendChild(prodId1);
 		
 		argumentsMap.put("productidvalue", Long.toString(title.getIsbn13()));
-		Element prodId2 = pidb.build();
+		Element prodId2 = pidb.build(version, tagType);
 		argumentsMap.remove("productidvalue");
 		
 		product.appendChild(prodId2);
 		
 		argumentsMap.put("productidtype", "06");
 		argumentsMap.put("productidvalue", "10.2379/" + title.getIsbn13());
-		Element prodId3 = pidb.build();
+		Element prodId3 = pidb.build(version, tagType);
 		argumentsMap.remove("productidvalue");
 		argumentsMap.remove("productidtype");
 		
@@ -215,7 +214,7 @@ public class ONIXFile extends File
 		argumentsMap.put("productidtype", "01");
 		argumentsMap.put("productidvalue", Long.toString(title.getIsbn13()).substring(6, 12));
 		argumentsMap.put("productidtypename", "Verlagsnummer");
-		Element prodId4 = pidb.build();
+		Element prodId4 = pidb.build(version, tagType);
 		argumentsMap.remove("productidtypename");
 		argumentsMap.remove("productidvalue");
 		argumentsMap.remove("productidtype");
@@ -399,8 +398,8 @@ public class ONIXFile extends File
 		parentNode.appendChild(publisher);
 		
 		// Place and country of publication
-		OnixCityOfPublicationBuilder ocopb = new OnixCityOfPublicationBuilder(version, tagType, argumentsMap);
-		parentNode.appendChild(ocopb.build());
+		OnixCityOfPublicationBuilder ocopb = new OnixCityOfPublicationBuilder(argumentsMap);
+		parentNode.appendChild(ocopb.build(version, tagType));
 		
 		OnixCountryOfPublicationBuilder ocountpb = new OnixCountryOfPublicationBuilder(version, tagType, argumentsMap);
 		parentNode.appendChild(ocountpb.build());

@@ -45,7 +45,7 @@ public class AddTitleToScenarioListener implements ActionListener
 			// some local variables for title form data
 			String format = "";
 			boolean mfl = false, screenshot = false, packshot = false, extract = false, backcover = false, epubmobi = false;
-			
+			boolean gtin13 = false, doi = false, urn = false;
 			// get reference to the form
 			JButton button = (JButton) evt.getSource();
 			JDialog dialog = (JDialog) button.getTopLevelAncestor();
@@ -61,6 +61,8 @@ public class AddTitleToScenarioListener implements ActionListener
 					//process the form data
 					for(Component tcomp : titleComponents)
 					{
+						
+						JCheckBox checkBox; 
 						String compName = tcomp.getName();
 						if(compName == null)
 						{
@@ -69,36 +71,43 @@ public class AddTitleToScenarioListener implements ActionListener
 						switch(compName)
 						{
 							case("covertype"):
-								@SuppressWarnings("unchecked")
-								JComboBox<String> jcb1 = (JComboBox<String>) tcomp;
-								String boxString = (String) jcb1.getSelectedItem();
+								JComboBox<String> comboBox1 = (JComboBox<String>) tcomp;
+								String boxString = (String) comboBox1.getSelectedItem();
 								mfl = boxString.equals("Media file link") ? true : false;
 								break;
 							case("product"):
-								@SuppressWarnings("unchecked")
-								JComboBox<String> jcb2 = (JComboBox<String>) tcomp;
-								format = (String) jcb2.getSelectedItem();
+								JComboBox<String> comboBox2 = (JComboBox<String>) tcomp;
+								format = (String) comboBox2.getSelectedItem();
 								break;
 							case("screenshot"):
-								JCheckBox jcb3 = (JCheckBox) tcomp;
-								screenshot = jcb3.isSelected();
+								checkBox = (JCheckBox) tcomp;
+								screenshot = checkBox.isSelected();
 								break;
 							case("packshot"):
-								JCheckBox jcb4 = (JCheckBox) tcomp;
-								packshot = jcb4.isSelected();
+								checkBox = (JCheckBox) tcomp;
+								packshot = checkBox.isSelected();
 								break;
 							case("extracts"):
-								JCheckBox jcb5 = (JCheckBox) tcomp;
-								extract = jcb5.isSelected();
+								checkBox = (JCheckBox) tcomp;
+								extract = checkBox.isSelected();
 								break;
 							case("backcover"):
-								JCheckBox jcb6 = (JCheckBox) tcomp;
-								backcover = jcb6.isSelected();
+								checkBox = (JCheckBox) tcomp;
+								backcover = checkBox.isSelected();
 								break;
 							case("epubmobi"):
-								JCheckBox jcb7 = (JCheckBox) tcomp;
-								epubmobi = jcb7.isSelected();
+								checkBox = (JCheckBox) tcomp;
+								epubmobi = checkBox.isSelected();
 								break;
+							case ("GTIN-13"):
+								checkBox = (JCheckBox) tcomp;
+								gtin13 = checkBox.isSelected();
+							case ("DOI"):
+								checkBox = (JCheckBox) tcomp;
+								doi = checkBox.isSelected();
+							case ("URN"):
+								checkBox = (JCheckBox) tcomp;
+								urn = checkBox.isSelected();
 							default: 
 								break;
 						}
@@ -107,6 +116,20 @@ public class AddTitleToScenarioListener implements ActionListener
 					// instantiate a new title object
 					long nextIsbn = ISBNUtils.getNextISBN();
 					Title newTitle = new Title(nextIsbn, "test-" + nextIsbn, TitleUtils.getNewTitle(), TitleUtils.getNewAuthor(), mfl);
+					
+					// additional product identifiers required in ONIX file?
+					if(gtin13)
+					{
+						newTitle.getOnixPartsDirector().addProductIdentifier("03");
+					}
+					if(doi)
+					{
+						newTitle.getOnixPartsDirector().addProductIdentifier("06");
+					}
+					if(urn)
+					{
+						newTitle.getOnixPartsDirector().addProductIdentifier("22");
+					}
 					
 					// instantiate selected ebook file types and add them to the title object
 					EBookFileFactory eff = EBookFileFactory.getInstance();

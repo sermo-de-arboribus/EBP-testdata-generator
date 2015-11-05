@@ -10,6 +10,7 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSplitPane;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
@@ -37,12 +38,16 @@ public class TitleForm extends JDialog
 		
 		// The form elements
 		String[] coverOptions = {"Media file link", "Cover upload"};
-		JLabel coverSelection = new JLabel("Choose cover delivery method");
+		JLabel coverSelectionLabel = new JLabel("Choose cover delivery method");
+		coverSelectionLabel.setForeground(Color.BLUE);
 		JComboBox<String> covertype = new JComboBox<String>(coverOptions);
 		covertype.setName("covertype");
-		JLabel productTypeSelection = new JLabel("Choose product type");
+		JLabel productTypeSelectionLabel = new JLabel("Choose product type");
+		productTypeSelectionLabel.setForeground(Color.BLUE);
 		JComboBox<String> product = new JComboBox<String>(ProductType.productTypeNames());
 		product.setName("product");
+		JLabel additionalAssetsLabel = new JLabel("Choose additional assets");
+		additionalAssetsLabel.setForeground(Color.BLUE);
 		JCheckBox scrBox = new JCheckBox("Add screenshot assets");
 		scrBox.setName("screenshot");
 		JCheckBox packBox = new JCheckBox("Add 3D packshot assets");
@@ -53,19 +58,37 @@ public class TitleForm extends JDialog
 		bkcBox.setName("backcover");
 		JCheckBox epmoBox = new JCheckBox("Add EpubMobi");
 		epmoBox.setName("epubmobi");
+		JLabel productIdentifierSelectionLabel = new JLabel("Additional product identifiers");
+		productIdentifierSelectionLabel.setForeground(Color.BLUE);
+		JCheckBox prodIdGtin13 = new JCheckBox("GTIN-13");
+		prodIdGtin13.setName("GTIN-13");
+		JCheckBox prodIdDoi = new JCheckBox("DOI");
+		prodIdDoi.setName("DOI");
+		JCheckBox prodIdUrn = new JCheckBox("DOI");
+		prodIdUrn.setName("URN");
 		
-		// Group form elements in panel
+		// Group form elements in left panel
 		JPanel titleOptionsPanel = new JPanel(new GridLayout(0,1));
 		titleOptionsPanel.setName("titleOptionsPanel");
-		titleOptionsPanel.add(coverSelection);
-		titleOptionsPanel.add(covertype);
-		titleOptionsPanel.add(productTypeSelection);
+		titleOptionsPanel.add(productTypeSelectionLabel);
 		titleOptionsPanel.add(product);
+		titleOptionsPanel.add(coverSelectionLabel);
+		titleOptionsPanel.add(covertype);
+		titleOptionsPanel.add(additionalAssetsLabel);
 		titleOptionsPanel.add(scrBox);
 		titleOptionsPanel.add(packBox);
 		titleOptionsPanel.add(extrBox);
 		titleOptionsPanel.add(bkcBox);
 		titleOptionsPanel.add(epmoBox);
+		
+		// Group form elements in right panel
+		JPanel detailOptionsPanel = new JPanel(new GridLayout(0,1));
+		detailOptionsPanel.add(productIdentifierSelectionLabel);
+		detailOptionsPanel.add(prodIdGtin13);
+		detailOptionsPanel.add(prodIdDoi);
+		detailOptionsPanel.add(prodIdUrn);
+		
+		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, titleOptionsPanel, detailOptionsPanel);
 		
 		// submit button
 		JButton submitbtn = new JButton("submit");
@@ -74,9 +97,9 @@ public class TitleForm extends JDialog
 		
 		// add form elements to dialog and define dimensions
 		this.add(header, BorderLayout.NORTH);
-		this.add(titleOptionsPanel, BorderLayout.CENTER);
+		this.add(splitPane, BorderLayout.CENTER);
 		this.add(submitbtn, BorderLayout.SOUTH);
 		this.setLocation(100,100);
-		this.setSize(300, 600);
+		this.setSize(600, 500);
 	}
 }

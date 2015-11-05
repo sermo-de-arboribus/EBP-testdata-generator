@@ -14,18 +14,27 @@ public class OnixRecordReferenceBuilder extends OnixPartsBuilder
 		{
 			{"a001", "RecordReference", "a001", "RecordReference", "recordreference", "ERROR"},
 		};
+	private static final int SEQUENCE_NUMBER = 200;
 	
-	public OnixRecordReferenceBuilder(String onixVersion, int tagType, HashMap<String, String> args)
+	public OnixRecordReferenceBuilder(HashMap<String, String> args)
 	{
-		super(onixVersion, tagType, args);
+		super(args);
 		elementDefinitions = recReferenceDefinitions;
 	}
 
 	@Override
-	public Element build()
+	public Element build(String onixVersion, int tagType)
 	{
+		initialize(onixVersion, tagType);
+		
 		Element recRef = new Element(getTagName(0));
 		recRef.appendChild(new Text(determineElementContent(0)));
 		return recRef;
+	}
+	
+	@Override
+	public int getSequenceNumber()
+	{
+		return SEQUENCE_NUMBER;
 	}
 }

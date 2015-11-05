@@ -13,8 +13,8 @@ public abstract class OnixPartsBuilder
 	public static final int SHORTTAG = 1;
 	public static final int REFERENCETAG = 2;
 	
-	protected String onixVersion;
-	protected int tagType;
+	protected String onixVersion = null;
+	protected int tagType = 0;
 	protected HashMap<String, String> arguments;
 	
 	/* This String array contains information on how to create ONIX elements.
@@ -34,19 +34,21 @@ public abstract class OnixPartsBuilder
 	 * @args HashMap<String, String>: this hash map may contain key-value pairs for providing certain ONIX elements' text content.
 	 * 		The key names to be used have to match the 5th column (index 4) of the elementDefinitions array.
 	 */
-	public OnixPartsBuilder(String onixVersion, int tagType, HashMap<String, String> args)
+	public OnixPartsBuilder(final HashMap<String, String> args)
 	{
-		validateTagType(tagType);
-		validateOnixVersion(onixVersion);
-		this.onixVersion = onixVersion;
-		this.tagType = tagType;
 		arguments = args;
 	}
 	
 	/*
 	 * build() is the main worker method to create a chunk of ONIX elements.
 	 */
-	public abstract Element build();
+	public abstract Element build(String onixVersion, int tagType);
+	
+	/*
+	 * To enforce an order on the sequence of ONIX elements, every subclass needs to 
+	 * be able to return a (statically determined) sequence number.
+	 */
+	public abstract int getSequenceNumber();
 	
 	/*
 	 * gets an argument value from the arguments HashMap that was passed to the constructor
@@ -141,5 +143,14 @@ public abstract class OnixPartsBuilder
 		{
 			throw new IndexOutOfBoundsException("OnixPartsBuilder tried to read a tagname outside of elementDefinitions' array bounds!");
 		}
+	}
+	
+	protected void initialize(String onixVersion, int tagType)
+	{
+		validateTagType(tagType);
+		validateOnixVersion(onixVersion);
+		
+		this.onixVersion = onixVersion;
+		this.tagType = tagType;
 	}
 }

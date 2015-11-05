@@ -8,6 +8,7 @@ import java.util.Locale;
 import testdatagen.model.files.EBookFile;
 import testdatagen.model.files.File;
 import testdatagen.model.files.GraphicFile;
+import testdatagen.onixbuilder.*;
 import testdatagen.templates.AuthorBlurbTemplate;
 import testdatagen.templates.TitleBlurbTemplate;
 import testdatagen.templates.TitleBlurbTemplateType;
@@ -30,6 +31,7 @@ public class Title implements Serializable
     private String epubType;
     private String format; // format = protection + epubType
     private String protection; // WM = watermarked, ND = no protection, DRM = hard DRM
+    private OnixPartsDirector onixPartsDirector;
     
     public Title(final long isbn13, final String uid, final String name, final String author, final boolean mediaFileLink)
     {
@@ -39,6 +41,7 @@ public class Title implements Serializable
     	this.author = author;
     	this.mediaFileLink = mediaFileLink;
     	files = new HashSet<File>();
+    	onixPartsDirector = new OnixPartsDirector(this);
     }
     
     public synchronized void addFile(final File newFile)
@@ -199,6 +202,11 @@ public class Title implements Serializable
 			}
 		}
 		return returnList;
+	}
+	
+	public synchronized OnixPartsDirector getOnixPartsDirector()
+	{
+		return onixPartsDirector;
 	}
 	
 	public synchronized String getProtectionTypeForONIX()
