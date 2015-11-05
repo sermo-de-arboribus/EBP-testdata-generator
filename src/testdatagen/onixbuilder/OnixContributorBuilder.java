@@ -107,7 +107,7 @@ public class OnixContributorBuilder extends OnixPartsBuilder
 			appendElement(1, contributorNode);
 			appendElement(2, contributorNode);
 			
-			if(hasArgument("contributornode"))
+			if(hasArgument("corporatename"))
 			{
 				addCorporateNameElements(contributorNode);
 			}
