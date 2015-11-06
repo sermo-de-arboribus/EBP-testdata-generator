@@ -19,16 +19,19 @@ public class OnixTitleBuilder extends OnixPartsBuilder
 			{"b203", "TitleText", "b203", "TitleText", "titletext", "Buchtitel"},
 			{"b029", "Subtitle", "b029", "Subtitle", "subtitle", "Untertitel"}
 		};
+	private static final int SEQUENCE_NUMBER = 900;
 	
-	public OnixTitleBuilder(String onixVersion, int tagType, HashMap<String, String> args)
+	public OnixTitleBuilder(HashMap<String, String> args)
 	{
-		super(onixVersion, tagType, args);
+		super(args);
 		elementDefinitions = TITLE_DEFINITIONS;
 	}
 	
 	@Override
-	public Element build()
+	public Element build(String onixVersion, int tagType)
 	{
+		initialize(onixVersion, tagType);
+		
 		Element titleComposite = new Element(getTagName(0));
 		
 		Element titleType = new Element(getTagName(1));
@@ -51,14 +54,26 @@ public class OnixTitleBuilder extends OnixPartsBuilder
 			parentElement.appendChild(titleElementLevel);
 		}
 		
-		for(int i = 4; i < elementDefinitions.length; i++)
+		// write main title
+		Element nextElement = new Element(getTagName(4));
+		nextElement.appendChild(new Text(determineElementContent(4)));
+		parentElement.appendChild(nextElement);
+		
+		// id a subtitle defined?
+		if(hasArgument("subtitle"))
 		{
-			Element nextElement = new Element(getTagName(i));
-			nextElement.appendChild(new Text(determineElementContent(i)));
+			nextElement = new Element(getTagName(5));
+			nextElement.appendChild(new Text(determineElementContent(5)));
 			parentElement.appendChild(nextElement);
 		}
 		
 		return titleComposite;
 	}
 
+	@Override
+	public int getSequenceNumber()
+	{
+		return SEQUENCE_NUMBER;
+	}
+	
 }

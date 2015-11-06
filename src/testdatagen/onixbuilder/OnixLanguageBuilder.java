@@ -16,16 +16,19 @@ public class OnixLanguageBuilder extends OnixPartsBuilder
 			{"b253", "LanguageRole", "b253", "LanguageRole", "languagerole", "01"},
 			{"b252", "LanguageCode", "b252", "LanguageCode", "languagecode", "ger"}
 		};
-
-	public OnixLanguageBuilder(String onixVersion, int tagType, HashMap<String, String> args)
+	private static final int SEQUENCE_NUMBER = 1300;
+	
+	public OnixLanguageBuilder(final HashMap<String, String> args)
 	{
-		super(onixVersion, tagType, args);
+		super(args);
 		elementDefinitions = LANGUAGE_ELEMENT_DEFINITIONS;
 	}
 	
 	@Override
-	public Element build()
+	public Element build(final String onixVersion, final int tagType)
 	{
+		initialize(onixVersion, tagType);
+		
 		Element language = new Element(getTagName(0));
 		
 		for(int i = 1; i < elementDefinitions.length; i++)
@@ -38,4 +41,9 @@ public class OnixLanguageBuilder extends OnixPartsBuilder
 		return language;
 	}
 
+	@Override
+	public int getSequenceNumber()
+	{
+		return SEQUENCE_NUMBER;
+	}
 }

@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -36,14 +35,14 @@ public class TitleForm extends JDialog
 	 */
 	private JComboBox<String> covertype;
 	private JComboBox<String> product;
-	private JCheckBox scrBox;
-	private JCheckBox packBox;
-	private JCheckBox extrBox;
-	private JCheckBox bkcBox;
-	private JCheckBox epmoBox;
-	private JCheckBox prodIdGtin13;
-	private JCheckBox prodIdDoi;
-	private JCheckBox prodIdUrn;
+	// additional asset checkboxes
+	private JCheckBox scrBox, packBox, extrBox, bkcBox, epmoBox;
+	// additional product identifier checkboxes
+	private JCheckBox prodIdGtin13, prodIdDoi, prodIdUrn;
+	// additional product form detail checkboxes
+	private JCheckBox a103, e200, e201, e202, e203;
+	// additional title type checkboxes
+	private JCheckBox tittyp03, tittyp06, tittyp08, tittyp11, tittyp13;
 	
 	public TitleForm(TestScenario scenario)
 	{
@@ -84,15 +83,40 @@ public class TitleForm extends JDialog
 		
 		// Group form elements in right panel
 		JPanel detailOptionsPanel = new JPanel(new GridLayout(0,1));
+		
+		// Product ID options
 		JPanel productIdPanel = new JPanel(new GridLayout(0,1));
 		JPanel productIdPanelOptions = new JPanel(new GridLayout(1,0));
 		detailOptionsPanel.add(productIdPanel);
-		detailOptionsPanel.add(Box.createHorizontalGlue());
-		productIdPanel.setBorder(BorderFactory.createTitledBorder(blueLineBorder, "Additional product identifiers"));
+		productIdPanel.setBorder(BorderFactory.createTitledBorder(blueLineBorder, "Additional Product Identifiers"));
 		productIdPanel.add(productIdPanelOptions);
 		productIdPanelOptions.add(prodIdGtin13);
 		productIdPanelOptions.add(prodIdDoi);
 		productIdPanelOptions.add(prodIdUrn);
+		
+		// Product Form Detail options
+		JPanel productFormDetailPanel = new JPanel(new GridLayout(0,1));
+		JPanel productFormDetailPanelOptions = new JPanel(new GridLayout(1,0));
+		detailOptionsPanel.add(productFormDetailPanel);
+		productFormDetailPanel.add(productFormDetailPanelOptions);
+		productFormDetailPanel.setBorder(BorderFactory.createTitledBorder(blueLineBorder, "Additional Product Form Detail"));
+		productFormDetailPanelOptions.add(a103);
+		productFormDetailPanelOptions.add(e200);
+		productFormDetailPanelOptions.add(e201);
+		productFormDetailPanelOptions.add(e202);
+		productFormDetailPanelOptions.add(e203);
+		
+		// Title options
+		JPanel titlePanel = new JPanel(new GridLayout(0,1));
+		JPanel titlePanelOptions = new JPanel(new GridLayout(1,0));
+		detailOptionsPanel.add(titlePanel);
+		titlePanel.add(titlePanelOptions);
+		titlePanel.setBorder(BorderFactory.createTitledBorder(blueLineBorder, "Additional Titles (select Title Type)"));
+		titlePanelOptions.add(tittyp03);
+		titlePanelOptions.add(tittyp06);
+		titlePanelOptions.add(tittyp08);
+		titlePanelOptions.add(tittyp11);
+		titlePanelOptions.add(tittyp13);
 		
 		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, titleOptionsPanel, detailOptionsPanel);
 		
@@ -123,7 +147,11 @@ public class TitleForm extends JDialog
 		formDataMap.put(prodIdGtin13.getName(), prodIdGtin13.isSelected() ? "true" : "false");
 		formDataMap.put(prodIdDoi.getName(), prodIdDoi.isSelected() ? "true" : "false");
 		formDataMap.put(prodIdUrn.getName(), prodIdUrn.isSelected() ? "true" : "false");
-		
+		formDataMap.put(a103.getName(), a103.isSelected() ? "true" : "false");
+		formDataMap.put(e200.getName(), e200.isSelected() ? "true" : "false");
+		formDataMap.put(e201.getName(), e201.isSelected() ? "true" : "false");
+		formDataMap.put(e202.getName(), e202.isSelected() ? "true" : "false");
+		formDataMap.put(e203.getName(), e203.isSelected() ? "true" : "false");
 		return formDataMap;
 	}
 	
@@ -156,7 +184,47 @@ public class TitleForm extends JDialog
 		prodIdDoi = new JCheckBox("DOI");
 		prodIdDoi.setName("DOI");
 		
-		prodIdUrn = new JCheckBox("DOI");
+		prodIdUrn = new JCheckBox("URN");
 		prodIdUrn.setName("URN");
+		
+		a103 = new JCheckBox("A103");
+		a103.setName("pfd-a103");
+		a103.setToolTipText("MP3");
+		
+		e200 = new JCheckBox("E200");
+		e200.setName("pfd-e200");
+		e200.setToolTipText("reflowable");
+		
+		e201 = new JCheckBox("E201");
+		e201.setName("pfd-E201");
+		e201.setToolTipText("fixed layout");
+		
+		e202 = new JCheckBox("E202");
+		e202.setName("pfd-e202");
+		e202.setToolTipText("readable offline");
+		
+		e203 = new JCheckBox("E203");
+		e203.setName("pfd-e203");
+		e203.setToolTipText("requires network connection");
+		
+		tittyp03 = new JCheckBox("03");
+		tittyp03.setName("tittyp03");
+		tittyp03.setToolTipText("Title in original language");
+		
+		tittyp06 = new JCheckBox("06");
+		tittyp06.setName("tittyp06");
+		tittyp06.setToolTipText("Title in other language");
+		
+		tittyp08 = new JCheckBox("08");
+		tittyp08.setName("tittyp08");
+		tittyp08.setToolTipText("Former title");
+		
+		tittyp11 = new JCheckBox("11");
+		tittyp11.setName("tittyp11");
+		tittyp11.setToolTipText("Alternative title on cover");
+		
+		tittyp13 = new JCheckBox("13");
+		tittyp13.setName("tittyp13");
+		tittyp13.setToolTipText("Expanded title");
 	}
 }

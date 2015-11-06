@@ -118,8 +118,8 @@ public class ONIXFile extends File
 		}
 		argumentsMap.put("professionalaffiliation", "");
 		argumentsMap.put("websitelink", "http://www.purple.com/");
-		OnixContributorBuilder ocb = new OnixContributorBuilder(version, tagType, argumentsMap);
-		Element contributorNode = ocb.build();
+		OnixContributorBuilder ocb = new OnixContributorBuilder(argumentsMap);
+		Element contributorNode = ocb.build(version, tagType);
 		argumentsMap.remove("sequencenumber");
 		argumentsMap.remove("contributorrole");
 		argumentsMap.remove("contributorname");
@@ -143,9 +143,9 @@ public class ONIXFile extends File
 	
 	private Element buildLanguageNode(String langCode)
 	{
-		OnixLanguageBuilder olb = new OnixLanguageBuilder(version, tagType, argumentsMap);
+		OnixLanguageBuilder olb = new OnixLanguageBuilder(argumentsMap);
 		argumentsMap.put("languagecode", langCode);
-		Element langNode = olb.build();
+		Element langNode = olb.build(version, tagType);
 		argumentsMap.remove("languagecode");
 		
 		return langNode;
@@ -247,44 +247,44 @@ public class ONIXFile extends File
 		// ONIX 3.0 requires a mandatory ProductComposition element
 		if(version.equals("3.0"))
 		{
-			OnixProductCompositionBuilder oprocob = new OnixProductCompositionBuilder(version, tagType, argumentsMap);
-			parentNode.appendChild(oprocob.build());
+			OnixProductCompositionBuilder oprocob = new OnixProductCompositionBuilder(argumentsMap);
+			parentNode.appendChild(oprocob.build(version, tagType));
 		}
 		
 		// TODO: implement "AJ" products later
 		// Product Form
-		OnixProductFormBuilder pfb = new OnixProductFormBuilder(version, tagType, argumentsMap);
-		parentNode.appendChild(pfb.build());
+		OnixProductFormBuilder pfb = new OnixProductFormBuilder(argumentsMap);
+		parentNode.appendChild(pfb.build(version, tagType));
 
 		// ProductFormDetail
-		OnixProductFormDetailBuilder pfdb = new OnixProductFormDetailBuilder(version, tagType, argumentsMap); 
+		OnixProductFormDetailBuilder pfdb = new OnixProductFormDetailBuilder(argumentsMap); 
 
 		// ProductFormDetail #1: is e-book reflowable or fixed layout?
 		String layoutType = random.nextBoolean() ? "E200" : "E201";
 		argumentsMap.put("productformdetail", layoutType);
-		parentNode.appendChild(pfdb.build());
+		parentNode.appendChild(pfdb.build(version, tagType));
 		argumentsMap.remove("productformdetail");
 		// ProductFormDetail #2: give information about EpubType
 		argumentsMap.put("productformdetail", title.getEpubTypeForProductFormDetail());
-		parentNode.appendChild(pfdb.build());
+		parentNode.appendChild(pfdb.build(version, tagType));
 		argumentsMap.remove("productformdetail");
 		
 		// output protection type
-		OnixTechnicalProtectionBuilder tpb = new OnixTechnicalProtectionBuilder(version, tagType, argumentsMap);
+		OnixTechnicalProtectionBuilder tpb = new OnixTechnicalProtectionBuilder(argumentsMap);
 		argumentsMap.put("technicalprotection", title.getProtectionTypeForONIX());
-		parentNode.appendChild(tpb.build());
+		parentNode.appendChild(tpb.build(version, tagType));
 		argumentsMap.remove("technicalprotection");
 		
 		// output title
-		OnixTitleBuilder otb = new OnixTitleBuilder(version, tagType, argumentsMap);
+		OnixTitleBuilder otb = new OnixTitleBuilder(argumentsMap);
 		argumentsMap.put("titletext", determineTitleStringByType("01", title));
 		argumentsMap.put("subtitle", determineTitleStringByType("subtitle", title));
-		parentNode.appendChild(otb.build());
+		parentNode.appendChild(otb.build(version, tagType));
 		argumentsMap.remove("subtitle");
 		argumentsMap.remove("titletext");
 		
 		argumentsMap.put("titletext", determineTitleStringByType("05", title));
-		parentNode.appendChild(otb.build());
+		parentNode.appendChild(otb.build(version, tagType));
 		argumentsMap.remove("titletext");
 		
 		// person name contributor
@@ -295,16 +295,18 @@ public class ONIXFile extends File
 		Element corporateContributorNode = buildContributorNode(title, true);
 		parentNode.appendChild(corporateContributorNode);
 		
+		// TODO: do we want to implement EditionNumber / EditionStatement?
+		
 		// Language
 		Element languageNode = buildLanguageNode("ger");
 		parentNode.appendChild(languageNode);
 		
 		// Extent / Page numbering information
-		OnixExtentBuilder oextb = new OnixExtentBuilder(version, tagType, argumentsMap);
+		OnixExtentBuilder oextb = new OnixExtentBuilder(argumentsMap);
 		if(version.equals("2.1"))
 		{
 			argumentsMap.put("numberofpages", "320");
-			parentNode.appendChild(oextb.build());
+			parentNode.appendChild(oextb.build(version, tagType));
 			argumentsMap.remove("numberofpages");
 			
 			// we could also append some pagesroman or pagesarabic here, if we wanted to
@@ -315,7 +317,7 @@ public class ONIXFile extends File
 			argumentsMap.put("extentvalue", "320");
 			argumentsMap.put("extentvalueroman", "CCCXX");
 			argumentsMap.put("extentunit", "03");
-			parentNode.appendChild(oextb.build());
+			parentNode.appendChild(oextb.build(version, tagType));
 			argumentsMap.remove("extenttype");
 			argumentsMap.remove("extentvalue");
 			argumentsMap.remove("extentvalueroman");
@@ -325,7 +327,7 @@ public class ONIXFile extends File
 		argumentsMap.put("extenttype", "22");
 		argumentsMap.put("extentvalue", "1.3");
 		argumentsMap.put("extentunit", "19");
-		parentNode.appendChild(oextb.build());
+		parentNode.appendChild(oextb.build(version, tagType));
 		argumentsMap.remove("extenttype");
 		argumentsMap.remove("extentvalue");
 		argumentsMap.remove("extentunit");

@@ -14,18 +14,34 @@ public class OnixProductCompositionBuilder extends OnixPartsBuilder
 		{
 			{"x314", "ProductComposition", "", "", "productcomposition", "00"},
 		};
+	private static final int SEQUENCE_NUMBER = 400;
 
-	public OnixProductCompositionBuilder(String onixVersion, int tagType, HashMap<String, String> args)
+	public OnixProductCompositionBuilder(HashMap<String, String> args)
 	{
-		super(onixVersion, tagType, args);
+		super(args);
 		elementDefinitions = PRODUCT_COMPOSITION_DEFINITIONS;
 	}
 	
 	@Override
-	public Element build()
+	public Element build(String onixVersion, int tagType)
 	{
-		Element prodForm = new Element(getTagName(0));
-		prodForm.appendChild(new Text(determineElementContent(0)));
-		return prodForm;
+		initialize(onixVersion, tagType);
+		
+		if(onixVersion.equals("3.0"))
+		{
+			Element prodForm = new Element(getTagName(0));
+			prodForm.appendChild(new Text(determineElementContent(0)));
+			return prodForm;
+		}
+		else
+		{
+			return null;
+		}
+	}
+
+	@Override
+	public int getSequenceNumber()
+	{
+		return SEQUENCE_NUMBER;
 	}
 }

@@ -66,6 +66,50 @@ public class AddTitleToScenarioListener implements ActionListener
 			{
 				newTitle.getOnixPartsDirector().addProductIdentifier("22");
 			}
+			
+			// additional product form details required in ONIX file?
+			if(Boolean.parseBoolean(formDataMap.get("pfd-a103")))
+			{
+				newTitle.getOnixPartsDirector().addProductFormDetail("A103");
+			}
+			if(Boolean.parseBoolean(formDataMap.get("pfd-e200")))
+			{
+				newTitle.getOnixPartsDirector().addProductFormDetail("E200");
+			}
+			if(Boolean.parseBoolean(formDataMap.get("pfd-e201")))
+			{
+				newTitle.getOnixPartsDirector().addProductFormDetail("E201");
+			}
+			if(Boolean.parseBoolean(formDataMap.get("pfd-e202")))
+			{
+				newTitle.getOnixPartsDirector().addProductFormDetail("E202");
+			}
+			if(Boolean.parseBoolean(formDataMap.get("pfd-E203")))
+			{
+				newTitle.getOnixPartsDirector().addProductFormDetail("E203");
+			}
+			
+			// additional titles required in ONIX file?
+			if(Boolean.parseBoolean(formDataMap.get("tittyp03")))
+			{
+				newTitle.getOnixPartsDirector().addTitle("03");
+			}
+			if(Boolean.parseBoolean(formDataMap.get("tittyp06")))
+			{
+				newTitle.getOnixPartsDirector().addTitle("06");
+			}
+			if(Boolean.parseBoolean(formDataMap.get("tittyp08")))
+			{
+				newTitle.getOnixPartsDirector().addTitle("08");
+			}
+			if(Boolean.parseBoolean(formDataMap.get("tittyp11")))
+			{
+				newTitle.getOnixPartsDirector().addTitle("11");
+			}
+			if(Boolean.parseBoolean(formDataMap.get("tittyp13")))
+			{
+				newTitle.getOnixPartsDirector().addTitle("13");
+			}
 					
 			// instantiate selected ebook file types and add them to the title object
 			EBookFileFactory eff = EBookFileFactory.getInstance();

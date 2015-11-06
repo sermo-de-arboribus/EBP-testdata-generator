@@ -15,16 +15,19 @@ public class OnixProductFormDetailBuilder extends OnixPartsBuilder
 			{"b333", "ProductFormDetail", "b333", "ProductFormDetail", "productformdetail", "E200"},
 			{"", "", "b211", "EpubType", "", "029"}
 		};
-
-	public OnixProductFormDetailBuilder(String onixVersion, int tagType, HashMap<String, String> args)
+	private static final int SEQUENCE_NUMBER = 600;
+	
+	public OnixProductFormDetailBuilder(HashMap<String, String> args)
 	{
-		super(onixVersion, tagType, args);
+		super(args);
 		elementDefinitions = PRODUCT_FORM_DETAIL_DEFINITIONS;
 	}
 	
 	@Override
-	public Element build()
+	public Element build(String onixVersion, int tagType)
 	{
+		initialize(onixVersion, tagType);
+		
 		Element returnElement;
 		// In ONIX 2.1 we need to produce <b211> / <EpubType> for some information,
 		// In ONIX 3.0 all information is handled by <b333> / <ProductFormDetail>
@@ -71,6 +74,12 @@ public class OnixProductFormDetailBuilder extends OnixPartsBuilder
 			returnElement.appendChild(new Text(determineElementContent(0)));
 			return returnElement;
 		}
+	}
+
+	@Override
+	public int getSequenceNumber()
+	{
+		return SEQUENCE_NUMBER;
 	}
 
 }

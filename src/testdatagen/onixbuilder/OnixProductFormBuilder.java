@@ -14,7 +14,7 @@ public class OnixProductFormBuilder extends OnixPartsBuilder
 		{
 			{"b012", "ProductForm", "b012", "ProductForm", "productform", "BB"},
 		};
-	private static final int SEQUENCE_NUMBER = 400;
+	private static final int SEQUENCE_NUMBER = 500;
 
 	public OnixProductFormBuilder(HashMap<String, String> args)
 	{
@@ -25,6 +25,8 @@ public class OnixProductFormBuilder extends OnixPartsBuilder
 	@Override
 	public Element build(String onixVersion, int tagType)
 	{
+		initialize(onixVersion, tagType);
+		
 		Element prodForm = new Element(getTagName(0));
 		prodForm.appendChild(new Text(determineElementContent(0)));
 		return prodForm;

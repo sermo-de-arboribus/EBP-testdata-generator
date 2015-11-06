@@ -22,16 +22,19 @@ public class OnixExtentBuilder extends OnixPartsBuilder
 			{"", "", "b254", "PagesRoman", "pagesroman", "IV"},
 			{"", "", "b255", "PagesArabic", "pagesarabic", "188"}
 		};
-
-	public OnixExtentBuilder(String onixVersion, int tagType, HashMap<String, String> args)
+	private static final int SEQUENCE_NUMBER = 1400;
+	
+	public OnixExtentBuilder(final HashMap<String, String> args)
 	{
-		super(onixVersion, tagType, args);
+		super(args);
 		elementDefinitions = EXTENT_ELEMENT_DEFINITIONS;
 	}
 	
 	@Override
-	public Element build()
+	public Element build(String onixVersion, int tagType)
 	{
+		initialize(onixVersion, tagType);
+		
 		// if any of the arguments numberofpages, pagesroman or pagesarabic is defined, 
 		// assume that the caller just wants to receive an ONIX 2.1 single element,
 		// otherwise return a full extent node
@@ -72,4 +75,9 @@ public class OnixExtentBuilder extends OnixPartsBuilder
 		}
 	}
 
+	@Override
+	public int getSequenceNumber()
+	{
+		return SEQUENCE_NUMBER;
+	}
 }

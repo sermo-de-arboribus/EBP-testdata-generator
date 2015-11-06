@@ -29,6 +29,8 @@ public class OnixProductIdentifierBuilder extends OnixPartsBuilder
 	@Override
 	public Element build(String onixVersion, int tagType)
 	{
+		initialize(onixVersion, tagType);
+		
 		Element productidentifier = new Element(getTagName(0));
 		
 		for(int i = 1; i < elementDefinitions.length; i++)

@@ -37,13 +37,53 @@ public class OnixPartsDirector
 		// add notification Type
 		requiredElements.add(new OnixNotificationTypeBuilder(new HashMap<String, String>()));
 		
-		// add default product Identifier (type 15: ISBN-13)
-		HashMap<String, String> isbnArgs = new HashMap<>();
-		isbnArgs.put("productidvalue", Long.toString(title.getIsbn13()));
-		requiredElements.add(new OnixProductIdentifierBuilder(isbnArgs));
+		// add product composition
+		requiredElements.add(new OnixProductCompositionBuilder(new HashMap<String, String>()));
 		
-		// product form
+		// add default product Identifier (type 15: ISBN-13)
+		addProductIdentifier("15");
+		
+		// add product form
 		requiredElements.add(new OnixProductFormBuilder(new HashMap<String, String>()));
+		
+		// add product form detail
+		addProductFormDetail(title.getEpubTypeForProductFormDetail());
+
+		// add protection type
+		HashMap<String, String> protectionArgs = new HashMap<>();
+		protectionArgs.put("technicalprotection", title.getProtectionTypeForONIX());
+		requiredElements.add(new OnixTechnicalProtectionBuilder(protectionArgs));
+		
+		// TODO: implement Series / Collection 
+		
+		// add a title
+		addTitleWithSubtitle("01");
+		
+		// add (first / main) author
+		HashMap<String, String> authorArgs = new HashMap<>();
+		authorArgs.put("fullname", title.getAuthor());
+		authorArgs.put("invertedname", title.getAuthorLastName() + ", " + title.getAuthorFirstName());
+		authorArgs.put("namesbeforekey", title.getAuthorFirstName());
+		authorArgs.put("keynames", title.getAuthorLastName());
+		authorArgs.put("biographicalnote", title.getAuthorBlurb());
+		authorArgs.put("birthdate", "19440704");
+		authorArgs.put("deathdate", "20131228");
+		requiredElements.add(new OnixContributorBuilder(authorArgs));
+		
+		// TODO: add a corporate contributor? Add the option of adding further authors?
+		// TODO: do we want to implement EditionNumber / EditionStatement?
+		
+		// add a default language node
+		requiredElements.add(new OnixLanguageBuilder(new HashMap<String, String>()));
+		
+		// add a default extent element
+	}
+	
+	public void addProductFormDetail(String code)
+	{
+		HashMap<String, String> productFormDetailArgs = new HashMap<>();
+		productFormDetailArgs.put("productformdetail", code);
+		requiredElements.add(new OnixProductFormDetailBuilder(productFormDetailArgs));
 	}
 	
 	public void addProductIdentifier(String type)
@@ -67,6 +107,23 @@ public class OnixPartsDirector
 		requiredElements.add(new OnixProductIdentifierBuilder(productIdArgs));
 	}
 	
+	public void addTitle(String titleType)
+	{
+		HashMap<String, String> titleArgs = new HashMap<>();
+		titleArgs.put("titletext", determineTitleStringByType("01", title));
+		OnixTitleBuilder otb = new OnixTitleBuilder(titleArgs);
+		requiredElements.add(otb); 
+	}
+	
+	public void addTitleWithSubtitle(String titleType)
+	{
+		HashMap<String, String> titleArgs = new HashMap<>();
+		titleArgs.put("titletext", determineTitleStringByType("01", title));
+		titleArgs.put("subtitle", determineTitleStringByType("subtitle", title));
+		OnixTitleBuilder otb = new OnixTitleBuilder(titleArgs);
+		requiredElements.add(otb); 
+	}
+	
 	public Element buildOnix2(int tagType)
 	{
 		String rootElementName = getRootName(tagType);
@@ -75,6 +132,7 @@ public class OnixPartsDirector
 
 		// TODO: build the header and product elements and append them to the root
 		// Note that the ProductForm must be set to 'DG' (or 'AJ')
+		// Also note that we probably need an Extent builder to give us a b061 / NumberOfPages element 
 		
 		return root;
 	}
@@ -107,5 +165,46 @@ public class OnixPartsDirector
 				rootElementName = "ONIXmessage";
 		}
 		return rootElementName;
+	}
+	
+	private String determineTitleStringByType(String titleType, Title title)
+	{
+		// split titleString into main title and subtitle, if titleString contains a full-stop.
+		String titleString = title.getName();
+		String mainTitle = "";
+		String subTitle = "";
+		String abbrevTitle = "";
+		if(titleString.contains("."))
+		{
+			mainTitle = titleString.substring(0, titleString.lastIndexOf('.'));
+			subTitle = titleString.substring(titleString.lastIndexOf('.') + 1).trim();
+		}
+		else 
+		{
+			mainTitle = titleString;
+		}
+		// if titleType is "05", this is meant to be a shortened title
+		if(titleType.equals("05"))
+		{
+			abbrevTitle = mainTitle;
+			if(mainTitle.length() > 12)
+			{
+				abbrevTitle = mainTitle.substring(0, 10);
+			}
+		}
+		if(subTitle.equals(""))
+		{
+			subTitle = "Kein Untertitel";
+		}
+		switch(titleType)
+		{
+			case "subtitle": return subTitle;
+			case "01":
+			case "title":
+			case "distinctivetitle": return mainTitle;
+			case "05":
+			case "abbreviatedtitle": return abbrevTitle;
+			default: return "";
+		}
 	}
 }

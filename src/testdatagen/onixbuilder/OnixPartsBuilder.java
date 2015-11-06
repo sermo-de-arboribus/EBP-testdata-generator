@@ -2,6 +2,7 @@ package testdatagen.onixbuilder;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Random;
 
 import testdatagen.utilities.TitleUtils;
 import testdatagen.utilities.Utilities;
@@ -119,6 +120,10 @@ public abstract class OnixPartsBuilder
 					break;
 				case "{$randomCurrencyCode}":
 					elementContent = TitleUtils.getRandomCurrencyCode();
+					break;
+				case "{$randomDate}":
+					Random random = new Random();
+					elementContent = "" + (random.nextInt(100) + 1950) + "0" + (random.nextInt(8) + 1) + (random.nextInt(18) + 10);
 					break;
 				default:
 					elementContent = "ERROR! Could not create element content for " + defValue;

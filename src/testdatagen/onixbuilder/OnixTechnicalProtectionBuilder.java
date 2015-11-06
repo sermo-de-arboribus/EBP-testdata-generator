@@ -14,19 +14,27 @@ public class OnixTechnicalProtectionBuilder extends OnixPartsBuilder
 		{
 			{"x317", "EpubTechnicalProtection", "b277", "EpubTypeNote", "technicalprotection", "03"}
 		};
+	private static final int SEQUENCE_NUMBER = 700;
 
-	public OnixTechnicalProtectionBuilder(String onixVersion, int tagType, HashMap<String, String> args)
+	public OnixTechnicalProtectionBuilder(HashMap<String, String> args)
 	{
-		super(onixVersion, tagType, args);
+		super(args);
 		elementDefinitions = TECHNICAL_PROTECTION_DEFINITIONS;
 	}
 	
 	@Override
-	public Element build()
+	public Element build(String onixVersion, int tagType)
 	{
+		initialize(onixVersion, tagType);
+		
 		Element protectionType = new Element(getTagName(0));
 		protectionType.appendChild(new Text(determineElementContent(0)));
 		return protectionType;
 	}
 
+	@Override
+	public int getSequenceNumber()
+	{
+		return SEQUENCE_NUMBER;
+	}
 }

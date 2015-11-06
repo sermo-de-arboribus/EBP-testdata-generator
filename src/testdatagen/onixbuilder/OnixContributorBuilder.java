@@ -27,8 +27,8 @@ public class OnixContributorBuilder extends OnixPartsBuilder
 		/*12 */	{"contributordate", "ContributorDate", "persondate", "ProductContributorPersonDate", "", ""},
 		/*13 */	{"x417", "ContributorDateRole", "b305", "PersonDateRole", "contributordaterole", "50"},
 		/*14 */	{"j260", "DateFormat", "j260", "DateFormat", "persondateformat", "00"},
-		/*15 */	{"b306", "Date", "b306", "Date", "birthdate", "19500101"},
-		/*16 */	{"b306", "Date", "b306", "Date", "deathdate", "20150101"},
+		/*15 */	{"b306", "Date", "b306", "Date", "birthdate", "{$randomDate}"},
+		/*16 */	{"b306", "Date", "b306", "Date", "deathdate", "{$randomDate}"},
 		/*17 */	{"professionalaffiliation", "ProfessionalAffiliation", "professionalaffiliation", "ProfessionalAffiliation", "professionalaffiliation", ""},
 		/*18 */	{"b045", "ProfessionalPosition", "b045", "ProfessionalPosition", "professionalposition", "Managing director"},
 		/*19 */	{"b046", "Affiliation", "b046", "Affiliation", "affiliation", "Koch, Neff & Oetinger GmbH"},
@@ -36,16 +36,19 @@ public class OnixContributorBuilder extends OnixPartsBuilder
 		/*21 */	{"website", "Website", "website", "Website", "", ""},		
 		/*22 */	{"b295", "WebsiteLink", "b295", "WebsiteLink", "websitelink", "http://www.kno-va.de"}
 		};
+	private static final int SEQUENCE_NUMBER = 1000;
 	
-	public OnixContributorBuilder (String onixVersion, int tagType, HashMap<String, String> args)
+	public OnixContributorBuilder (HashMap<String, String> args)
 	{
-		super(onixVersion, tagType, args);
+		super(args);
 		elementDefinitions = CONTRIBUTOR_ELEMENT_DEFINITIONS;
 	}
 	
 	@Override
-	public Element build()
+	public Element build(String onixVersion, int tagType)
 	{
+		initialize(onixVersion, tagType);
+		
 		Element contributorNode = new Element(getTagName(0));
 
 		// Onix 2.1 and Onix 3.0 have different element sequences and nesting, so we need to distinguish
@@ -153,6 +156,12 @@ public class OnixContributorBuilder extends OnixPartsBuilder
 		}
 		
 		return contributorNode;
+	}
+	
+	@Override
+	public int getSequenceNumber()
+	{
+		return SEQUENCE_NUMBER;
 	}
 
 	private void addCorporateNameElements(Element parentNode)
