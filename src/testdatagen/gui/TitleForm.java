@@ -6,6 +6,8 @@ import java.awt.GridLayout;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -15,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
+import javax.swing.border.Border;
 
 import testdatagen.gui.listeners.AddTitleToScenarioListener;
 import testdatagen.model.ProductType;
@@ -56,40 +59,40 @@ public class TitleForm extends JDialog
 		header.setFont(header.getFont().deriveFont(16.0f));
 		
 		// The form elements
-		
-		// instantiate labels for different sections
-		JLabel productTypeSelectionLabel = new JLabel("Choose product type");
-		productTypeSelectionLabel.setForeground(Color.BLUE);
-		
-		JLabel coverSelectionLabel = new JLabel("Choose cover delivery method");
-		coverSelectionLabel.setForeground(Color.BLUE);
-		
-		JLabel additionalAssetsLabel = new JLabel("Choose additional assets");
-		additionalAssetsLabel.setForeground(Color.BLUE);
-
-		JLabel productIdentifierSelectionLabel = new JLabel("Additional product identifiers");
-		productIdentifierSelectionLabel.setForeground(Color.BLUE);
+		Border blueLineBorder = BorderFactory.createLineBorder(Color.BLUE);
 		
 		// Group form elements in left panel
 		JPanel titleOptionsPanel = new JPanel(new GridLayout(0,1));
-		titleOptionsPanel.setName("titleOptionsPanel");
-		titleOptionsPanel.add(productTypeSelectionLabel);
-		titleOptionsPanel.add(product);
-		titleOptionsPanel.add(coverSelectionLabel);
-		titleOptionsPanel.add(covertype);
-		titleOptionsPanel.add(additionalAssetsLabel);
-		titleOptionsPanel.add(scrBox);
-		titleOptionsPanel.add(packBox);
-		titleOptionsPanel.add(extrBox);
-		titleOptionsPanel.add(bkcBox);
-		titleOptionsPanel.add(epmoBox);
+		JPanel productTypeSelectionPanel = new JPanel(new GridLayout(0,1));
+		productTypeSelectionPanel.setBorder(BorderFactory.createTitledBorder(blueLineBorder, "Product Type Selection"));
+		JPanel coverSelectionPanel = new JPanel(new GridLayout(0,1));
+		coverSelectionPanel.setBorder(BorderFactory.createTitledBorder(blueLineBorder, "Cover delivery method"));
+		JPanel additionalAssetsPanel = new JPanel(new GridLayout(0,1));
+		additionalAssetsPanel.setBorder(BorderFactory.createTitledBorder(blueLineBorder, "Additional assets"));
+		
+		titleOptionsPanel.add(productTypeSelectionPanel);
+		titleOptionsPanel.add(coverSelectionPanel);
+		titleOptionsPanel.add(additionalAssetsPanel);
+		
+		productTypeSelectionPanel.add(product);
+		coverSelectionPanel.add(covertype);
+		additionalAssetsPanel.add(scrBox);
+		additionalAssetsPanel.add(packBox);
+		additionalAssetsPanel.add(extrBox);
+		additionalAssetsPanel.add(bkcBox);
+		additionalAssetsPanel.add(epmoBox);
 		
 		// Group form elements in right panel
 		JPanel detailOptionsPanel = new JPanel(new GridLayout(0,1));
-		detailOptionsPanel.add(productIdentifierSelectionLabel);
-		detailOptionsPanel.add(prodIdGtin13);
-		detailOptionsPanel.add(prodIdDoi);
-		detailOptionsPanel.add(prodIdUrn);
+		JPanel productIdPanel = new JPanel(new GridLayout(0,1));
+		JPanel productIdPanelOptions = new JPanel(new GridLayout(1,0));
+		detailOptionsPanel.add(productIdPanel);
+		detailOptionsPanel.add(Box.createHorizontalGlue());
+		productIdPanel.setBorder(BorderFactory.createTitledBorder(blueLineBorder, "Additional product identifiers"));
+		productIdPanel.add(productIdPanelOptions);
+		productIdPanelOptions.add(prodIdGtin13);
+		productIdPanelOptions.add(prodIdDoi);
+		productIdPanelOptions.add(prodIdUrn);
 		
 		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, titleOptionsPanel, detailOptionsPanel);
 		
