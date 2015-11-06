@@ -42,6 +42,8 @@ public class OnixPartsDirector
 		isbnArgs.put("productidvalue", Long.toString(title.getIsbn13()));
 		requiredElements.add(new OnixProductIdentifierBuilder(isbnArgs));
 		
+		// product form
+		requiredElements.add(new OnixProductFormBuilder(new HashMap<String, String>()));
 	}
 	
 	public void addProductIdentifier(String type)
@@ -72,6 +74,7 @@ public class OnixPartsDirector
 		root.addAttribute(new Attribute("release", "2.1"));
 
 		// TODO: build the header and product elements and append them to the root
+		// Note that the ProductForm must be set to 'DG' (or 'AJ')
 		
 		return root;
 	}
@@ -83,6 +86,7 @@ public class OnixPartsDirector
 		root.addAttribute(new Attribute("release", "3.0"));
 		
 		// TODO: build the header and product elements and append them to the root
+		// Note that the ProductForm must be set to 'EA' / 'DG' (or maybe 'AJ' later) 
 		
 		return root;
 	}
