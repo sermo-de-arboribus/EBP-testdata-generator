@@ -23,6 +23,7 @@ public class OnixSubjectBuilder extends OnixPartsBuilder
 			{"b069", "SubjectCode", "b069", "SubjectCode", "subjectcode", "9120"},
 			{"b070", "SubjectHeadingText", "b070", "SubjectHeadingText", "subjectheadingtext", " "},
 		};
+	private static final int SEQUENCE_NUMBER = 1500;
 
 	// constants defined for ONIX tag types
 	public static final int SUBJECTTYPE_MAIN = 1;
@@ -30,20 +31,20 @@ public class OnixSubjectBuilder extends OnixPartsBuilder
 	
 	private int subjectType;
 	
-	public OnixSubjectBuilder(String onixVersion, int tagType, int subjectType, HashMap<String, String> args)
+	public OnixSubjectBuilder(int subjectType, HashMap<String, String> args)
 	{
-		super(onixVersion, tagType, args);
+		super(args);
 		elementDefinitions = SUBJECT_ELEMENT_DEFINITIONS;
 		this.subjectType = subjectType;
 	}
 	
-	public OnixSubjectBuilder(String onixVersion, int tagType, HashMap<String, String> args)
+	public OnixSubjectBuilder(HashMap<String, String> args)
 	{
-		this(onixVersion, tagType, SUBJECTTYPE_NORMAL, args);
+		this(SUBJECTTYPE_NORMAL, args);
 	}
 	
 	@Override
-	public Element build()
+	public Element build(String onixVersion, int tagType)
 	{
 		Element subject;
 		Element subjectIdentifier;
@@ -76,4 +77,9 @@ public class OnixSubjectBuilder extends OnixPartsBuilder
 		return subject;
 	}
 
+	@Override
+	public int getSequenceNumber()
+	{
+		return SEQUENCE_NUMBER + subjectType;
+	}
 }

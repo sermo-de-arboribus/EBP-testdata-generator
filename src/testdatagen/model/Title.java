@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Locale;
+import java.util.Set;
 
 import testdatagen.model.files.EBookFile;
 import testdatagen.model.files.File;
@@ -20,7 +21,6 @@ public class Title implements Serializable
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static final String[] validEpubTypes = {"Epub", "PDF", "Mobi", "EpubMobi", "IBook", "SoftwareZip", "AudioZip"};
 	private static final String[] validFormats = ProductType.productTypeNames();
 	
 	private long isbn13;
@@ -31,6 +31,7 @@ public class Title implements Serializable
     private String format; // format = protection + epubType
     private String protection; // WM = watermarked, ND = no protection, DRM = hard DRM
     private OnixPartsDirector onixPartsDirector;
+    private Set<Subject> subjects;
     
     public Title(final long isbn13, final String uid, final String name, final String author, final String format)
     {
@@ -41,6 +42,7 @@ public class Title implements Serializable
     	setFormat(format);
     	files = new HashSet<File>();
     	onixPartsDirector = new OnixPartsDirector(this);
+    	subjects = new HashSet<Subject>();
     }
     
     public synchronized void addFile(final File newFile)
@@ -48,6 +50,12 @@ public class Title implements Serializable
     	files.add(newFile);
     }
 	
+    public synchronized void addSubject(final Subject newSubject)
+    {
+    	subjects.add(newSubject);
+    	onixPartsDirector.addSubject(newSubject);
+    }
+    
 	public synchronized String getAuthor()
 	{
 		return author;

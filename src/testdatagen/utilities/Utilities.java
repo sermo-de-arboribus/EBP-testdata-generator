@@ -107,6 +107,11 @@ public final class Utilities
 		}
 	}
 	
+	public static boolean nullSafeEquals(final Object obj1, final Object obj2)
+	{
+		return (obj1 == obj2) || (obj1 != null && obj1.equals(obj2));
+	}
+	
 	public static void safeClose(Closeable str)
 	{
 		try

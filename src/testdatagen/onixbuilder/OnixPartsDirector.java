@@ -5,8 +5,11 @@ import nu.xom.Element;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Locale;
 
+import testdatagen.model.Subject;
 import testdatagen.model.Title;
+import testdatagen.utilities.TitleUtils;
 
 public class OnixPartsDirector
 {
@@ -77,6 +80,20 @@ public class OnixPartsDirector
 		requiredElements.add(new OnixLanguageBuilder(new HashMap<String, String>()));
 		
 		// add a default extent element
+		requiredElements.add(new OnixExtentBuilder (new HashMap<String, String>()));
+		
+		// add main subject element
+		HashMap<String, String> mainSubjectArgs = new HashMap<String, String>();
+		mainSubjectArgs.put("subjectcode", TitleUtils.getRandomWarengruppeCode());
+		mainSubjectArgs.put("subjectheadingtext", TitleUtils.getRandomTopic(new Locale("de")));
+		requiredElements.add(new OnixSubjectBuilder(OnixSubjectBuilder.SUBJECTTYPE_MAIN, mainSubjectArgs));
+		
+		// add "normal" subject element
+		HashMap<String, String> subjectArgs = new HashMap<String, String>();
+		subjectArgs.put("subjectheadingtext", TitleUtils.getRandomTopic(new Locale("de")));
+		requiredElements.add(new OnixSubjectBuilder(subjectArgs));
+		
+		
 	}
 	
 	public void addProductFormDetail(String code)
@@ -105,6 +122,25 @@ public class OnixPartsDirector
 		productIdArgs.put("productidtype", type);
 		productIdArgs.put("productidvalue", productIdValue);
 		requiredElements.add(new OnixProductIdentifierBuilder(productIdArgs));
+	}
+	
+	public void addSubject(Subject newSubject)
+	{
+		HashMap<String, String> subjectArgs = new HashMap<String, String>();
+		subjectArgs.put("subjectcode", newSubject.getSubjectcode());
+		subjectArgs.put("subjectheadingtext", newSubject.getSubjectheadingtext());
+		subjectArgs.put("subjectschemeidentifier", newSubject.getSubjectschemeidentifier());
+		subjectArgs.put("subjectheadingtext", newSubject.getSubjectheadingtext());
+		if(newSubject.isMainSubject())
+		{
+			subjectArgs.put("mainsubjectschemeidentifier", newSubject.getSubjectschemeidentifier());
+			requiredElements.add(new OnixSubjectBuilder(OnixSubjectBuilder.SUBJECTTYPE_MAIN, subjectArgs));
+		}
+		else
+		{
+			requiredElements.add(new OnixSubjectBuilder(OnixSubjectBuilder.SUBJECTTYPE_NORMAL, subjectArgs));
+		}
+		
 	}
 	
 	public void addTitle(String titleType)

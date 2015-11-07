@@ -2,9 +2,12 @@ package testdatagen.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -14,12 +17,15 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
+import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.border.Border;
 
+import testdatagen.gui.listeners.AddSubjectsToTitleListener;
 import testdatagen.gui.listeners.AddTitleToScenarioListener;
 import testdatagen.model.ProductType;
+import testdatagen.model.Subject;
 import testdatagen.model.TestScenario;
 
 public class TitleForm extends JDialog
@@ -43,6 +49,8 @@ public class TitleForm extends JDialog
 	private JCheckBox a103, e200, e201, e202, e203;
 	// additional title type checkboxes
 	private JCheckBox tittyp03, tittyp06, tittyp08, tittyp11, tittyp13;
+	// set of configured subjects
+	private Set<Subject> configuredSubjects;
 	
 	public TitleForm(TestScenario scenario)
 	{
@@ -118,6 +126,22 @@ public class TitleForm extends JDialog
 		titlePanelOptions.add(tittyp11);
 		titlePanelOptions.add(tittyp13);
 		
+		// Subject options
+		JPanel subjectsPanel = new JPanel(new GridLayout(1,0));
+		subjectsPanel.setBorder(BorderFactory.createTitledBorder(blueLineBorder, "Additional subjects"));
+		JTextArea configuredSubjectsField = new JTextArea();
+		configuredSubjectsField.setLineWrap(true);
+		configuredSubjectsField.setEditable(false);
+		configuredSubjectsField.setColumns(40);
+		JButton addSubjectsButton = new JButton("add subject");
+		addSubjectsButton.setActionCommand("open subjects dialog");
+		addSubjectsButton.addActionListener(new AddSubjectsToTitleListener(configuredSubjectsField, configuredSubjects));
+		JPanel addSubjectsButtonPanel = new JPanel(new FlowLayout());
+		addSubjectsButtonPanel.add(addSubjectsButton);
+		subjectsPanel.add(configuredSubjectsField);
+		subjectsPanel.add(addSubjectsButtonPanel);
+		detailOptionsPanel.add(subjectsPanel);
+		
 		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, titleOptionsPanel, detailOptionsPanel);
 		
 		// submit button
@@ -131,6 +155,11 @@ public class TitleForm extends JDialog
 		this.add(submitbtn, BorderLayout.SOUTH);
 		this.setLocation(100,100);
 		this.setSize(600, 500);
+	}
+	
+	public Set<Subject> getConfiguredSubjects()
+	{
+		return configuredSubjects;
 	}
 	
 	public Map<String, String> getFormDataMap()
@@ -226,5 +255,7 @@ public class TitleForm extends JDialog
 		tittyp13 = new JCheckBox("13");
 		tittyp13.setName("tittyp13");
 		tittyp13.setToolTipText("Expanded title");
+		
+		configuredSubjects = new HashSet<Subject>();
 	}
 }

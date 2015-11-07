@@ -2,13 +2,16 @@ package testdatagen.gui.listeners;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 import javax.swing.*;
 
 import testdatagen.EBookFileFactory;
 import testdatagen.GraphicFileFactory;
 import testdatagen.gui.TitleForm;
+import testdatagen.model.Subject;
 import testdatagen.model.TestScenario;
 import testdatagen.model.Title;
 import testdatagen.model.files.EBookFile;
@@ -45,6 +48,7 @@ public class AddTitleToScenarioListener implements ActionListener
 			JButton button = (JButton) evt.getSource();
 			TitleForm dialog = (TitleForm) button.getTopLevelAncestor();
 			Map<String, String> formDataMap = dialog.getFormDataMap();
+			Set<Subject> subjectSet = dialog.getConfiguredSubjects();
 			
 			// determine product format
 			String format = formDataMap.get("product");
@@ -110,7 +114,17 @@ public class AddTitleToScenarioListener implements ActionListener
 			{
 				newTitle.getOnixPartsDirector().addTitle("13");
 			}
-					
+			
+			// additional subjects required in ONIX file?
+			if(!subjectSet.isEmpty())
+			{
+				Iterator<Subject> iterator = subjectSet.iterator();
+				while(iterator.hasNext())
+				{
+					newTitle.addSubject(iterator.next());
+				}
+			}
+			
 			// instantiate selected ebook file types and add them to the title object
 			EBookFileFactory eff = EBookFileFactory.getInstance();
 					

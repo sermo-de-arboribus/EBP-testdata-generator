@@ -153,10 +153,10 @@ public class ONIXFile extends File
 	
 	private Element buildMainSubjectNode()
 	{
-		OnixSubjectBuilder omainsubb = new OnixSubjectBuilder(version, tagType, OnixSubjectBuilder.SUBJECTTYPE_MAIN, argumentsMap);
+		OnixSubjectBuilder omainsubb = new OnixSubjectBuilder(OnixSubjectBuilder.SUBJECTTYPE_MAIN, argumentsMap);
 		argumentsMap.put("subjectcode", TitleUtils.getRandomWarengruppeCode());
 		argumentsMap.put("subjectheadingtext", TitleUtils.getRandomTopic(new Locale("de")));
-		Element msn = omainsubb.build();
+		Element msn = omainsubb.build(version, tagType);
 		argumentsMap.remove("subjectheadingtext");
 		argumentsMap.remove("subjectcode");
 		
@@ -522,9 +522,9 @@ public class ONIXFile extends File
 	
 	private Element buildSubjectNode()
 	{
-		OnixSubjectBuilder osubb = new OnixSubjectBuilder(version, tagType, argumentsMap);
+		OnixSubjectBuilder osubb = new OnixSubjectBuilder(argumentsMap);
 		argumentsMap.put("subjectheadingtext", TitleUtils.getRandomTopic(new Locale("de")));
-		Element subjectNode = osubb.build();
+		Element subjectNode = osubb.build(version, tagType);
 		argumentsMap.remove("subjectheadingtext");
 		
 		return subjectNode;
