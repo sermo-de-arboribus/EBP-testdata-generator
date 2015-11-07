@@ -23,16 +23,19 @@ public class OnixPublisherBuilder extends OnixPartsBuilder
 			{"b294", "WebsiteDescription", "b294", "WebsiteDescription", "websitedescription", "Die Verlagswebsite"},
 			{"b295", "WebsiteLink", "b295", "WebsiteLink", "websitelink", "http://www.it-e-books-verlag.com"}
 		};
+	private static final int SEQUENCE_NUMBER = 2100;
 	
-	public OnixPublisherBuilder(String onixVersion, int tagType, HashMap<String, String> args)
+	public OnixPublisherBuilder(HashMap<String, String> args)
 	{
-		super(onixVersion, tagType, args);
+		super(args);
 		elementDefinitions = PUBLISHER_ELEMENT_DEFINITIONS;
 	}
 	
 	@Override
-	public Element build()
+	public Element build(String onixVersion, int tagType)
 	{
+		initialize(onixVersion, tagType);
+		
 		Element publisherNode = new Element(getTagName(0));
 		
 		Element pubRole = new Element(getTagName(1));
@@ -75,4 +78,9 @@ public class OnixPublisherBuilder extends OnixPartsBuilder
 		return publisherNode;
 	}
 
+	@Override
+	public int getSequenceNumber()
+	{
+		return SEQUENCE_NUMBER;
+	}
 }

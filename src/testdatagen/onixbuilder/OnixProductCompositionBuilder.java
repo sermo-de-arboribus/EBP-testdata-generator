@@ -14,7 +14,7 @@ public class OnixProductCompositionBuilder extends OnixPartsBuilder
 		{
 			{"x314", "ProductComposition", "", "", "productcomposition", "00"},
 		};
-	private static final int SEQUENCE_NUMBER = 400;
+	private static final int SEQUENCE_NUMBER = 450;
 
 	public OnixProductCompositionBuilder(HashMap<String, String> args)
 	{

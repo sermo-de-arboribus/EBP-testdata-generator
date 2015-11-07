@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Locale;
+import java.util.Random;
 import java.util.Set;
 
 import testdatagen.model.files.EBookFile;
@@ -32,6 +33,7 @@ public class Title implements Serializable
     private String protection; // WM = watermarked, ND = no protection, DRM = hard DRM
     private OnixPartsDirector onixPartsDirector;
     private Set<Subject> subjects;
+    private Price basePrice;
     
     public Title(final long isbn13, final String uid, final String name, final String author, final String format)
     {
@@ -40,6 +42,7 @@ public class Title implements Serializable
     	this.name = name;
     	this.author = author;
     	setFormat(format);
+    	basePrice = getRandomBasePrice();
     	files = new HashSet<File>();
     	onixPartsDirector = new OnixPartsDirector(this);
     	subjects = new HashSet<Subject>();
@@ -111,6 +114,12 @@ public class Title implements Serializable
 	{
 		AuthorBlurbTemplate template = new AuthorBlurbTemplate(new Locale("de"), this);
 		return template.fillWithText();
+	}
+	
+	public synchronized Price getBasePrice()
+	{
+		// we don't want the base price to be changed externally, so we only hand out a clone
+		return basePrice.clone();
 	}
 	
 	public synchronized String getEpubType()
@@ -274,6 +283,13 @@ public class Title implements Serializable
         return files.remove(remFile);
     }
 
+    private Price getRandomBasePrice()
+    {
+    	Random random = new Random();
+		double basePrice = Math.round((random.nextDouble() * 28.99 + 1) * 100) / 100.0;
+		return new Price("04", "" + basePrice, "EUR", "DE");
+    }
+    
 	private boolean isValidFormat(String formatString)
 	{
 		boolean valid = false;
@@ -325,5 +341,6 @@ public class Title implements Serializable
     public synchronized void setMediaFileUrl(String url)
     {
     	mediaFileUrl = url;
+    	onixPartsDirector.replaceMediaResource(url);
     }
 }

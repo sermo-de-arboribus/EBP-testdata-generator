@@ -24,6 +24,8 @@ public class OnixMediaResourceBuilder extends OnixPartsBuilder
 	/*9 */	{"b306", "Date", "f373", "MediaFileDate", "mediafiledate", "20151025"},
 	/*10*/	{"", "", "f116", "MediaFileLinkTypeCode", "", "01"}
 		};
+	private static final int SEQUENCE_NUMBER = 1900;
+	
 	/*
 	 * Map for determining the ONIX 2.1 MediaFileTypeCode out of ONIX 3.0 ResourceMode + ResourceContentType information
 	 */
@@ -64,15 +66,17 @@ public class OnixMediaResourceBuilder extends OnixPartsBuilder
 				put("0628", "01");
 			}};
 	
-	public OnixMediaResourceBuilder(String onixVersion, int tagType, HashMap<String, String> args)
+	public OnixMediaResourceBuilder(HashMap<String, String> args)
 	{
-		super(onixVersion, tagType, args);
+		super(args);
 		elementDefinitions = MEDIA_RESOURCE_ELEMENT_DEFINITIONS;
 	}
 	
 	@Override
-	public Element build()
+	public Element build(String onixVersion, int tagType)
 	{
+		initialize(onixVersion, tagType);
+		
 		Element mediaResource = new Element(getTagName(0));
 		
 		// ONIX 2.1 and ONIX 3.0 are structuring media resource information in a very different way.
@@ -87,6 +91,12 @@ public class OnixMediaResourceBuilder extends OnixPartsBuilder
 		}
 		
 		return mediaResource;
+	}
+	
+	@Override
+	public int getSequenceNumber()
+	{
+		return SEQUENCE_NUMBER;
 	}
 	
 	private void appendElementsFromTo(Element parent, int from, int to)

@@ -12,16 +12,19 @@ public class OnixProductAvailabilityBuilder extends OnixSupplyDetailPartsBuilder
 			{"", "", "j141", "AvailabilityCode", "availabilitycode", "IP"},
 			{"j396", "ProductAvailability", "j396", "ProductAvailability", "productavailability", "20"}
 		};
+	private static final int SEQUENCE_NUMBER = 3100;
 	
-	public OnixProductAvailabilityBuilder(final String onixVersion, final int tagType, final HashMap<String, String> args)
+	public OnixProductAvailabilityBuilder(final HashMap<String, String> args)
 	{
-		super(onixVersion, tagType, args);
+		super(args);
 		elementDefinitions = PRODUCT_AVAILABILITY_DEFINITIONS;
 	}
 	
 	@Override
-	public void appendElementsTo(final Element parentNode)
+	public void appendElementsTo(final Element parentNode, final String onixVersion, final int tagType)
 	{
+		initialize(onixVersion, tagType);
+		
 		// only ONIX 2.1 allows the Availability Code element
 		if(onixVersion.equals("2.1"))
 		{
@@ -35,4 +38,9 @@ public class OnixProductAvailabilityBuilder extends OnixSupplyDetailPartsBuilder
 		parentNode.appendChild(productAvail);
 	}
 
+	@Override
+	public int getSequenceNumber()
+	{
+		return SEQUENCE_NUMBER;
+	}
 }

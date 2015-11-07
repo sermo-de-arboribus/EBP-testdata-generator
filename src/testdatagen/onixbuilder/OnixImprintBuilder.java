@@ -19,16 +19,19 @@ public class OnixImprintBuilder extends OnixPartsBuilder
 			{"b244", "IDValue", "b243", "NameCodeValue", "idvalue", "ABC"},
 			{"b079", "ImprintName", "b079", "ImprintName", "imprintname", "Imprint Name"}
 		};
-
-	public OnixImprintBuilder(String onixVersion, int tagType, HashMap<String, String> args)
+	private static final int SEQUENCE_NUMBER = 2000;
+	
+	public OnixImprintBuilder(HashMap<String, String> args)
 	{
-		super(onixVersion, tagType, args);
+		super(args);
 		elementDefinitions = IMPRINT_ELEMENT_DEFINITIONS;
 	}
 	
 	@Override
-	public Element build()
+	public Element build(String onixVersion, int tagType)
 	{
+		initialize(onixVersion, tagType);
+		
 		Element imprintNode = new Element(getTagName(0));
 		Element identifierParentNode;
 		
@@ -57,4 +60,9 @@ public class OnixImprintBuilder extends OnixPartsBuilder
 		return imprintNode;
 	}
 
+	@Override
+	public int getSequenceNumber()
+	{
+		return SEQUENCE_NUMBER;
+	}
 }

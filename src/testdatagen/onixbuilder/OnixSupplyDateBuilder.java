@@ -15,16 +15,19 @@ public class OnixSupplyDateBuilder extends OnixSupplyDetailPartsBuilder
 			{"", "", "j143", "OnSaleDate", "date", "{$currentDateTime}"},
 			{"", "", "j142", "ExpectedShipDate", "date", "{$currentDateTime}"},
 		};
-
-	public OnixSupplyDateBuilder(final String onixVersion, final int tagType, final HashMap<String, String> args)
+	private static final int SEQUENCE_NUMBER = 3200;
+	
+	public OnixSupplyDateBuilder(final HashMap<String, String> args)
 	{
-		super(onixVersion, tagType, args);
+		super(args);
 		elementDefinitions = SUPPLY_DATE_DEFINITIONS;
 	}
 	
 	@Override
-	public void appendElementsTo(Element parentNode)
+	public void appendElementsTo(final Element parentNode, final String onixVersion, final int tagType)
 	{
+		initialize(onixVersion, tagType);
+		
 		// we have to build different date elements for ONIX 2.1 and ONIX 3
 		if(onixVersion.equals("2.1"))
 		{
@@ -60,4 +63,9 @@ public class OnixSupplyDateBuilder extends OnixSupplyDetailPartsBuilder
 		}
 	}
 
+	@Override
+	public int getSequenceNumber()
+	{
+		return SEQUENCE_NUMBER;
+	}
 }

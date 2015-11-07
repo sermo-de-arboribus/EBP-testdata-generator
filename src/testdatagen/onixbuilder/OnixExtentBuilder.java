@@ -78,6 +78,6 @@ public class OnixExtentBuilder extends OnixPartsBuilder
 	@Override
 	public int getSequenceNumber()
 	{
-		return SEQUENCE_NUMBER;
+		return SEQUENCE_NUMBER + (hasArgument("numberOfPages") ? 0 : 1);
 	}
 }

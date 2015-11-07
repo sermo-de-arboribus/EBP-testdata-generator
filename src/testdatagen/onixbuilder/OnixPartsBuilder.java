@@ -8,7 +8,7 @@ import testdatagen.utilities.TitleUtils;
 import testdatagen.utilities.Utilities;
 import nu.xom.Element;
 
-public abstract class OnixPartsBuilder
+public abstract class OnixPartsBuilder implements Comparable<OnixPartsBuilder>
 {
 	// constants defined for ONIX tag types
 	public static final int SHORTTAG = 1;
@@ -55,6 +55,23 @@ public abstract class OnixPartsBuilder
 	 * gets an argument value from the arguments HashMap that was passed to the constructor
 	 * @arg String: key to the hash map.
 	 */
+	
+	public int compareTo(final OnixPartsBuilder otherBuilder)
+	{
+		if(this.getSequenceNumber() < otherBuilder.getSequenceNumber())
+		{
+			return -1;
+		}
+		if(this.getSequenceNumber() > otherBuilder.getSequenceNumber())
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	
 	protected String getArgument(String arg)
 	{
 		return arguments.get(arg);

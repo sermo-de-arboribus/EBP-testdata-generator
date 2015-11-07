@@ -23,19 +23,22 @@ public class OnixRelatedProductBuilder extends OnixPartsBuilder
 			{"b012", "ProductForm", "b012", "ProductForm", "productform", "BB"},
 			{"b333", "ProductFormDetail", "b333", "ProductFormDetail", "productformdetail", "E200"},
 		};
+	private static final int SEQUENCE_NUMBER = 2800;
 	
-	public OnixRelatedProductBuilder(String onixVersion, int tagType, HashMap<String, String> args)
+	public OnixRelatedProductBuilder(HashMap<String, String> args)
 	{
-		super(onixVersion, tagType, args);
+		super(args);
 		elementDefinitions = RELATED_PRODUCT_DEFINITIONS;
 	}
 	
 	@Override
-	public Element build()
+	public Element build(String onixVersion, int tagType)
 	{
-		OnixProductIdentifierBuilder opib = new OnixProductIdentifierBuilder(onixVersion, tagType, arguments);
-		OnixProductFormBuilder opfb = new OnixProductFormBuilder(onixVersion, tagType, arguments);
-		OnixProductFormDetailBuilder opfdb = new OnixProductFormDetailBuilder(onixVersion, tagType, arguments);
+		initialize(onixVersion, tagType);
+		
+		OnixProductIdentifierBuilder opib = new OnixProductIdentifierBuilder(arguments);
+		OnixProductFormBuilder opfb = new OnixProductFormBuilder(arguments);
+		OnixProductFormDetailBuilder opfdb = new OnixProductFormDetailBuilder(arguments);
 		
 		Element relatedProductNode = new Element(getTagName(0));
 		
@@ -43,11 +46,16 @@ public class OnixRelatedProductBuilder extends OnixPartsBuilder
 		productRelationCode.appendChild(new Text(determineElementContent(1)));
 		relatedProductNode.appendChild(productRelationCode);
 		
-		relatedProductNode.appendChild(opib.build());
-		relatedProductNode.appendChild(opfb.build());
-		relatedProductNode.appendChild(opfdb.build());
+		relatedProductNode.appendChild(opib.build(onixVersion, tagType));
+		relatedProductNode.appendChild(opfb.build(onixVersion, tagType));
+		relatedProductNode.appendChild(opfdb.build(onixVersion, tagType));
 		
 		return relatedProductNode;
 	}
 
+	@Override
+	public int getSequenceNumber()
+	{
+		return SEQUENCE_NUMBER;
+	}
 }

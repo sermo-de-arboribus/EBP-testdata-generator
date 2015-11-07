@@ -32,16 +32,19 @@ public class OnixPriceBuilder extends OnixSupplyDetailPartsBuilder
 	/*20*/	{"", "", "j161", "PriceEffectiveFrom", "fromdate", "{$currentDate}"},
 			{"", "", "j162", "PriceEffectiveUntil", "untildate", "{$currentDate}"}
 		};
+	private static final int SEQUENCE_NUMBER = 3300;
 
-	public OnixPriceBuilder(final String onixVersion, final int tagType, final HashMap<String, String> args)
+	public OnixPriceBuilder(final HashMap<String, String> args)
 	{
-		super(onixVersion, tagType, args);
+		super(args);
 		elementDefinitions = PRICE_ELEMENT_DEFINITIONS;
 	}
 	
 	@Override
-	public void appendElementsTo(Element parentNode)
+	public void appendElementsTo(final Element parentNode, final String onixVersion, final int tagType)
 	{
+		initialize(onixVersion, tagType);
+		
 		Element priceNode = new Element(getTagName(0));
 		parentNode.appendChild(priceNode);
 		
@@ -50,17 +53,9 @@ public class OnixPriceBuilder extends OnixSupplyDetailPartsBuilder
 		priceNode.appendChild(typeCode);
 		
 		// build discountcode information
-		Element temporaryParentNode;
-		if(onixVersion.equals("3.0"))
-		{
-			temporaryParentNode = new Element(getTagName(2));
-			priceNode.appendChild(temporaryParentNode);
-		}
-		else
-		{
-			temporaryParentNode = priceNode;
-		}
-		appendElementsFromTo(temporaryParentNode, 3, 5);
+		Element discountCodedNode = new Element(getTagName(2));
+		priceNode.appendChild(discountCodedNode);
+		appendElementsFromTo(discountCodedNode, 3, 5);
 		
 		// add price status and price amount
 		appendElementsFromTo(priceNode, 6, 7);
@@ -68,13 +63,13 @@ public class OnixPriceBuilder extends OnixSupplyDetailPartsBuilder
 		// handle tax information
 		if(onixVersion.equals("3.0"))
 		{
-			temporaryParentNode = new Element(getTagName(8));
-			priceNode.appendChild(temporaryParentNode);
-			appendElementsFromTo(temporaryParentNode, 9, 12);
+			discountCodedNode = new Element(getTagName(8));
+			priceNode.appendChild(discountCodedNode);
+			appendElementsFromTo(discountCodedNode, 9, 12);
 		}
 		else
 		{
-			appendElementsFromTo(temporaryParentNode, 10, 12);
+			appendElementsFromTo(discountCodedNode, 10, 12);
 		}
 
 		// add currency code
@@ -83,10 +78,10 @@ public class OnixPriceBuilder extends OnixSupplyDetailPartsBuilder
 		// add territorial information
 		if(onixVersion.equals("3.0"))
 		{
-			temporaryParentNode = new Element(getTagName(14));
-			priceNode.appendChild(temporaryParentNode);
+			discountCodedNode = new Element(getTagName(14));
+			priceNode.appendChild(discountCodedNode);
 		}
-		appendElementsFromTo(temporaryParentNode, 15, 16);
+		appendElementsFromTo(discountCodedNode, 15, 16);
 		
 		// add price dates
 		if(onixVersion.equals("3.0"))
@@ -112,7 +107,13 @@ public class OnixPriceBuilder extends OnixSupplyDetailPartsBuilder
 		}
 		
 	}
-
+	
+	@Override
+	public int getSequenceNumber()
+	{
+		return SEQUENCE_NUMBER;
+	}
+	
 	private void appendElementsFromTo(Element parent, int from, int to)
 	{
 		for(int i = from; i <= to; i++)

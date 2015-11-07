@@ -20,16 +20,19 @@ public class OnixSupplierBuilder extends OnixSupplyDetailPartsBuilder
 			{"b244", "IDValue", "b244", "IDValue", "productidvalue", "No Supplier ID Value given"},
 			{"j137", "SupplierName", "j137", "SupplierName", "suppliername", "IT E-Books-Supllier"}
 		};
-
-	public OnixSupplierBuilder(final String onixVersion, final int tagType, final HashMap<String, String> args)
+	private static final int SEQUENCE_NUMBER = 3000;
+	
+	public OnixSupplierBuilder(final HashMap<String, String> args)
 	{
-		super(onixVersion, tagType, args);
+		super(args);
 		elementDefinitions = SUPPLIER_ELEMENTS_DEFINITIONS;
 	}
 	
 	@Override
-	public void appendElementsTo(Element parentNode)
+	public void appendElementsTo(Element parentNode, final String onixVersion, final int tagType)
 	{
+		initialize(onixVersion, tagType);
+		
 		if(onixVersion.equals("3.0"))
 		{
 			Element supplier = new Element(getTagName(0));
@@ -65,5 +68,10 @@ public class OnixSupplierBuilder extends OnixSupplyDetailPartsBuilder
 		supplierName.appendChild(new Text(determineElementContent(6)));
 		parentNode.appendChild(supplierName);
 	}
-
+	
+	@Override
+	public int getSequenceNumber()
+	{
+		return SEQUENCE_NUMBER;
+	}
 }

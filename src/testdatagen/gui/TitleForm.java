@@ -208,13 +208,13 @@ public class TitleForm extends JDialog
 		epmoBox.setName("epubmobi");
 		
 		prodIdGtin13 = new JCheckBox("GTIN-13");
-		prodIdGtin13.setName("GTIN-13");
+		prodIdGtin13.setName("gtin13");
 		
 		prodIdDoi = new JCheckBox("DOI");
-		prodIdDoi.setName("DOI");
+		prodIdDoi.setName("doi");
 		
 		prodIdUrn = new JCheckBox("URN");
-		prodIdUrn.setName("URN");
+		prodIdUrn.setName("urn");
 		
 		a103 = new JCheckBox("A103");
 		a103.setName("pfd-a103");
@@ -225,7 +225,7 @@ public class TitleForm extends JDialog
 		e200.setToolTipText("reflowable");
 		
 		e201 = new JCheckBox("E201");
-		e201.setName("pfd-E201");
+		e201.setName("pfd-e201");
 		e201.setToolTipText("fixed layout");
 		
 		e202 = new JCheckBox("E202");

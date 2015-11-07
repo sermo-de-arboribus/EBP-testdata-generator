@@ -18,16 +18,19 @@ public class OnixTextBuilder extends OnixPartsBuilder
 			{"x427", "ContentAudience", "", "", "contentaudience", ""},		
 			{"d104", "Text", "d104", "Text", "text", "Ich stehe hier und habe nichts zu sagen und das ist Poesie, wie ich sie brauche"}
 		};
+	private static final int SEQUENCE_NUMBER = 1800;
 	
-	public OnixTextBuilder(String onixVersion, int tagType, HashMap<String, String> args)
+	public OnixTextBuilder(HashMap<String, String> args)
 	{
-		super(onixVersion, tagType, args);
+		super(args);
 		elementDefinitions = TEXT_ELEMENT_DEFINITIONS;
 	}
 	
 	@Override
-	public Element build() 
+	public Element build(String onixVersion, int tagType) 
 	{
+		initialize(onixVersion, tagType);
+		
 		Element textNode = new Element(getTagName(0));
 		
 		Element textType = new Element(getTagName(1));
@@ -49,4 +52,9 @@ public class OnixTextBuilder extends OnixPartsBuilder
 		return textNode;
 	}
 
+	@Override
+	public int getSequenceNumber()
+	{
+		return SEQUENCE_NUMBER;
+	}
 }

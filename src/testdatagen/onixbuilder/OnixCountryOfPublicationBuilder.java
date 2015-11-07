@@ -14,19 +14,27 @@ public class OnixCountryOfPublicationBuilder extends OnixPartsBuilder
 		{
 			{"b083", "CountryOfPublication", "b083", "CountryOfPublication", "countryofpublication", "DE"}
 		};
+	private static final int SEQUENCE_NUMBER = 2300;
 
-	public OnixCountryOfPublicationBuilder(String onixVersion, int tagType, HashMap<String, String> args)
+	public OnixCountryOfPublicationBuilder(HashMap<String, String> args)
 	{
-		super(onixVersion, tagType, args);
+		super(args);
 		elementDefinitions = COUNTRY_DEFINITIONS;
 	}
 	
 	@Override
-	public Element build()
+	public Element build(String onixVersion, int tagType)
 	{
+		initialize(onixVersion, tagType);
+		
 		Element country = new Element(getTagName(0));
 		country.appendChild(new Text(determineElementContent(0)));
 		return country;
 	}
-
+	
+	@Override
+	public int getSequenceNumber()
+	{
+		return SEQUENCE_NUMBER;
+	}
 }

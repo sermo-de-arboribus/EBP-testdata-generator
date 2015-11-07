@@ -14,6 +14,7 @@ public class OnixCityOfPublicationBuilder extends OnixPartsBuilder
 		{
 			{"b209", "CityOfPublication", "b209", "CityOfPublication", "cityofpublication", "Stuttgart"}
 		};
+	private static final int SEQUENCE_NUMBER = 2200;
 
 	public OnixCityOfPublicationBuilder(HashMap<String, String> args)
 	{
@@ -31,4 +32,9 @@ public class OnixCityOfPublicationBuilder extends OnixPartsBuilder
 		return city;
 	}
 
+	@Override
+	public int getSequenceNumber()
+	{
+		return SEQUENCE_NUMBER;
+	}
 }

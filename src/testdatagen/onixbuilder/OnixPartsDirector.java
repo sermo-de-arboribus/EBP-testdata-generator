@@ -3,13 +3,20 @@ package testdatagen.onixbuilder;
 import nu.xom.Attribute;
 import nu.xom.Element;
 
+import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Locale;
+import java.util.Random;
 
+import testdatagen.model.Price;
 import testdatagen.model.Subject;
 import testdatagen.model.Title;
+import testdatagen.utilities.ISBNUtils;
 import testdatagen.utilities.TitleUtils;
+import testdatagen.utilities.Utilities;
 
 public class OnixPartsDirector
 {
@@ -28,6 +35,7 @@ public class OnixPartsDirector
 	public OnixPartsDirector(Title title)
 	{
 		this.title = title;
+		Random random = new Random();
 		
 		requiredElements = new LinkedList<OnixPartsBuilder>();
 		
@@ -35,7 +43,9 @@ public class OnixPartsDirector
 		requiredElements.add(new OnixHeaderBuilder(new HashMap<String, String>()));
 		
 		// add record reference
-		requiredElements.add(new OnixRecordReferenceBuilder(new HashMap<String, String>()));
+		HashMap<String, String> recRefArgs = new HashMap<String, String>();
+		recRefArgs.put("recordreference", "test-" + title.getIsbn13());
+		requiredElements.add(new OnixRecordReferenceBuilder(recRefArgs));
 		
 		// add notification Type
 		requiredElements.add(new OnixNotificationTypeBuilder(new HashMap<String, String>()));
@@ -46,8 +56,7 @@ public class OnixPartsDirector
 		// add default product Identifier (type 15: ISBN-13)
 		addProductIdentifier("15");
 		
-		// add product form
-		requiredElements.add(new OnixProductFormBuilder(new HashMap<String, String>()));
+		// product form should be handled by the onix 2.1 / onix 3 build methods
 		
 		// add product form detail
 		addProductFormDetail(title.getEpubTypeForProductFormDetail());
@@ -79,6 +88,11 @@ public class OnixPartsDirector
 		// add a default language node
 		requiredElements.add(new OnixLanguageBuilder(new HashMap<String, String>()));
 		
+		// add number of pages (in ONIX 2.1)
+		HashMap<String, String> extentArgs = new HashMap<String, String>();
+		extentArgs.put("numberofpages", "320");
+		requiredElements.add(new OnixExtentBuilder(extentArgs));
+		
 		// add a default extent element
 		requiredElements.add(new OnixExtentBuilder (new HashMap<String, String>()));
 		
@@ -93,7 +107,108 @@ public class OnixPartsDirector
 		subjectArgs.put("subjectheadingtext", TitleUtils.getRandomTopic(new Locale("de")));
 		requiredElements.add(new OnixSubjectBuilder(subjectArgs));
 		
+		// add descriptive / advertising text content
+		HashMap<String, String> textArgs = new HashMap<String, String>();
+		textArgs.put("texttypecode", "03");
+		textArgs.put("contentaudience", "00");
+		textArgs.put("text", title.getShortBlurb());
+		requiredElements.add(new OnixTextBuilder(textArgs));
 		
+		// we don't need to set a default media resource, as the title's setMediaFileUrl() method is handling this
+		
+		// add an imprint node
+		requiredElements.add(new OnixImprintBuilder(new HashMap<String,String>()));
+		
+		// add publisher information
+		requiredElements.add(new OnixPublisherBuilder(new HashMap<String, String>()));
+		
+		// add place and country of publication
+		requiredElements.add(new OnixCityOfPublicationBuilder(new HashMap<String, String>()));
+		requiredElements.add(new OnixCountryOfPublicationBuilder(new HashMap<String, String>()));
+		
+		// add publishing status
+		requiredElements.add(new OnixPublishingStatusBuilder(new HashMap<String, String>()));
+		
+		// add publication date
+		HashMap<String, String> pubDateArgs = new HashMap<String, String>();
+		long currentDateMillis = new Date().getTime();
+		long randomPubDate = random.nextInt(10) * 86400000L;	
+		randomPubDate = random.nextBoolean() ? randomPubDate : randomPubDate * -1;
+		pubDateArgs.put("publishingdate", Utilities.getDateForONIX2(new Date(currentDateMillis + randomPubDate)).substring(0, 8));
+		requiredElements.add(new OnixPublishingDateBuilder(pubDateArgs));
+		
+		// add sales rights
+		HashMap<String, String> salesRightsArgs = new HashMap<String, String>();
+
+		// build a random country list
+		StringBuffer countryList = new StringBuffer("");
+		int j = random.nextInt(6) + 1;
+		for(int i = 0; i < j; i++)
+		{
+			countryList.append(Utilities.getCountryForONIX());
+			if(i < j - 1)
+			{		// Also note that we probably need an Extent builder to give us a b061 / NumberOfPages element
+				countryList.append(" ");
+			}
+		}
+		salesRightsArgs.put("salesrightstype", "0" + (random.nextInt(1) + 1));
+		salesRightsArgs.put("countriesincluded", countryList.toString());
+		requiredElements.add(new OnixSalesRightsBuilder(salesRightsArgs));
+		
+		// add some related product
+		HashMap<String, String> relatedProductArgs = new HashMap<String, String>();
+		// determine the ISBN to be used for a related product
+		String ISBNString = Long.toString(title.getIsbn13());
+		ISBNString = ISBNString.substring(0, 6) + "5" + ISBNString.substring(7, 12);
+		String checkDigit = ISBNUtils.calculateCheckDigit(ISBNString);
+		ISBNString = ISBNString + checkDigit;
+		long relISBN = Long.parseLong(ISBNString);
+		relatedProductArgs.put("productidvalue", Long.toString(relISBN));
+		relatedProductArgs.put("productform", "BC");
+		requiredElements.add(new OnixRelatedProductBuilder(relatedProductArgs));
+		
+		// add supply detail
+		requiredElements.add(new OnixSupplierBuilder(new HashMap<String, String>()));
+		
+		// add product availability node
+		requiredElements.add(new OnixProductAvailabilityBuilder(new HashMap<String, String>()));
+		
+		// add an expected ship date
+		HashMap<String, String> expectedShipDateArgs = new HashMap<String, String>();
+		// calculate a random expected ship date
+		// Expected Ship Date, +/- 10 days from today
+		currentDateMillis = new Date().getTime();
+		long randomShipDate = random.nextInt(10) * 86400000L;
+		randomShipDate = random.nextBoolean() ? randomShipDate : randomShipDate * -1;
+		Date actualShipDate = new Date(currentDateMillis + randomShipDate);
+		String shipDateString = Utilities.getDateForONIX2(actualShipDate).substring(0, 8);
+		expectedShipDateArgs.put("supplydaterole", "08");
+		expectedShipDateArgs.put("date", shipDateString);
+		requiredElements.add(new OnixSupplyDateBuilder(expectedShipDateArgs));
+		
+		// add an on sale date
+		HashMap<String, String> onSaleDateArgs = new HashMap<String, String>();
+		long onSaleDate = random.nextInt(10) * 86400000L;
+		onSaleDate = random.nextBoolean() ? onSaleDate : onSaleDate * -1;
+		Date actualOnSaleDate = new Date(currentDateMillis + onSaleDate);
+		shipDateString = Utilities.getDateForONIX2(actualOnSaleDate).substring(0, 8);
+		onSaleDateArgs.put("supplydaterole", "02");
+		onSaleDateArgs.put("date", shipDateString);
+		requiredElements.add(new OnixSupplyDateBuilder(onSaleDateArgs));
+		
+		// add an 04-type price for Germany - further prices should become a configuration option
+		// determine random base price
+		Price basePrice = title.getBasePrice();
+		HashMap<String, String> priceArgs = new HashMap<String, String>();
+		basePrice.addPriceArguments(priceArgs);
+		requiredElements.add(new OnixPriceBuilder(priceArgs));
+	}
+	
+	public void addMediaResource(String url)
+	{
+		HashMap<String, String> mediaArgs = new HashMap<String, String>();
+		mediaArgs.put("resourcelink", url);
+		requiredElements.add(new OnixMediaResourceBuilder(mediaArgs));
 	}
 	
 	public void addProductFormDetail(String code)
@@ -164,11 +279,55 @@ public class OnixPartsDirector
 	{
 		String rootElementName = getRootName(tagType);
 		Element root = new Element(rootElementName);
+		Element parent = root;
 		root.addAttribute(new Attribute("release", "2.1"));
 
-		// TODO: build the header and product elements and append them to the root
-		// Note that the ProductForm must be set to 'DG' (or 'AJ')
-		// Also note that we probably need an Extent builder to give us a b061 / NumberOfPages element 
+		// first add specific ONIX 2.1 elements
+		replaceProductForm("DG");
+		
+		// then sort the list of required elements
+		Collections.sort(requiredElements);
+		
+		Iterator<OnixPartsBuilder> iterator = requiredElements.iterator();
+		while(iterator.hasNext())
+		{
+			OnixPartsBuilder builder = iterator.next();
+			
+			// We need to distinguish between two styles of appending elements:
+			// Elements created with direct subclasses of OnixPartsBuilder use the build() method,
+			// elements created with subclasses of OnixSupplyDetailPartsBuilder use the appendElementsTo() method.
+			// The first element that uses an OnixSupplyDetailPartsBuilder has the static sequence number 3000.
+			if(builder.getSequenceNumber() < 3000)
+			{
+				Element nextElement = builder.build("2.1", tagType);
+				// Builders that product elements that are only valid in ONIX 3 might return null
+				// when called on with onixVersion 2.1
+				if(nextElement != null)
+				{
+					parent.appendChild(nextElement);	
+				}
+				
+				// if we have just built the header, then create a <product> node an make it the
+				// parent element for all the following elements
+				if(builder.getSequenceNumber() == 100)
+				{
+					Element productElement = createElement(tagType, "Product");
+					parent.appendChild(productElement);
+					parent = productElement;
+				}
+			}
+			else if (builder.getSequenceNumber() == 3000)
+			{
+				Element supplyDetailNode = builder.build("2.1", tagType);
+				parent.appendChild(supplyDetailNode);
+				parent = supplyDetailNode;
+			}
+			else // here we handle the <supplydetail> child elements
+			{
+				OnixSupplyDetailPartsBuilder supplyDetailPartsBuilder = (OnixSupplyDetailPartsBuilder) builder;
+				supplyDetailPartsBuilder.appendElementsTo(parent, "2.1", tagType);
+			}
+		}
 		
 		return root;
 	}
@@ -178,11 +337,134 @@ public class OnixPartsDirector
 		String rootElementName = getRootName(tagType);
 		Element root = new Element(rootElementName);
 		root.addAttribute(new Attribute("release", "3.0"));
+		Element parent = root;
+		Element product = null;
 		
-		// TODO: build the header and product elements and append them to the root
-		// Note that the ProductForm must be set to 'EA' / 'DG' (or maybe 'AJ' later) 
+		// first add specific ONIX 3.0 element
+		replaceProductForm("ED");
+		
+		// then sort the list of required elements
+		Collections.sort(requiredElements);
+		
+		Iterator<OnixPartsBuilder> iterator = requiredElements.iterator();
+		
+		// when iterating through the OnixPartsBuilders, we use an integer flag to determine if we need to 
+		// create a new parent node for the following elements.
+		// 
+		int flag = 0;
+		
+		while(iterator.hasNext())
+		{
+			OnixPartsBuilder builder = iterator.next();
+			// we've reached the first element after the header, so instantiate a product node and increment the flag
+			if(flag == 0 && builder.getSequenceNumber() > 100)
+			{
+				product = createElement(tagType, "Product");
+				parent.appendChild(product);
+				parent = product;
+				flag++;
+			}
+			// we've reached the first element for the <descriptivedetail> composite
+			if(flag == 1 && builder.getSequenceNumber() >= 450)
+			{
+				Element descriptiveDetail = createElement(tagType, "DescriptiveDetail");
+				product.appendChild(descriptiveDetail);
+				parent = descriptiveDetail;
+				flag++;
+			}
+			// we've reached the first element for the <collateraldetail> composite
+			if(flag == 2 && builder.getSequenceNumber() >= 1800)
+			{
+				Element collateralDetail = createElement(tagType, "CollateralDetail");
+				product.appendChild(collateralDetail);
+				parent = collateralDetail;
+				flag++;
+			}
+			// we've reached the first element for the <publishingdetail> composite
+			if(flag == 3 && builder.getSequenceNumber() >= 2000)
+			{
+				Element publishingDetail = createElement(tagType,"PublishingDetail");
+				product.appendChild(publishingDetail);
+				parent = publishingDetail;
+				flag++;
+			}
+			// we've reached the first element for the <relatedmaterial> composite
+			if(flag == 4 && builder.getSequenceNumber() > 2600)
+			{
+				Element relatedMaterial = createElement(tagType, "RelatedMaterial");
+				product.appendChild(relatedMaterial);
+				parent = relatedMaterial;
+				flag++;
+			}
+			// we've reached the first element for the <productsupply> composite
+			if(flag == 5 && builder.getSequenceNumber() > 2800)
+			{
+				Element productSupply = createElement(tagType, "ProductSupply");
+				product.appendChild(productSupply);
+				parent = productSupply;
+				flag++;
+			}
+			
+			// here we're adding the next element that is not a predecessor of <supplydetail>
+			if(builder.getSequenceNumber() < 3000)
+			{
+				Element nextElement = builder.build("3.0", tagType);
+				parent.appendChild(nextElement);
+			}
+			// this is the <supplydetail> node
+			else if (builder.getSequenceNumber() == 3000)
+			{
+				Element supplyDetailNode = builder.build("3.0", tagType);
+				parent.appendChild(supplyDetailNode);
+				parent = supplyDetailNode;
+			}
+			else // here we handle the <supplydetail> child elements
+			{
+				OnixSupplyDetailPartsBuilder supplyDetailPartsBuilder = (OnixSupplyDetailPartsBuilder) builder;
+				supplyDetailPartsBuilder.appendElementsTo(parent, "3.0", tagType);
+			}
+		}
 		
 		return root;
+	}
+	
+	public void replaceMediaResource(String url)
+	{
+		Iterator<OnixPartsBuilder> iterator = requiredElements.iterator();
+		while(iterator.hasNext())
+		{
+			OnixPartsBuilder nextBuilder = iterator.next();
+			if(nextBuilder instanceof OnixMediaResourceBuilder)
+			{
+				iterator.remove();
+			}
+		}
+		addMediaResource(url);
+	}
+	
+	public void replaceProductForm(String productFormCode)
+	{
+		Iterator<OnixPartsBuilder> iterator = requiredElements.iterator();
+		while(iterator.hasNext())
+		{
+			OnixPartsBuilder nextBuilder = iterator.next();
+			if(nextBuilder instanceof OnixProductFormBuilder)
+			{
+				iterator.remove();
+			}
+		}
+		HashMap<String, String> productFormArgs = new HashMap<String, String>();
+		productFormArgs.put("productform", productFormCode);
+		requiredElements.add(new OnixProductFormBuilder(productFormArgs));
+	}
+	
+	private Element createElement(int tagType, String name)
+	{
+		if(tagType == OnixPartsBuilder.SHORTTAG)
+		{
+			name = name.toLowerCase();
+		}
+		return new Element(name);
 	}
 	
 	/*

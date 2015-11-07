@@ -46,6 +46,8 @@ public class OnixSubjectBuilder extends OnixPartsBuilder
 	@Override
 	public Element build(String onixVersion, int tagType)
 	{
+		initialize(onixVersion, tagType);
+		
 		Element subject;
 		Element subjectIdentifier;
 		

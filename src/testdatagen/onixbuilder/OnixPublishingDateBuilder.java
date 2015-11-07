@@ -16,16 +16,19 @@ public class OnixPublishingDateBuilder extends OnixPartsBuilder
 			{"x448", "PublishingDateRole", "", "", "publishingdaterole", "01"},
 			{"b306", "Date", "b003", "PublicationDate", "publishingdate", "{$currentDateTime}"}
 		};
-
-	public OnixPublishingDateBuilder(String onixVersion, int tagType, HashMap<String, String> args)
+	private static final int SEQUENCE_NUMBER = 2400;
+	
+	public OnixPublishingDateBuilder(HashMap<String, String> args)
 	{
-		super(onixVersion, tagType, args);
+		super(args);
 		elementDefinitions = PUBLISHING_DATE_DEFINITIONS;
 	}
 
 	@Override
-	public Element build()
+	public Element build(String onixVersion, int tagType)
 	{
+		initialize(onixVersion, tagType);
+		
 		Element publishingdate;
 		
 		if(onixVersion.equals("2.1"))
@@ -47,5 +50,11 @@ public class OnixPublishingDateBuilder extends OnixPartsBuilder
 		}
 		
 		return publishingdate;
+	}
+	
+	@Override
+	public int getSequenceNumber()
+	{
+		return SEQUENCE_NUMBER;
 	}
 }

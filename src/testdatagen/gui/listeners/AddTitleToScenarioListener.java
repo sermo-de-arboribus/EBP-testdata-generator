@@ -88,7 +88,7 @@ public class AddTitleToScenarioListener implements ActionListener
 			{
 				newTitle.getOnixPartsDirector().addProductFormDetail("E202");
 			}
-			if(Boolean.parseBoolean(formDataMap.get("pfd-E203")))
+			if(Boolean.parseBoolean(formDataMap.get("pfd-e203")))
 			{
 				newTitle.getOnixPartsDirector().addProductFormDetail("E203");
 			}

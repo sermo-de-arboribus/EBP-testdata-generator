@@ -12,15 +12,15 @@ public abstract class OnixSupplyDetailPartsBuilder extends OnixPartsBuilder
 	 * but just returns a freshly built node. The build() function of OnixSupplyDetailPartBuilder works on
 	 * a supplyDetail node which is passed in as an argument. 
 	 */
-	public OnixSupplyDetailPartsBuilder(String onixVersion, int tagType, HashMap<String, String> args)
+	public OnixSupplyDetailPartsBuilder(HashMap<String, String> args)
 	{
-		super(onixVersion, tagType, args);
+		super(args);
 	}
 	
 	/*
 	 * build() just returns an empty SupplyDetail node.
 	 */
-	public Element build()
+	public Element build(String onixVersion, int tagType)
 	{
 		if(tagType == OnixPartsBuilder.REFERENCETAG)
 		{
@@ -32,6 +32,6 @@ public abstract class OnixSupplyDetailPartsBuilder extends OnixPartsBuilder
 		}
 	}
 	
-	public abstract void appendElementsTo(Element parentNode);
+	public abstract void appendElementsTo(Element parentNode, String onixVersion, int tagType);
 
 }

@@ -19,16 +19,19 @@ public class OnixSalesRightsBuilder extends OnixPartsBuilder
 			{"x449", "CountriesIncluded", "b090", "RightsCountry", "countriesincluded", "DE AT CH"},
 			{"x450", "RegionsIncluded", "b388", "RightsTerritory", "regionsincluded", "US-TX"}
 		};
+	private static final int SEQUENCE_NUMBER = 2600;
 
-	public OnixSalesRightsBuilder(String onixVersion, int tagType, HashMap<String, String> args)
+	public OnixSalesRightsBuilder(HashMap<String, String> args)
 	{
-		super(onixVersion, tagType, args);
+		super(args);
 		elementDefinitions = SALES_RIGHTS_DEFINITIONS;
 	}
 	
 	@Override
-	public Element build()
+	public Element build(String onixVersion, int tagType)
 	{
+		initialize(onixVersion, tagType);
+		
 		Element salesRightsNode = new Element(getTagName(0));
 		
 		Element salesRightsType = new Element(getTagName(1));
@@ -58,4 +61,9 @@ public class OnixSalesRightsBuilder extends OnixPartsBuilder
 		return salesRightsNode;
 	}
 
+	@Override
+	public int getSequenceNumber()
+	{
+		return SEQUENCE_NUMBER;
+	}
 }
