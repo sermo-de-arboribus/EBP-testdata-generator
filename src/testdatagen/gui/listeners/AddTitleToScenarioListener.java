@@ -51,7 +51,7 @@ public class AddTitleToScenarioListener implements ActionListener
 					
 			// instantiate a new title object
 			long nextIsbn = ISBNUtils.getNextISBN();
-			Title newTitle = new Title(nextIsbn, "test-" + nextIsbn, TitleUtils.getNewTitle(), TitleUtils.getNewAuthor(), formDataMap.get("covertype").equals("Media file link") ? true : false);
+			Title newTitle = new Title(nextIsbn, "test-" + nextIsbn, TitleUtils.getNewTitle(), TitleUtils.getNewAuthor(), format);
 
 			// additional product identifiers required in ONIX file?
 			if(Boolean.parseBoolean(formDataMap.get("gtin13")))
@@ -115,7 +115,7 @@ public class AddTitleToScenarioListener implements ActionListener
 			EBookFileFactory eff = EBookFileFactory.getInstance();
 					
 			EBookFile ebookFile = eff.generateFile(Utilities.formatToFileType(format), nextIsbn);
-			newTitle.addMainProductFile(ebookFile, format);
+			newTitle.addFile(ebookFile);
 					
 			// check for optional product content files and generate if needed
 			if(Boolean.parseBoolean(formDataMap.get("epubmobi")))

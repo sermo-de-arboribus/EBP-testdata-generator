@@ -160,19 +160,19 @@ public class TestDataGeneratorMain extends JFrame
 		scenarios.add(scenario02);
 		scenarios.add(scenario03);
 		
-		Title testtitle001 = new Title(9783497600014L, "test-9783497600014", "Testtitel Nr. 1", "Fritz Riemann", true);
-		Title testtitle002 = new Title(9787561333068L, "test-9787561333068", "Testtitel Nr. 2", "李叔同", false);
-		Title testtitle003 = new Title(9787561331163L, "test-9787561331163", "Testtitel Nr. 3", "Shutong Li", false);
-		Title testtitle004 = new Title(9783888146466L, "test-3-88814-646-1", "Changing New York", "Berenice Abbott", true);
-		Title testtitle005 = new Title(9783458058649L, "test-9783458058649", "Die vierte Zwischeneiszeit", "Kobo Abe", true);
-		Title testtitle006 = new Title(9780679733782L, "test-9780679733782", "The Woman in the Dunes", "Kōbō Abe", false);
-		Title testtitle007 = new Title(9783499504723L, "test-9783499504723", "Franz Werfel in Selbstzeugnissen", "Norbert Abels", true);
-		Title testtitle008 = new Title(9783836925266L, "test-9783836925266", "Theater. Schauspiele von der Antike bis heute", "Norbert Abels", false);
-		Title testtitle009 = new Title(9783923854561L, "test-9783923854561", "Xuma. Ein Roman aus Südafrika", "Peter Abrahams", false);
-		Title testtitle010 = new Title(9780030549823L, "test-9780030549823", "A Glossary of Literary Terms", "Meyer Howard Abrams", true);
-		Title testtitle011 = new Title(9787229004385L, "test-978-7-229-00438-5", "Anthills of the Savannah", "Chinua Achebe", false);
-		Title testtitle012 = new Title(9780435905255L, "test-9780435905255", "Things Fall Apart", "Chinua Achebe", false);
-		Title testtitle013 = new Title(9789402008005L, "test-9789402008005", "Das Laubenspiel", "Adam de la Halle", true);
+		Title testtitle001 = new Title(9783497600014L, "test-9783497600014", "Testtitel Nr. 1", "Fritz Riemann", "EPUB");
+		Title testtitle002 = new Title(9787561333068L, "test-9787561333068", "Testtitel Nr. 2", "李叔同", "WMEPUB");
+		Title testtitle003 = new Title(9787561331163L, "test-9787561331163", "Testtitel Nr. 3", "Shutong Li", "NDEPUB");
+		Title testtitle004 = new Title(9783888146466L, "test-3-88814-646-1", "Changing New York", "Berenice Abbott", "PDF");
+		Title testtitle005 = new Title(9783458058649L, "test-9783458058649", "Die vierte Zwischeneiszeit", "Kobo Abe", "WMPDF");
+		Title testtitle006 = new Title(9780679733782L, "test-9780679733782", "The Woman in the Dunes", "Kōbō Abe", "NDPDF");
+		Title testtitle007 = new Title(9783499504723L, "test-9783499504723", "Franz Werfel in Selbstzeugnissen", "Norbert Abels", "WMMOBI");
+		Title testtitle008 = new Title(9783836925266L, "test-9783836925266", "Theater. Schauspiele von der Antike bis heute", "Norbert Abels", "NDMOBI");
+		Title testtitle009 = new Title(9783923854561L, "test-9783923854561", "Xuma. Ein Roman aus Südafrika", "Peter Abrahams", "EPUB");
+		Title testtitle010 = new Title(9780030549823L, "test-9780030549823", "A Glossary of Literary Terms", "Meyer Howard Abrams", "WMEPUB");
+		Title testtitle011 = new Title(9787229004385L, "test-978-7-229-00438-5", "Anthills of the Savannah", "Chinua Achebe", "NDEPUB");
+		Title testtitle012 = new Title(9780435905255L, "test-9780435905255", "Things Fall Apart", "Chinua Achebe", "EPUB");
+		Title testtitle013 = new Title(9789402008005L, "test-9789402008005", "Das Laubenspiel", "Adam de la Halle", "WMEPUB");
 		
 		scenario01.addTitle(testtitle001);
 		scenario01.addTitle(testtitle002);
@@ -205,8 +205,8 @@ public class TestDataGeneratorMain extends JFrame
 			while(titr.hasNext())
 			{
 				Title tit = titr.next();
-				EBookFile ebookFile = eff.generateFile(Utilities.formatToFileType("EPUB"), tit.getIsbn13());
-				tit.addMainProductFile(ebookFile, "EPUB");
+				EBookFile ebookFile = eff.generateFile(tit.getEpubType(), tit.getIsbn13());
+				tit.addFile(ebookFile);
 				
 				GraphicFile coverFile = gff.generateFile(CoverUtils.getRandomCoverFormat(), tit.getIsbn13(), GraphicFile.Type.COVER);
 				tit.addFile(coverFile);

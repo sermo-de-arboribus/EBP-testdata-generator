@@ -25,7 +25,6 @@ public class Title implements Serializable
 	
 	private long isbn13;
     private String uid, name, author; // TODO: a book could have several authors with different author types. Expand model to reflect that
-    private boolean mediaFileLink;
     private String mediaFileUrl;
     private HashSet<File> files;
     private String epubType;
@@ -33,13 +32,13 @@ public class Title implements Serializable
     private String protection; // WM = watermarked, ND = no protection, DRM = hard DRM
     private OnixPartsDirector onixPartsDirector;
     
-    public Title(final long isbn13, final String uid, final String name, final String author, final boolean mediaFileLink)
+    public Title(final long isbn13, final String uid, final String name, final String author, final String format)
     {
     	this.isbn13 = isbn13;
     	this.uid = uid;
     	this.name = name;
     	this.author = author;
-    	this.mediaFileLink = mediaFileLink;
+    	setFormat(format);
     	files = new HashSet<File>();
     	onixPartsDirector = new OnixPartsDirector(this);
     }
@@ -48,13 +47,6 @@ public class Title implements Serializable
     {
     	files.add(newFile);
     }
-
-
-	public synchronized void addMainProductFile(EBookFile ebookFile, String format)
-	{
-		files.add(ebookFile);
-		setFormat(format);
-	}
 	
 	public synchronized String getAuthor()
 	{
@@ -266,7 +258,7 @@ public class Title implements Serializable
 
 	public boolean hasMediaFileLink()
 	{
-		return mediaFileLink;
+		return mediaFileUrl != null;
 	}
     
     public synchronized boolean removeFile(final File remFile)
