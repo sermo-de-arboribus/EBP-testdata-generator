@@ -52,11 +52,18 @@ public class AddTitleToScenarioListener implements ActionListener
 			
 			// determine product format
 			String format = formDataMap.get("product");
-					
+			String coverUploadType = formDataMap.get("covertype");
+			
 			// instantiate a new title object
 			long nextIsbn = ISBNUtils.getNextISBN();
 			Title newTitle = new Title(nextIsbn, "test-" + nextIsbn, TitleUtils.getNewTitle(), TitleUtils.getNewAuthor(), format);
 
+			// do we need to upload the cover and include a media file link in the ONIX?
+			if(coverUploadType.equals("Media file link"))
+			{
+				newTitle.setMediaFileUrl("");
+			}
+			
 			// additional product identifiers required in ONIX file?
 			if(Boolean.parseBoolean(formDataMap.get("gtin13")))
 			{

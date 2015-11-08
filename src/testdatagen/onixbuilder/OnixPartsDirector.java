@@ -3,26 +3,15 @@ package testdatagen.onixbuilder;
 import nu.xom.Attribute;
 import nu.xom.Element;
 
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Locale;
-import java.util.Random;
+import java.io.Serializable;
+import java.util.*;
 
-import testdatagen.model.Price;
-import testdatagen.model.Subject;
-import testdatagen.model.Title;
-import testdatagen.utilities.ISBNUtils;
-import testdatagen.utilities.TitleUtils;
-import testdatagen.utilities.Utilities;
+import testdatagen.model.*;
+import testdatagen.utilities.*;
 
-public class OnixPartsDirector
+public class OnixPartsDirector implements Serializable
 {
-	// constants defined for ONIX tag types
-	public static final int SHORTTAG = 1;
-	public static final int REFERENCETAG = 2;
+	private static final long serialVersionUID = 1L;
 	
 	private LinkedList<OnixPartsBuilder> requiredElements;
 	private Title title;
@@ -261,7 +250,8 @@ public class OnixPartsDirector
 	public void addTitle(String titleType)
 	{
 		HashMap<String, String> titleArgs = new HashMap<>();
-		titleArgs.put("titletext", determineTitleStringByType("01", title));
+		titleArgs.put("titletext", determineTitleStringByType(titleType, title));
+		titleArgs.put("titletype", titleType);
 		OnixTitleBuilder otb = new OnixTitleBuilder(titleArgs);
 		requiredElements.add(otb); 
 	}
@@ -269,8 +259,9 @@ public class OnixPartsDirector
 	public void addTitleWithSubtitle(String titleType)
 	{
 		HashMap<String, String> titleArgs = new HashMap<>();
-		titleArgs.put("titletext", determineTitleStringByType("01", title));
+		titleArgs.put("titletext", determineTitleStringByType(titleType, title));
 		titleArgs.put("subtitle", determineTitleStringByType("subtitle", title));
+		titleArgs.put("titletype", titleType);
 		OnixTitleBuilder otb = new OnixTitleBuilder(titleArgs);
 		requiredElements.add(otb); 
 	}
@@ -321,6 +312,9 @@ public class OnixPartsDirector
 				Element supplyDetailNode = builder.build("2.1", tagType);
 				parent.appendChild(supplyDetailNode);
 				parent = supplyDetailNode;
+				
+				OnixSupplyDetailPartsBuilder supplyDetailPartsBuilder = (OnixSupplyDetailPartsBuilder) builder;
+				supplyDetailPartsBuilder.appendElementsTo(parent, "2.1", tagType);
 			}
 			else // here we handle the <supplydetail> child elements
 			{
@@ -475,10 +469,12 @@ public class OnixPartsDirector
 		String rootElementName;
 		switch(tagType)
 		{
-			case SHORTTAG:
+			case OnixPartsBuilder.SHORTTAG:
 				rootElementName = "ONIXmessage";
-			case REFERENCETAG:
+				break;
+			case OnixPartsBuilder.REFERENCETAG:
 				rootElementName = "ONIXMessage";
+				break;
 			default:
 				rootElementName = "ONIXmessage";
 		}
@@ -517,12 +513,12 @@ public class OnixPartsDirector
 		switch(titleType)
 		{
 			case "subtitle": return subTitle;
-			case "01":
-			case "title":
-			case "distinctivetitle": return mainTitle;
 			case "05":
 			case "abbreviatedtitle": return abbrevTitle;
-			default: return "";
+			case "01":
+			case "title":
+			case "distinctivetitle":
+			default: return mainTitle;
 		}
 	}
 }

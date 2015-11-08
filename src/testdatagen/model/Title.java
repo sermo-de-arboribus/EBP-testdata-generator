@@ -1,26 +1,17 @@
 package testdatagen.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 import testdatagen.model.files.EBookFile;
 import testdatagen.model.files.File;
 import testdatagen.model.files.GraphicFile;
 import testdatagen.onixbuilder.*;
-import testdatagen.templates.AuthorBlurbTemplate;
-import testdatagen.templates.TitleBlurbTemplate;
-import testdatagen.templates.TitleBlurbTemplateType;
+import testdatagen.templates.*;
 import testdatagen.utilities.Utilities;
 
 public class Title implements Serializable
 {
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private static final String[] validFormats = ProductType.productTypeNames();
 	
@@ -208,6 +199,14 @@ public class Title implements Serializable
 			if(!(file instanceof GraphicFile))
 			{
 				returnList.add(file);
+			}
+			else
+			{
+				GraphicFile graphicFile = (GraphicFile) file;
+				if(!graphicFile.isCover())
+				{
+					returnList.add(file);
+				}
 			}
 		}
 		return returnList;

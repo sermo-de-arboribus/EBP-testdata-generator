@@ -60,28 +60,34 @@ public class OnixPriceBuilder extends OnixSupplyDetailPartsBuilder
 		// add price status and price amount
 		appendElementsFromTo(priceNode, 6, 7);
 		
+		// add territorial and currency information in ONIX 2.1
+		if(onixVersion.equals("2.1"))
+		{
+			appendElementsFromTo(priceNode, 13, 13);
+			appendElementsFromTo(priceNode, 15, 16);
+		}
+		
 		// handle tax information
 		if(onixVersion.equals("3.0"))
 		{
-			discountCodedNode = new Element(getTagName(8));
-			priceNode.appendChild(discountCodedNode);
-			appendElementsFromTo(discountCodedNode, 9, 12);
+			Element taxNode = new Element(getTagName(8));
+			priceNode.appendChild(taxNode);
+			appendElementsFromTo(taxNode, 9, 12);
 		}
 		else
 		{
-			appendElementsFromTo(discountCodedNode, 10, 12);
+			appendElementsFromTo(priceNode, 10, 12);
 		}
-
-		// add currency code
-		appendElementsFromTo(priceNode, 13, 13);
 		
-		// add territorial information
+		// add currency and territorial information in ONIX 3.0
 		if(onixVersion.equals("3.0"))
 		{
-			discountCodedNode = new Element(getTagName(14));
-			priceNode.appendChild(discountCodedNode);
+			appendElementsFromTo(priceNode, 13, 13);
+			
+			Element territoryNode = new Element(getTagName(14));
+			priceNode.appendChild(territoryNode);
+			appendElementsFromTo(territoryNode, 15, 16);
 		}
-		appendElementsFromTo(discountCodedNode, 15, 16);
 		
 		// add price dates
 		if(onixVersion.equals("3.0"))

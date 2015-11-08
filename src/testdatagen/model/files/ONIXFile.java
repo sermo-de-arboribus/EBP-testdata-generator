@@ -38,7 +38,7 @@ public class ONIXFile extends File
 		}
 		
 		String tagTypeString = "";
-		if(tagType == OnixPartsDirector.REFERENCETAG)
+		if(tagType == OnixPartsBuilder.REFERENCETAG)
 		{
 			tagTypeString = "reference";
 		}

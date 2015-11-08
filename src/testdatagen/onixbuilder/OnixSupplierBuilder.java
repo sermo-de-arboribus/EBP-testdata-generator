@@ -55,6 +55,11 @@ public class OnixSupplierBuilder extends OnixSupplyDetailPartsBuilder
 			supplierIdentifier.appendChild(nextElement);	
 		}
 		
+		// Supplier Name
+		Element supplierName = new Element(getTagName(6));
+		supplierName.appendChild(new Text(determineElementContent(6)));
+		parentNode.appendChild(supplierName);
+		
 		if(onixVersion.equals("2.1"))
 		{
 			// Supplier Role
@@ -62,11 +67,6 @@ public class OnixSupplierBuilder extends OnixSupplyDetailPartsBuilder
 			supplierRole.appendChild(new Text(determineElementContent(1)));
 			parentNode.appendChild(supplierRole);
 		}
-		
-		// Supplier Name
-		Element supplierName = new Element(getTagName(6));
-		supplierName.appendChild(new Text(determineElementContent(6)));
-		parentNode.appendChild(supplierName);
 	}
 	
 	@Override

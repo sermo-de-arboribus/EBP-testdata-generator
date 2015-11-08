@@ -181,6 +181,12 @@ public class TitleForm extends JDialog
 		formDataMap.put(e201.getName(), e201.isSelected() ? "true" : "false");
 		formDataMap.put(e202.getName(), e202.isSelected() ? "true" : "false");
 		formDataMap.put(e203.getName(), e203.isSelected() ? "true" : "false");
+		formDataMap.put(tittyp03.getName(), tittyp03.isSelected() ? "true" : "false");
+		formDataMap.put(tittyp06.getName(), tittyp06.isSelected() ? "true" : "false");
+		formDataMap.put(tittyp08.getName(), tittyp08.isSelected() ? "true" : "false");
+		formDataMap.put(tittyp11.getName(), tittyp11.isSelected() ? "true" : "false");
+		formDataMap.put(tittyp13.getName(), tittyp13.isSelected() ? "true" : "false");
+		
 		return formDataMap;
 	}
 	

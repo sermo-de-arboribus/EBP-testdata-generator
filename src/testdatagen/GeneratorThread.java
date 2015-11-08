@@ -39,7 +39,6 @@ public class GeneratorThread extends Thread
 				// TODO: check, if cover is handled by MediaFileLink
 				if(title.hasMediaFileLink())
 				{
-					// TODO: upload cover file(s) to Dropbox and delete them from the local disc; keep file for later usage by ONIX builder
 					DropboxUploaderThread uploader = new DropboxUploaderThread(storedFile, title);
 					uploadThreads.add(uploader);
 					uploader.start();
@@ -74,7 +73,6 @@ public class GeneratorThread extends Thread
 			
 			// generate ONIX 3.0 file with short tag names
 			onixFile = new ONIXFile(title.getIsbn13(), OnixPartsBuilder.SHORTTAG, "3.0");
-
 			onixFile.generate(title, destDir);
 			
 			ArrayList<testdatagen.model.files.File> fileList = title.getNonCoverFiles();

@@ -103,6 +103,8 @@ public class TestDataGeneratorMain extends JFrame
 	private void buildMenuBar()
 	{
 		JMenuBar menubar = new JMenuBar();
+		
+		// Info menu
 		JMenu infoMenu = new JMenu("Info");
 		JMenuItem generalInfoItem = new JMenuItem("How to use TDG");
 		JMenuItem aboutInfoItem = new JMenuItem("About TDG");
@@ -112,7 +114,20 @@ public class TestDataGeneratorMain extends JFrame
 		infoMenu.add(aboutInfoItem);
 		aboutInfoItem.addActionListener(new MenuAboutInfoListener());
 		
-		menubar.add(Box.createHorizontalGlue());
+		// File menu
+		JMenu fileMenu = new JMenu("File");
+		JMenuItem saveFileItem = new JMenuItem("Save scenarios");
+		JMenuItem loadFileItem = new JMenuItem("Load scenarios");
+		JMenuItem generateFileItem = new JMenuItem("Generate selected scenario");
+
+		fileMenu.add(saveFileItem);
+		saveFileItem.addActionListener(new SaveScenariosButtonListener(this));
+		fileMenu.add(loadFileItem);
+		loadFileItem.addActionListener(new LoadScenariosButtonListener(this));
+		fileMenu.add(generateFileItem);
+		generateFileItem.addActionListener(new GenerateDataButtonListener(this));
+	    
+		menubar.add(fileMenu);
 		menubar.add(infoMenu);
 		
 		this.setJMenuBar(menubar);
@@ -141,6 +156,7 @@ public class TestDataGeneratorMain extends JFrame
 	    // add buttons to pane
 	    topButtonPanel.add(addButton);
 	    topButtonPanel.add(editButton);
+	    topButtonPanel.add(delButton);
 	    topButtonPanel.add(saveButton);
 	    topButtonPanel.add(loadButton);
 	    topButtonPanel.add(generateDataButton);

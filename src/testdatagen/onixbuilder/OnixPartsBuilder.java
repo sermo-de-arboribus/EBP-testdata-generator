@@ -1,5 +1,6 @@
 package testdatagen.onixbuilder;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
@@ -8,8 +9,9 @@ import testdatagen.utilities.TitleUtils;
 import testdatagen.utilities.Utilities;
 import nu.xom.Element;
 
-public abstract class OnixPartsBuilder implements Comparable<OnixPartsBuilder>
+public abstract class OnixPartsBuilder implements Comparable<OnixPartsBuilder>, Serializable
 {
+	private static final long serialVersionUID = 1L;
 	// constants defined for ONIX tag types
 	public static final int SHORTTAG = 1;
 	public static final int REFERENCETAG = 2;

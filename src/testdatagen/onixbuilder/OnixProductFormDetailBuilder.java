@@ -79,7 +79,36 @@ public class OnixProductFormDetailBuilder extends OnixPartsBuilder
 	@Override
 	public int getSequenceNumber()
 	{
-		return SEQUENCE_NUMBER;
+		// we need to enforce a sequence, because in ONIX 2.1 <EpubType> elements need to 
+		// be placed after <ProductFormDetail> elements.
+		return SEQUENCE_NUMBER + (isEpubTypeProductFormDetail() ? 1 : 0);
 	}
 
+	private boolean isEpubTypeProductFormDetail()
+	{		
+		if(!hasArgument(elementDefinitions[0][4]))
+		{
+			return false;
+		}
+		else
+		{
+			String pfdArg = getArgument(elementDefinitions[0][4]);
+			return isPfdArgEpubType(pfdArg);
+		}
+	}
+	
+	private boolean isPfdArgEpubType(String pfdArg)
+	{
+		switch(pfdArg)
+		{
+			case "E107":
+			case "E101":
+			case "E141":
+			case "E116":
+			case "E127":
+				return true;
+			default:
+				return false;
+		}
+	}
 }

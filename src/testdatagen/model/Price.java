@@ -1,9 +1,11 @@
 package testdatagen.model;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class Price
+public class Price implements Serializable
 {
+	private static final long serialVersionUID = 1L;
 	String type, amount, currency, country;
 	
 	public Price(String type, String amount, String currency, String country)
