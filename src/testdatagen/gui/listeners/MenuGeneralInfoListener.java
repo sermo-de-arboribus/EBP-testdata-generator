@@ -66,6 +66,12 @@ public class MenuGeneralInfoListener implements ActionListener
 			"       ISBNumber plus one. If the Testdata Generator is used in a team, it is recommended to store " +
 			"       the Testdata Generator on a network share and let all users start Testdata Generator from the same " +
 			"       .jar file, as this will ensure \"globally\" unique ISBNs.</p>" +
+			"    <h2>Configuration options</h2>" +
+			"    <p>When you add a title to a scenario, you're given several configuration options. They are meant" +
+			"       for your convenience, but even if you do adjust any settings on the title configuration screen," +
+			"       the Testdata Generator will output valid files for you. The Testdata Generator has built-in defaults" +
+			"       for all required ONIX values, which it will use. Many ONIX options (marked with \"additional ...\")" +
+			"       will keep the default ONIX elements and just add further elements to the output ONIX file.</p>" +
 			"  </body>\n" +
 			"</html>";
 }

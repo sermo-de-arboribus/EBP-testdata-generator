@@ -1,10 +1,9 @@
 package testdatagen;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -12,29 +11,18 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.table.TableModel;
 
-import testdatagen.gui.listeners.AddScenarioButtonListener;
-import testdatagen.gui.listeners.DeleteScenarioButtonListener;
-import testdatagen.gui.listeners.EditScenarioButtonListener;
-import testdatagen.gui.listeners.GenerateDataButtonListener;
-import testdatagen.gui.listeners.LoadScenariosButtonListener;
-import testdatagen.gui.listeners.MenuAboutInfoListener;
-import testdatagen.gui.listeners.MenuGeneralInfoListener;
-import testdatagen.gui.listeners.SaveScenariosButtonListener;
-import testdatagen.model.ScenarioTableModel;
-import testdatagen.model.TestScenario;
-import testdatagen.model.Title;
+import testdatagen.gui.listeners.*;
+import testdatagen.model.*;
 import testdatagen.model.files.EBookFile;
 import testdatagen.model.files.GraphicFile;
-import testdatagen.utilities.CoverUtils;
-import testdatagen.utilities.ISBNUtils;
-import testdatagen.utilities.TitleUtils;
-import testdatagen.utilities.Utilities;
+import testdatagen.utilities.*;
 
 public class TestDataGeneratorMain extends JFrame
 {
 	private static final long serialVersionUID = 1L;
 	private JTable scenarioTable;
 	private Dimension screenSize;
+	private JProgressBar progressBar;
     
 	public TestDataGeneratorMain(String name)
     {
@@ -79,25 +67,19 @@ public class TestDataGeneratorMain extends JFrame
 		scenarioTable.setModel(scenarios);
 	}
 	
-	private void addRefreshButtonListener(JButton refreshButton)
-	{
-		refreshButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent evt)
-			{
-				Component source = (Component) evt.getSource();
-				JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(source);
-				frame.repaint();
-			}
-		});
-	}
-	
 	private void buildBottomButtonPane()
 	{
-		JButton refreshButton = new JButton("Refresh");
-		addRefreshButtonListener(refreshButton);
-		add(refreshButton, BorderLayout.SOUTH);
+		JPanel bottomPanel = new JPanel(new GridLayout(0,1));
+		JLabel bottomLabel = new JLabel("");
+		
+		JPanel progressPanel = new JPanel(new FlowLayout());
+		progressBar = new JProgressBar();
+		progressPanel.add(progressBar);
+		
+		bottomPanel.add(bottomLabel);
+		bottomPanel.add(progressPanel);
+		
+		add(bottomPanel, BorderLayout.SOUTH);
 	}
 	
 	private void buildMenuBar()

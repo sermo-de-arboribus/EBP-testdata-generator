@@ -41,10 +41,16 @@ public class MenuAboutInfoListener implements ActionListener
 			"    <title>About the Testdata Generator</title>\n" +
 			"  </head>\n" +
 			"  <body>\n" +
-			"    <h1>About the Testdata Generator</h1>\n" +
-			"    <p>This is an alpha version of the Testdata Generator for the E-Book Plant.</p>\n" +
+			"    <h1>About the Testdata Generator 0.7</h1>\n" +
+			"    <p>This is a beta version of the Testdata Generator for the E-Book Plant.</p>\n" +
 			"    <p>If you have questions, ideas, suggestions, bug reports, please contact" +
 			"       Kai.Weber@knv.de</p>" +
+			"    <p>Although options for all file types are already given in the title configuration," +
+			"       the Testdata Generator can currently only produce PDF and EPUB files. Mobi, iBooks, " +
+			"       and Zip files output is not implemented yet. (However, at least for iBooks and Mobi" +
+			"       you'll get valid ONIX files.)</p>" +
+			"    <p>Please let me know, what would be your most urgent or most interesting configuration" +
+			"       options that should be implemented as soon as possible.</p>" +
 			"  </body>\n" +
 			"</html>";
 }
