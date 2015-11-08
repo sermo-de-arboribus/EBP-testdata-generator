@@ -2,10 +2,13 @@ package testdatagen.gui.listeners;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.util.List;
 
 import javax.swing.JFileChooser;
+import javax.swing.JProgressBar;
 import javax.swing.JTable;
 
 import org.apache.commons.io.FilenameUtils;
@@ -17,9 +20,11 @@ import testdatagen.model.TestScenario;
 import testdatagen.model.Title;
 import testdatagen.utilities.Utilities;
 
-public class GenerateDataButtonListener implements ActionListener
+public class GenerateDataButtonListener implements ActionListener, PropertyChangeListener
 {
 	private TestDataGeneratorMain programWindow;
+	private GeneratorThread genThread;
+	private File destDir;
 	
 	public GenerateDataButtonListener(TestDataGeneratorMain programWindow)
 	{
@@ -53,7 +58,7 @@ public class GenerateDataButtonListener implements ActionListener
 	    	{
 	    		parentOfDestDir = chooser.getSelectedFile();
 	    		// create output directory, using the scenario name as dir name
-	    		File destDir = new File(FilenameUtils.concat(parentOfDestDir.getPath(), selectedScenario.getName()));
+	    		destDir = new File(FilenameUtils.concat(parentOfDestDir.getPath(), selectedScenario.getName()));
 	    		try
 	    		{
 	    			destDir.mkdir();
@@ -64,14 +69,31 @@ public class GenerateDataButtonListener implements ActionListener
 	    		}
 	    		
 	    		List<Title> titleList = selectedScenario.getTitleList();
-	    		// TODO: The task of generating and saving files should not be done in the event dispatcher thread. 
-	    		// This must go into a separate SwingWorker thread.
-	    		GeneratorThread genThread = new GeneratorThread(titleList, destDir);
-	    		genThread.start();
-	    		
-	    		// TODO: add progress bar
-				Utilities.showInfoPane("All files for this scenario have been generated and saved to " + destDir.getPath());
-    		}
+	    		genThread = new GeneratorThread(titleList, destDir);
+	    		genThread.addPropertyChangeListener(this);
+	    		genThread.execute();
+	    	}
     	}
+	}
+	
+	public void propertyChange(PropertyChangeEvent evt)
+	{
+		JProgressBar progressBar = programWindow.getProgressBar();
+		if(genThread.getProgress() == 0 && !evt.getNewValue().equals("DONE"))
+		{
+			progressBar.setIndeterminate(true);
+		}
+		else if(evt.getPropertyName().equals("progress"))
+		{
+			progressBar.setIndeterminate(false);
+			int progress = (Integer) evt.getNewValue();
+			progressBar.setValue(progress);
+	        programWindow.getProgressLabel().setText(String.format("Generating files, %d%% completed.\n", genThread.getProgress()));
+		}
+		else //(evt.getNewValue().equals("DONE"))
+		{
+			programWindow.getProgressLabel().setText("Generating files completed. Files saved in " + destDir.getPath());
+			// Utilities.showInfoPane("All files for this scenario have been generated and saved to " + destDir.getPath());
+		}
 	}
 }

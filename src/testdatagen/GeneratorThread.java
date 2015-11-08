@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
+import javax.swing.SwingWorker;
+
 import org.apache.commons.io.FilenameUtils;
 
 import testdatagen.DropboxUploaderThread;
@@ -13,7 +15,7 @@ import testdatagen.model.files.GraphicFile;
 import testdatagen.model.files.ONIXFile;
 import testdatagen.onixbuilder.OnixPartsBuilder;
 
-public class GeneratorThread extends Thread
+public class GeneratorThread extends SwingWorker<Void, Void>
 {
 	List<Title> titleList;
 	java.io.File destDir;
@@ -24,9 +26,12 @@ public class GeneratorThread extends Thread
 		this.destDir = destDir;
 	}
 
-	public void run()
+	public Void doInBackground()
 	{
+		setProgress(0);
 		ListIterator<Title> titleIterator = titleList.listIterator();
+		int progress = 0;
+		final int tasks = titleList.size();
 		while(titleIterator.hasNext())
 		{
 			Title title = titleIterator.next();
@@ -57,8 +62,6 @@ public class GeneratorThread extends Thread
 			{
 				System.out.println("Warning: interrupted while waiting for results of dropbox upload threads");
 			}
-			
-			System.out.println("MediaFileLink is: " + title.getMediaFileUrl());
 
 			ONIXFile onixFile = new ONIXFile(title.getIsbn13(), OnixPartsBuilder.REFERENCETAG, "2.1");
 			onixFile.generate(title, destDir);
@@ -80,6 +83,10 @@ public class GeneratorThread extends Thread
 			{
 				file.generate(title, new java.io.File(FilenameUtils.concat(destDir.getPath(), file.getName())));
 			}
+			progress++;
+			int progressPercent = (int)(100.0 / (float)tasks * progress);
+			setProgress(progressPercent);
 		}
+		return null;
 	}
 }

@@ -23,6 +23,7 @@ public class TestDataGeneratorMain extends JFrame
 	private JTable scenarioTable;
 	private Dimension screenSize;
 	private JProgressBar progressBar;
+	private JLabel progressLabel;
     
 	public TestDataGeneratorMain(String name)
     {
@@ -52,6 +53,16 @@ public class TestDataGeneratorMain extends JFrame
     	new TestDataGeneratorMain("KNV E-Book-Plant test data generator");
     }
     
+    public JProgressBar getProgressBar()
+    {
+    	return progressBar;
+    }
+    
+    public JLabel getProgressLabel()
+    {
+    	return progressLabel;
+    }
+    
 	public JTable getScenarioTable()
 	{
 		return scenarioTable;
@@ -70,14 +81,18 @@ public class TestDataGeneratorMain extends JFrame
 	private void buildBottomButtonPane()
 	{
 		JPanel bottomPanel = new JPanel(new GridLayout(0,1));
-		JLabel bottomLabel = new JLabel("");
+
+		JPanel progressPanel1 = new JPanel(new FlowLayout());
+		JPanel progressPanel2 = new JPanel(new FlowLayout());
 		
-		JPanel progressPanel = new JPanel(new FlowLayout());
+		progressLabel = new JLabel("");
+		progressPanel1.add(progressLabel);
+		
 		progressBar = new JProgressBar();
-		progressPanel.add(progressBar);
+		progressPanel2.add(progressBar);
 		
-		bottomPanel.add(bottomLabel);
-		bottomPanel.add(progressPanel);
+		bottomPanel.add(progressPanel1);
+		bottomPanel.add(progressPanel2);
 		
 		add(bottomPanel, BorderLayout.SOUTH);
 	}

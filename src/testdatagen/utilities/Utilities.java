@@ -41,7 +41,6 @@ public final class Utilities
 			appDirectory = new File(appDirectory).getParent();
 		}
 		String configURI = appDirectory + "/config";
-		System.out.println("appDirectory is: " + appDirectory + ", configURI is: " + configURI);
 		File configDir = new File(configURI.replaceAll("%20", " "));
 		if(!configDir.exists())
 		{
