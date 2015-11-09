@@ -16,7 +16,7 @@ public class OnixHeaderBuilder extends OnixPartsBuilder
 			{"sender", "Sender", "", "", "", ""},
 			{"x298", "SenderName", "m174", "FromCompany", "sender", "IT-E-Books-Verlag"},
 			{"x299", "ContactName", "m175", "FromPerson", "person", "{$randomFullName}"},
-			{"j172", "EmailAddress", "m283", "FromEmail", "email", "noreply@kno-va.de"},
+			{"j272", "EmailAddress", "m283", "FromEmail", "email", "noreply@kno-va.de"},
 			{"x307", "SentDateTime", "m182", "SentDate", "date", "{$currentDateTime}"},
 			{"m184", "DefaultLanguageOfText", "m184", "DefaultLanguageOfText", "defaultlanguage", "ger"},
 			{"x310", "DefaultPriceType", "m185", "DefaultPriceTypeCode", "defaultpricetype", "04"},

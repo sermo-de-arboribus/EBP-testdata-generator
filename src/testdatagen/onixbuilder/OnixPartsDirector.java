@@ -411,6 +411,9 @@ public class OnixPartsDirector implements Serializable
 				Element supplyDetailNode = builder.build("3.0", tagType);
 				parent.appendChild(supplyDetailNode);
 				parent = supplyDetailNode;
+				
+				OnixSupplyDetailPartsBuilder supplyDetailPartsBuilder = (OnixSupplyDetailPartsBuilder) builder;
+				supplyDetailPartsBuilder.appendElementsTo(parent, "3.0", tagType);
 			}
 			else // here we handle the <supplydetail> child elements
 			{

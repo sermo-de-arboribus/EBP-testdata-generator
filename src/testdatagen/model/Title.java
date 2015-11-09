@@ -157,7 +157,7 @@ public class Title implements Serializable
 			case "044":
 				return "E141";
 			case "022":
-				return "127";
+				return "E127";
 				//TODO: how to represent software / audio products in ProductFormDetail?
 			case "099":
 				return "WARNING! Software / Audio Products not implemented yet";

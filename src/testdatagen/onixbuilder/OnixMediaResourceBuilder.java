@@ -127,6 +127,10 @@ public class OnixMediaResourceBuilder extends OnixPartsBuilder
 		mediaResource.appendChild(mediaFileLinkType);
 		
 		Element mediaFileLink = new Element(getTagName(6));
+		if(url.equals(""))
+		{
+			url = elementDefinitions[6][5];
+		}
 		mediaFileLink.appendChild(new Text(url));
 		mediaResource.appendChild(mediaFileLink);
 		

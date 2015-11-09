@@ -15,7 +15,7 @@ import testdatagen.config.ConfigurationRegistry;
 
 public class TitleUtils
 {
-	private static int lastTitleNumber =  19;
+	private static int lastTitleNumber =  101;
 	private static final String COMMON_TITLE_COMPONENT = "Testtitel ";
 	private static final String[] CURRENCIES = {"EUR", "GBP", "USD", "HKD", "CZK"};
 	private static final String[] GENRES = {"Roman", "Gedichte", "Komödie", "Ratgeber", "Erzählungen"};

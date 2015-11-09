@@ -10,7 +10,7 @@ import java.io.ObjectOutputStream;
 
 public class ISBNUtils
 {
-	private static long lastISBN = 978710000019L;
+	private static long lastISBN = 978721000001L;
 	
 	public static long getNextISBN()
 	{
