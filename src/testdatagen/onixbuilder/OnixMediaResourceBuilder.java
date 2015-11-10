@@ -146,7 +146,16 @@ public class OnixMediaResourceBuilder extends OnixPartsBuilder
 		Element resourceVersion = new Element(getTagName(4));
 		mediaResource.appendChild(resourceVersion);
 		
-		appendElementsFromTo(resourceVersion, 5, 6);
+		appendElementsFromTo(resourceVersion, 5, 5);
+		
+		String url = determineElementContent(6);
+		Element resourceLink = new Element(getTagName(6));
+		if(url.equals(""))
+		{
+			url = elementDefinitions[6][5];
+		}
+		resourceLink.appendChild(new Text(url));
+		resourceVersion.appendChild(resourceLink);
 		
 		Element contentDate = new Element(getTagName(7));
 		resourceVersion.appendChild(contentDate);
