@@ -1,10 +1,6 @@
 package testdatagen.model.files;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -75,11 +71,15 @@ public class EpubFile extends EBookFile
 		HTMLTitlePagePath.getParentFile().mkdirs();
 		try
 		{
-			PrintWriter out = new PrintWriter(HTMLTitlePagePath);
+			PrintWriter out = new PrintWriter(HTMLTitlePagePath, "UTF-8");
 			out.print(HTMLTitlePage);
 			out.close();
 		}
 		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+		catch (UnsupportedEncodingException e)
 		{
 			e.printStackTrace();
 		}

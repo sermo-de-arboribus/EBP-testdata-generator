@@ -18,9 +18,9 @@ public class TitleUtils
 	private static int lastTitleNumber =  101;
 	private static final String COMMON_TITLE_COMPONENT = "Testtitel ";
 	private static final String[] CURRENCIES = {"EUR", "GBP", "USD", "HKD", "CZK"};
-	private static final String[] GENRES = {"Roman", "Gedichte", "Komödie", "Ratgeber", "Erzählungen"};
-	private static final String[] FIRST_NAMES = {"Gesine", "Arnold", "Jascha", "Evelyne", "Horst", "Winfried", "Susanne", "Grazia", "Kasimir", "Kajetan", "Caille", "Nadine", "Fenja", "Robin", "Kalle", "Frieda", "Nanjiang", "Jianhuang", "René", "Jiří", "Joyce", "Jean", "Eleftheria", "Alessandro", "Alexander", "Alexandra", "Mari", "Amy", "Oskar", "Carl"};
-	private static final String[] LAST_NAMES = {"Schmidt", "Meier", "Tiedenhub", "Sully", "Prudhomme", "Mommsen", "Björnson", "Mistral", "Neruda", "Faulkner", "Hemingway", "Pynchon", "Joyce", "Zappa", "Frith", "Balcı", "Lodówka", "Lutosławski", "Einstein", "Ramanujan", "Sigurdsen"};
+	private static final String[] GENRES = {"Roman", "Gedichte", "Komödie", "Ratgeber", "Erzählungen", "Reiseführer"};
+	private static final String[] FIRST_NAMES = {"Gesine", "Arnold", "Jascha", "Evelyne", "Horst", "Winfried", "Susanne", "Grazia", "Kasimir", "Kajetan", "Caille", "Nadine", "Fenja", "Robin", "Kalle", "Frieda", "Nanjiang", "Jianhuang", "René", "Jiří", "Joyce", "Jean", "Eleftheria", "Alessandro", "Alexander", "Alexandra", "Mari", "Amy", "Oskar", "Carl", "Hongyun"};
+	private static final String[] LAST_NAMES = {"Schmidt", "Meier", "Tiedenhub", "Sully", "Prudhomme", "Mommsen", "Björnson", "Mistral", "Neruda", "Faulkner", "Hemingway", "Pynchon", "Joyce", "Zappa", "Frith", "Balcı", "Lodówka", "Lutosławski", "Einstein", "Ramanujan", "Sigurdsen", "Flintstone", "Rindfleisch", "Karsch", "Juppen", "Kloth", "Wagner", "Boole"};
 	private static Random random = new Random();
 	
 	public static String getNewAuthor()
