@@ -22,7 +22,8 @@ public class OnixMediaResourceBuilder extends OnixPartsBuilder
 	/*7 */	{"contentdate", "ContentDate", "", "", "", ""},
 	/*8 */	{"x429", "ContentDateRole", "", "", "contentdaterole", "17"},
 	/*9 */	{"b306", "Date", "f373", "MediaFileDate", "mediafiledate", "20151025"},
-	/*10*/	{"", "", "f116", "MediaFileLinkTypeCode", "", "01"}
+	/*10*/	{"", "", "f116", "MediaFileLinkTypeCode", "", "01"},
+	/*11*/  {"", "", "f115", "MediaFileFormatCode", "mediafileformatcode", "03"}
 		};
 	private static final int SEQUENCE_NUMBER = 1900;
 	
@@ -118,6 +119,10 @@ public class OnixMediaResourceBuilder extends OnixPartsBuilder
 		Element mediaFileTypeCode = new Element(getTagName(1));
 		mediaFileTypeCode.appendChild(new Text(mediaFileTypeCodeContent));
 		mediaResource.appendChild(mediaFileTypeCode);
+		
+		Element mediaFileFormatCode = new Element(getTagName(11));
+		mediaFileFormatCode.appendChild(determineElementContent(11));
+		mediaResource.appendChild(mediaFileFormatCode);
 		
 		String url = determineElementContent(6);
 		
