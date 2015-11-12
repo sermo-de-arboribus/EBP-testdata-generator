@@ -61,6 +61,11 @@ public class TitleUtils
 		String[] topics = registry.getLocalizedText(loc, "topic");
 		String topic = topics[random.nextInt(topics.length)];
 		topic = topic.substring(0, 1).toUpperCase() + topic.substring(1);
+		// if topic starts with an article, cut it off
+		if(topic.startsWith("Der ") || topic.startsWith("Den ") || topic.startsWith("Das ") || topic.startsWith("Die ") || topic.startsWith("The "))
+		{
+			topic = topic.substring(4);
+		}
 		return topic;
 	}
 	

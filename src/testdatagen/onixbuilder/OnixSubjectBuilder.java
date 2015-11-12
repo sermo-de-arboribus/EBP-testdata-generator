@@ -19,7 +19,7 @@ public class OnixSubjectBuilder extends OnixPartsBuilder
 			{"subject", "Subject", "subject", "Subject", "", ""},
 			{"x425", "MainSubject", "", "", "", ""},
 			{"b067", "SubjectSchemeIdentifier", "b067", "SubjectSchemeIdentifier", "subjectschemeidentifier", "26"},
-			{"b068", "SubjectSchemeVersion", "b068", "SubjectSchemeVersion", "subjectschemeversion", "2.0"},
+			{"b068", "SubjectSchemeVersion", "b068", "SubjectSchemeVersion", "subjectschemeversion", ""},
 			{"b069", "SubjectCode", "b069", "SubjectCode", "subjectcode", "9120"},
 			{"b070", "SubjectHeadingText", "b070", "SubjectHeadingText", "subjectheadingtext", " "},
 		};
@@ -71,9 +71,17 @@ public class OnixSubjectBuilder extends OnixPartsBuilder
 		
 		for (int i = 5; i < 8; i++)
 		{
-			Element nextElement = new Element(getTagName(i));
-			nextElement.appendChild(new Text(determineElementContent(i)));
-			subject.appendChild(nextElement);	
+			String elementContent = determineElementContent(i);
+			if(elementContent.isEmpty())
+			{
+				continue;
+			}
+			else
+			{
+				Element nextElement = new Element(getTagName(i));
+				nextElement.appendChild(new Text(determineElementContent(i)));
+				subject.appendChild(nextElement);		
+			}
 		}
 		
 		return subject;
