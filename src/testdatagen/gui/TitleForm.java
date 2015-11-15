@@ -24,6 +24,7 @@ import javax.swing.border.Border;
 
 import testdatagen.gui.listeners.AddSubjectsToTitleListener;
 import testdatagen.gui.listeners.AddTitleToScenarioListener;
+import testdatagen.gui.listeners.ClearSubjectsFromTitleListener;
 import testdatagen.model.ProductType;
 import testdatagen.model.Subject;
 import testdatagen.model.TestScenario;
@@ -136,8 +137,13 @@ public class TitleForm extends JDialog
 		JButton addSubjectsButton = new JButton("add subject");
 		addSubjectsButton.setActionCommand("open subjects dialog");
 		addSubjectsButton.addActionListener(new AddSubjectsToTitleListener(configuredSubjectsField, configuredSubjects));
+		JButton clearSubjectsButton = new JButton("clear subjects");
+		clearSubjectsButton.setActionCommand("clear subjects");
+		clearSubjectsButton.addActionListener(new ClearSubjectsFromTitleListener(configuredSubjectsField, configuredSubjects));
+		
 		JPanel addSubjectsButtonPanel = new JPanel(new FlowLayout());
 		addSubjectsButtonPanel.add(addSubjectsButton);
+		addSubjectsButtonPanel.add(clearSubjectsButton);
 		subjectsPanel.add(configuredSubjectsField);
 		subjectsPanel.add(addSubjectsButtonPanel);
 		detailOptionsPanel.add(subjectsPanel);
