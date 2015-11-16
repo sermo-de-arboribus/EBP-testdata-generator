@@ -1,0 +1,22 @@
+Test Data Generator release notes / history
+
+*-----------*
+*Version 0.7*
+*-----------* 
+Released November 9th, 2015
+
+First Beta version
+
+*-------------*
+*Version 0.7.1*
+*-------------*
+Released November 16th, 2015
+
+Bug fixes and UI enhancements:
+- TDG now makes sure that mediafilelink / resourcelink is non-empty string
+- TDG now ensures that Mobi products get represented with ProductFormDetail E127 in the exported ONIX
+- <Supplier> node is now attached in ONIX 3 messages
+- Default MediaFileFormatCode / <f115> added in ONIX 2.1 messages
+- Fixed UTF-8 encoding problem in generated EPUB files
+- <SubjectSchemeVersion> is only put into the ONIX files, if it has been explicitly configured
+- In Title configuration window, the selected subjects can now also be deleted, not only added
