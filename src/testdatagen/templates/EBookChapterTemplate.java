@@ -56,11 +56,9 @@ public class EBookChapterTemplate extends TextTemplate
 		int runs = random.nextInt(10) + 1;
 		for(int i = 0; i < runs; i++)
 		{
-			System.out.println("Run no. " + i);
 			Node quote = allQuotes.get(random.nextInt(allQuotes.size()));
 			Nodes quoteTexts = quote.query("version[starts-with(@xml:lang,'" + language + "')]/text");
 			Node quoteText = quoteTexts.get(0);
-			System.out.println("Quote text: " + quoteText.getValue());
 			chaptertextBuffer.append(quoteText.getValue() + " ");
 		}
 		predefinedValues.put("chaptertext", chaptertextBuffer.toString());
