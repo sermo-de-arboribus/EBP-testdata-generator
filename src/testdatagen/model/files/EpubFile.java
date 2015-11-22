@@ -78,7 +78,6 @@ public class EpubFile extends EBookFile
 		List<java.io.File> chapterFiles = new ArrayList<java.io.File>();
 		for(int i = 1; i < 13; i++)
 		{
-			System.out.println("Generating HTML file no. " + i);
 			EBookChapterTemplate chapterTemplate = new EBookChapterTemplate(new Locale("de"), i);
 			String HTMLChapterPage = chapterTemplate.fillWithText();
 			java.io.File HTMLChapterFile = new java.io.File(FilenameUtils.concat(tempDir.getPath(), "OEBPS/text/Chapter" + i + ".xhtml"));
