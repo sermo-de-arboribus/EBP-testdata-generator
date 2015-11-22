@@ -427,29 +427,33 @@ public class OnixPartsDirector implements Serializable
 	
 	public void replaceMediaResource(String url)
 	{
-		Iterator<OnixPartsBuilder> iterator = requiredElements.iterator();
-		while(iterator.hasNext())
-		{
-			OnixPartsBuilder nextBuilder = iterator.next();
-			if(nextBuilder instanceof OnixMediaResourceBuilder)
-			{
-				iterator.remove();
-			}
-		}
+		removeBuilders(OnixMediaResourceBuilder.class);
 		addMediaResource(url);
+	}
+	
+	public void replaceNotificationType(String newType)
+	{
+		removeBuilders(OnixNotificationTypeBuilder.class);
+		
+		HashMap<String, String> notiTypeArgs = new HashMap<String, String>();
+		notiTypeArgs.put("notificationtype", newType);
+		requiredElements.add(new OnixNotificationTypeBuilder(notiTypeArgs));
+	}
+	
+	public void replaceProductAvailability(String availCode, String prodAvail)
+	{
+		removeBuilders(OnixProductAvailabilityBuilder.class);
+		
+		HashMap<String, String> prodAvailArgs = new HashMap<String, String>();
+		prodAvailArgs.put("availabilitycode", availCode);
+		prodAvailArgs.put("productavailability", prodAvail);
+		requiredElements.add(new OnixProductAvailabilityBuilder(prodAvailArgs));
 	}
 	
 	public void replaceProductForm(String productFormCode)
 	{
-		Iterator<OnixPartsBuilder> iterator = requiredElements.iterator();
-		while(iterator.hasNext())
-		{
-			OnixPartsBuilder nextBuilder = iterator.next();
-			if(nextBuilder instanceof OnixProductFormBuilder)
-			{
-				iterator.remove();
-			}
-		}
+		removeBuilders(OnixProductFormBuilder.class);
+
 		HashMap<String, String> productFormArgs = new HashMap<String, String>();
 		productFormArgs.put("productform", productFormCode);
 		requiredElements.add(new OnixProductFormBuilder(productFormArgs));
@@ -522,6 +526,19 @@ public class OnixPartsDirector implements Serializable
 			case "title":
 			case "distinctivetitle":
 			default: return mainTitle;
+		}
+	}
+	
+	private void removeBuilders(Class<?> builderClass)
+	{
+		Iterator<OnixPartsBuilder> iterator = requiredElements.iterator();
+		while(iterator.hasNext())
+		{
+			OnixPartsBuilder nextBuilder = iterator.next();
+			if(builderClass.isInstance(nextBuilder))
+			{
+				iterator.remove();
+			}
 		}
 	}
 }

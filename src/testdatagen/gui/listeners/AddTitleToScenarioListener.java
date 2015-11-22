@@ -16,6 +16,8 @@ import testdatagen.model.TestScenario;
 import testdatagen.model.Title;
 import testdatagen.model.files.EBookFile;
 import testdatagen.model.files.GraphicFile;
+import testdatagen.onixbuilder.OnixNotificationTypeBuilder;
+import testdatagen.onixbuilder.OnixProductAvailabilityBuilder;
 import testdatagen.utilities.CoverUtils;
 import testdatagen.utilities.ISBNUtils;
 import testdatagen.utilities.TitleUtils;
@@ -132,6 +134,20 @@ public class AddTitleToScenarioListener implements ActionListener
 				}
 			}
 			
+			// change of default notification or availability types needed?
+			String notificationType = formDataMap.get("notificationtype");
+			if(notificationType != null && !notificationType.isEmpty() && 
+					!notificationType.equals(OnixNotificationTypeBuilder.DEFAULT_NOTIFICATION_TYPE))
+			{
+				newTitle.getOnixPartsDirector().replaceNotificationType(notificationType);
+			}
+			String availCode = formDataMap.get("availabilitycode");
+			String prodAvail = formDataMap.get("productavailability");
+			if(availabilityChanged(availCode, prodAvail))
+			{
+				newTitle.getOnixPartsDirector().replaceProductAvailability(availCode, prodAvail);
+			}
+			
 			// instantiate selected ebook file types and add them to the title object
 			EBookFileFactory eff = EBookFileFactory.getInstance();
 					
@@ -180,6 +196,16 @@ public class AddTitleToScenarioListener implements ActionListener
 		}
 	}
 	
+	private boolean availabilityChanged(String availCode, String prodAvail)
+	{
+		boolean availCodeChanged, prodAvailChanged;
+		availCodeChanged = availCode != null && !availCode.isEmpty() && 
+				!availCode.equals(OnixProductAvailabilityBuilder.DEFAULT_AVAILABILITY_CODE);
+		prodAvailChanged = prodAvail != null && !prodAvail.isEmpty() && 
+				!prodAvail.equals(OnixProductAvailabilityBuilder.DEFAULT_PRODUCT_AVAILABILITY);
+		return availCodeChanged && prodAvailChanged;
+	}
+
 	private void displayTitleForm()
 	{
 		TitleForm titleForm = new TitleForm(scenario);

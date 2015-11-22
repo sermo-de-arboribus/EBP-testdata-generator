@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.border.Border;
@@ -28,6 +29,8 @@ import testdatagen.gui.listeners.ClearSubjectsFromTitleListener;
 import testdatagen.model.ProductType;
 import testdatagen.model.Subject;
 import testdatagen.model.TestScenario;
+import testdatagen.onixbuilder.OnixNotificationTypeBuilder;
+import testdatagen.onixbuilder.OnixProductAvailabilityBuilder;
 
 public class TitleForm extends JDialog
 {
@@ -50,6 +53,8 @@ public class TitleForm extends JDialog
 	private JCheckBox a103, e200, e201, e202, e203;
 	// additional title type checkboxes
 	private JCheckBox tittyp03, tittyp06, tittyp08, tittyp11, tittyp13;
+	// availability and notification type elements
+	private JTextField notificationTypeField, availabilityCodeField, productAvailabilityField;
 	// set of configured subjects
 	private Set<Subject> configuredSubjects;
 	
@@ -68,6 +73,7 @@ public class TitleForm extends JDialog
 		
 		// The form elements
 		Border blueLineBorder = BorderFactory.createLineBorder(Color.BLUE);
+		Border purpleLineBorder = BorderFactory.createLineBorder(new Color(153, 0, 153));
 		
 		// Group form elements in left panel
 		JPanel titleOptionsPanel = new JPanel(new GridLayout(0,1));
@@ -91,11 +97,11 @@ public class TitleForm extends JDialog
 		additionalAssetsPanel.add(epmoBox);
 		
 		// Group form elements in right panel
-		JPanel detailOptionsPanel = new JPanel(new GridLayout(0,1));
+		JPanel detailOptionsPanel = new JPanel(new GridLayout(0,2));
 		
 		// Product ID options
 		JPanel productIdPanel = new JPanel(new GridLayout(0,1));
-		JPanel productIdPanelOptions = new JPanel(new GridLayout(1,0));
+		JPanel productIdPanelOptions = new JPanel(new GridLayout(0,1));
 		detailOptionsPanel.add(productIdPanel);
 		productIdPanel.setBorder(BorderFactory.createTitledBorder(blueLineBorder, "Additional Product Identifiers"));
 		productIdPanel.add(productIdPanelOptions);
@@ -105,7 +111,7 @@ public class TitleForm extends JDialog
 		
 		// Product Form Detail options
 		JPanel productFormDetailPanel = new JPanel(new GridLayout(0,1));
-		JPanel productFormDetailPanelOptions = new JPanel(new GridLayout(1,0));
+		JPanel productFormDetailPanelOptions = new JPanel(new GridLayout(0,1));
 		detailOptionsPanel.add(productFormDetailPanel);
 		productFormDetailPanel.add(productFormDetailPanelOptions);
 		productFormDetailPanel.setBorder(BorderFactory.createTitledBorder(blueLineBorder, "Additional Product Form Detail"));
@@ -117,7 +123,7 @@ public class TitleForm extends JDialog
 		
 		// Title options
 		JPanel titlePanel = new JPanel(new GridLayout(0,1));
-		JPanel titlePanelOptions = new JPanel(new GridLayout(1,0));
+		JPanel titlePanelOptions = new JPanel(new GridLayout(0,1));
 		detailOptionsPanel.add(titlePanel);
 		titlePanel.add(titlePanelOptions);
 		titlePanel.setBorder(BorderFactory.createTitledBorder(blueLineBorder, "Additional Titles (select Title Type)"));
@@ -148,6 +154,27 @@ public class TitleForm extends JDialog
 		subjectsPanel.add(addSubjectsButtonPanel);
 		detailOptionsPanel.add(subjectsPanel);
 		
+		// availability and notification type options
+		JPanel availabilityPanel = new JPanel(new GridLayout(0,1));
+		availabilityPanel.setBorder(BorderFactory.createTitledBorder(blueLineBorder, "Availability settings"));
+		
+		JPanel notificationTypePanel = new JPanel(new FlowLayout());
+		notificationTypePanel.setBorder(BorderFactory.createTitledBorder(purpleLineBorder, "Notification type"));
+		notificationTypePanel.add(notificationTypeField);
+		availabilityPanel.add(notificationTypePanel);
+		
+		JPanel availabilityCodePanel = new JPanel(new FlowLayout());
+		availabilityCodePanel.setBorder(BorderFactory.createTitledBorder(purpleLineBorder, "Availability code"));
+		availabilityCodePanel.add(availabilityCodeField);
+		availabilityPanel.add(availabilityCodePanel);
+		
+		JPanel productAvailabilityPanel = new JPanel(new FlowLayout());
+		productAvailabilityPanel.setBorder(BorderFactory.createTitledBorder(purpleLineBorder, "Product availability"));
+		productAvailabilityPanel.add(productAvailabilityField);
+		availabilityPanel.add(productAvailabilityPanel);
+		
+		detailOptionsPanel.add(availabilityPanel);
+		
 		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, titleOptionsPanel, detailOptionsPanel);
 		
 		// submit button
@@ -160,7 +187,7 @@ public class TitleForm extends JDialog
 		this.add(splitPane, BorderLayout.CENTER);
 		this.add(submitbtn, BorderLayout.SOUTH);
 		this.setLocation(100,100);
-		this.setSize(600, 500);
+		this.setSize(800, 600);
 	}
 	
 	public Set<Subject> getConfiguredSubjects()
@@ -192,6 +219,9 @@ public class TitleForm extends JDialog
 		formDataMap.put(tittyp08.getName(), tittyp08.isSelected() ? "true" : "false");
 		formDataMap.put(tittyp11.getName(), tittyp11.isSelected() ? "true" : "false");
 		formDataMap.put(tittyp13.getName(), tittyp13.isSelected() ? "true" : "false");
+		formDataMap.put(notificationTypeField.getName(), notificationTypeField.getText());
+		formDataMap.put(availabilityCodeField.getName(), availabilityCodeField.getText());
+		formDataMap.put(productAvailabilityField.getName(), productAvailabilityField.getText());
 		
 		return formDataMap;
 	}
@@ -269,5 +299,15 @@ public class TitleForm extends JDialog
 		tittyp13.setToolTipText("Expanded title");
 		
 		configuredSubjects = new HashSet<Subject>();
+		
+		notificationTypeField = new JTextField(OnixNotificationTypeBuilder.DEFAULT_NOTIFICATION_TYPE);
+		notificationTypeField.setName("notificationtype");
+		notificationTypeField.setColumns(8);
+		availabilityCodeField = new JTextField(OnixProductAvailabilityBuilder.DEFAULT_AVAILABILITY_CODE);
+		availabilityCodeField.setName("availabilitycode");
+		availabilityCodeField.setColumns(8);
+		productAvailabilityField = new JTextField(OnixProductAvailabilityBuilder.DEFAULT_PRODUCT_AVAILABILITY);
+		productAvailabilityField.setName("productavailability");
+		productAvailabilityField.setColumns(8);
 	}
 }

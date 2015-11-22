@@ -7,10 +7,12 @@ import nu.xom.Text;
 
 public class OnixProductAvailabilityBuilder extends OnixSupplyDetailPartsBuilder
 {
+	public static final String DEFAULT_AVAILABILITY_CODE = "IP";
+	public static final String DEFAULT_PRODUCT_AVAILABILITY = "20";
 	private static final String[][] PRODUCT_AVAILABILITY_DEFINITIONS = 
 		{
-			{"", "", "j141", "AvailabilityCode", "availabilitycode", "IP"},
-			{"j396", "ProductAvailability", "j396", "ProductAvailability", "productavailability", "20"}
+			{"", "", "j141", "AvailabilityCode", "availabilitycode", DEFAULT_AVAILABILITY_CODE},
+			{"j396", "ProductAvailability", "j396", "ProductAvailability", "productavailability", DEFAULT_PRODUCT_AVAILABILITY}
 		};
 	private static final int SEQUENCE_NUMBER = 3100;
 	
