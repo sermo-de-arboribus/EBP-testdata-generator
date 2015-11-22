@@ -2,7 +2,10 @@ package testdatagen.model.files;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -18,6 +21,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 
 import testdatagen.model.Title;
+import testdatagen.templates.EBookChapterTemplate;
 import testdatagen.templates.EPUBTitlePageTemplate;
 import testdatagen.utilities.Utilities;
 
@@ -67,21 +71,19 @@ public class EpubFile extends EBookFile
 		// generate title page file
 		EPUBTitlePageTemplate template = new EPUBTitlePageTemplate(new Locale("de"), title);
 		String HTMLTitlePage = template.fillWithText();
-		java.io.File HTMLTitlePagePath = new java.io.File (FilenameUtils.concat(tempDir.getPath(), "OEBPS/text/Section0001.xhtml"));
-		HTMLTitlePagePath.getParentFile().mkdirs();
-		try
+		java.io.File HTMLTitlePagePath = new java.io.File(FilenameUtils.concat(tempDir.getPath(), "OEBPS/text/Title.xhtml"));
+		saveHtmlFile(HTMLTitlePagePath, HTMLTitlePage);
+		
+		// generate HTML chapter files
+		List<java.io.File> chapterFiles = new ArrayList<java.io.File>();
+		for(int i = 1; i < 13; i++)
 		{
-			PrintWriter out = new PrintWriter(HTMLTitlePagePath, "UTF-8");
-			out.print(HTMLTitlePage);
-			out.close();
-		}
-		catch (FileNotFoundException e)
-		{
-			e.printStackTrace();
-		}
-		catch (UnsupportedEncodingException e)
-		{
-			e.printStackTrace();
+			System.out.println("Generating HTML file no. " + i);
+			EBookChapterTemplate chapterTemplate = new EBookChapterTemplate(new Locale("de"), i);
+			String HTMLChapterPage = chapterTemplate.fillWithText();
+			java.io.File HTMLChapterFile = new java.io.File(FilenameUtils.concat(tempDir.getPath(), "OEBPS/text/Chapter" + i + ".xhtml"));
+			chapterFiles.add(HTMLChapterFile);
+			saveHtmlFile(HTMLChapterFile, HTMLChapterPage);
 		}
 		
 		// generate NCX file
@@ -131,8 +133,32 @@ public class EpubFile extends EBookFile
 		navLabel.appendChild(labelText);
 		navPoint.appendChild(navLabel);
 		Element content = new Element("content", "http://www.daisy.org/z3986/2005/ncx/");
-		content.addAttribute(new Attribute("src", "text/Section0001.xhtml"));
+		content.addAttribute(new Attribute("src", "text/Title.xhtml"));
 		navPoint.appendChild(content);
+		
+		// add chapters
+		Iterator<java.io.File> iterator = chapterFiles.iterator();
+		int counter = 2;
+		while(iterator.hasNext())
+		{
+			java.io.File nextFile = iterator.next();
+			Element chapterNavPoint = new Element("navPoint", "http://www.daisy.org/z3986/2005/ncx/");
+			chapterNavPoint.addAttribute(new Attribute("id", "navPoint-" + counter));
+			chapterNavPoint.addAttribute(new Attribute("playOrder", "" + counter));
+			
+			Element chapterLabel = new Element("navLabel", "http://www.daisy.org/z3986/2005/ncx/");
+			Element chapterText = new Element("text", "http://www.daisy.org/z3986/2005/ncx/");
+			chapterText.appendChild(new Text("Kapitel " + (counter - 1)));
+			chapterLabel.appendChild(chapterText);
+			chapterNavPoint.appendChild(chapterLabel);
+			Element chapterContent = new Element("content", "http://www.daisy.org/z3986/2005/ncx/");
+			chapterContent.addAttribute(new Attribute("src", "text/" + FilenameUtils.getName(nextFile.getPath())));
+			chapterNavPoint.appendChild(chapterContent);
+			navMap.appendChild(chapterNavPoint);
+			
+			counter++;
+		}
+		
 		ncxRoot.appendChild(navMap);
 		
 		java.io.File ncxFilePath = new java.io.File(FilenameUtils.concat(tempDir.getPath(), "OEBPS/toc.ncx"));
@@ -205,8 +231,8 @@ public class EpubFile extends EBookFile
 		item1.addAttribute(new Attribute("media-type", "application/x-dtbncx+xml"));
 		manifest.appendChild(item1);
 		
-		item2.addAttribute(new Attribute("href", "text/Section0001.xhtml"));
-		item2.addAttribute(new Attribute("id", "Section0001"));
+		item2.addAttribute(new Attribute("href", "text/Title.xhtml"));
+		item2.addAttribute(new Attribute("id", "Title"));
 		item2.addAttribute(new Attribute("media-type", "application/xhtml+xml"));
 		manifest.appendChild(item2);
 		
@@ -216,14 +242,36 @@ public class EpubFile extends EBookFile
 		item3.addAttribute(new Attribute("properties", "cover-image"));
 		manifest.appendChild(item3);
 		
+		// add chapters
+		Iterator<java.io.File> opfChapterItems = chapterFiles.iterator();
+		while(opfChapterItems.hasNext())
+		{
+			java.io.File nextFile = opfChapterItems.next();
+			Element nextItem = new Element("item", "http://www.idpf.org/2007/opf");
+			nextItem.addAttribute(new Attribute("href", "text/" + FilenameUtils.getName(nextFile.getPath())));
+			nextItem.addAttribute(new Attribute("id", FilenameUtils.getBaseName(nextFile.getPath())));
+			nextItem.addAttribute(new Attribute("media-type", "application/xhtml+xml"));
+			manifest.appendChild(nextItem);
+		}
+		
 		opfRoot.appendChild(manifest);
 		
 		Element spine = new Element("spine", "http://www.idpf.org/2007/opf");
 		spine.addAttribute(new Attribute("toc", "ncx"));
 		
 		Element itemref = new Element("itemref", "http://www.idpf.org/2007/opf");
-		itemref.addAttribute(new Attribute("idref", "Section0001"));
+		itemref.addAttribute(new Attribute("idref", "Title"));
 		spine.appendChild(itemref);
+		
+		// add chapters
+		Iterator<java.io.File> opfChapterSpineRefs = chapterFiles.iterator();
+		while(opfChapterSpineRefs.hasNext())
+		{
+			java.io.File nextFile = opfChapterSpineRefs.next();
+			Element nextItem = new Element("itemref", "http://www.idpf.org/2007/opf");
+			nextItem.addAttribute(new Attribute("idref", FilenameUtils.getBaseName(nextFile.getPath())));
+			spine.appendChild(nextItem);
+		}
 		
 		opfRoot.appendChild(spine);
 		
@@ -378,5 +426,24 @@ public class EpubFile extends EBookFile
 	      out.closeEntry();
 	      in.close();
 	    }
+	}
+	
+	private void saveHtmlFile(java.io.File HTMLPagePath, String HTMLPage)
+	{
+		HTMLPagePath.getParentFile().mkdirs();
+		try
+		{
+			PrintWriter out = new PrintWriter(HTMLPagePath, "UTF-8");
+			out.print(HTMLPage);
+			out.close();
+		}
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+		catch (UnsupportedEncodingException e)
+		{
+			e.printStackTrace();
+		}
 	}
 }

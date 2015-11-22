@@ -71,10 +71,13 @@ public class ConfigurationRegistry
 		 putLocalizedText(deLocale, "tbt-compound2", new String[]{"Gemeinschaft", "Gläubigkeit", "Verstrickung", "Gewißheit", "Verpflichtung", "Bewahrung", "Aussage", "Phase", "Potenz", "Flexibilität", "Akzeleration", "Defenestration", "Problematik", "Tendenz", "Konzeption", "Präferenz", "Infantilität", "Kynologie"});
 		 putLocalizedText(deLocale, "tbt-imperative", new String[]{"lesen", "anschauen", "herunterladen", "begrüßen", "gebrauchen", "kaufen", "verschlingen", "reinschnuppern"});
 		 
-		 // value for the ONIXTitlePageTemplate
+		 // values for the ONIXTitlePageTemplate
 		 putLocalizedText(deLocale, "ONIXTitlePageTemplate", "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?><!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\"><html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>Titelseite {$title}</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/></head><body style=\"text-align:center\"><h1>{$title}</h1><div><br/></div><h2>von {$author}</h2><div><br/></div><div>erschienen im</div><div><br/></div><div><br/></div><div>{$publishername}</div><div>{$publisherlocation}</div><div>{$year}</div><div><br/></div><div>ISBN {$isbn}</div></body></html>");
 		 putLocalizedText(deLocale, "publisherlocation", new String[]{"Stuttgart", "Stuttgart-Vaihingen", "Stuttgart-Möhringen", "Stuttgart-Kaltental", "Stuttgart-Rohr"});
 		 putLocalizedText(deLocale, "publishername", new String[]{"KNV IT-E-Books-Verlag", "Koch, Neff &amp; Volckmar IT-E-Books-Verlag", "KNO DiVA &amp; KNV IT-E-Books-Verlag", "KNO DiVA Verlag"});
+		 
+		 // values for the EbookChapterTemplate
+		 putLocalizedText(deLocale, "chapterTemplate", "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?><!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\"><html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>Kapitel {$chapternumber}</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/></head><body><h1>Kapitel {$chapternumber}</h1><div><br/></div><div>{$chaptertext}</div></body></html>");
 		 
 		 onixCodeListMap = new ConcurrentHashMap<Integer, Map<String, String>>();
 		 
