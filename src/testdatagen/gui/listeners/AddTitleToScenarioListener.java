@@ -150,10 +150,10 @@ public class AddTitleToScenarioListener implements ActionListener
 			
 			// instantiate selected ebook file types and add them to the title object
 			EBookFileFactory eff = EBookFileFactory.getInstance();
-					
+
 			EBookFile ebookFile = eff.generateFile(Utilities.formatToFileType(format), nextIsbn);
 			newTitle.addFile(ebookFile);
-					
+
 			// check for optional product content files and generate if needed
 			if(Boolean.parseBoolean(formDataMap.get("epubmobi")))
 			{
@@ -165,7 +165,7 @@ public class AddTitleToScenarioListener implements ActionListener
 				EBookFile extractFile = eff.generateDemoFile(Utilities.formatToFileType(format), nextIsbn);
 				newTitle.addFile(extractFile);
 			}
-					
+
 			// instantiate selected graphic file types and add them to the title object
 			GraphicFileFactory gff = GraphicFileFactory.getInstance();
 			// a cover file is needed in any case, choose randomly between jpg or pdf cover
