@@ -1,5 +1,7 @@
 package testdatagen.model.files;
 
+import testdatagen.model.Title;
+
 public abstract class GraphicFile extends File
 {
 	/**
@@ -8,9 +10,9 @@ public abstract class GraphicFile extends File
 	private static final long serialVersionUID = 1L;
 	protected Type type;
 
-	public GraphicFile(String pathname, Type type)
+	public GraphicFile(Title title, Type type)
 	{
-		super(pathname);
+		super(title);
 		this.type = type;
 	}
 	

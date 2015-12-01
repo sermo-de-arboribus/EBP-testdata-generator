@@ -20,12 +20,10 @@ public class MobiFile extends EBookFile
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private long ISBN;
 	
-	public MobiFile(long ISBN, boolean demoFlag)
+	public MobiFile(final Title title, boolean demoFlag)
 	{
-		super(Long.toString(ISBN) + (demoFlag ? "_Extract" : "" ) + ".mobi", demoFlag);
-		this.ISBN = ISBN;
+		super(title, demoFlag);
 	}
 	
 	public String toString()
@@ -35,21 +33,24 @@ public class MobiFile extends EBookFile
 		{
 			fileString += "_extract";
 		}
-		return fileString + "[" +ISBN+ "]";
+		return fileString + "[" + title.getIsbn13() + "]";
 	}
 
 	@Override
-	public File generate(Title title, File destPath)
+	public File generate(final File destFolder)
 	{
 		// first generate an EpubMobi file as the base
-		EpubMobiFile epubMobi = new EpubMobiFile(ISBN, this.isDemoFile());
-		File tempDir = new File(FilenameUtils.concat(destPath.getParent(), ConfigurationRegistry.getRegistry().getString("file.tempFolder")));
-		tempDir.mkdirs();
-		String epubMobiPath = FilenameUtils.concat(tempDir.getPath(), epubMobi.getName());
-		String epubPath = epubMobiPath.replace("_EpubMobi", "");
-		epubMobi.generate(title, new File(epubMobiPath));
+		EpubMobiFile epubMobi = new EpubMobiFile(title, this.isDemoFile());
+		File tempDir = Utilities.getTempDir();
+		epubMobi.generate(tempDir);
 		
 		// rename EpubMobi file
+		String epubMobiPath = FilenameUtils.concat(tempDir.getPath(), epubMobi.buildFileName());
+		String epubPath = epubMobiPath.replace("_EpubMobi", "");
+		
+		System.out.println("epubMobiPath: " + epubMobiPath);
+		System.out.println("epubPath: " + epubPath);
+		System.out.println("tempDir: " + tempDir);
 		try
 		{
 			FileUtils.moveFile(FileUtils.getFile(epubMobiPath), FileUtils.getFile(epubPath));
@@ -118,10 +119,10 @@ public class MobiFile extends EBookFile
 
 			// copy generated mobi file from temp to destination folder
 			File mobiDestinationFile = new File(epubPath.replace(".epub", ".mobi"));
-			destPath.getParentFile().mkdirs();
+			destFolder.mkdirs();
 			try
 			{
-				FileUtils.copyFileToDirectory(mobiDestinationFile, destPath.getParentFile());
+				FileUtils.copyFileToDirectory(mobiDestinationFile, destFolder);
 			}
 			catch (IOException exc)
 			{
@@ -146,6 +147,11 @@ public class MobiFile extends EBookFile
 			return null;
 		}
 		
+	}
+	
+	protected String buildFileName()
+	{
+		return Long.toString(title.getIsbn13()) + (isDemoFile() ? "_Extract" : "" ) + ".mobi";
 	}
 	
 	class KindleGenChooser extends JFileChooser

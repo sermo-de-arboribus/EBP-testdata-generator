@@ -14,6 +14,8 @@ import java.util.Random;
 
 import javax.swing.JOptionPane;
 
+import org.apache.commons.io.FilenameUtils;
+
 import testdatagen.config.ConfigurationRegistry;
 
 public final class Utilities
@@ -77,6 +79,14 @@ public final class Utilities
 		String DATE_FORMAT = "yyyyMMdd'T'HHmm";
 		SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
 		return sdf.format(date);
+	}
+	
+	public static File getTempDir()
+	{
+		long timestamp = System.currentTimeMillis();
+		File tempDir = new File(FilenameUtils.concat(Utilities.getConfigDir().getPath(), "temp" + timestamp  + "/"));
+		tempDir.mkdirs();
+		return tempDir;
 	}
 	
 	// TODO: Refactor - this method belongs into the Title class

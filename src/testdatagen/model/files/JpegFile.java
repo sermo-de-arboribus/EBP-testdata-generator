@@ -26,15 +26,14 @@ public class JpegFile extends GraphicFile
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private long ISBN;
 	
-	public JpegFile(long ISBN, GraphicFile.Type type)
+	public JpegFile(final Title title, final GraphicFile.Type type)
 	{
-		super(Long.toString(ISBN) + "_" + type.toString().toLowerCase() + ".jpg", type);
-		this.ISBN = ISBN;
+		super(title, type);
 	}
-		
-	public java.io.File generate(Title title, java.io.File destPath)
+	
+	@Override
+	public java.io.File generate(java.io.File destPath)
 	{
 		BufferedImage coverImage = paintCover(title);
 		java.io.File storedFile = null;
@@ -61,9 +60,16 @@ public class JpegFile extends GraphicFile
 		return storedFile;
 	}
 	
+	@Override
 	public String toString()
 	{
-		return type.toString().toLowerCase() + "JPG["+ISBN+"]";
+		return type.toString().toLowerCase() + "JPG[" + title.getIsbn13() + "]";
+	}
+	
+	@Override
+	protected String buildFileName()
+	{
+		return Long.toString(title.getIsbn13()) + "_" + type.toString().toLowerCase() + ".jpg";
 	}
 	
 	private BufferedImage paintCover(Title title)

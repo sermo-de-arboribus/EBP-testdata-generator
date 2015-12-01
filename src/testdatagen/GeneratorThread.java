@@ -7,8 +7,6 @@ import java.util.ListIterator;
 
 import javax.swing.SwingWorker;
 
-import org.apache.commons.io.FilenameUtils;
-
 import testdatagen.DropboxUploaderThread;
 import testdatagen.model.Title;
 import testdatagen.model.files.GraphicFile;
@@ -40,7 +38,7 @@ public class GeneratorThread extends SwingWorker<Void, Void>
 			ArrayList<Thread> uploadThreads = new ArrayList<Thread>();
 			for(GraphicFile coverFile : coversList)
 			{
-				java.io.File storedFile = coverFile.generate(title, destDir);
+				java.io.File storedFile = coverFile.generate(destDir);
 				// TODO: check, if cover is handled by MediaFileLink
 				if(title.hasMediaFileLink())
 				{
@@ -63,25 +61,25 @@ public class GeneratorThread extends SwingWorker<Void, Void>
 				System.out.println("Warning: interrupted while waiting for results of dropbox upload threads");
 			}
 
-			ONIXFile onixFile = new ONIXFile(title.getIsbn13(), OnixPartsBuilder.REFERENCETAG, "2.1");
-			onixFile.generate(title, destDir);
+			ONIXFile onixFile = new ONIXFile(title, OnixPartsBuilder.REFERENCETAG, "2.1");
+			onixFile.generate(destDir);
 			
 			// generate ONIX 2.1 file with short tag names
-			onixFile = new ONIXFile(title.getIsbn13(), OnixPartsBuilder.SHORTTAG, "2.1");
-			onixFile.generate(title, destDir);
+			onixFile = new ONIXFile(title, OnixPartsBuilder.SHORTTAG, "2.1");
+			onixFile.generate(destDir);
 			
 			// generate ONIX 3.0 file with long tag names
-			onixFile = new ONIXFile(title.getIsbn13(), OnixPartsBuilder.REFERENCETAG, "3.0");
-			onixFile.generate(title, destDir);
+			onixFile = new ONIXFile(title, OnixPartsBuilder.REFERENCETAG, "3.0");
+			onixFile.generate(destDir);
 			
 			// generate ONIX 3.0 file with short tag names
-			onixFile = new ONIXFile(title.getIsbn13(), OnixPartsBuilder.SHORTTAG, "3.0");
-			onixFile.generate(title, destDir);
+			onixFile = new ONIXFile(title, OnixPartsBuilder.SHORTTAG, "3.0");
+			onixFile.generate(destDir);
 			
 			ArrayList<testdatagen.model.files.File> fileList = title.getNonCoverFiles();
 			for(testdatagen.model.files.File file : fileList)
 			{
-				file.generate(title, new java.io.File(FilenameUtils.concat(destDir.getPath(), file.getName())));
+				file.generate(destDir);
 			}
 			progress++;
 			int progressPercent = (int)(100.0 / (float)tasks * progress);

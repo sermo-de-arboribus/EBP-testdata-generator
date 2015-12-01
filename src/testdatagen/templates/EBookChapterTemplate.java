@@ -66,5 +66,11 @@ public class EBookChapterTemplate extends TextTemplate
 		replaceVars(templateBuffer, templateText, predefinedValues);
 		return templateBuffer.toString();
 	}
-
+	
+	public String fillWithPlainText()
+	{
+		String htmlText = this.fillWithText();
+		htmlText = htmlText.replaceFirst("\\<head>.+\\</head>", "");
+		return htmlText.replaceAll("\\<[^>]*>","");
+	}
 }

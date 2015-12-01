@@ -74,6 +74,16 @@ public abstract class OnixPartsBuilder implements Comparable<OnixPartsBuilder>, 
 		}
 	}
 	
+	public static String getTagTypeString(int tagType)
+	{
+		switch(tagType)
+		{
+			case SHORTTAG: return "short";
+			case REFERENCETAG: return "reference";
+			default: return "unknownTagType";
+		}
+	}
+	
 	protected String getArgument(String arg)
 	{
 		return arguments.get(arg);

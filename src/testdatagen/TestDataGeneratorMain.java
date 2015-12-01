@@ -218,10 +218,10 @@ public class TestDataGeneratorMain extends JFrame
 			while(titr.hasNext())
 			{
 				Title tit = titr.next();
-				EBookFile ebookFile = eff.generateFile(tit.getEpubType(), tit.getIsbn13());
+				EBookFile ebookFile = eff.generateFile(tit.getEpubType(), tit);
 				tit.addFile(ebookFile);
 				
-				GraphicFile coverFile = gff.generateFile(CoverUtils.getRandomCoverFormat(), tit.getIsbn13(), GraphicFile.Type.COVER);
+				GraphicFile coverFile = gff.generateFile(CoverUtils.getRandomCoverFormat(), tit, GraphicFile.Type.COVER);
 				tit.addFile(coverFile);
 			}
 		}

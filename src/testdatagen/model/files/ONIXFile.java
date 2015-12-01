@@ -18,14 +18,15 @@ public class ONIXFile extends File
 	private String version;
 	private int tagType;
 	
-	public ONIXFile(long ISBN, int tagType, String version)
+	public ONIXFile(final Title title, int tagType, String version)
 	{
-		super(Long.toString(ISBN) + "_onix.xml");
+		super(title);
 		this.version = version;
 		this.tagType = tagType;
 	}
 	
-	public java.io.File generate(Title title, java.io.File destDir)
+	@Override
+	public java.io.File generate(java.io.File destDir)
 	{
 		Element ONIXroot;
 		if(version.equals("2.1"))
@@ -63,5 +64,11 @@ public class ONIXFile extends File
 			Utilities.showErrorPane("Could not save ONIX XML file", ex);
 		}
 		return outputFile;
+	}
+	
+	@Override
+	protected String buildFileName()
+	{
+		return Long.toString(title.getIsbn13()) + "_onix" + version + OnixPartsBuilder.getTagTypeString(tagType)  + ".xml";
 	}
 }

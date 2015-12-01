@@ -10,23 +10,27 @@ public class IBookFile extends EBookFile
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private long ISBN;
 	
-	public IBookFile(long ISBN, boolean demoFlag)
+	public IBookFile(final Title title, final boolean demoFlag)
 	{
-		super(Long.toString(ISBN) + (demoFlag ? "_Extract" : "" ) + ".ibook", demoFlag);
-		this.ISBN = ISBN;
+		super(title, demoFlag);
 	}
 	
 	public String toString()
 	{
-		return "iBook["+ISBN+"]";
+		return "iBook[" + title.getIsbn13() + "]";
 	}
 
 	@Override
-	public File generate(Title title, File destDir)
+	public File generate(final File destDir)
 	{
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	protected String buildFileName()
+	{
+		return Long.toString(title.getIsbn13()) + (isDemoFile() ? "_Extract" : "" ) + ".ibook";
 	}
 }

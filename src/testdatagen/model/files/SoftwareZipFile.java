@@ -10,23 +10,27 @@ public class SoftwareZipFile extends EBookFile
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private long ISBN;
 	
-	public SoftwareZipFile(long ISBN, boolean demoFlag)
+	public SoftwareZipFile(final Title title, final boolean demoFlag)
 	{
-		super(Long.toString(ISBN)  + (demoFlag ? "_demosoftware" : "" ) + ".zip", demoFlag);
-		this.ISBN = ISBN;
+		super(title, demoFlag);
 	}
 	
 	public String toString()
 	{
-		return "SoftwareZip["+ISBN+"]";
+		return "SoftwareZip["+ title.getIsbn13() +"]";
 	}
 
 	@Override
-	public File generate(Title title, File destDir) 
+	public File generate(final File destDir) 
 	{
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	protected String buildFileName()
+	{
+		return Long.toString(title.getIsbn13())  + (isDemoFile() ? "_demosoftware" : "" ) + ".zip";
 	}
 }

@@ -23,15 +23,14 @@ public class PDFCoverFile extends GraphicFile
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private long ISBN;
 		
-	public PDFCoverFile(long ISBN)
+	public PDFCoverFile(Title title)
 	{
-		super(Long.toString(ISBN) + "_cover.pdf", GraphicFile.Type.COVER);
-		this.ISBN = ISBN;
+		super(title, GraphicFile.Type.COVER);
 	}
 	
-	public java.io.File generate(Title title, java.io.File destPath)
+	@Override
+	public java.io.File generate(java.io.File destFolder)
 	{
 		Dimension coverDimension = CoverUtils.getRandomCoverDimension();
 		
@@ -39,7 +38,50 @@ public class PDFCoverFile extends GraphicFile
 		PDRectangle pageDimension = new PDRectangle((float) coverDimension.getWidth(), (float) coverDimension.getHeight());
 		PDPage coverPage = new PDPage(pageDimension);
 		coverDoc.addPage(coverPage);
+				
+		writeCoverToPage(coverDoc, coverPage);
 		
+		java.io.File storedFile = new java.io.File(FilenameUtils.concat(destFolder.getPath(), buildFileName()));
+		
+		try
+		{
+			coverDoc.save(storedFile);
+		}
+		catch (COSVisitorException cve)
+		{
+			System.out.println("An exception that represents something gone wrong when visiting a PDF object, thrown by the Apache PDFBox library");
+			cve.printStackTrace();
+			storedFile = null;
+		}
+		catch (IOException ex)
+		{
+			System.out.println("I/O error occurred during saving of cover PDF");
+			ex.printStackTrace();
+			storedFile = null;
+		}
+		finally
+		{
+			try
+			{
+				coverDoc.close();	
+			}
+			catch(IOException ex)
+			{
+				// nop
+			}
+		}
+		return storedFile;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return "CoverPDF[" + title.getIsbn13() + "]";
+	}
+	
+	void writeCoverToPage(PDDocument coverDoc, PDPage coverPage)
+	{
+		PDRectangle pageDimension = coverPage.getMediaBox();
 		PDFont largeFont = PDType1Font.TIMES_BOLD;
 		PDFont mediumFont = PDType1Font.TIMES_ITALIC;
 		PDFont smallFont = PDType1Font.TIMES_ROMAN;
@@ -88,49 +130,11 @@ public class PDFCoverFile extends GraphicFile
 			System.out.println("I/O error occurred during PDF generation");
 			ex.printStackTrace();
 		}
-		
-		java.io.File storedFile = null;
-		if(destPath.isDirectory())
-		{
-			 storedFile = new java.io.File(FilenameUtils.concat(destPath.getPath(), title.getIsbn13() + "_cover.pdf"));
-		}
-		else
-		{
-			storedFile = new java.io.File(destPath.getPath());
-		}
-		
-		try
-		{
-			coverDoc.save(storedFile);
-		}
-		catch (COSVisitorException cve)
-		{
-			System.out.println("An exception that represents something gone wrong when visiting a PDF object, thrown by the Apache PDFBox library");
-			cve.printStackTrace();
-			storedFile = null;
-		}
-		catch (IOException ex)
-		{
-			System.out.println("I/O error occurred during saving of cover PDF");
-			ex.printStackTrace();
-			storedFile = null;
-		}
-		finally
-		{
-			try
-			{
-				coverDoc.close();	
-			}
-			catch(IOException ex)
-			{
-				// nop
-			}
-		}
-		return storedFile;
 	}
 	
-	public String toString()
+	@Override
+	protected String buildFileName()
 	{
-		return "CoverPDF["+ISBN+"]";
+		return Long.toString(title.getIsbn13()) + "_cover.pdf";
 	}
 }

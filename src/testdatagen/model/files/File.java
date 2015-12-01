@@ -1,24 +1,28 @@
 package testdatagen.model.files;
 
+import java.io.Serializable;
+
 import testdatagen.model.Title;
 
-public abstract class File extends java.io.File
+public abstract class File implements Serializable
 {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	protected Title title;
 	
-	public File(String pathname)
+	public File(Title title)
 	{
-		super(pathname);
+		this.title = title;
 	}
 	
 	/*
 	 * generates a file and saves it to disc
 	 * @title Title: the title object to create the graphic file for
-	 * @destDir File: the destination directory for saving the file
-	 * @return File: the file path of the stored file.
+	 * @destFolder File: the destination directory for saving the file
+	 * @return File: the File object of the stored file.
 	 */
-	public abstract java.io.File generate(Title title, java.io.File destPath);
+	public abstract java.io.File generate(java.io.File destFolder);
+	protected abstract String buildFileName();
 }

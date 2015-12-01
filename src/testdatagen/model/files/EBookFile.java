@@ -1,5 +1,7 @@
 package testdatagen.model.files;
 
+import testdatagen.model.Title;
+
 public abstract class EBookFile extends File
 {
 	/**
@@ -8,9 +10,9 @@ public abstract class EBookFile extends File
 	private static final long serialVersionUID = 1L;
 	protected boolean isDemo;
 
-	public EBookFile(String pathname, boolean demoFlag)
+	public EBookFile(Title title, boolean demoFlag)
 	{
-		super(pathname);
+		super(title);
 		this.isDemo = demoFlag;
 	}
 	

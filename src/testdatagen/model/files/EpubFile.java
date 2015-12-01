@@ -31,42 +31,30 @@ public class EpubFile extends EBookFile
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private long ISBN;
 	private boolean isBooklet;
 	// prepare a byte array with the ASCII codes for "application/epub+zip" without EOL/EOF marker
 	private static byte[] mimetypeASCII = new byte[]{0x61, 0x70, 0x70, 0x6C, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6F, 0x6E, 0x2F, 0x65, 0x70, 0x75, 0x62, 0x2B, 0x7A, 0x69, 0x70};
 	
-	public EpubFile(final long ISBN, boolean demoFlag)
+	public EpubFile(final Title title, final boolean demoFlag)
 	{
-		super(Long.toString(ISBN) + (demoFlag ? "_Extract" : "" ) +  ".epub", demoFlag);
-		this.ISBN = ISBN;
+		super(title, demoFlag);
 		isBooklet = false;
 	}
 	
-	public EpubFile(final long ISBN, boolean demoFlag, boolean isBooklet)
+	public EpubFile(final Title title, final boolean demoFlag, final boolean isBooklet)
 	{
-		this(ISBN, demoFlag);
-		isBooklet = true;
+		this(title, demoFlag);
+		this.isBooklet = isBooklet;
 	}
 	
-	public java.io.File generate(Title title, java.io.File destPath)
+	public java.io.File generate(final java.io.File destFolder)
 	{
-		java.io.File tempDir = null;
-		SimpleDateFormat df = new SimpleDateFormat("HHmmssSSS");
-		if(destPath.isDirectory())
-		{
-			tempDir = new java.io.File(FilenameUtils.concat(destPath.getPath(),"temp" + df.format(new Date())));
-		}
-		else
-		{
-			tempDir = new java.io.File(FilenameUtils.concat(destPath.getParent(), "temp" + df.format(new Date())));
-		}
+		java.io.File tempDir = Utilities.getTempDir();
 		
 		// generate cover file
-		JpegFile cover = new JpegFile(title.getIsbn13(), GraphicFile.Type.COVER);
+		JpegFile cover = new JpegFile(title, GraphicFile.Type.COVER);
 		java.io.File imageFilePath = new java.io.File(FilenameUtils.concat(tempDir.getPath(), "OEBPS/images/" + title.getIsbn13() + ".jpg"));
-		
-		cover.generate(title, imageFilePath);
+		cover.generate(imageFilePath);
 		
 		// generate title page file
 		EPUBTitlePageTemplate template = new EPUBTitlePageTemplate(new Locale("de"), title);
@@ -329,17 +317,9 @@ public class EpubFile extends EBookFile
 		}
 		
 		// zip epub in a way that is conformant with the EPUB spec
-		String dest = null;
-		if(destPath.isDirectory())
-		{
-			dest = FilenameUtils.concat(destPath.getPath(), "" + title.getIsbn13() + ".epub");
-		}
-		else
-		{
-			dest = destPath.getPath();
-		}
+		String destPath = FilenameUtils.concat(destFolder.getPath(), "" + title.getIsbn13() + ".epub");
 		
-		zipEpub(dest, tempDir.getPath());
+		zipEpub(destPath, tempDir.getPath());
 		
 		// delete temp folder
 		try
@@ -351,7 +331,7 @@ public class EpubFile extends EBookFile
 			Utilities.showWarnPane("Could not delete temporary directory " + tempDir.getPath() + " for " + title.getIsbn13());
 		}
 		
-		return new java.io.File(dest);
+		return new java.io.File(destPath);
 	}
 	
 	public boolean isBooklet()
@@ -370,7 +350,12 @@ public class EpubFile extends EBookFile
 		{
 			fileString += "_booklet";
 		}
-		return fileString + "[" +ISBN+ "]";
+		return fileString + "[" + title.getIsbn13() + "]";
+	}
+	
+	protected String buildFileName()
+	{
+		return Long.toString(title.getIsbn13()) + (isDemoFile() ? "_Extract" : "") + (isBooklet() ? "_Booklet" : "") +  ".epub";
 	}
 	
 	private void zipEpub(String zipFileName, String dir)

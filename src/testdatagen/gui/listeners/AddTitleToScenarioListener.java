@@ -151,40 +151,40 @@ public class AddTitleToScenarioListener implements ActionListener
 			// instantiate selected ebook file types and add them to the title object
 			EBookFileFactory eff = EBookFileFactory.getInstance();
 
-			EBookFile ebookFile = eff.generateFile(Utilities.formatToFileType(format), nextIsbn);
+			EBookFile ebookFile = eff.generateFile(Utilities.formatToFileType(format), newTitle);
 			newTitle.addFile(ebookFile);
 
 			// check for optional product content files and generate if needed
 			if(Boolean.parseBoolean(formDataMap.get("epubmobi")))
 			{
-				EBookFile epubMobiFile = eff.generateFile("EpubMobi", nextIsbn);
+				EBookFile epubMobiFile = eff.generateFile("EpubMobi", newTitle);
 				newTitle.addFile(epubMobiFile);
 			}
 			if(Boolean.parseBoolean(formDataMap.get("extracts")))
 			{
-				EBookFile extractFile = eff.generateDemoFile(Utilities.formatToFileType(format), nextIsbn);
+				EBookFile extractFile = eff.generateDemoFile(Utilities.formatToFileType(format), newTitle);
 				newTitle.addFile(extractFile);
 			}
 
 			// instantiate selected graphic file types and add them to the title object
 			GraphicFileFactory gff = GraphicFileFactory.getInstance();
 			// a cover file is needed in any case, choose randomly between jpg or pdf cover
-			GraphicFile coverFile = gff.generateFile(CoverUtils.getRandomCoverFormat(), nextIsbn, GraphicFile.Type.COVER);
+			GraphicFile coverFile = gff.generateFile(CoverUtils.getRandomCoverFormat(), newTitle, GraphicFile.Type.COVER);
 			newTitle.addFile(coverFile);
 			// check for optional graphic files and generate if requested
 			if(Boolean.parseBoolean(formDataMap.get("screenshot")))
 			{
-				GraphicFile screenshotFile = gff.generateFile("JPEG", nextIsbn, GraphicFile.Type.SCREENSHOT);
+				GraphicFile screenshotFile = gff.generateFile("JPEG", newTitle, GraphicFile.Type.SCREENSHOT);
 				newTitle.addFile(screenshotFile);
 			}
 			if(Boolean.parseBoolean(formDataMap.get("packshot")))
 			{
-				GraphicFile packshotFile = gff.generateFile("JPEG", nextIsbn, GraphicFile.Type.PACKSHOT);
+				GraphicFile packshotFile = gff.generateFile("JPEG", newTitle, GraphicFile.Type.PACKSHOT);
 				newTitle.addFile(packshotFile);
 			}
 			if(Boolean.parseBoolean(formDataMap.get("backcover")))
 			{
-				GraphicFile backcoverFile = gff.generateFile("JPEG", nextIsbn, GraphicFile.Type.BACKCOVER);
+				GraphicFile backcoverFile = gff.generateFile("JPEG", newTitle, GraphicFile.Type.BACKCOVER);
 				newTitle.addFile(backcoverFile);
 			}
 					

@@ -1,5 +1,6 @@
 package testdatagen;
 
+import testdatagen.model.Title;
 import testdatagen.model.files.GraphicFile;
 import testdatagen.model.files.JpegFile;
 import testdatagen.model.files.PDFCoverFile;
@@ -25,26 +26,26 @@ public class GraphicFileFactory extends FileFactory
 	}
 	
 	@Override
-	public GraphicFile generateFile(String format, long ISBN)
+	public GraphicFile generateFile(final String format, final Title title)
 	{
 		// default graphic file type: Cover
-		return generateFile(format, ISBN, GraphicFile.Type.COVER);
+		return generateFile(format, title, GraphicFile.Type.COVER);
 	}
 	
-	public GraphicFile generateFile(String format, long ISBN, GraphicFile.Type type)
+	public GraphicFile generateFile(final String format, final Title title, final GraphicFile.Type type)
 	{
 		GraphicFile newFile = null;
 		validateFormat(format);
 		switch(format)
 		{
 			case "PDF":
-				newFile = new PDFCoverFile(ISBN);
+				newFile = new PDFCoverFile(title);
 				break;
 			case "JPEG":
 			case "jpg":
 			case "JPG":
 			case "JPeg":
-				newFile = new JpegFile(ISBN, type);
+				newFile = new JpegFile(title, type);
 				break;
 			default:
 				break;

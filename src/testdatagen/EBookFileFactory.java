@@ -1,5 +1,6 @@
 package testdatagen;
 
+import testdatagen.model.Title;
 import testdatagen.model.files.AudioZipFile;
 import testdatagen.model.files.EBookFile;
 import testdatagen.model.files.EpubFile;
@@ -30,42 +31,42 @@ public class EBookFileFactory extends FileFactory
 	}
 	
 	@Override
-	public EBookFile generateFile(String format, long ISBN)
+	public EBookFile generateFile(final String format, final Title title)
 	{
-		return instantiateEbookFile(format, ISBN, false);
+		return instantiateEbookFile(format, title, false);
 	}
 	
-	public EBookFile generateDemoFile(String format, long ISBN)
+	public EBookFile generateDemoFile(final String format, final Title title)
 	{
-		return instantiateEbookFile(format, ISBN, true);
+		return instantiateEbookFile(format, title, true);
 	}
 	
-	private EBookFile instantiateEbookFile(String format, long ISBN, boolean demoFlag)
+	private EBookFile instantiateEbookFile(String format, Title title, boolean demoFlag)
 	{
 		EBookFile newFile = null;
 		validateFormat(format);
 		switch(format)
 		{
 			case "PDF":
-				newFile = new PDFFile(ISBN, demoFlag);
+				newFile = new PDFFile(title, demoFlag);
 				break;
 			case "Epub":
-				newFile = new EpubFile(ISBN, demoFlag);
+				newFile = new EpubFile(title, demoFlag);
 				break;
 			case "EpubMobi":
-				newFile = new EpubMobiFile(ISBN, demoFlag);
+				newFile = new EpubMobiFile(title, demoFlag);
 				break;
 			case "IBook":
-				newFile = new IBookFile(ISBN, demoFlag);
+				newFile = new IBookFile(title, demoFlag);
 				break;
 			case "Mobi":
-				newFile = new MobiFile(ISBN, demoFlag);
+				newFile = new MobiFile(title, demoFlag);
 				break;
 			case "AudioZip":
-				newFile = new AudioZipFile(ISBN, demoFlag);
+				newFile = new AudioZipFile(title, demoFlag);
 				break;
 			case "SoftwareZip":
-				newFile = new SoftwareZipFile(ISBN, demoFlag);
+				newFile = new SoftwareZipFile(title, demoFlag);
 				break;
 			default:
 				break;
