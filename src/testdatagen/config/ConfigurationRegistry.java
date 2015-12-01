@@ -45,6 +45,7 @@ public class ConfigurationRegistry
 		 regMap.put("onix.minNumberOfPriceNodes", "3");
 		 regMap.put("onix.maxNumberOfPriceNodes", "12");
 		 regMap.put("iso3166-1.countryCodes", "AD AE AF AG AI AL AM AN AO AQ AR AS AT AU AW AX AZ BA BE BF BG CA CH CM CN CR CU CV CY CZ DE DK EC EE EG FR GB GR GT HK HR HU JP LB LI LT LU LY MA MC MD ME MG MT NL PK PR PT PW RW SA SD SN SR TG TR TW VA YE ZW");
+		 regMap.put("kindleGenPath", "");
 		 
 		 localeTextMap = new ConcurrentHashMap<Locale, Map<String, String[]>>();
 		 Map<String, String[]> germanTextMap = new ConcurrentHashMap<String, String[]>();
@@ -166,6 +167,10 @@ public class ConfigurationRegistry
 		return onixCodeListMap;
 	}
 	
+	public void put(String key, String value)
+	{
+		regMap.put(key, value);
+	}
 	/*
 	 * Convenience function: If a single String is to be stored in the locale map, wrap it into an array of length 1
 	 */
