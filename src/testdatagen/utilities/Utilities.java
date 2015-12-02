@@ -83,8 +83,9 @@ public final class Utilities
 	
 	public static File getTempDir()
 	{
+		Random random = new Random();
 		long timestamp = System.currentTimeMillis();
-		File tempDir = new File(FilenameUtils.concat(Utilities.getConfigDir().getPath(), "temp" + timestamp  + "/"));
+		File tempDir = new File(FilenameUtils.concat(Utilities.getConfigDir().getPath(), "temp" + timestamp  + "-" + random.nextInt(1000) + "/"));
 		tempDir.mkdirs();
 		return tempDir;
 	}

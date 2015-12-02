@@ -49,8 +49,7 @@ public class EpubFile extends EBookFile
 	
 	public java.io.File generate(final java.io.File destFolder)
 	{
-		java.io.File tempDir = Utilities.getTempDir();
-		
+		java.io.File tempDir = Utilities.getTempDir();	
 		// generate cover file
 		JpegFile cover = new JpegFile(title, GraphicFile.Type.COVER);
 		java.io.File imageFilePath = new java.io.File(FilenameUtils.concat(tempDir.getPath(), "OEBPS/images/" + title.getIsbn13() + ".jpg"));

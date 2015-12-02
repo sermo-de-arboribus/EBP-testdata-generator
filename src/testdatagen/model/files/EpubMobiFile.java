@@ -27,6 +27,7 @@ public class EpubMobiFile extends EBookFile
 		java.io.File tempDir = Utilities.getTempDir();
 		EpubFile epubFile = new EpubFile(title, this.isDemoFile());
 		java.io.File epubMobiTempFile = epubFile.generate(tempDir);
+		
 		java.io.File epubMobiDestFile = new java.io.File(FilenameUtils.concat(destFolder.getAbsolutePath(), buildFileName()));
 		// rename Epub file and move it to destination folder
 		try
@@ -40,17 +41,6 @@ public class EpubMobiFile extends EBookFile
 		catch (IOException exc)
 		{
 			Utilities.showErrorPane("Could not move temporary EpubMobi file to " + destFolder.getAbsolutePath() + "\n", exc);
-		}
-
-		// TODO: it seems FileUtils is working asynchronously, but I couldn't find any info in the documentation. So this bad solution of waiting a second before deleting the 
-		// temp dir is just a workaround, and one that might fail occasionally.
-		try
-		{
-			Thread.sleep(2000);
-		}
-		catch (InterruptedException exc)
-		{
-			//
 		}
 		
 		try

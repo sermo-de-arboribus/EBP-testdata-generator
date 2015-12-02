@@ -16,9 +16,6 @@ import testdatagen.utilities.Utilities;
 
 public class MobiFile extends EBookFile
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	public MobiFile(final Title title, boolean demoFlag)
@@ -127,6 +124,17 @@ public class MobiFile extends EBookFile
 			catch (IOException exc)
 			{
 				Utilities.showErrorPane("Could not move Mobi file from temp folder to destination folder.\n", exc);
+			}
+			
+			// TODO: it seems FileUtils is working asynchronously, but I couldn't find any info in the documentation. So this bad solution of waiting a second before deleting the 
+			// temp dir is just a workaround, and one that might fail occasionally.
+			try
+			{
+				Thread.sleep(2000);
+			}
+			catch (InterruptedException exc)
+			{
+				//
 			}
 			
 			// delete temp folder
