@@ -45,9 +45,6 @@ public class MobiFile extends EBookFile
 		String epubMobiPath = FilenameUtils.concat(tempDir.getPath(), epubMobi.buildFileName());
 		String epubPath = epubMobiPath.replace("_EpubMobi", "");
 		
-		System.out.println("epubMobiPath: " + epubMobiPath);
-		System.out.println("epubPath: " + epubPath);
-		System.out.println("tempDir: " + tempDir);
 		try
 		{
 			FileUtils.moveFile(FileUtils.getFile(epubMobiPath), FileUtils.getFile(epubPath));
