@@ -41,6 +41,17 @@ public class EpubMobiFile extends EBookFile
 		{
 			Utilities.showErrorPane("Could not move temporary EpubMobi file to " + destFolder.getAbsolutePath() + "\n", exc);
 		}
+
+		// TODO: it seems FileUtils is working asynchronously, but I couldn't find any info in the documentation. So this bad solution of waiting a second before deleting the 
+		// temp dir is just a workaround, and one that might fail occasionally.
+		try
+		{
+			Thread.sleep(2000);
+		}
+		catch (InterruptedException exc)
+		{
+			//
+		}
 		
 		try
 		{
