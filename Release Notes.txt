@@ -20,3 +20,17 @@ Bug fixes and UI enhancements:
 - Fixed UTF-8 encoding problem in generated EPUB files
 - <SubjectSchemeVersion> is only put into the ONIX files, if it has been explicitly configured
 - In Title configuration window, the selected subjects can now also be deleted, not only added
+
+*-------------*
+*Version 0.7.2*
+*-------------*
+Released December 8th, 2015
+
+Major improvements:
+- Mobi files now generated
+- configuration options for <PublishingStatus>, <ProductAvailability> and <AvailabilityCode> added
+- Screenshot and Packshot files are now produced in multitude and with sequence numbers
+
+Minor changes and "beauty farm":
+- E-Book files now contain some chapters and are filled with text (for better or worse...)
+- File model classes refactored
