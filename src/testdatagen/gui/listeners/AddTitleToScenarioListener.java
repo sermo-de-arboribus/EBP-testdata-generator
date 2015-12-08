@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 import javax.swing.*;
@@ -174,13 +175,23 @@ public class AddTitleToScenarioListener implements ActionListener
 			// check for optional graphic files and generate if requested
 			if(Boolean.parseBoolean(formDataMap.get("screenshot")))
 			{
-				GraphicFile screenshotFile = gff.generateFile("JPEG", newTitle, GraphicFile.Type.SCREENSHOT);
-				newTitle.addFile(screenshotFile);
+				Random random = new Random();
+				int numberOfScreenshotFiles = random.nextInt(5) + 1;
+				for(int i = 1; i <= numberOfScreenshotFiles; i++)
+				{
+					GraphicFile screenshotFile = gff.generateFile("JPEG", newTitle, GraphicFile.Type.SCREENSHOT, i);
+					newTitle.addFile(screenshotFile);
+				}
 			}
 			if(Boolean.parseBoolean(formDataMap.get("packshot")))
 			{
-				GraphicFile packshotFile = gff.generateFile("JPEG", newTitle, GraphicFile.Type.PACKSHOT);
-				newTitle.addFile(packshotFile);
+				Random random = new Random();
+				int numberOfScreenshotFiles = random.nextInt(5) + 1;
+				for(int i = 1; i <= numberOfScreenshotFiles; i++)
+				{
+					GraphicFile packshotFile = gff.generateFile("JPEG", newTitle, GraphicFile.Type.PACKSHOT, i);
+					newTitle.addFile(packshotFile);
+				}
 			}
 			if(Boolean.parseBoolean(formDataMap.get("backcover")))
 			{

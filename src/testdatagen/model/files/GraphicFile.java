@@ -28,6 +28,20 @@ public abstract class GraphicFile extends File
 	
 	public enum Type
 	{
-		COVER, SCREENSHOT, PACKSHOT, SQUARECOVER, BACKCOVER
+		COVER, SCREENSHOT, PACKSHOT, SQUARECOVER, BACKCOVER;
+		
+		@Override
+		public String toString()
+		{
+			switch(this)
+			{
+				case COVER: return "COVER";
+				case SCREENSHOT: return "SCREEN";
+				case PACKSHOT: return "3DPACKSHOT";
+				case SQUARECOVER: return "SQUARED";
+				case BACKCOVER: return "BC";
+				default: return "";
+			}
+		}
 	}
 }

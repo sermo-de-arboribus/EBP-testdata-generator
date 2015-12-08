@@ -26,10 +26,18 @@ public class JpegFile extends GraphicFile
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private int sequenceNumber;
 	
 	public JpegFile(final Title title, final GraphicFile.Type type)
 	{
 		super(title, type);
+		sequenceNumber = 0;
+	}
+	
+	public JpegFile(final Title title, final GraphicFile.Type type, int sequNo)
+	{
+		super(title, type);
+		sequenceNumber = sequNo;
 	}
 	
 	@Override
@@ -55,13 +63,13 @@ public class JpegFile extends GraphicFile
 	@Override
 	public String toString()
 	{
-		return type.toString().toLowerCase() + "JPG[" + title.getIsbn13() + "]";
+		return type.toString().toLowerCase() + "JPG" + getSequenceString() + "[" + title.getIsbn13() + "]";
 	}
 	
 	@Override
 	protected String buildFileName()
 	{
-		return Long.toString(title.getIsbn13()) + "_" + type.toString().toLowerCase() + ".jpg";
+		return Long.toString(title.getIsbn13()) + "_" + type.toString().toLowerCase() + getSequenceString() + ".jpg";
 	}
 	
 	private BufferedImage paintCover(Title title)
@@ -69,6 +77,16 @@ public class JpegFile extends GraphicFile
 		Dimension coverDimension = CoverUtils.getRandomCoverDimension();
 		BufferedImage bufImg = new JpegCover(title, (int) coverDimension.getWidth(), (int) coverDimension.getHeight());
 		return bufImg;
+	}
+	
+	private String getSequenceString()
+	{
+		String sequenceString = "";
+		if(sequenceNumber > 0)
+		{
+			sequenceString = String.format("_%03d", sequenceNumber);
+		}
+		return sequenceString;
 	}
 }
 

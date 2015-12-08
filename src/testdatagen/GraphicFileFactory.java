@@ -53,6 +53,25 @@ public class GraphicFileFactory extends FileFactory
 		return newFile;
 	}
 	
+	// constructor for screenshot and packshot files that should have sequence numbers
+	public GraphicFile generateFile(final String format, final Title title, final GraphicFile.Type type, int sequenceNumber)
+	{
+		GraphicFile newFile = null;
+		validateFormat(format);
+		switch(format)
+		{
+			case "JPEG":
+			case "jpg":
+			case "JPG":
+			case "JPeg":
+				newFile = new JpegFile(title, type, sequenceNumber);
+				break;
+			default:
+				break;
+		}
+		return newFile;
+	}
+	
 	private void validateFormat(String format)
 	{
 		for(String validFormat : validFormats)
