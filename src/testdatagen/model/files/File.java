@@ -3,6 +3,7 @@ package testdatagen.model.files;
 import java.io.Serializable;
 
 import testdatagen.model.Title;
+import testdatagen.utilities.Utilities;
 
 public abstract class File implements Serializable
 {
@@ -14,7 +15,15 @@ public abstract class File implements Serializable
 	
 	public File(Title title)
 	{
-		this.title = title;
+		if(title == null)
+		{
+			NullPointerException exc = new NullPointerException();
+			Utilities.showErrorPane("Contructor tried to instantiate a File object, but the title parameter passed in was a null reference" + exc.getStackTrace() + "\n", exc);
+		}
+		else
+		{
+			this.title = title;	
+		}
 	}
 	
 	/*

@@ -52,8 +52,8 @@ public class EpubFile extends EBookFile
 		java.io.File tempDir = Utilities.getTempDir();	
 		// generate cover file
 		JpegFile cover = new JpegFile(title, GraphicFile.Type.COVER);
-		java.io.File imageFilePath = new java.io.File(FilenameUtils.concat(tempDir.getPath(), "OEBPS/images/" + title.getIsbn13() + ".jpg"));
-		cover.generate(imageFilePath);
+		java.io.File imageFileDir = new java.io.File(FilenameUtils.concat(tempDir.getPath(), "OEBPS/images/"));
+		java.io.File imageFilePath = cover.generate(imageFileDir);
 		
 		// generate title page file
 		EPUBTitlePageTemplate template = new EPUBTitlePageTemplate(new Locale("de"), title);
@@ -222,7 +222,10 @@ public class EpubFile extends EBookFile
 		item2.addAttribute(new Attribute("media-type", "application/xhtml+xml"));
 		manifest.appendChild(item2);
 		
-		item3.addAttribute(new Attribute("href", "images/" + title.getIsbn13() + ".jpg"));
+		String tocCoverPath = imageFilePath.getAbsolutePath();
+		int index = tocCoverPath.indexOf("images" + java.io.File.separator);
+		tocCoverPath = tocCoverPath.substring(index);
+		item3.addAttribute(new Attribute("href", tocCoverPath));
 		item3.addAttribute(new Attribute("id", "cover"));
 		item3.addAttribute(new Attribute("media-type", "image/jpeg"));
 		item3.addAttribute(new Attribute("properties", "cover-image"));
