@@ -31,42 +31,39 @@ public class SaveScenariosButtonListener implements ActionListener
 	    chooser.setFileFilter(filter);
 	    int returnVal = chooser.showSaveDialog(null);
 	    File fileForSaving = null;
-	    while(fileForSaving == null)
+	    if(returnVal == JFileChooser.APPROVE_OPTION)
 	    {
-		    if(returnVal == JFileChooser.APPROVE_OPTION)
+	    	fileForSaving = chooser.getSelectedFile();
+		    // add desired file extension, if not entered by user
+		    if (FilenameUtils.getExtension(fileForSaving.getName()).equalsIgnoreCase("ebp"))
 		    {
-		    	fileForSaving = chooser.getSelectedFile();
+		        // filename is OK as-is
 		    }
-	    }
-	    // add desired file extension, if not entered by user
-	    if (FilenameUtils.getExtension(fileForSaving.getName()).equalsIgnoreCase("ebp"))
-	    {
-	        // filename is OK as-is
-	    }
-	    else
-	    {
-	    	fileForSaving = new File(fileForSaving.toString() + ".ebp");
-	    }
-	    ObjectOutputStream saveScenarioObjects = null;
-	    try
-	    {
-	    	ScenarioTableModel stm = programWindow.getScenarioTableModel();
-		    saveScenarioObjects = new ObjectOutputStream(new FileOutputStream(fileForSaving));
-		    saveScenarioObjects.writeObject(stm);
-		    saveScenarioObjects.flush();
-		    Utilities.showInfoPane("" + stm.getRowCount() + " scenarios saved to file " + fileForSaving.getName());
-	    }
-	    catch (IOException e)
-	    {
-	    	Utilities.showErrorPane("Error: could not save file", e);
-    		e.printStackTrace();
-	    }
-	    finally
-	    {
-	    	if(saveScenarioObjects != null)
-	    	{
-	    		Utilities.safeClose(saveScenarioObjects);
-	    	}
+		    else
+		    {
+		    	fileForSaving = new File(fileForSaving.toString() + ".ebp");
+		    }
+		    ObjectOutputStream saveScenarioObjects = null;
+		    try
+		    {
+		    	ScenarioTableModel stm = programWindow.getScenarioTableModel();
+			    saveScenarioObjects = new ObjectOutputStream(new FileOutputStream(fileForSaving));
+			    saveScenarioObjects.writeObject(stm);
+			    saveScenarioObjects.flush();
+			    Utilities.showInfoPane("" + stm.getRowCount() + " scenarios saved to file " + fileForSaving.getName());
+		    }
+		    catch (IOException e)
+		    {
+		    	Utilities.showErrorPane("Error: could not save file", e);
+	    		e.printStackTrace();
+		    }
+		    finally
+		    {
+		    	if(saveScenarioObjects != null)
+		    	{
+		    		Utilities.safeClose(saveScenarioObjects);
+		    	}
+		    }
 	    }
 	}
 }

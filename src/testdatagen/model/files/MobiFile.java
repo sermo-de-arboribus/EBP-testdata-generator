@@ -4,11 +4,15 @@ import java.awt.Component;
 import java.awt.HeadlessException;
 import java.io.File;
 import java.io.IOException;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.lang.ProcessBuilder.Redirect;
 
 import javax.swing.*;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
 
 import testdatagen.config.ConfigurationRegistry;
 import testdatagen.model.Title;
@@ -94,22 +98,28 @@ public class MobiFile extends EBookFile
 		// Here we still might not have a valid KindleGen reference. If so, we skip the Mobi generation with a warning (see else branch).
 		if(kindleGenPath.exists())
 		{
-			// run kindlegen
-			Runtime rt = Runtime.getRuntime();
-			String executionStatement = kindleGenPath.getAbsolutePath() + " " + "\"" + epubPath + "\"";
+			Writer kindleGenOutputWriter = new StringWriter();
+			String kindleGenOutput = "";
 			try
 			{
-				Process p = rt.exec(executionStatement);
+				ProcessBuilder pb = new ProcessBuilder(kindleGenPath.getAbsolutePath(), "\"" + epubPath + "\"");
+				pb.redirectOutput(Redirect.PIPE);
+				pb.redirectError(Redirect.PIPE);
+				Process p = pb.start();
 				p.waitFor();
+				IOUtils.copy(p.getInputStream(), kindleGenOutputWriter, "UTF-8");
+				kindleGenOutput = kindleGenOutputWriter.toString();
 			}
 			catch (IOException exc)
 			{
-				Utilities.showErrorPane("Could not execute KindleGen with statement " + executionStatement + "\n", exc);
+				Utilities.showErrorPane("Could not execute KindleGen with kindlePath " + kindleGenPath.getAbsolutePath() + "\n", exc);
 			}
 			catch (InterruptedException exc)
 			{
 				Utilities.showErrorPane("Interrupted while waiting for KindleGen to finish\n", exc);
 			}
+			// TODO: debug output, should be put into a logging framework later
+			System.out.println(kindleGenOutput);
 
 			// copy generated mobi file from temp to destination folder
 			File mobiDestinationFile = new File(epubPath.replace(".epub", ".mobi"));
@@ -121,17 +131,6 @@ public class MobiFile extends EBookFile
 			catch (IOException exc)
 			{
 				Utilities.showErrorPane("Could not move Mobi file from temp folder to destination folder.\n", exc);
-			}
-			
-			// TODO: it seems FileUtils is working asynchronously, but I couldn't find any info in the documentation. So this bad solution of waiting a second before deleting the 
-			// temp dir is just a workaround, and one that might fail occasionally.
-			try
-			{
-				Thread.sleep(2000);
-			}
-			catch (InterruptedException exc)
-			{
-				//
 			}
 			
 			// delete temp folder

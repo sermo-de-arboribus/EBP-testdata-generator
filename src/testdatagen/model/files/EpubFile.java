@@ -22,6 +22,7 @@ import org.apache.commons.io.FilenameUtils;
 
 import testdatagen.model.Title;
 import testdatagen.templates.EBookChapterTemplate;
+import testdatagen.templates.EPUBCoverPageTemplate;
 import testdatagen.templates.EPUBTitlePageTemplate;
 import testdatagen.utilities.Utilities;
 
@@ -54,6 +55,16 @@ public class EpubFile extends EBookFile
 		JpegFile cover = new JpegFile(title, GraphicFile.Type.COVER);
 		java.io.File imageFileDir = new java.io.File(FilenameUtils.concat(tempDir.getPath(), "OEBPS/images/"));
 		java.io.File imageFilePath = cover.generate(imageFileDir);
+		
+		String tocCoverPath = imageFilePath.toURI().toString();
+		int index = tocCoverPath.indexOf("images/");
+		tocCoverPath = tocCoverPath.substring(index);
+		
+		// generate cover HTML
+		EPUBCoverPageTemplate coverTemplate = new EPUBCoverPageTemplate(new Locale("de"), "../" + tocCoverPath);
+		String HTMLCoverPage = coverTemplate.fillWithText();
+		java.io.File HTMLCoverPagePath = new java.io.File(FilenameUtils.concat(tempDir.getPath(), "OEBPS/text/Cover.xhtml"));
+		saveHtmlFile(HTMLCoverPagePath, HTMLCoverPage);
 		
 		// generate title page file
 		EPUBTitlePageTemplate template = new EPUBTitlePageTemplate(new Locale("de"), title);
@@ -205,12 +216,18 @@ public class EpubFile extends EBookFile
 		dcPublisher.appendChild(new Text("KNV IT E-Books-verlag"));
 		metadata.appendChild(dcPublisher);
 		
+		Element metaCover = new Element("meta", "http://www.idpf.org/2007/opf");
+		metaCover.addAttribute(new Attribute("name", "cover"));
+		metaCover.addAttribute(new Attribute("content", "coverjpg"));
+		metadata.appendChild(metaCover);
+		
 		opfRoot.appendChild(metadata);
 		
 		Element manifest = new Element("manifest", "http://www.idpf.org/2007/opf");
 		Element item1 = new Element("item", "http://www.idpf.org/2007/opf");
 		Element item2 = new Element("item", "http://www.idpf.org/2007/opf");
 		Element item3 = new Element("item", "http://www.idpf.org/2007/opf");
+		Element item4 = new Element("item", "http://www.idpf.org/2007/opf");
 		
 		item1.addAttribute(new Attribute("href", "toc.ncx"));
 		item1.addAttribute(new Attribute("id", "ncx"));
@@ -222,13 +239,18 @@ public class EpubFile extends EBookFile
 		item2.addAttribute(new Attribute("media-type", "application/xhtml+xml"));
 		manifest.appendChild(item2);
 		
-		String tocCoverPath = imageFilePath.getAbsolutePath();
-		int index = tocCoverPath.indexOf("images" + java.io.File.separator);
-		tocCoverPath = tocCoverPath.substring(index);
+		// list cover HTML
+		item4.addAttribute(new Attribute("href", "text/Cover.xhtml"));
+		item4.addAttribute(new Attribute("id", "Cover"));
+		item4.addAttribute(new Attribute("media-type", "application/xhtml+xml"));
+		manifest.appendChild(item4);
+		
+		// list cover JPG
 		item3.addAttribute(new Attribute("href", tocCoverPath));
-		item3.addAttribute(new Attribute("id", "cover"));
+		item3.addAttribute(new Attribute("id", "coverjpg"));
 		item3.addAttribute(new Attribute("media-type", "image/jpeg"));
-		item3.addAttribute(new Attribute("properties", "cover-image"));
+		// This is a suggested solution for generating Mobi, but only valid in EPUB 3
+		// item3.addAttribute(new Attribute("properties", "cover-image"));
 		manifest.appendChild(item3);
 		
 		// add chapters
@@ -247,6 +269,10 @@ public class EpubFile extends EBookFile
 		
 		Element spine = new Element("spine", "http://www.idpf.org/2007/opf");
 		spine.addAttribute(new Attribute("toc", "ncx"));
+		
+		Element coverref = new Element("itemref", "http://www.idpf.org/2007/opf");
+		coverref.addAttribute(new Attribute("idref", "Cover"));
+		spine.appendChild(coverref);
 		
 		Element itemref = new Element("itemref", "http://www.idpf.org/2007/opf");
 		itemref.addAttribute(new Attribute("idref", "Title"));
@@ -268,7 +294,7 @@ public class EpubFile extends EBookFile
 		Element guideRef = new Element("reference", "http://www.idpf.org/2007/opf");
 		guideRef.addAttribute(new Attribute("type", "cover"));
 		guideRef.addAttribute(new Attribute("title", "Cover"));
-		guideRef.addAttribute(new Attribute("href", "images/" + title.getIsbn13() + ".jpg"));
+		guideRef.addAttribute(new Attribute("href", "text/Cover.xhtml"));
 		guide.appendChild(guideRef);
 		
 		opfRoot.appendChild(guide);

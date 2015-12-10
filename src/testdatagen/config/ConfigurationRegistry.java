@@ -77,6 +77,9 @@ public class ConfigurationRegistry
 		 putLocalizedText(deLocale, "publisherlocation", new String[]{"Stuttgart", "Stuttgart-Vaihingen", "Stuttgart-Möhringen", "Stuttgart-Kaltental", "Stuttgart-Rohr"});
 		 putLocalizedText(deLocale, "publishername", new String[]{"KNV IT-E-Books-Verlag", "Koch, Neff &amp; Volckmar IT-E-Books-Verlag", "KNO DiVA &amp; KNV IT-E-Books-Verlag", "KNO DiVA Verlag"});
 		 
+		 // values for the EPUBCoverPageTemplate
+		 putLocalizedText(deLocale, "EPUBCoverPageTemplate", "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?><!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\"><html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>Coverseite</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/></head><body style=\"text-align:center\"><div style=\"text-align:center;width:95%\"><img alt=\"Cover\" src=\"{$coverjpgpath}\" style=\"max-width:90%\" /></div></body></html>");
+		 
 		 // values for the EbookChapterTemplate
 		 putLocalizedText(deLocale, "chapterTemplate", "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?><!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\"><html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>Kapitel {$chapternumber}</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/></head><body><h1>Kapitel {$chapternumber}</h1><div><br/></div><div>{$chaptertext}</div></body></html>");
 		 
