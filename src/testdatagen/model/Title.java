@@ -237,13 +237,25 @@ public class Title implements Serializable
 			default:
 				Utilities.showErrorPane("Something went wrong with title " + this.isbn13 + ": protection has unsupported value", new IllegalArgumentException());
 				return "";
-			}	
+			}
 		}
 	}
 	
 	public synchronized String getShortBlurb()
 	{
-		TitleBlurbTemplate template = new TitleBlurbTemplate(new Locale("de"), this, TitleBlurbTemplateType.SHORT);
+		TitleBlurbTemplate template = new TitleBlurbTemplate(new Locale("de"), TitleBlurbTemplateType.SHORT);
+		return template.fillWithText();
+	}
+	
+	public synchronized String getMediumBlurb()
+	{
+		TitleBlurbTemplate template = new TitleBlurbTemplate(new Locale("de"), TitleBlurbTemplateType.MEDIUM);
+		return template.fillWithText();
+	}
+	
+	public synchronized String getLongBlurb()
+	{
+		TitleBlurbTemplate template = new TitleBlurbTemplate(new Locale("de"), TitleBlurbTemplateType.LONG);
 		return template.fillWithText();
 	}
 	

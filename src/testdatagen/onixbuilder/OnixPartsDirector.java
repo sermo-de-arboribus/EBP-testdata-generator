@@ -100,6 +100,13 @@ public class OnixPartsDirector implements Serializable
 		HashMap<String, String> textArgs = new HashMap<String, String>();
 		textArgs.put("texttypecode", "03");
 		textArgs.put("contentaudience", "00");
+		textArgs.put("text", title.getLongBlurb());
+		requiredElements.add(new OnixTextBuilder(textArgs));
+
+		// add descriptive / advertising text content
+		textArgs = new HashMap<String, String>();
+		textArgs.put("texttypecode", "02");
+		textArgs.put("contentaudience", "00");
 		textArgs.put("text", title.getShortBlurb());
 		requiredElements.add(new OnixTextBuilder(textArgs));
 		
