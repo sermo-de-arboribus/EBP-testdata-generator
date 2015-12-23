@@ -12,6 +12,7 @@ import javax.swing.*;
 import testdatagen.EBookFileFactory;
 import testdatagen.GraphicFileFactory;
 import testdatagen.gui.TitleForm;
+import testdatagen.model.Price;
 import testdatagen.model.Subject;
 import testdatagen.model.TestScenario;
 import testdatagen.model.Title;
@@ -52,6 +53,7 @@ public class AddTitleToScenarioListener implements ActionListener
 			TitleForm dialog = (TitleForm) button.getTopLevelAncestor();
 			Map<String, String> formDataMap = dialog.getFormDataMap();
 			Set<Subject> subjectSet = dialog.getConfiguredSubjects();
+			Set<Price> pricesSet = dialog.getConfiguredPrices();
 			
 			// determine product format
 			String format = formDataMap.get("product");
@@ -132,6 +134,16 @@ public class AddTitleToScenarioListener implements ActionListener
 				while(iterator.hasNext())
 				{
 					newTitle.addSubject(iterator.next());
+				}
+			}
+			
+			// additional prices required in ONIX file?
+			if(!pricesSet.isEmpty())
+			{
+				Iterator<Price> iterator = pricesSet.iterator();
+				while(iterator.hasNext())
+				{
+					newTitle.addPrice(iterator.next());
 				}
 			}
 			

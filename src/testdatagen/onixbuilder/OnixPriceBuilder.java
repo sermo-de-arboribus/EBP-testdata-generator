@@ -117,7 +117,16 @@ public class OnixPriceBuilder extends OnixSupplyDetailPartsBuilder
 	@Override
 	public int getSequenceNumber()
 	{
-		return SEQUENCE_NUMBER;
+		int weight;
+		try
+		{
+			weight = Integer.parseInt(determineElementContent(1));
+		}
+		catch(NumberFormatException exc)
+		{
+			weight = 0;
+		}
+		return SEQUENCE_NUMBER + weight;
 	}
 	
 	private void appendElementsFromTo(Element parent, int from, int to)

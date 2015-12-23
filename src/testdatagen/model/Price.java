@@ -39,7 +39,16 @@ public class Price implements Serializable
 	
 	public boolean equals(Price otherPrice)
 	{
-		return type.equals(otherPrice.type) && country.equals(otherPrice.country);
+		return type.equals(otherPrice.type) && country.equals(otherPrice.country) && currency.equals(otherPrice.currency);
+	}
+	
+	@Override
+	public boolean equals(Object otherObject)
+	{
+		if(otherObject != null && !(otherObject instanceof Price))
+			return false;
+		
+		return this.equals((Price) otherObject);
 	}
 	
 	public String getPriceCountry()
@@ -52,9 +61,16 @@ public class Price implements Serializable
 		return type;
 	}
 	
+	@Override
 	public int hashCode()
 	{
 		String concatenatedValues = type + amount + currency + country;
 		return concatenatedValues.hashCode();
+	}
+	
+	@Override
+	public String toString()
+	{
+		return type + "-" + country + ": " + amount + " " + currency;
 	}
 }

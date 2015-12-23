@@ -219,6 +219,13 @@ public class OnixPartsDirector implements Serializable
 		requiredElements.add(new OnixProductFormDetailBuilder(productFormDetailArgs));
 	}
 	
+	public void addPrice(Price newPrice)
+	{
+		HashMap<String, String> newPriceArgs = new HashMap<>();
+		newPrice.addPriceArguments(newPriceArgs);
+		requiredElements.add(new OnixPriceBuilder(newPriceArgs));
+	}
+	
 	public void addProductIdentifier(String type)
 	{
 		String productIdValue;
@@ -280,6 +287,7 @@ public class OnixPartsDirector implements Serializable
 	
 	public Element buildOnix2(int tagType)
 	{
+		System.out.println(this);
 		String rootElementName = getRootName(tagType);
 		Element root = new Element(rootElementName);
 		Element parent = root;
@@ -469,6 +477,17 @@ public class OnixPartsDirector implements Serializable
 		HashMap<String, String> productFormArgs = new HashMap<String, String>();
 		productFormArgs.put("productform", productFormCode);
 		requiredElements.add(new OnixProductFormBuilder(productFormArgs));
+	}
+	
+	@Override
+	public String toString()
+	{
+		StringBuffer buffer = new StringBuffer();
+		for(OnixPartsBuilder nextBuilder : requiredElements)
+		{
+			buffer.append(nextBuilder.getClass() + "[" + nextBuilder.getSequenceNumber() + "]\n");
+		}
+		return buffer.toString();
 	}
 	
 	private Element createElement(int tagType, String name)

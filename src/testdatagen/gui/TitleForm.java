@@ -23,8 +23,10 @@ import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.border.Border;
 
+import testdatagen.gui.listeners.AddPricesToTitleListener;
 import testdatagen.gui.listeners.AddSubjectsToTitleListener;
 import testdatagen.gui.listeners.AddTitleToScenarioListener;
+import testdatagen.gui.listeners.ClearPricesFromTitleListener;
 import testdatagen.gui.listeners.ClearSubjectsFromTitleListener;
 import testdatagen.model.Price;
 import testdatagen.model.ProductType;
@@ -179,13 +181,27 @@ public class TitleForm extends JDialog
 		detailOptionsPanel.add(availabilityPanel);
 		
 		// price options
-		JPanel addPricePanel = new JPanel(new GridLayout(0,1));
-		addPricePanel.setBorder(BorderFactory.createTitledBorder(blueLineBorder, "Additional prices"));
-		addPricePanel.setToolTipText("A 04-DE-EUR price is the default and will always be generated. Here you can add further prices");
+		JPanel pricePanel = new JPanel(new GridLayout(1,0));
+		pricePanel.setBorder(BorderFactory.createTitledBorder(blueLineBorder, "Additional prices"));
+		pricePanel.setToolTipText("A 04-DE-EUR price is the default and will always be generated. Here you can add further prices");
+
+		JTextArea configuredPricesField = new JTextArea();
+		configuredPricesField.setLineWrap(true);
+		configuredPricesField.setEditable(false);
+		configuredPricesField.setColumns(40);
+		JButton addPriceButton = new JButton("add price");
+		addPriceButton.setActionCommand("open prices dialog");
+		addPriceButton.addActionListener(new AddPricesToTitleListener(configuredPricesField, configuredPrices));
+		JButton clearPriceButton = new JButton("clear prices");
+		clearPriceButton.setActionCommand("clear prices");
+		clearPriceButton.addActionListener(new ClearPricesFromTitleListener(configuredPricesField, configuredPrices));
 		
-		// TODO: add price buttons in the same as for the subjects configuration
-		
-		detailOptionsPanel.add(addPricePanel);
+		JPanel addPricesButtonPanel = new JPanel(new FlowLayout());
+		addPricesButtonPanel.add(addPriceButton);
+		addPricesButtonPanel.add(clearPriceButton);
+		pricePanel.add(configuredPricesField);
+		pricePanel.add(addPricesButtonPanel);
+		detailOptionsPanel.add(pricePanel);
 		
 		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, titleOptionsPanel, detailOptionsPanel);
 		
@@ -202,7 +218,7 @@ public class TitleForm extends JDialog
 		this.setSize(800, 600);
 	}
 	
-	public Set<Price> getConfiguredPricets()
+	public Set<Price> getConfiguredPrices()
 	{
 		return configuredPrices;
 	}

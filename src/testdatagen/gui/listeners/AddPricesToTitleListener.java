@@ -1,21 +1,12 @@
 package testdatagen.gui.listeners;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
 import java.util.Set;
 
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 
 import testdatagen.model.Price;
 
@@ -47,11 +38,23 @@ public class AddPricesToTitleListener implements ActionListener
 			String countryCode = submittedDialog.getCountryCode();
 			String currencyCode = submittedDialog.getCurrencyCode();
 			
-			Price newPrice = new Price(priceTypeCode, countryCode, currencyCode);
-		}
+			Price newPrice = new Price(priceTypeCode, currencyCode, countryCode);
+			pricesSet.add(newPrice);
 			
+			StringBuffer labelText = new StringBuffer("");
+			Iterator<Price> iterator = pricesSet.iterator();
+			while(iterator.hasNext())
+			{
+				labelText.append(iterator.next().toString());
+				if(iterator.hasNext())
+				{
+					labelText.append(", ");
+				}
+			}
+			pricesField.setText(labelText.toString());
+			pricesContainer.setVisible(false);
+		}
 	}
-
 }
 
 class PricesDialog extends JDialog

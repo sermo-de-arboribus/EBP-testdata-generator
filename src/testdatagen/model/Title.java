@@ -25,6 +25,7 @@ public class Title implements Serializable
     private OnixPartsDirector onixPartsDirector;
     private Set<Subject> subjects;
     private Price basePrice;
+    private Set<Price> additionalPrices;
     
     public Title(final long isbn13, final String uid, final String name, final String author, final String format)
     {
@@ -37,6 +38,7 @@ public class Title implements Serializable
     	files = new HashSet<File>();
     	onixPartsDirector = new OnixPartsDirector(this);
     	subjects = new HashSet<Subject>();
+    	additionalPrices = new HashSet<Price>();
     }
     
     public synchronized void addFile(final File newFile)
@@ -44,6 +46,12 @@ public class Title implements Serializable
     	files.add(newFile);
     }
 	
+    public synchronized void addPrice(final Price newPrice)
+    {
+    	additionalPrices.add(newPrice);
+    	onixPartsDirector.addPrice(newPrice);
+    }
+    
     public synchronized void addSubject(final Subject newSubject)
     {
     	subjects.add(newSubject);
