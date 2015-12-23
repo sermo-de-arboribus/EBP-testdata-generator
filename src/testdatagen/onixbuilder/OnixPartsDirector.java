@@ -192,12 +192,17 @@ public class OnixPartsDirector implements Serializable
 		onSaleDateArgs.put("date", shipDateString);
 		requiredElements.add(new OnixSupplyDateBuilder(onSaleDateArgs));
 		
-		// add an 04-type price for Germany - further prices should become a configuration option
+		// add an 04-type price and a 42-type price for Germany - further prices should become a configuration option
 		// determine random base price
 		Price basePrice = title.getBasePrice();
 		HashMap<String, String> priceArgs = new HashMap<String, String>();
 		basePrice.addPriceArguments(priceArgs);
 		requiredElements.add(new OnixPriceBuilder(priceArgs));
+		
+		Price fourtyTwoPrice = new Price("42", "EUR", "DE");
+		HashMap<String, String> fourtyTwoPriceArgs = new HashMap<String, String>();
+		fourtyTwoPrice.addPriceArguments(fourtyTwoPriceArgs);
+		requiredElements.add(new OnixPriceBuilder(fourtyTwoPriceArgs));
 	}
 	
 	public void addMediaResource(String url)

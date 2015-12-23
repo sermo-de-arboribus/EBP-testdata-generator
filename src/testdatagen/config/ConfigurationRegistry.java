@@ -75,17 +75,17 @@ public class ConfigurationRegistry
 		 // values for the medium and long TitleBlurbTemplate
 		 putLocalizedText(deLocale, "longTitleBlurbTemplate", "Die {$female-protagonist} ist {$mtbt-adj1}, {$mtbt-adj2} und {$mtbt-adj3}. Ihrem {$partner}, für den sie {$emotion1}, aber nicht {$emotion2} empfindet, bleibt sie über seinen Tod hinaus treu, obwohl sie in {$mtbt-adj4} {$emotion3} für einen {$lover} entbrannt ist. Sie widersteht dessen hartnäckigem {$courting}, denn umgeben von den {$surrounding} {$location} strebt sie nach {$striving-for} – und fasst einen unerhörten Entschluss … ");
 		 putLocalizedText(deLocale, "mediumTitleBlurbTemplate", "Die {$female-protagonist} ist {$mtbt-adj1} und {$mtbt-adj3}. Ihrem {$partner}, bleibt sie über seinen Tod hinaus treu, obwohl sie in {$emotion3} für einen {$lover} entbrannt ist. Sie widersteht – und fasst einen unerhörten Entschluss … ");
-		 putLocalizedText(deLocale, "female-protagonist", new String[]{"Prinzessin von Braunschweig", "Prinzessin von Hintertupfingen", "Prinzessin auf der Erbse", "erfolgsverwöhnte Tennisspielerin Klara", "Unterschicht-Angehörige Denise", "Boulevardblatt-Journalistin", "päpstliche Kammerzofe"});
-		 putLocalizedText(deLocale, "mtbt-adj1", new String[]{"jung", "blutjung", "immer noch jung"});
+		 putLocalizedText(deLocale, "female-protagonist", new String[]{"Prinzessin von Braunschweig", "Prinzessin von Hintertupfingen", "Prinzessin auf der Erbse", "erfolgsverwöhnte Tennisspielerin Klara", "Unterschicht-Angehörige Denise", "Boulevardblatt-Journalistin Karla", "päpstliche Kammerzofe Diana", "graue Maus"});
+		 putLocalizedText(deLocale, "mtbt-adj1", new String[]{"jung", "blutjung", "immer noch jung", "unerfahren"});
 		 putLocalizedText(deLocale, "mtbt-adj2", new String[]{"schön", "hübsch", "intelligent", "aufgeweckt", "aufbrausend", "sozial"});
-		 putLocalizedText(deLocale, "mtbt-adj3", new String[]{"wohlhabend", "reich", "klug", "selbstbewusst", "komplexbehaftet"});
+		 putLocalizedText(deLocale, "mtbt-adj3", new String[]{"wohlhabend", "reich", "klug", "selbstbewusst", "komplexbehaftet", "starrsinnig", "starrköpfig"});
 		 putLocalizedText(deLocale, "mtbt-adj4", new String[]{"leidenschaftlicher", "bedingungsloser", "kopfloser", "außergewöhnlicher", "wahnsinniger"});
-		 putLocalizedText(deLocale, "partner", new String[]{"Ehemann", "Verlobten", "Schoßhund", "Lieblingskater"});
-		 putLocalizedText(deLocale, "emotion1", new String[]{"Sympathie", "Zuneigung", "Mitgefühl", "Mitleid"});
+		 putLocalizedText(deLocale, "partner", new String[]{"Ehemann", "Verlobten", "Schoßhund", "Lieblingskater", "Gemahl"});
+		 putLocalizedText(deLocale, "emotion1", new String[]{"Sympathie", "Zuneigung", "Mitgefühl", "Mitleid", "Zärtlichkeit"});
 		 putLocalizedText(deLocale, "emotion2", new String[]{"Liebe", "tiefe Zuneigung", "innige Verbundenheit", "eheliche Gefühle"});
 		 putLocalizedText(deLocale, "emotion3", new String[]{"Liebe", "Zuneigung", "Verbundenheit", "Haßliebe", "Geschmeidigkeit"});
-		 putLocalizedText(deLocale, "lover", new String[]{"anderen Mann", "nordischen Gott", "wahren Adonis", "verschrumpelten Alten", "schönen Grünschnabel"});
-		 putLocalizedText(deLocale, "courting", new String[]{"Werben", "Buhlen", "Drängen", "Zureden", "Einschmeicheln"});
+		 putLocalizedText(deLocale, "lover", new String[]{"anderen Mann", "nordischen Gott", "wahren Adonis", "verschrumpelten Alten", "schönen Grünschnabel", "Herzensbrecher", "schüchternen Fleischereifachverkäufer"});
+		 putLocalizedText(deLocale, "courting", new String[]{"Werben", "Buhlen", "Drängen", "Zureden", "Einschmeicheln", "Flirten"});
 		 putLocalizedText(deLocale, "surrounding", new String[]{"Intrigen und Eitelkeiten", "Kabalen und Lieben", "Dekadenzen", "Sphärenklängen", "dreckigen Tricks", "Ungeheuerlichkeiten"});
 		 putLocalizedText(deLocale, "location", new String[]{"des französischen Hofes", "des römischen Palastes", "der deutschen Gesellschaft ihrer Zeit", "der Bourgeoisie", "des Lumpenproletariats", "der Mehrheitsgesellschaft", "der Leitkultur"});
 		 putLocalizedText(deLocale, "striving-for", new String[]{"einer anderen Art von Glück", "der ultimativen Erkenntnis", "Erfüllung weniger greifbarer Bedürfnisse", "subtilster Rache"});

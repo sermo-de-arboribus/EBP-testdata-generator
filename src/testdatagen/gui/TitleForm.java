@@ -26,6 +26,7 @@ import javax.swing.border.Border;
 import testdatagen.gui.listeners.AddSubjectsToTitleListener;
 import testdatagen.gui.listeners.AddTitleToScenarioListener;
 import testdatagen.gui.listeners.ClearSubjectsFromTitleListener;
+import testdatagen.model.Price;
 import testdatagen.model.ProductType;
 import testdatagen.model.Subject;
 import testdatagen.model.TestScenario;
@@ -57,6 +58,8 @@ public class TitleForm extends JDialog
 	private JTextField notificationTypeField, availabilityCodeField, productAvailabilityField;
 	// set of configured subjects
 	private Set<Subject> configuredSubjects;
+	// additional price nodes
+	private Set<Price> configuredPrices;
 	
 	public TitleForm(TestScenario scenario)
 	{
@@ -77,9 +80,9 @@ public class TitleForm extends JDialog
 		
 		// Group form elements in left panel
 		JPanel titleOptionsPanel = new JPanel(new GridLayout(0,1));
-		JPanel productTypeSelectionPanel = new JPanel(new GridLayout(0,1));
+		JPanel productTypeSelectionPanel = new JPanel(new FlowLayout());
 		productTypeSelectionPanel.setBorder(BorderFactory.createTitledBorder(blueLineBorder, "Product Type Selection"));
-		JPanel coverSelectionPanel = new JPanel(new GridLayout(0,1));
+		JPanel coverSelectionPanel = new JPanel(new FlowLayout());
 		coverSelectionPanel.setBorder(BorderFactory.createTitledBorder(blueLineBorder, "Cover delivery method"));
 		JPanel additionalAssetsPanel = new JPanel(new GridLayout(0,1));
 		additionalAssetsPanel.setBorder(BorderFactory.createTitledBorder(blueLineBorder, "Additional assets"));
@@ -175,6 +178,15 @@ public class TitleForm extends JDialog
 		
 		detailOptionsPanel.add(availabilityPanel);
 		
+		// price options
+		JPanel addPricePanel = new JPanel(new GridLayout(0,1));
+		addPricePanel.setBorder(BorderFactory.createTitledBorder(blueLineBorder, "Additional prices"));
+		addPricePanel.setToolTipText("A 04-DE-EUR price is the default and will always be generated. Here you can add further prices");
+		
+		// TODO: add price buttons in the same as for the subjects configuration
+		
+		detailOptionsPanel.add(addPricePanel);
+		
 		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, titleOptionsPanel, detailOptionsPanel);
 		
 		// submit button
@@ -188,6 +200,11 @@ public class TitleForm extends JDialog
 		this.add(submitbtn, BorderLayout.SOUTH);
 		this.setLocation(100,100);
 		this.setSize(800, 600);
+	}
+	
+	public Set<Price> getConfiguredPricets()
+	{
+		return configuredPrices;
 	}
 	
 	public Set<Subject> getConfiguredSubjects()
@@ -309,5 +326,7 @@ public class TitleForm extends JDialog
 		productAvailabilityField = new JTextField(OnixProductAvailabilityBuilder.DEFAULT_PRODUCT_AVAILABILITY);
 		productAvailabilityField.setName("productavailability");
 		productAvailabilityField.setColumns(8);
+		
+		configuredPrices = new HashSet<Price>();
 	}
 }

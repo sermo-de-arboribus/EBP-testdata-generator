@@ -16,6 +16,14 @@ public class Price implements Serializable
 		this.country = country;
 	}
 	
+	public Price(String type, String currency, String country)
+	{
+		this.type = type;
+		this.amount = "9.90";
+		this.currency = currency;
+		this.country = country;
+	}
+	
 	public void addPriceArguments(HashMap<String, String> argumentsMap)
 	{
 		argumentsMap.put("pricetype", type);

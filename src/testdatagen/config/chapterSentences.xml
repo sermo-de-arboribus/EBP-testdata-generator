@@ -1241,7 +1241,7 @@
     </quote>
     <quote>
         <version status="original" xml:lang="de-DE">
-            <text>Wenn Götter einander mit Steinen werfen, so müssen diese Steine auch die Götter beschädigen können, oder wir glauben mutwillige Buben zu sehen, die sicht mit Erdkläßen bewerfen.</text>
+            <text>Wenn Götter einander mit Steinen werfen, so müssen diese Steine auch die Götter beschädigen können, oder wir glauben mutwillige Buben zu sehen, die sicht mit Erdklößen bewerfen.</text>
             <source>
                 <title>Laokoon</title>
                 <page>81</page>
@@ -1843,7 +1843,7 @@
     </quote>
     <quote>
         <version status="translation" xml:lang="de-DE">
-            <text>Das Lächeln ist im Gegensatz zu fünf negativen Formen des Gesichtsausdrucks (Angst, Zorn, Abscheu, Kummer und Geringeschätzung) die einzige positive Ausdrucksform. Ein Lächeln kann man von weiter weg erkennen als sämtliche negativen Ausdrucksformen (nämlich aus einer Entfernung von 100 Metern).</text>
+            <text>Das Lächeln ist im Gegensatz zu fünf negativen Formen des Gesichtsausdrucks (Angst, Zorn, Abscheu, Kummer und Geringschätzung) die einzige positive Ausdrucksform. Ein Lächeln kann man von weiter weg erkennen als sämtliche negativen Ausdrucksformen (nämlich aus einer Entfernung von 100 Metern).</text>
             <source>
                 <title>Charles Darwin: Der Ausdruck der Gemütsbewegungen beim Menschen und bei den Tieren.</title>
                 <idref>646</idref>
@@ -1875,7 +1875,7 @@
     </quote>
     <quote>
         <version status="original" xml:lang="de-DE">
-            <text>BILD, einer Informationen und Fakten verpflichteten Zeitung so weit entfernt wie der &#8222;Andromeda-Nebel&#8220; der Erde, ist das Märchenbuch unserer Tage: Nur werden hier nichrt die von unten gewachsenen, befreienden Mythen des Volkes verkündet, die neben Ängsten auch Hoffnungen und Sehnsüchte ausdrücken und Veränderungen in Aussicht stellen, &#8211; hier zeigt sich allein die stickige Käseglocke von Ersatz- und Wahnwelten, die den BILD-Lesern übergestülpt wird.
+            <text>BILD, einer Informationen und Fakten verpflichteten Zeitung so weit entfernt wie der &#8222;Andromeda-Nebel&#8220; der Erde, ist das Märchenbuch unserer Tage: Nur werden hier nicht die von unten gewachsenen, befreienden Mythen des Volkes verkündet, die neben Ängsten auch Hoffnungen und Sehnsüchte ausdrücken und Veränderungen in Aussicht stellen, &#8211; hier zeigt sich allein die stickige Käseglocke von Ersatz- und Wahnwelten, die den BILD-Lesern übergestülpt wird.
             Monster, menschenfressende Möwen, ein Killer-Bussard, gräßliche Vogelspinnen, unbemannte Flugkörper, eine explodierende Sonne &#8211; BILD hat für seine Leser immer den schrecklichsten Schrecken parat. Wer Angst hat, ist manipulierbar. Wem Angst gemacht wird, der kommt nicht zum Denken. Aufklärung &#8211; das ist für BILD der Volksfeind Nr. 1.</text>
             <source>
                 <title>Zeugen der Anklage</title>
@@ -2075,7 +2075,7 @@
     </quote>
     <quote>
         <version status="original" xml:lang="en-US">
-            <text>The contemporary academic left seems to think that the higher your level of abstraction, the more subversive of the establishes order you can be.</text>
+            <text>The contemporary academic left seems to think that the higher your level of abstraction, the more subversive of the established order you can be.</text>
             <source>
                 <title>Achieving Our Country</title>
                 <idref>3803</idref>
@@ -2186,7 +2186,9 @@
     </quote>
     <quote>
         <version status="original" xml:lang="de-DE">
-            <text>Vielen / Frauen ist ein Weichling erwünscht, wie Anchises, der blonde, / Oder Endymion gar, der nur als Schläfer geliebt ward.</text>
+            <text>Vielen
+            Frauen ist ein Weichling erwünscht, wie Anchises, der blonde,
+            Oder Endymion gar, der nur als Schläfer geliebt ward.</text>
             <source>
                 <title>Achilleis</title>
                 <page>528</page>

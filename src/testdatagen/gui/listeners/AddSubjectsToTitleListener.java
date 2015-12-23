@@ -86,7 +86,9 @@ class SubjectsDialog extends JDialog
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		this.setLayout(new BorderLayout());
 		
+		// centerPanel is for entering data
 		JPanel centerPanel = new JPanel(new GridLayout(0,2));
+		// southPanel is for the submit button
 		JPanel southPanel = new JPanel(new FlowLayout());
 		
 		JLabel subjectschemeidentifierLabel = new JLabel("Subject Scheme Identifier");
