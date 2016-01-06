@@ -287,7 +287,6 @@ public class OnixPartsDirector implements Serializable
 	
 	public Element buildOnix2(int tagType)
 	{
-		System.out.println(this);
 		String rootElementName = getRootName(tagType);
 		Element root = new Element(rootElementName);
 		Element parent = root;
