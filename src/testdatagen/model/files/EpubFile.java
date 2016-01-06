@@ -345,7 +345,7 @@ public class EpubFile extends EBookFile
 		}
 		
 		// zip epub in a way that is conformant with the EPUB spec
-		String destPath = FilenameUtils.concat(destFolder.getPath(), "" + title.getIsbn13() + ".epub");
+		String destPath = FilenameUtils.concat(destFolder.getPath(), "" + buildFileName());
 		
 		zipEpub(destPath, tempDir.getPath());
 		
