@@ -12,7 +12,7 @@ public class OnixMediaResourceBuilder extends OnixPartsBuilder
 	 */
 	private static final String[][] MEDIA_RESOURCE_ELEMENT_DEFINITIONS = 
 		{
-	/*0 */	{"supportingsresource", "SupportingResource", "mediafile", "MediaFile", "", ""},
+	/*0 */	{"supportingresource", "SupportingResource", "mediafile", "MediaFile", "", ""},
 	/*1 */	{"x436", "ResourceContentType", "f114", "MediaFileTypeCode", "resourcecontenttype", "01"},
 	/*2 */	{"x427", "ContentAudience", "", "", "contentaudience", "00"},
 	/*3 */	{"x437", "ResourceMode", "", "", "resourcemode", "03"},
