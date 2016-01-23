@@ -81,7 +81,6 @@ public class DropboxUploaderThread extends Thread
         }
         else
         {
-            System.out.print(metadata.toStringMultiline());
             try
             {
                 shareableUrl = dbxClient.createShareableUrl(dropboxPath);

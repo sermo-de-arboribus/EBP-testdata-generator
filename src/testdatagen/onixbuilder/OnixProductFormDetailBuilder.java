@@ -13,7 +13,7 @@ public class OnixProductFormDetailBuilder extends OnixPartsBuilder
 	private static final String[][] PRODUCT_FORM_DETAIL_DEFINITIONS = 
 		{
 			{"b333", "ProductFormDetail", "b333", "ProductFormDetail", "productformdetail", "E200"},
-			{"", "", "b211", "EpubType", "", "029"}
+			{"", "", "b211", "EpubType", "epubtype", "029"}
 		};
 	private static final int SEQUENCE_NUMBER = 600;
 	
@@ -27,16 +27,24 @@ public class OnixProductFormDetailBuilder extends OnixPartsBuilder
 	public Element build(String onixVersion, int tagType)
 	{
 		initialize(onixVersion, tagType);
-		
 		Element returnElement;
 		// In ONIX 2.1 we need to produce <b211> / <EpubType> for some information,
 		// In ONIX 3.0 all information is handled by <b333> / <ProductFormDetail>
 		if(onixVersion.equals("2.1"))
 		{
+			String epubType = null;
+			// was an epubtype argument directly passed in?
+			if(hasArgument(elementDefinitions[1][4]))
+			{
+				epubType = getArgument(elementDefinitions[1][4]);
+				returnElement = new Element(getTagName(1));
+				returnElement.appendChild(new Text(epubType));
+				return returnElement;
+			}
+			// try to infer epubType from productformdetail argument
 			if(hasArgument(elementDefinitions[0][4]))
 			{
 				String pfdArg = getArgument(elementDefinitions[0][4]);
-				String epubType = null;
 				switch(pfdArg)
 				{
 					case "E107": epubType = "002"; break; // PDF

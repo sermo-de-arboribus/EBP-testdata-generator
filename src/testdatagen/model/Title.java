@@ -338,7 +338,7 @@ public class Title implements Serializable
     	{
     		format = formatString;
     		setEpubType(Utilities.formatToFileType(formatString));
-    		if(formatString.startsWith("ND"))
+    		if(formatString.startsWith("ND") || formatString.equals("ZIP"))
     		{
     			protection = "ND";
     		}

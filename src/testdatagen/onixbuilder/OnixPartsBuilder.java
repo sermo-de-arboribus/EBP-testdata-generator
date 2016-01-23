@@ -53,11 +53,6 @@ public abstract class OnixPartsBuilder implements Comparable<OnixPartsBuilder>, 
 	 */
 	public abstract int getSequenceNumber();
 	
-	/*
-	 * gets an argument value from the arguments HashMap that was passed to the constructor
-	 * @arg String: key to the hash map.
-	 */
-	
 	public int compareTo(final OnixPartsBuilder otherBuilder)
 	{
 		if(this.getSequenceNumber() < otherBuilder.getSequenceNumber())
@@ -84,6 +79,10 @@ public abstract class OnixPartsBuilder implements Comparable<OnixPartsBuilder>, 
 		}
 	}
 	
+	/*
+	 * gets an argument value from the arguments HashMap that was passed to the constructor
+	 * @arg String: key to the hash map.
+	 */
 	protected String getArgument(String arg)
 	{
 		return arguments.get(arg);

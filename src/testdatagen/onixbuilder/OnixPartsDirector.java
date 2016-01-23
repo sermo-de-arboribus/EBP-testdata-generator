@@ -219,6 +219,13 @@ public class OnixPartsDirector implements Serializable
 		requiredElements.add(new OnixProductFormDetailBuilder(productFormDetailArgs));
 	}
 	
+	public void removeProductFormDetail(String code)
+	{
+		HashMap<String, String> productFormDetailArgs = new HashMap<>();
+		productFormDetailArgs.put("productformdetail", code);
+		requiredElements.remove(new OnixProductFormDetailBuilder(productFormDetailArgs));
+	}
+	
 	public void addPrice(Price newPrice)
 	{
 		HashMap<String, String> newPriceArgs = new HashMap<>();
@@ -422,7 +429,10 @@ public class OnixPartsDirector implements Serializable
 			if(builder.getSequenceNumber() < 3000)
 			{
 				Element nextElement = builder.build("3.0", tagType);
-				parent.appendChild(nextElement);
+				if(nextElement != null)
+				{
+					parent.appendChild(nextElement);	
+				}
 			}
 			// this is the <supplydetail> node
 			else if (builder.getSequenceNumber() == 3000)
@@ -442,6 +452,15 @@ public class OnixPartsDirector implements Serializable
 		}
 		
 		return root;
+	}
+
+	public void changeFormatToZip()
+	{
+		replaceOnix2EpubType("099");
+		
+		// add EpubTypeDescription for Onix 2.1
+		HashMap<String, String> epubTypeDescArgs = new HashMap<>();
+		requiredElements.add(new OnixEpubTypeDescriptionBuilder(epubTypeDescArgs));
 	}
 	
 	public void replaceMediaResource(String url)
@@ -476,6 +495,15 @@ public class OnixPartsDirector implements Serializable
 		HashMap<String, String> productFormArgs = new HashMap<String, String>();
 		productFormArgs.put("productform", productFormCode);
 		requiredElements.add(new OnixProductFormBuilder(productFormArgs));
+	}
+	
+	public void replaceOnix2EpubType(String epubType)
+	{
+		removeBuilders(OnixProductFormDetailBuilder.class);
+		
+		HashMap<String, String> productFormArgs = new HashMap<String, String>();
+		productFormArgs.put("epubtype", epubType);
+		requiredElements.add(new OnixProductFormDetailBuilder(productFormArgs));
 	}
 	
 	@Override

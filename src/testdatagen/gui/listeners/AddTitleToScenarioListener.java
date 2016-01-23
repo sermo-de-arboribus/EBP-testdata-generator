@@ -13,6 +13,7 @@ import testdatagen.EBookFileFactory;
 import testdatagen.GraphicFileFactory;
 import testdatagen.gui.TitleForm;
 import testdatagen.model.Price;
+import testdatagen.model.ProductType;
 import testdatagen.model.Subject;
 import testdatagen.model.TestScenario;
 import testdatagen.model.Title;
@@ -67,6 +68,12 @@ public class AddTitleToScenarioListener implements ActionListener
 			if(coverUploadType.equals("Media file link"))
 			{
 				newTitle.setMediaFileUrl("");
+			}
+			
+			// if product format is "ZIP" it needs some special Onix settings
+			if(ProductType.valueOf(format) == ProductType.ZIP)
+			{
+				newTitle.getOnixPartsDirector().changeFormatToZip();
 			}
 			
 			// additional product identifiers required in ONIX file?
