@@ -7,7 +7,7 @@ public abstract class GraphicFile extends File
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 	protected Type type;
 
 	public GraphicFile(Title title, Type type)

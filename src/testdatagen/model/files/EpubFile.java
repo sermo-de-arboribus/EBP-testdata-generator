@@ -31,7 +31,7 @@ public class EpubFile extends EBookFile
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 	private boolean isBooklet;
 	// prepare a byte array with the ASCII codes for "application/epub+zip" without EOL/EOF marker
 	private static byte[] mimetypeASCII = new byte[]{0x61, 0x70, 0x70, 0x6C, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6F, 0x6E, 0x2F, 0x65, 0x70, 0x75, 0x62, 0x2B, 0x7A, 0x69, 0x70};

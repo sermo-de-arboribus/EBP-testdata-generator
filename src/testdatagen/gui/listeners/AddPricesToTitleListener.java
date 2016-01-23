@@ -59,7 +59,7 @@ public class AddPricesToTitleListener implements ActionListener
 
 class PricesDialog extends JDialog
 {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 	private JTextField currencyCode, priceTypeCode, countryCode;
 	
 	public PricesDialog(AddPricesToTitleListener actionListener)

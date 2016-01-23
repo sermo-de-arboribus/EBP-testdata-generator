@@ -22,7 +22,7 @@ public class PDFCoverFile extends GraphicFile
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 		
 	public PDFCoverFile(Title title)
 	{
@@ -35,7 +35,7 @@ public class PDFCoverFile extends GraphicFile
 		Dimension coverDimension = CoverUtils.getRandomCoverDimension();
 		
 		PDDocument coverDoc = new PDDocument();
-		PDRectangle pageDimension = new PDRectangle((float) coverDimension.getWidth(), (float) coverDimension.getHeight());
+		PDRectangle pageDimension = new PDRectangle((float) coverDimension.getWidth() / 7.0f, (float) coverDimension.getHeight() / 7.0f);
 		PDPage coverPage = new PDPage(pageDimension);
 		coverDoc.addPage(coverPage);
 				

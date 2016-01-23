@@ -21,7 +21,7 @@ public class EditScenarioDialog extends JDialog
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 	// some values for visual appearance of the dialog window
 	// width and height of the dialog window
 	private static final int DIALOG_WIDTH = 1024;

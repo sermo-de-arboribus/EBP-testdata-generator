@@ -9,7 +9,7 @@ public class TitleTable extends JTable
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 	// preferred table column width
 	private static final int[] COLUMN_WIDTH = {65, 65, 120, 120, 45, 400}; 
 	

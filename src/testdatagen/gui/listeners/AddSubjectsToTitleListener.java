@@ -72,7 +72,7 @@ public class AddSubjectsToTitleListener implements ActionListener
 
 class SubjectsDialog extends JDialog
 {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 	private JTextField subjectschemeidentifierField;
 	private JTextField subjectschemeversionField;
 	private JTextField subjectcodeField;

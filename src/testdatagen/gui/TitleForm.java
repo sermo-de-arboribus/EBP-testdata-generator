@@ -41,7 +41,7 @@ public class TitleForm extends JDialog
 	 * Definitions of constants for selections
 	 */
 	private static final String[] COVER_OPTIONS = {"Media file link", "Cover upload"};
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 	
 	/*
 	 * This form keeps the state of its combo and check boxes and makes the values available in some data structure

@@ -18,7 +18,7 @@ import testdatagen.templates.EBookChapterTemplate;
 
 public class PDFFile extends EBookFile
 {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 	private static final float POINTS_PER_INCH = 72;
 	private static final float MM_PER_INCH = 1 / (10 * 2.54f) * POINTS_PER_INCH;
 	

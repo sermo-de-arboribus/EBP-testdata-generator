@@ -7,7 +7,7 @@ public abstract class EBookFile extends File
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 	protected boolean isDemo;
 
 	public EBookFile(Title title, boolean demoFlag)

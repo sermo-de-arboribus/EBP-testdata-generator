@@ -24,7 +24,7 @@ public class NewScenarioDialog extends JDialog
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 	private TestScenario scenario;
 	private TestDataGeneratorMain mainWindow;
 	private JTable titleTable;

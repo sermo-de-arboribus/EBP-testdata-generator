@@ -12,7 +12,7 @@ import testdatagen.utilities.Utilities;
 
 public class Title implements Serializable
 {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 	private static final String[] validFormats = ProductType.productTypeNames();
 	
 	private long isbn13;

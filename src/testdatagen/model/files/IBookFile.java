@@ -15,7 +15,7 @@ public class IBookFile extends EBookFile
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 	
 	public IBookFile(final Title title, final boolean demoFlag)
 	{

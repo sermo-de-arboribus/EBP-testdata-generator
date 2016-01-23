@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 public class Price implements Serializable
 {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 	String type, amount, currency, country;
 	
 	public Price(String type, String amount, String currency, String country)

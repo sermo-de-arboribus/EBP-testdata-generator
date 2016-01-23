@@ -13,7 +13,7 @@ public class TableCellLineWrapRenderer extends JTextArea implements TableCellRen
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 
 	public TableCellLineWrapRenderer()
 	{

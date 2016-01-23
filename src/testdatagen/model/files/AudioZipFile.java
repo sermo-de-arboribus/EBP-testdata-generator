@@ -11,7 +11,7 @@ public class AudioZipFile extends EBookFile
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 	
 	public AudioZipFile(final Title title, final boolean demoFlag)
 	{

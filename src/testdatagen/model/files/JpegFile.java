@@ -25,7 +25,7 @@ public class JpegFile extends GraphicFile
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 	private int sequenceNumber;
 	
 	public JpegFile(final Title title, final GraphicFile.Type type)

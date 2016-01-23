@@ -19,7 +19,7 @@ import testdatagen.utilities.*;
 
 public class TestDataGeneratorMain extends JFrame
 {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 	private JTable scenarioTable;
 	private Dimension screenSize;
 	private JProgressBar progressBar;

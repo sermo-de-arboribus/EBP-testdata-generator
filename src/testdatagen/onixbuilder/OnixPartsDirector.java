@@ -11,7 +11,7 @@ import testdatagen.utilities.*;
 
 public class OnixPartsDirector implements Serializable
 {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 	
 	private LinkedList<OnixPartsBuilder> requiredElements;
 	private Title title;

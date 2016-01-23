@@ -11,7 +11,7 @@ import nu.xom.Element;
 
 public abstract class OnixPartsBuilder implements Comparable<OnixPartsBuilder>, Serializable
 {
-	private static final long serialVersionUID = 1L;
+	protected static final long serialVersionUID = 1L;
 	// constants defined for ONIX tag types
 	public static final int SHORTTAG = 1;
 	public static final int REFERENCETAG = 2;

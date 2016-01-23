@@ -8,7 +8,7 @@ public class Subject implements Serializable
 {
 	boolean isMainSubject;
 	private String subjectschemeidentifier, subjectschemeversion, subjectcode, subjectheadingtext;
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 	
 	public Subject(final String subjectschemeidentifier, final String subjectschemeversion, final String subjectcode, 
 			final String subjectheadingtext, final boolean isMainSubject)

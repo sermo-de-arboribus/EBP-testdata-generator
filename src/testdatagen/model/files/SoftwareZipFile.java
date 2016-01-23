@@ -17,7 +17,7 @@ public class SoftwareZipFile extends EBookFile
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 	
 	public SoftwareZipFile(final Title title, final boolean demoFlag)
 	{

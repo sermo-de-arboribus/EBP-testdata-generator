@@ -20,7 +20,7 @@ import testdatagen.utilities.Utilities;
 
 public class MobiFile extends EBookFile
 {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 	
 	public MobiFile(final Title title, boolean demoFlag)
 	{
