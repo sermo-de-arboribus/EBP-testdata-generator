@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -62,7 +63,9 @@ public class TitleForm extends JDialog
 	private Set<Subject> configuredSubjects;
 	// additional price nodes
 	private Set<Price> configuredPrices;
-	
+	// publisher elements
+	private JTextField namecodetype, namecodevalue, publishername;
+		
 	public TitleForm(TestScenario scenario)
 	{
 		initializeSelectionElements();
@@ -81,17 +84,22 @@ public class TitleForm extends JDialog
 		Border purpleLineBorder = BorderFactory.createLineBorder(new Color(153, 0, 153));
 		
 		// Group form elements in left panel
-		JPanel titleOptionsPanel = new JPanel(new GridLayout(0,1));
+		// JPanel titleOptionsPanel = new JPanel(new GridLayout(0,1));
+		JPanel titleOptionsPanel = new JPanel();
+		titleOptionsPanel.setLayout(new BoxLayout(titleOptionsPanel, BoxLayout.Y_AXIS));
 		JPanel productTypeSelectionPanel = new JPanel(new FlowLayout());
 		productTypeSelectionPanel.setBorder(BorderFactory.createTitledBorder(blueLineBorder, "Product Type Selection"));
 		JPanel coverSelectionPanel = new JPanel(new FlowLayout());
 		coverSelectionPanel.setBorder(BorderFactory.createTitledBorder(blueLineBorder, "Cover delivery method"));
 		JPanel additionalAssetsPanel = new JPanel(new GridLayout(0,1));
 		additionalAssetsPanel.setBorder(BorderFactory.createTitledBorder(blueLineBorder, "Additional assets"));
+		JPanel publisherPanel = new JPanel(new GridLayout(0,1));
+		publisherPanel.setBorder(BorderFactory.createTitledBorder(blueLineBorder, "Publisher information"));
 		
 		titleOptionsPanel.add(productTypeSelectionPanel);
 		titleOptionsPanel.add(coverSelectionPanel);
 		titleOptionsPanel.add(additionalAssetsPanel);
+		titleOptionsPanel.add(publisherPanel);
 		
 		productTypeSelectionPanel.add(product);
 		coverSelectionPanel.add(covertype);
@@ -100,6 +108,21 @@ public class TitleForm extends JDialog
 		additionalAssetsPanel.add(extrBox);
 		additionalAssetsPanel.add(bkcBox);
 		additionalAssetsPanel.add(epmoBox);
+		
+		JPanel publisherNameCodeTypePanel = new JPanel(new FlowLayout());
+		publisherNameCodeTypePanel.setBorder(BorderFactory.createTitledBorder(purpleLineBorder, "Name Code Type"));
+		publisherNameCodeTypePanel.add(namecodetype);
+		publisherPanel.add(publisherNameCodeTypePanel);
+		
+		JPanel publisherNameCodeValuePanel = new JPanel(new FlowLayout());
+		publisherNameCodeValuePanel.setBorder(BorderFactory.createTitledBorder(purpleLineBorder, "Name Code Value"));
+		publisherNameCodeValuePanel.add(namecodevalue);
+		publisherPanel.add(publisherNameCodeValuePanel);
+		
+		JPanel publisherNamePanel = new JPanel(new FlowLayout());
+		publisherNamePanel.setBorder(BorderFactory.createTitledBorder(purpleLineBorder, "Publisher Name"));
+		publisherNamePanel.add(publishername);
+		publisherPanel.add(publisherNamePanel);
 		
 		// Group form elements in right panel
 		JPanel detailOptionsPanel = new JPanel(new GridLayout(0,2));
@@ -239,6 +262,9 @@ public class TitleForm extends JDialog
 		formDataMap.put(extrBox.getName(), extrBox.isSelected() ? "true" : "false");
 		formDataMap.put(bkcBox.getName(), bkcBox.isSelected() ? "true" : "false");
 		formDataMap.put(epmoBox.getName(), epmoBox.isSelected() ? "true" : "false");
+		formDataMap.put(namecodetype.getName(), namecodetype.getText());
+		formDataMap.put(namecodevalue.getName(), namecodevalue.getText());
+		formDataMap.put(publishername.getName(), publishername.getText());
 		formDataMap.put(prodIdGtin13.getName(), prodIdGtin13.isSelected() ? "true" : "false");
 		formDataMap.put(prodIdDoi.getName(), prodIdDoi.isSelected() ? "true" : "false");
 		formDataMap.put(prodIdUrn.getName(), prodIdUrn.isSelected() ? "true" : "false");
@@ -281,6 +307,16 @@ public class TitleForm extends JDialog
 		
 		epmoBox = new JCheckBox("Add EpubMobi");
 		epmoBox.setName("epubmobi");
+		
+		namecodetype = new JTextField("04");
+		namecodetype.setName("namecodetype");
+		namecodetype.setColumns(2);
+		namecodevalue = new JTextField("56789");
+		namecodevalue.setName("namecodevalue");
+		namecodevalue.setColumns(10);
+		publishername = new JTextField("IT-E-Books-Verlag");
+		publishername.setName("publishername");
+		publishername.setColumns(15);
 		
 		prodIdGtin13 = new JCheckBox("GTIN-13");
 		prodIdGtin13.setName("gtin13");

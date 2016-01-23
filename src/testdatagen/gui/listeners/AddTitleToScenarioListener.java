@@ -168,6 +168,12 @@ public class AddTitleToScenarioListener implements ActionListener
 				newTitle.getOnixPartsDirector().replaceProductAvailability(availCode, prodAvail);
 			}
 			
+			// set publisher data
+			String nameCodeType = formDataMap.get("namecodetype");
+			String nameCodeValue = formDataMap.get("namecodevalue");
+			String publisherName = formDataMap.get("publishername");
+			newTitle.getOnixPartsDirector().replacePublisher(nameCodeType, nameCodeValue, publisherName);
+			
 			// instantiate selected ebook file types and add them to the title object
 			EBookFileFactory eff = EBookFileFactory.getInstance();
 

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/css" href="quotes.css"?>
-<quotes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="quotes-schema.xsd">
+<quotes>
     <quote>
         <version xml:lang="fr-FR" status="original">
             <text>Une œuvre où il y a des théories est comme un objet sur lequel on laisse la marque du prix.</text>
@@ -1448,7 +1446,7 @@
     </quote>
     <quote>
         <version status="original" xml:lang="de-DE">
-            <text>Ein einziges Merkmal gibt es, woran man die Dummen erkennt: Mit dem, was sie erreicht haben, sind sie selten, aber mit sich selbst sind sie stets zufrieden.</text>
+            <text>Ein einziges Merkmal gibt es, woran man die Dummen erkennt: Mit dem, was sie erreich haben, sind sie selten, aber mit sich selbst sind sie stets zufrieden.</text>
             <source>
                 <title>Die Schildbürger</title>
             </source>
@@ -1941,7 +1939,7 @@
     </quote>
     <quote>
         <version status="translation" xml:lang="de-DE">
-            <text>Ich entfernte mich von dem gleißenden Vergnügungspalast, der schamlos dort aufragte trotz der von seiten der Familien vergebens an den Bürgermeister ergangenen Proteste, und begab mich wieder auf die Düne, auf der ich den gewundenen Wegen in Richtung Balbec folgte. Ohne darauf Antwort zu geben, hörte ich den Ruf der Weißdornhecken. Als weniger üppige Nachbarinnen der Apfelblüten fanden sie jene recht schwerfällig, obwohl sie der frischen Wangenfärbung dieser mit rosigen Blütenblättern geschmückten Töchter der behäbigen Apfelweinhersteller Anerkennung zollten. Sie wußten, daß sie zwar weniger reich dotiert, doch gesuchter sein würden und, um zu gefallen, nichts anderes nötig hätten als ihre weißschäumende Blütenpracht.</text>
+            <text>Ich entfernte mich von dem gleißenden Vergnügungspalast, der schamlos dort aufragte trotz der von seiten der Familien vergebens an den Bürgermeister ergangenen Proteste, und begab mich wieder auf die Düne, auf der ich den gewundenen Wegen in Richtung Balbec folgte. Ohne darauf Antwort zu geben, hörte ich den Ruf der Weißdornhecken. Als weniger üppige Nachbarinnen der Apfelblüten fanden sie jene recht schwerfällig, obwohl sie der frischen Wangenfärbung dieser mit rosigen Blütenblättern geschmückten Töchter der behäbigen Apfelweinhersteller Anerkennung zollten. Sie wußten, daß sie zwar weniger reich dotiert, doch gesuchten sein würden und, um zu gefallen, nichts anderes nötig hätten als ihre weißschäumende Blütenpracht.</text>
             <source>
                 <title>Auf der Suche nach der verlorenen Zeit</title>
                 <idref>2409</idref>
@@ -2154,7 +2152,7 @@
             <text>Der Huszar von Kecskemét
         ist gerne gegen Damen nett.
         Sind Damen aber, bitte, schiach,
-        dann wird der Huszar, bitte, Viech.</text>
+        dann wird der Huszar, bitte, Viech"</text>
             <source>
                 <title>Baby Wallenstein oder Prinz Hamlet der Osterhase oder Selawi</title>
             </source>
@@ -2187,8 +2185,8 @@
     <quote>
         <version status="original" xml:lang="de-DE">
             <text>Vielen
-            Frauen ist ein Weichling erwünscht, wie Anchises, der blonde,
-            Oder Endymion gar, der nur als Schläfer geliebt ward.</text>
+                Frauen ist ein Weichling erwünscht, wie Anchises, der blonde,
+                Oder Endymion gar, der nur als Schläfer geliebt ward.</text>
             <source>
                 <title>Achilleis</title>
                 <page>528</page>
@@ -2198,7 +2196,7 @@
     </quote>
     <quote>
         <version status="original" xml:lang="de-AT">
-            <text>Nicht im Daß: im Wie des Leidens liegt der Sinn des Leidens.</text>
+            <text>Nicht im Daß: im Wie des Leidens liegt der Sinn des Leidens</text>
             <source>
                 <title>Theorie und Therapie der Neurosen</title>
                 <idref>940</idref>
@@ -2344,5 +2342,69 @@
         </version>
         <author>Kittler, Friedrich</author>
     </quote>
-    
+    <quote>
+        <version status="original" xml:lang="de-DE">
+            <text>Franz ist längst ein berühmter Faustkämpfer geworden, doch weist er heute das Lob, das ihm in der Familie gespendet wird, mit derselben Gleichgültigkeit zurück, mit der er sich damals jede Kritik verbat.</text>
+            <source>
+                <title>Doktor Murkes gesammeltes Schweigen</title>
+            </source>
+        </version>
+        <author>Heinrich Böll</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="de-DE">
+            <text>Nein, ein Singen war im Grabhaus nicht; er erhoffte es sich nur. Leise sagte er etwas, auf französisch, lauschte wieder. Nichts. Nur eine Abwesenheit, die wie körperlich war und als betrachtete ihn jemand durch sie hindurch.</text>
+            <source>
+                <title>Die Orgelpfeifen von Flandern</title>
+            </source>
+        </version>
+        <author>Herbst, Alban Nikolai</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="de-DE">
+            <text>Das Spiel beginnt, sobald der Spielende den Austragungsort betritt, wobei er selbst den hierfür geeigneten Zeitpunkt bestimmen darf. Seine Aufgabe ist es, einen Punkt zu machen und damit das Spiel für sich zu entscheiden.</text>
+            <source>
+                <title>Managuaspiele</title>
+            </source>
+        </version>
+        <author>Vattrodt, Magnus</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="de-DE">
+            <text>Ich merkte es zu spät. Das fremde Wesen, das wissen wollte, hatte sich schon zu weit in mich hineingefressen, ich konnte es nicht mehr loswerden.</text>
+            <source>
+                <title>Kassandra</title>
+            </source>
+        </version>
+        <author>Wolf, Christa</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="de-AT">
+            <text>Ich kenne, glaube ich, die Welt nur, wenn ich schreibe, und wenn ich die Feder weglege, bin ich verloren. Der Alkohol ist keine Ursache sondern Folge.</text>
+            <source>
+                <title>Briefe</title>
+            </source>
+        </version>
+        <author>Roth, Joseph</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="de-DE">
+            <text>Wenn sie uns morgen erschießen werden, wird jemand diese Schüsse hören. Kugeln in den Herzen von guten Menschen haben ein langes Echo.</text>
+            <source>
+                <title>Hostages. Der Fall Glasenapp</title>
+            </source>
+        </version>
+        <author>Heym, Stefan</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="de-DE">
+            <text>Der scheinbar einzige Gast außer mir war ein junger Punker mit Hund. Er leistete mir beim Essen Gesellschaft, ernährte sich selbst aber eher von Flüssigem. Das Gespräch mit ihm war interessant, wenn ich ihm und er mir folgen konnte. Oft hatte ich allerdings das Gefühl, wir redeten einfach aneinander vorbei.</text>
+            <source>
+                <title>Mit der Sonne Richtung Westen</title>
+                <idref>3976</idref>
+                <page>53</page>
+            </source>
+        </version>
+        <author>Kleinhage, Esther</author>
+    </quote>
 </quotes>

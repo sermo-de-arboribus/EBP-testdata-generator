@@ -478,6 +478,15 @@ public class OnixPartsDirector implements Serializable
 		requiredElements.add(new OnixNotificationTypeBuilder(notiTypeArgs));
 	}
 	
+	public void replaceOnix2EpubType(String epubType)
+	{
+		removeBuilders(OnixProductFormDetailBuilder.class);
+		
+		HashMap<String, String> productFormArgs = new HashMap<String, String>();
+		productFormArgs.put("epubtype", epubType);
+		requiredElements.add(new OnixProductFormDetailBuilder(productFormArgs));
+	}
+	
 	public void replaceProductAvailability(String availCode, String prodAvail)
 	{
 		removeBuilders(OnixProductAvailabilityBuilder.class);
@@ -497,13 +506,15 @@ public class OnixPartsDirector implements Serializable
 		requiredElements.add(new OnixProductFormBuilder(productFormArgs));
 	}
 	
-	public void replaceOnix2EpubType(String epubType)
+	public void replacePublisher(String namecodetype, String namecodevalue, String publishername)
 	{
-		removeBuilders(OnixProductFormDetailBuilder.class);
-		
-		HashMap<String, String> productFormArgs = new HashMap<String, String>();
-		productFormArgs.put("epubtype", epubType);
-		requiredElements.add(new OnixProductFormDetailBuilder(productFormArgs));
+		removeBuilders(OnixPublisherBuilder.class);
+
+		HashMap<String, String> publisherArgs = new HashMap<String, String>();
+		publisherArgs.put("publisheridtype", namecodetype);
+		publisherArgs.put("idvalue", namecodevalue);
+		publisherArgs.put("publishername", publishername);
+		requiredElements.add(new OnixPublisherBuilder(publisherArgs));
 	}
 	
 	@Override

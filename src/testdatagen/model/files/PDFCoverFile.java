@@ -38,7 +38,7 @@ public class PDFCoverFile extends GraphicFile
 		PDRectangle pageDimension = new PDRectangle((float) coverDimension.getWidth() / 7.0f, (float) coverDimension.getHeight() / 7.0f);
 		PDPage coverPage = new PDPage(pageDimension);
 		coverDoc.addPage(coverPage);
-				
+
 		writeCoverToPage(coverDoc, coverPage);
 		
 		java.io.File storedFile = new java.io.File(FilenameUtils.concat(destFolder.getPath(), buildFileName()));
