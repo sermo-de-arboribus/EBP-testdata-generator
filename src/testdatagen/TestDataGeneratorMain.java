@@ -36,7 +36,7 @@ public class TestDataGeneratorMain extends JFrame
     	
     	// define window dimensions
     	setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-    	setLocation(0, 0);
+    	setLocation(50, 50);
     	setSize(screenSize);
     	
     	buildMenuBar();

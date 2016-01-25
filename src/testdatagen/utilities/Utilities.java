@@ -26,7 +26,7 @@ public final class Utilities
     	Insets scnMax = Toolkit.getDefaultToolkit().getScreenInsets(component.getGraphicsConfiguration());
     	int taskBarSize = scnMax.bottom;
     	
-    	return new Dimension(screenSize.width, screenSize.height - taskBarSize);
+    	return new Dimension((int) (screenSize.width * 0.8), (int) ((screenSize.height - taskBarSize) * 0.6));
 	}
 	
 	public static File getConfigDir()
