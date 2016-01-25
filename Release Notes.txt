@@ -1,4 +1,19 @@
 Test Data Generator release notes / history
+
+*-------------*
+*Version 0.7.4*
+*-------------*
+Released January 23rd, 2015
+
+Improvements:
+- default price of type 42-DE-EUR added; further prices can now be configures
+- ZIP products implemented (dummy zip assets, ONIX for ZIP products)
+- dummy iBook file assets implemented
+
+Bug fixes:
+- incorrect XML element name for <supportingresource> in ONIX 3.0 short tag fixed
+- problem with EPUB sample files fixed (file name now contains "_extract")
+
 *-------------*
 *Version 0.7.3*
 *-------------*
