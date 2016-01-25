@@ -1,4 +1,17 @@
 Test Data Generator release notes / history
+*-------------*
+*Version 0.8.0*
+*-------------*
+Released January 25th, 2015
+
+Improvements:
+- added configuration option for publishers
+
+Bug fixes:
+- Fixed size of PDF covers
+
+Minor changes:
+- Decreased size of main window
 
 *-------------*
 *Version 0.7.4*
