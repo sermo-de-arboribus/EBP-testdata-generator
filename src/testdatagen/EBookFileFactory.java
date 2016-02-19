@@ -10,7 +10,7 @@ import testdatagen.model.files.MobiFile;
 import testdatagen.model.files.PDFFile;
 import testdatagen.model.files.SoftwareZipFile;
 
-public class EBookFileFactory extends FileFactory
+public class EBookFileFactory implements FileFactory
 {
 	private static final String[] validFormats = {"PDF", "Epub", "EpubMobi", "IBook", "Mobi", "AudioZip", "SoftwareZip"};
 	private static EBookFileFactory instance;

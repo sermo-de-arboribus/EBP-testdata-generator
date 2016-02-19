@@ -5,7 +5,7 @@ import testdatagen.model.files.GraphicFile;
 import testdatagen.model.files.JpegFile;
 import testdatagen.model.files.PDFCoverFile;
 
-public class GraphicFileFactory extends FileFactory
+public class GraphicFileFactory implements FileFactory
 {
 	private static final String[] validFormats = {"PDF", "JPEG", "jpg", "JPG", "JPeg"};
 	private static GraphicFileFactory instance;
