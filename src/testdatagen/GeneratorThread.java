@@ -13,17 +13,33 @@ import testdatagen.model.files.GraphicFile;
 import testdatagen.model.files.ONIXFile;
 import testdatagen.onixbuilder.OnixPartsBuilder;
 
+/**
+ * GeneratorThread is a class representing a worker thread for writing the required files to the disk.
+ * As I/O is usually relatively slow, and to keep the graphical user interface responsive, this class
+ * is derived from SwingWorker, which also allows a progress bar of the GeneratorThread's work-load 
+ * to be displayed in the GUI.
+ */
 public class GeneratorThread extends SwingWorker<Void, Void>
 {
-	List<Title> titleList;
-	java.io.File destDir;
+	private List<Title> titleList;
+	private java.io.File destDir;
 	
+	/**
+	 * Constructor.
+	 * @param titleList The list of product Title objects, whose files are to be generated and stored
+	 * @param destDir The destination directory as a java.io.File object 
+	 */
 	public GeneratorThread(final List<Title> titleList, final File destDir)
 	{
 		this.titleList = titleList;
 		this.destDir = destDir;
 	}
 
+	/**
+	 * The method does the actual work of the objects of this class (see class description above).
+	 * If necessary, it also uploads the cover files to a Dropbox online storage account.
+	 * It also maintains a progress value which can be used by the main window's progress bar. 
+	 */
 	public Void doInBackground()
 	{
 		setProgress(0);
@@ -39,7 +55,6 @@ public class GeneratorThread extends SwingWorker<Void, Void>
 			for(GraphicFile coverFile : coversList)
 			{
 				java.io.File storedFile = coverFile.generate(destDir);
-				// TODO: check, if cover is handled by MediaFileLink
 				if(title.hasMediaFileLink())
 				{
 					DropboxUploaderThread uploader = new DropboxUploaderThread(storedFile, title);
@@ -48,7 +63,8 @@ public class GeneratorThread extends SwingWorker<Void, Void>
 				}
 			}
 			
-			// wait for dropbox upload threads to finish
+			// wait for dropbox upload threads to finish - we need the uploads to be finished before
+			// Onix files are generated, because the shareable URL is saved in the Onix file.
 			try
 			{
 				for(Thread uploadThread : uploadThreads)
@@ -61,6 +77,7 @@ public class GeneratorThread extends SwingWorker<Void, Void>
 				System.out.println("Warning: interrupted while waiting for results of dropbox upload threads");
 			}
 
+			// generate ONIX 2.1 file with long tag names
 			ONIXFile onixFile = new ONIXFile(title, OnixPartsBuilder.REFERENCETAG, "2.1");
 			onixFile.generate(destDir);
 			

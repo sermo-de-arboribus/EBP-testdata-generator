@@ -38,7 +38,7 @@ public class ConfigurationRegistry
 		 regMap.put("file.tempFolder", "temp");
 		 regMap.put("ssl.pathToCacerts", "R:\\git\\EBP-testdata-generator\\lib\\cacerts");
 		 regMap.put("ssl.pathToCacerts", "R:\\git\\EBP-testdata-generator\\lib\\cacerts");
-		 regMap.put("net.useProxy", "yes");
+		 regMap.put("net.useProxy", "no");
 		 regMap.put("net.proxy.host", "proxy.knonet.de");
 		 regMap.put("net.proxy.port", "8080");
 		 regMap.put("onix.WarengruppeCodes", "110 112 113 114 115 116 117 118 120 121 122 123 130 131 132 133 150 151 152 180 182 183 185 190 210 211 212 213 214 240 250 260 270 280 284 285 310 311 312 313 314 315 324 410 411 412 413 414 415 421 418 444 456 461 470 473 476 480 481 484 490 491 520 527 530 533 534 535 540 550 551 552 553 554 555 556 557 558 559 560 561 562 563 568 570 574 577 578 579 580 585 590 610 630 632 633 640 642 643 690 691 692 693 694 695 697 698 699 720 730 740 750 770 771 772 773 774 775 778 781 782 783 787 910 914 930 931 932 933 937 945 950 960 961 970");

@@ -17,6 +17,9 @@ import testdatagen.model.files.EBookFile;
 import testdatagen.model.files.GraphicFile;
 import testdatagen.utilities.*;
 
+/**
+ * The main window of the program
+ */
 public class TestDataGeneratorMain extends JFrame
 {
 	private static final long serialVersionUID = 2L;
@@ -25,7 +28,11 @@ public class TestDataGeneratorMain extends JFrame
 	private JProgressBar progressBar;
 	private JLabel progressLabel;
     
-	public TestDataGeneratorMain(String name)
+	/**
+	 * The constructor initializes the visual components of the main window and displays them.
+	 * @param name The title of the application, which is displayed in the window's top bar.
+	 */
+	public TestDataGeneratorMain(final String name)
     {
     	super(name);
     	
@@ -48,32 +55,58 @@ public class TestDataGeneratorMain extends JFrame
     	setVisible(true);
     }
 
+	/**
+	 * Conventional main method of java. Calls the constructor of this main class.
+	 * @param args Command line arguments, which are ignored, if any are given.
+	 */
     public static void main(String[] args)
     {
     	new TestDataGeneratorMain("KNV E-Book-Plant test data generator");
     }
     
+    /**
+     * 
+     * @return the JProgressBar which displays the current status of file generation (see testdatagen.GeneratorThread for details)
+     */
     public JProgressBar getProgressBar()
     {
     	return progressBar;
     }
     
+    /**
+     * 
+     * @return The JLabel associated with the JProgressBar
+     */
     public JLabel getProgressLabel()
     {
     	return progressLabel;
     }
     
+    /**
+     * 
+     * @return The JTable object that holds and displays the test scenarios which are currently configured /
+     *   loaded in the currently running program
+     */
 	public JTable getScenarioTable()
 	{
 		return scenarioTable;
 	}
 
+	/**
+	 * 
+	 * @return The ScenarioTableModel which holds the test scenarios which are currently configured / loaded
+	 *  in the running program
+	 */
 	public ScenarioTableModel getScenarioTableModel()
 	{
 		return (ScenarioTableModel) scenarioTable.getModel();
 	}
 	
-	public void setScenarios(ScenarioTableModel scenarios)
+	/**
+	 * This method passes a ScenarioTableModel object to the JTable that displays it. 
+	 * @param scenarios The ScenarioTableModel object to be displayed by the JTable.
+	 */
+	public void setScenarios(final ScenarioTableModel scenarios)
 	{
 		scenarioTable.setModel(scenarios);
 	}
@@ -164,7 +197,7 @@ public class TestDataGeneratorMain extends JFrame
 
 	private void buildScenarioTable()
 	{
-		// TODO: scenario list currently filled with sample data at program start; remove this later?
+		// Sample data to be displayed at the program start-up.
 		List<TestScenario> scenarios = new ArrayList<>();
 		TestScenario scenario01 = new TestScenario("Testszenario Nr. 1");
 		TestScenario scenario02 = new TestScenario("Testszenario Nr. 2");
