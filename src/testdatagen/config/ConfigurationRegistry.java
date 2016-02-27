@@ -5,11 +5,20 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * At this stage of development we just give some configuration values as hard-coded literals here (see constructor)
+ * This could be evolved into a more flexible configuration system later.
+ * The class is designed as a singleton.
+ * 
+ * The registry maintains two different data structures for key-value based look-up of configuration values.
+ * One structure holds single strings, integers or double values.
+ * The other structure can hold localized texts, although at the current stage only the DE locale is used.
+ * Keys in the locale registry point to a string array and can therefore return more than one strings. This 
+ * feature is mainly used for the template system, where the templates are randomly filled with text values,
+ * that means one string out of the string array is randomly picked.
+ */
 public class ConfigurationRegistry
 {
-	// At this stage of development we just give some configuration values as hard-coded literals here (see constructor)
-	// This could be evolved into a more flexible configuration system later.
-	
 	private static ConfigurationRegistry registry;
 	private Map<String, String> regMap;
 	private Map<Locale, Map<String, String[]>> localeTextMap;
@@ -127,6 +136,10 @@ public class ConfigurationRegistry
 		 onixCodeListMap.put(new Integer(5), list5);
 	}
 	
+	/**
+	 * 
+	 * @return The singleton instance of the ConfigurationRegistry
+	 */
 	public static synchronized ConfigurationRegistry getRegistry()
 	{
 		if(registry == null)
@@ -136,7 +149,12 @@ public class ConfigurationRegistry
 		return registry;
 	}
 	
-	public boolean getBooleanValue(String key)
+	/**
+	 * Lookup method for getting a boolean configuration value based on a String key
+	 * @param key The configuration registry key
+	 * @return The boolean value that is represented by the key
+	 */
+	public boolean getBooleanValue(final String key)
 	{
 		String value = regMap.get(key);
 		if(value == null) return false;
@@ -144,7 +162,12 @@ public class ConfigurationRegistry
 		return false;
 	}
 	
-	public double getDoubleValue(String key)
+	/**
+	 * Lookup method for getting a double configuration value based on a String key
+	 * @param key The configuration registry key
+	 * @return The double value that is represented by the key. Return Double.MIN_VALUE if a parsing error occurs.
+	 */
+	public double getDoubleValue(final String key)
 	{
 		double value;
 		try
@@ -158,7 +181,12 @@ public class ConfigurationRegistry
 		return value;
 	}
 	
-	public int getIntValue(String key)
+	/**
+	 * Lookup method for getting an integer configuration value based on a String key
+	 * @param key The configuration registry key.
+	 * @return The integer value that is represented by the key; returns Integer.MIN_VALUE if a parsing error occurs.
+	 */
+	public int getIntValue(final String key)
 	{
 		int value;
 		try
@@ -172,36 +200,62 @@ public class ConfigurationRegistry
 		return value;
 	}
 	
-	public String[] getLocalizedText(Locale loc, String key)
+	/**
+	 * Lookup method for a localized text.
+	 * @param loc The locale for the requested text.
+	 * @param key The String key for the look-up.
+	 * @return A String array containing the localized text strings.
+	 */
+	public String[] getLocalizedText(final Locale loc, final String key)
 	{
 		Map<String, String[]> innerMap = localeTextMap.get(loc);
 		return innerMap.get(key);
 	}
 	
-	public String getString(String key)
+	/**
+	 * Lookup method for getting a configuration String based on a String key
+	 * @param key The configuration registry key.
+	 * @return The integer value that is represented by the key; returns Integer.MIN_VALUE if a parsing error occurs.
+	 */
+	public String getString(final String key)
 	{
 		return regMap.get(key);
 	}
 	
+	/**
+	 * @return: A map for Onix code list values, where the integer key represents the Onix code list number
+	 */
 	public Map<Integer, Map<String, String>> getOnixCodeMap()
 	{
 		return onixCodeListMap;
 	}
-	
-	public void put(String key, String value)
+
+	/**
+	 * 
+	 * @param key The key to be used for the value to put
+	 * @param value The value to be stored in the registry
+	 */
+	public void put(final String key, final String value)
 	{
 		regMap.put(key, value);
 	}
+	
 	/*
 	 * Convenience function: If a single String is to be stored in the locale map, wrap it into an array of length 1
 	 */
-	public void putLocalizedText(Locale loc, String key, String value)
+	public void putLocalizedText(final Locale loc, final String key, final String value)
 	{
 		String[] sarr = new String[1];
 		sarr[0] = value;
 		putLocalizedText(loc, key, sarr);
 	}
 	
+	/**
+	 * Stores a localized registry key-value pair 
+	 * @param loc The locale to be associated with the key-value pair
+	 * @param key The key to use for the value
+	 * @param sarr The string array to be stored with the key
+	 */
 	public void putLocalizedText(Locale loc, String key, String[] sarr)
 	{
 		Map<String, String[]> innerMap = localeTextMap.get(loc);
