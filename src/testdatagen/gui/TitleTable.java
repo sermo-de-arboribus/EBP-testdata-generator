@@ -4,16 +4,20 @@ import javax.swing.JTable;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 
+/**
+ * This class represents the JTable that is used for displaying all titles within a scenario dialog.
+ */
 public class TitleTable extends JTable
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2L;
 	// preferred table column width
 	private static final int[] COLUMN_WIDTH = {65, 65, 120, 120, 45, 400}; 
 	
-	public TitleTable(TableModel tm)
+	/**
+	 * Constructor
+	 * @param tm The table model that represents the table's content data
+	 */
+	public TitleTable(final TableModel tm)
 	{
 		super(tm);
 		TableColumnModel tcm = this.getColumnModel();

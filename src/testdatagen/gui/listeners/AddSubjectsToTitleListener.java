@@ -1,31 +1,28 @@
 package testdatagen.gui.listeners;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Iterator;
 import java.util.Set;
 
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 
 import testdatagen.model.Subject;
 
+/**
+ * This listener handles Onix subject configurations that are added to the product configuration.
+ */
 public class AddSubjectsToTitleListener implements ActionListener
 {
 	private JTextArea subjectsField;
 	private Set<Subject> subjectsSet;
 	
+	/**
+	 * Constructor
+	 * @param subjectsField The JTextArea that displays the configured Onix subjects
+	 * @param subjectsSet The Set that contains the currently configured Onix subjects
+	 */
 	public AddSubjectsToTitleListener(final JTextArea subjectsField, final Set<Subject> subjectsSet)
 	{
 		this.subjectsField = subjectsField;
@@ -33,12 +30,14 @@ public class AddSubjectsToTitleListener implements ActionListener
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent evt)
+	public void actionPerformed(final ActionEvent evt)
 	{
+		// display the modal subjects configuration dialog
 		if(evt.getActionCommand().equals("open subjects dialog"))
 		{
 			new SubjectsDialog(this);
 		}
+		// handle the added subjects
 		else if (evt.getActionCommand().equals("subject submitted"))
 		{
 			JComponent subjectsDialog = (JComponent) evt.getSource();
@@ -70,6 +69,9 @@ public class AddSubjectsToTitleListener implements ActionListener
 	}
 }
 
+/**
+ * Helper class for displaying the modal subject configuration dialog window
+ */
 class SubjectsDialog extends JDialog
 {
 	private static final long serialVersionUID = 2L;
@@ -79,7 +81,11 @@ class SubjectsDialog extends JDialog
 	private JTextField subjectheadingtextField;
 	private JCheckBox mainsubjectCheckBox;
 	
-	public SubjectsDialog(AddSubjectsToTitleListener actionListener)
+	/**
+	 * Constructor
+	 * @param actionListener The AddSubjectsToTitleListener that handles clicks to the "Submit" button
+	 */
+	public SubjectsDialog(final AddSubjectsToTitleListener actionListener)
 	{
 		this.setTitle("Add a subject");
 		this.setModalityType(ModalityType.APPLICATION_MODAL);
@@ -138,26 +144,46 @@ class SubjectsDialog extends JDialog
 		setVisible(true);
 	}
 	
+	/**
+	 * Get the Onix subject scheme identifier code that was entered in the form
+	 * @return String representing the Onix subject scheme identifier
+	 */
 	public String getSubjectschemeidentifier()
 	{
 		return subjectschemeidentifierField.getText();
 	}
 
+	/**
+	 * Get the Onix subject scheme version description that was enteref in the dialog
+	 * @return String representing the Onix subject scheme version
+	 */
 	public String getSubjectschemeversion()
 	{
 		return subjectschemeversionField.getText();
 	}
 
+	/**
+	 * Get the Onix subject code that was entered in the dialog's form
+	 * @return String representing the Onix subject code
+	 */
 	public String getSubjectcode()
 	{
 		return subjectcodeField.getText();
 	}
 
+	/**
+	 * Get the Onix subject heading text that was entered in the dialog's form
+	 * @return String representing the Onix subject heading text
+	 */
 	public String getSubjectheadingtext()
 	{
 		return subjectheadingtextField.getText();
 	}
 
+	/**
+	 * Checks whether the new subject is marked as a main subject
+	 * @return boolean true, if subject is a main subject
+	 */
 	public boolean isMainSubject()
 	{
 		return mainsubjectCheckBox.isSelected();

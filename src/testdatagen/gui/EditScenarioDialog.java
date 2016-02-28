@@ -4,23 +4,19 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 
 import testdatagen.TestDataGeneratorMain;
 import testdatagen.gui.listeners.AddTitleToScenarioListener;
 import testdatagen.gui.listeners.RemoveTitleFromScenarioListener;
 import testdatagen.model.TestScenario;
 
+/**
+ * This class represents the modal dialog window that allows editing of a single scenario (add or remove
+ * product titles).
+ */
 public class EditScenarioDialog extends JDialog
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2L;
 	// some values for visual appearance of the dialog window
 	// width and height of the dialog window
@@ -29,7 +25,12 @@ public class EditScenarioDialog extends JDialog
 
 	private JTable titleTable;
 	
-	public EditScenarioDialog(final TestDataGeneratorMain mainWindow, TestScenario selectedScenario)
+	/**
+	 * Constructor. Initializes appearance and displays the dialog window
+	 * @param mainWindow The parent window, which is the program's main window
+	 * @param selectedScenario The scenario that was selected for editing in the main window
+	 */
+	public EditScenarioDialog(final TestDataGeneratorMain mainWindow, final TestScenario selectedScenario)
 	{
 		this.setTitle("edit a test scenario");
 
@@ -62,7 +63,7 @@ public class EditScenarioDialog extends JDialog
 	    this.setVisible(true);
 	}
 	
-	private void buildTopButtonPanel(TestScenario scenario)
+	private void buildTopButtonPanel(final TestScenario scenario)
 	{
 		// create panel and buttons
 		JPanel topButtonPanel = new JPanel();
@@ -79,7 +80,7 @@ public class EditScenarioDialog extends JDialog
 		this.add(topButtonPanel, BorderLayout.NORTH);
 	}
 	
-	private void buildTestDataTable(TestScenario scenario)
+	private void buildTestDataTable(final TestScenario scenario)
 	{
 	    titleTable = new TitleTable(scenario.getTitleTableModel());
 	    JScrollPane scrollpane = new JScrollPane(titleTable);

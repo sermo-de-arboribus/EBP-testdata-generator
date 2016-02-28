@@ -10,11 +10,19 @@ import javax.swing.*;
 
 import testdatagen.model.Price;
 
+/**
+ * This ActionListener class handles clicks to the "Add price" and "Submit price" buttons in the TitleForm
+ */
 public class AddPricesToTitleListener implements ActionListener
 {
 	private JTextArea pricesField;
 	private Set<Price> pricesSet;
 	
+	/**
+	 * Constructor
+	 * @param pricesField The JTextArea that displays the currently configured prices
+	 * @param pricesSet The Set that holds the currently configured prices
+	 */
 	public AddPricesToTitleListener(final JTextArea pricesField, final Set<Price> pricesSet)
 	{
 		this.pricesField = pricesField;
@@ -22,7 +30,7 @@ public class AddPricesToTitleListener implements ActionListener
 	}
 	
 	@Override
-	public void actionPerformed(ActionEvent evt)
+	public void actionPerformed(final ActionEvent evt)
 	{
 		if(evt.getActionCommand().equals("open prices dialog"))
 		{
@@ -57,12 +65,19 @@ public class AddPricesToTitleListener implements ActionListener
 	}
 }
 
+/**
+ * Helper class for displaying a modal dialog window for price configuration
+ */
 class PricesDialog extends JDialog
 {
 	private static final long serialVersionUID = 2L;
 	private JTextField currencyCode, priceTypeCode, countryCode;
 	
-	public PricesDialog(AddPricesToTitleListener actionListener)
+	/**
+	 * Constructor. Configures and displays the modal price configuration dialog
+	 * @param actionListener The AddPricesToTitleListener that handles clicks to the "Submit" button
+	 */
+	public PricesDialog(final AddPricesToTitleListener actionListener)
 	{
 		this.setTitle("Add a price");
 		this.setModalityType(ModalityType.APPLICATION_MODAL);
@@ -113,16 +128,28 @@ class PricesDialog extends JDialog
 		setVisible(true);
 	}
 	
+	/**
+	 * Return the newly entered Onix currency code 
+	 * @return String representing Onix currency code
+	 */
 	public String getCurrencyCode()
 	{
 		return currencyCode.getText();
 	}
 	
+	/**
+	 * Return the newly entered Onix price type code
+	 * @return String representing the Onix price type code
+	 */
 	public String getPriceTypeCode()
 	{
 		return priceTypeCode.getText();
 	}
-	
+
+	/**
+	 * Return the newly entered Onix (= ISO) country code
+	 * @return String with ISO country code
+	 */
 	public String getCountryCode()
 	{
 		return countryCode.getText();

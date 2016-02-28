@@ -5,13 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 
 import testdatagen.TestDataGeneratorMain;
 import testdatagen.gui.listeners.AddTitleToScenarioListener;
@@ -19,11 +13,11 @@ import testdatagen.gui.listeners.RemoveTitleFromScenarioListener;
 import testdatagen.model.ScenarioTableModel;
 import testdatagen.model.TestScenario;
 
+/**
+ * This class represents the modal dialog for adding a new scenario to the running program
+ */
 public class NewScenarioDialog extends JDialog
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2L;
 	private TestScenario scenario;
 	private TestDataGeneratorMain mainWindow;
@@ -34,6 +28,11 @@ public class NewScenarioDialog extends JDialog
 	private static final int DIALOG_WIDTH = 1024;
 	private static final int DIALOG_HEIGHT = 800;
 	
+	/**
+	 * Constructor of modal dialog window. Configures the visual appearance and displays the window.
+	 * @param mainWindow The parent window, which is the main window of the program
+	 * @param newScenario The new scenario object, which is to be configured and added
+	 */
 	public NewScenarioDialog(final TestDataGeneratorMain mainWindow, final TestScenario newScenario)
 	{
 		if(mainWindow == null || newScenario == null)
@@ -59,6 +58,7 @@ public class NewScenarioDialog extends JDialog
     	this.setSize(DIALOG_WIDTH, DIALOG_HEIGHT);
 	}
 	
+	// configure panel with submit button and an anonymous action listener
 	private void buildSubmitPanel()
 	{
 		JPanel buttonPanel = new JPanel(new FlowLayout());

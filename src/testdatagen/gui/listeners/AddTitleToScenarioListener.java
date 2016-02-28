@@ -2,41 +2,40 @@ package testdatagen.gui.listeners;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 import javax.swing.*;
 
 import testdatagen.EBookFileFactory;
 import testdatagen.GraphicFileFactory;
 import testdatagen.gui.TitleForm;
-import testdatagen.model.Price;
-import testdatagen.model.ProductType;
-import testdatagen.model.Subject;
-import testdatagen.model.TestScenario;
-import testdatagen.model.Title;
+import testdatagen.model.*;
 import testdatagen.model.files.EBookFile;
 import testdatagen.model.files.GraphicFile;
 import testdatagen.onixbuilder.OnixNotificationTypeBuilder;
 import testdatagen.onixbuilder.OnixProductAvailabilityBuilder;
-import testdatagen.utilities.CoverUtils;
-import testdatagen.utilities.ISBNUtils;
-import testdatagen.utilities.TitleUtils;
-import testdatagen.utilities.Utilities;
+import testdatagen.utilities.*;
 
+/**
+ * Listener for handling title configurations to be added to a test scenario
+ */
 public class AddTitleToScenarioListener implements ActionListener
 {
 	private TestScenario scenario;
 	private JDialog parentDialog;
-	
+
+	/**
+	 * Constructor
+	 * @param parentDialog The parent dialog, which is the scenario configuration dialog window.
+	 * @param scenario The TestScenario object that the new title is meant to be added to.
+	 */
 	public AddTitleToScenarioListener(final JDialog parentDialog, final TestScenario scenario)
 	{
 		this.scenario = scenario;
 		this.parentDialog = parentDialog;
 	}
 	
+	// TODO: This method has a very high cyclomatic complexity... Should it be refactored or is that OK?
 	@Override
 	public void actionPerformed(final ActionEvent evt)
 	{
@@ -232,7 +231,8 @@ public class AddTitleToScenarioListener implements ActionListener
 		}
 	}
 	
-	private boolean availabilityChanged(String availCode, String prodAvail)
+	// helper method to check if the user changed the default availability codes in the title form
+	private boolean availabilityChanged(final String availCode, final String prodAvail)
 	{
 		boolean availCodeChanged, prodAvailChanged;
 		availCodeChanged = availCode != null && !availCode.isEmpty() && 

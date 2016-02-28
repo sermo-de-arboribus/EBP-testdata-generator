@@ -1,52 +1,27 @@
 package testdatagen.gui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.awt.*;
+import java.util.*;
 
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JSplitPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 import javax.swing.border.Border;
 
-import testdatagen.gui.listeners.AddPricesToTitleListener;
-import testdatagen.gui.listeners.AddSubjectsToTitleListener;
-import testdatagen.gui.listeners.AddTitleToScenarioListener;
-import testdatagen.gui.listeners.ClearPricesFromTitleListener;
-import testdatagen.gui.listeners.ClearSubjectsFromTitleListener;
-import testdatagen.model.Price;
-import testdatagen.model.ProductType;
-import testdatagen.model.Subject;
-import testdatagen.model.TestScenario;
+import testdatagen.gui.listeners.*;
+import testdatagen.model.*;
 import testdatagen.onixbuilder.OnixNotificationTypeBuilder;
 import testdatagen.onixbuilder.OnixProductAvailabilityBuilder;
 
+/**
+ * This modal dialog represents the product details configuration window, which is displayed when a user
+ * adds a new product to a scenario.
+ */
 public class TitleForm extends JDialog
 {
-	/*
-	 * Definitions of constants for selections
-	 */
+	// Definitions of constants for selections
 	private static final String[] COVER_OPTIONS = {"Media file link", "Cover upload"};
 	private static final long serialVersionUID = 2L;
 	
-	/*
-	 * This form keeps the state of its combo and check boxes and makes the values available in some data structure
-	 */
+	// This form keeps the state of its combo and check boxes and makes the values available in some data structure
 	private JComboBox<String> covertype;
 	private JComboBox<String> product;
 	// additional asset checkboxes
@@ -65,8 +40,12 @@ public class TitleForm extends JDialog
 	private Set<Price> configuredPrices;
 	// publisher elements
 	private JTextField namecodetype, namecodevalue, publishername;
-		
-	public TitleForm(TestScenario scenario)
+	
+	/**
+	 * Constructor, configures the components and visual elements and displays the form
+	 * @param scenario The test scenario that a title is added to
+	 */
+	public TitleForm(final TestScenario scenario)
 	{
 		initializeSelectionElements();
 		
@@ -241,16 +220,28 @@ public class TitleForm extends JDialog
 		this.setSize(800, 600);
 	}
 	
+	/**
+	 * Get the prices that are configured for the new product
+	 * @return A Set of Prices
+	 */
 	public Set<Price> getConfiguredPrices()
 	{
 		return configuredPrices;
 	}
 	
+	/**
+	 * Get the Onix subjects that are configures for the new product
+	 * @return A Set of Subjects
+	 */
 	public Set<Subject> getConfiguredSubjects()
 	{
 		return configuredSubjects;
 	}
 	
+	/**
+	 * Get all the form data that is configured in the text fields, selection boxes, etc.
+	 * @return A key-value map with the name of a swing component being the key to the value 
+	 */
 	public Map<String, String> getFormDataMap()
 	{
 		HashMap<String, String> formDataMap = new HashMap<>();
@@ -285,6 +276,8 @@ public class TitleForm extends JDialog
 		return formDataMap;
 	}
 	
+	// Instantiate all the swing components and assign a name to each of them (The name being the key
+	// in the form data map - see getFormDataMap() above
 	private void initializeSelectionElements()
 	{
 		covertype = new JComboBox<String>(COVER_OPTIONS);

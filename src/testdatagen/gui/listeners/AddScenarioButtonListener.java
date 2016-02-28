@@ -9,10 +9,17 @@ import testdatagen.TestDataGeneratorMain;
 import testdatagen.gui.NewScenarioDialog;
 import testdatagen.model.TestScenario;
 
+/**
+ * Listener close to handle adding new test scenarios to the program
+ */
 public class AddScenarioButtonListener implements ActionListener
 {
 	TestDataGeneratorMain programWindow;
-	
+
+	/**
+	 * Constructor. 
+	 * @param programWindow The main window JFrame of the program
+	 */
 	public AddScenarioButtonListener(final TestDataGeneratorMain programWindow)
 	{
 		this.programWindow = programWindow;
@@ -35,7 +42,7 @@ public class AddScenarioButtonListener implements ActionListener
     		}
 	}
 	
-	// this method shows a small dialog for entering a title and return the title
+	// this method shows a small dialog for entering a title and returns the title
 	private String askForTitle()
 	{
 		String s = (String)JOptionPane.showInputDialog(null, 
