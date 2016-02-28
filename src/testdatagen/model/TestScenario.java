@@ -1,52 +1,77 @@
 package testdatagen.model;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Model class for a TestScenario. A test scenario holds a list of product Title objects that belong to the scenario.
+ */
 public class TestScenario implements Serializable
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2L;
 	private TitleTableModel tableOfTitles;
 	private String name;
 	
-    public TestScenario(String name)
+	/**
+	 * Constructor. Initializes the title table.
+	 * @param name String name of the test scenario
+	 */
+    public TestScenario(final String name)
     {
     	this.name = name;
     	tableOfTitles = new TitleTableModel(new ArrayList<Title>());
     }
     
-    public void addTitle(Title newTitle)
+    /**
+     * Add a product Title object to the scenario.
+     */
+    public void addTitle(final Title newTitle)
     {
     	tableOfTitles.addTitle(newTitle);
     }
     
+    /**
+     * Remove a title from the scenario
+     * @param remTitle The product Title object to be removed.
+     * @return true, if title was in the scenario list.
+     */
     public boolean removeTitle(Title remTitle)
     {
     	return tableOfTitles.removeTitle(remTitle);
     }
-    
+
+    /**
+     * Returns the name of the test scenario
+     * @return String title of scenario
+     */
     public String getName()
     {
     	return name;
     }
     
+    /**
+     * Returns the number of titles in this scenario
+     * @return int number of titles currently part of this scenario
+     */
     public int getNumberOfTitles()
     {
     	return tableOfTitles.getRowCount();
     }
     
+    /**
+     * Returns the TitleTableModel for this scenario
+     * @return The TitleTableModel
+     */
     public TitleTableModel getTitleTableModel()
     {
     	return tableOfTitles;
     }
     
+    /**
+     * Returns the titles that are part of this scenario, as a list
+     * @return List<Title> of this scenario
+     */
     public List<Title> getTitleList()
     {
     	return tableOfTitles.getListOfTitles();

@@ -8,20 +8,25 @@ import javax.swing.JTable;
 
 import testdatagen.model.TitleTableModel;
 
+/**
+ * Listener to remove a title from a test scenario
+ */
 public class RemoveTitleFromScenarioListener implements ActionListener 
 {
 	private JTable titleTable;
-	
+
+	/**
+	 * Constructor
+	 * @param titleTable The product title table to remove from
+	 */
 	public RemoveTitleFromScenarioListener(JTable titleTable)
 	{
 		this.titleTable = titleTable;
 	}
 	
 	@Override
-	public void actionPerformed(ActionEvent evt)
-	{
-    //	ScenarioTableModel tableModel = (ScenarioTableModel) scenarioTable.getModel();
-    	
+	public void actionPerformed(final ActionEvent evt)
+	{	
     	int row = titleTable.getSelectedRow();
     	if(row < 0)
     	{

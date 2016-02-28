@@ -9,6 +9,9 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.WindowConstants;
 
+/**
+ * Listener for displaying the "About" information when clicking the corresponding menu item
+ */
 public class MenuAboutInfoListener implements ActionListener
 {
 

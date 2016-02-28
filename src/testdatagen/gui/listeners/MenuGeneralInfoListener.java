@@ -9,6 +9,9 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.WindowConstants;
 
+/**
+ * Listener to trigger the displaying of the program information window
+ */
 public class MenuGeneralInfoListener implements ActionListener
 {
 

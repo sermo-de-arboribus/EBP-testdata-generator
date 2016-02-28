@@ -13,18 +13,24 @@ import testdatagen.TestDataGeneratorMain;
 import testdatagen.model.ScenarioTableModel;
 import testdatagen.utilities.Utilities;
 
+/*
+ * Listener to save all scenarios to disk. Displays a FileChooser to set the destination file path.
+ */
 public class SaveScenariosButtonListener implements ActionListener
 {
-	// private ScenarioTableModel scenarios;
 	private TestDataGeneratorMain programWindow;
 
+	/**
+	 * Constructor
+	 * @param programWindow The main program window
+	 */
 	public SaveScenariosButtonListener(final TestDataGeneratorMain programWindow)
 	{
 		this.programWindow = programWindow;
 	}
 	
 	@Override
-	public void actionPerformed(ActionEvent evt)
+	public void actionPerformed(final ActionEvent evt)
 	{
 	    JFileChooser chooser = new JFileChooser();
 	    FileNameExtensionFilter filter = new FileNameExtensionFilter("E-Book-Plant data files", "ebp");

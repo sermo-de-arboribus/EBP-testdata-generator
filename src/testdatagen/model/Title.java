@@ -10,6 +10,9 @@ import testdatagen.onixbuilder.*;
 import testdatagen.templates.*;
 import testdatagen.utilities.Utilities;
 
+/**
+ * The model class for a product, which is the basic test entity of the E-Book-Plant
+ */
 public class Title implements Serializable
 {
 	private static final long serialVersionUID = 2L;
@@ -27,6 +30,14 @@ public class Title implements Serializable
     private Price basePrice;
     private Set<Price> additionalPrices;
     
+    /**
+     * Constructor
+     * @param isbn13 The 13-digit ISBN of this product
+     * @param uid The UID (RecordReference in Onix) of this product
+     * @param name The title of this product
+     * @param author The (primary) author of this product
+     * @param format The product format, in the E-Book-Plant style String
+     */
     public Title(final long isbn13, final String uid, final String name, final String author, final String format)
     {
     	this.isbn13 = isbn13;
@@ -41,28 +52,84 @@ public class Title implements Serializable
     	additionalPrices = new HashSet<Price>();
     }
     
+    /**
+     * Add a file object that needs to be generated for this product
+     * @param newFile The file object to add to this product
+     */
     public synchronized void addFile(final File newFile)
     {
     	files.add(newFile);
     }
 	
+    /**
+     * Add a Price object to this product (a product can have several prices for different type-currency-country combinations).
+     * @param newPrice
+     */
     public synchronized void addPrice(final Price newPrice)
     {
     	additionalPrices.add(newPrice);
     	onixPartsDirector.addPrice(newPrice);
     }
     
+    /**
+     * Add a Subject object to this product
+     * @param newSubject
+     */
     public synchronized void addSubject(final Subject newSubject)
     {
     	subjects.add(newSubject);
     	onixPartsDirector.addSubject(newSubject);
     }
     
+    /**
+     * get a clone of this Title object
+     * @return: The cloned Title object
+     */
+    public synchronized Title clone()
+    {
+		Title clonedTitle = new Title(
+				this.getIsbn13(),
+				this.getUid(),
+				this.getName(),
+				this.getAuthor(),
+				this.getFormat()
+				);
+		
+		for(File origFile : this.getFiles())
+		{
+			// TODO: It would be better to make a deep file copy rather than a flat reference copy
+			clonedTitle.addFile(origFile);
+		}
+		
+		// TODO: It would be better to make a deep copy of the OnixPartsDirector, too
+		clonedTitle.onixPartsDirector = this.onixPartsDirector;
+		
+		clonedTitle.basePrice = this.basePrice;
+		for(Price price : this.additionalPrices)
+		{
+			clonedTitle.additionalPrices.add(price.clone());
+		}
+		for(Subject subject : this.subjects)
+		{
+			clonedTitle.subjects.add(subject.clone());
+		}
+		
+		return clonedTitle;
+    }
+    
+    /**
+     * Get the author of this product
+     * @return String of author's complete name
+     */
 	public synchronized String getAuthor()
 	{
 		return author;
 	}
 	
+	/**
+	 * Get the author's first name
+	 * @return String of the author's first name.
+	 */
 	public synchronized String getAuthorFirstName()
 	{
 		if(author.contains(" "))
@@ -75,6 +142,10 @@ public class Title implements Serializable
 		}
 	}
 	
+	/**
+	 * Get the author's family name
+	 * @return String of the author's family name
+	 */
 	public synchronized String getAuthorLastName()
 	{
 		if(author.contains(" "))
@@ -109,18 +180,30 @@ public class Title implements Serializable
 		return returnList;
 	}
 	
+	/**
+	 * Get a promo text about the author of this product
+	 * @return String of a random promo text about the author of this product
+	 */
 	public synchronized String getAuthorBlurb()
 	{
 		AuthorBlurbTemplate template = new AuthorBlurbTemplate(new Locale("de"), this);
 		return template.fillWithText();
 	}
 	
+	/**
+	 * Get the base price of the product, i.e. the price that is used for calculating other prices.
+	 * @return Price object with the product's base price.
+	 */
 	public synchronized Price getBasePrice()
 	{
 		// we don't want the base price to be changed externally, so we only hand out a clone
 		return basePrice.clone();
 	}
-	
+
+	/**
+	 * Get the EpubType for this product
+	 * @return An EpubType String as it is used in the E-Book-Plant
+	 */
 	public synchronized String getEpubType()
 	{
 		if(epubType == null)
@@ -130,6 +213,10 @@ public class Title implements Serializable
 		return epubType;
 	}
 	
+	/**
+	 * Get the EpubType code for Onix 2.1
+	 * @return An Onix code String for the EpubType element
+	 */
 	public synchronized String getEpubTypeForONIX()
 	{
 		if(epubType == null) return "Unknown";
@@ -152,6 +239,10 @@ public class Title implements Serializable
 		}
 	}
 	
+	/**
+	 * Get the EpubType for Onix 3.0
+	 * @return The EpubType string for Onix 3.0
+	 */
 	public synchronized String getEpubTypeForProductFormDetail()
 	{
 		if(epubType == null) return "Unknown";
@@ -174,11 +265,19 @@ public class Title implements Serializable
 		}
 	}
 	
+	/**
+	 * Get the product format String
+	 * @return String representing the product format
+	 */
 	public String getFormat()
 	{
 		return format;
 	}
 	
+	/**
+	 * Get the main product file object for this product (e.g. the e-book in EPUB or PDF format)
+	 * @return EBookFile object representing the main file for this product
+	 */
 	public EBookFile getMainProductFile()
 	{
 		for(File file : files)
@@ -220,11 +319,19 @@ public class Title implements Serializable
 		return returnList;
 	}
 	
+	/**
+	 * Get the OnixPartsDirector that holds this product's Onix configuration
+	 * @return OnixPartsDirector object
+	 */
 	public synchronized OnixPartsDirector getOnixPartsDirector()
 	{
 		return onixPartsDirector;
 	}
-	
+
+	/**
+	 * Get the protection type (hard DRM, watermarking, no protection) for this product
+	 * @return A String representing this product's protection type
+	 */
 	public synchronized String getProtectionTypeForONIX()
 	{
 		if(protection == null)
@@ -249,67 +356,108 @@ public class Title implements Serializable
 		}
 	}
 	
+	/**
+	 * Get a short promo text for this product
+	 * @return A String with a short random promo text
+	 */
 	public synchronized String getShortBlurb()
 	{
 		TitleBlurbTemplate template = new TitleBlurbTemplate(new Locale("de"), TitleBlurbTemplateType.SHORT);
 		return template.fillWithText();
 	}
 	
+	/**
+	 * Get a medium length promo text for this product
+	 * @return A String with a medium length promo text
+	 */
 	public synchronized String getMediumBlurb()
 	{
 		TitleBlurbTemplate template = new TitleBlurbTemplate(new Locale("de"), TitleBlurbTemplateType.MEDIUM);
 		return template.fillWithText();
 	}
 	
+	/**
+	 * Get a long promo text for this product
+	 * @return A String with a long promo text for this product
+	 */
 	public synchronized String getLongBlurb()
 	{
 		TitleBlurbTemplate template = new TitleBlurbTemplate(new Locale("de"), TitleBlurbTemplateType.LONG);
 		return template.fillWithText();
 	}
 	
+	/**
+	 * Get all files that need to be generated for this product
+	 * @return A HashSet of all file objects
+	 */
 	public synchronized HashSet<File> getFiles()
 	{
 		return files;
 	}
 	
+	/**
+	 * Get the 13-digit ISBN (EAN) for this product
+	 * @return long ISBN
+	 */
 	public long getIsbn13()
 	{
 		return isbn13;
 	}
 
+	/**
+	 * Get the mediaFileUrl (i.e. a Dropbox download URL for the cover image of this product)
+	 * @return The mediaFileUrl as a String
+	 */
 	public synchronized String getMediaFileUrl()
 	{
 		return mediaFileUrl;
 	}
 	
+	/**
+	 * Get the title of this product
+	 * @return String title of this product
+	 */
 	public String getName()
 	{
 		return name;
 	}
 	
+	/**
+	 * Get the UID (in Onix the RecordReference element) for this product
+	 * @return A String representing the UID of this product
+	 */
 	public String getUid()
 	{
 		return uid;
 	}
 
+	/**
+	 * Flag to check if this product has a mediaFileUrl (i.e. a Dropbox download URL for the product's cover image)
+	 */
 	public boolean hasMediaFileLink()
 	{
 		return mediaFileUrl != null;
 	}
     
+	/**
+	 * Remove a file object from the set of file that need to be generated for this product.
+	 * @param remFile The File object to be removed
+	 * @return true, if this file was found and removed from the set
+	 */
     public synchronized boolean removeFile(final File remFile)
     {
         return files.remove(remFile);
     }
 
+    // Helper method to generate a random base price within certain bounds
     private Price getRandomBasePrice()
     {
     	Random random = new Random();
 		double basePrice = Math.round((random.nextDouble() * 28.99 + 1) * 100) / 100.0;
 		return new Price("04", "" + basePrice, "EUR", "DE");
     }
-    
-	private boolean isValidFormat(String formatString)
+
+	private boolean isValidFormat(final String formatString)
 	{
 		boolean valid = false;
 		for(String format : validFormats)
@@ -323,7 +471,7 @@ public class Title implements Serializable
 	}
 	
     // this is private, because epubType is set based on the format String -> see setFormat()
-	private void setEpubType(String epubType)
+	private void setEpubType(final String epubType)
 	{	
 		this.epubType = epubType;
 	}
@@ -332,7 +480,7 @@ public class Title implements Serializable
      * setFormat takes in an EBP format string like "WMPDF" or "NDEPUB", validates it and stores file format,
      * protection type and the format string itself as object attributes
      */
-    private void setFormat(String formatString)
+    private void setFormat(final String formatString)
     {
     	if(isValidFormat(formatString))
     	{
@@ -357,6 +505,10 @@ public class Title implements Serializable
     	}
     }
     
+    /**
+     * Set the mediaFileUrl (i.e. the Dropbox URL for downloading this product's cover image)
+     * @param url The Dropbox URL as a String
+     */
     public synchronized void setMediaFileUrl(String url)
     {
     	mediaFileUrl = url;

@@ -205,6 +205,12 @@ public class OnixPartsDirector implements Serializable
 		requiredElements.add(new OnixPriceBuilder(fourtyTwoPriceArgs));
 	}
 	
+	// the private, parameter-less constructor is only to be used be the clone() method
+	private OnixPartsDirector()
+	{
+		requiredElements = new LinkedList<OnixPartsBuilder>();
+	}
+	
 	public void addMediaResource(String url)
 	{
 		HashMap<String, String> mediaArgs = new HashMap<String, String>();
@@ -461,6 +467,21 @@ public class OnixPartsDirector implements Serializable
 		// add EpubTypeDescription for Onix 2.1
 		HashMap<String, String> epubTypeDescArgs = new HashMap<>();
 		requiredElements.add(new OnixEpubTypeDescriptionBuilder(epubTypeDescArgs));
+	}
+	
+	public OnixPartsDirector clone()
+	{
+		// use the private, parameter-less constructor
+		OnixPartsDirector clonedDirector = new OnixPartsDirector();
+		clonedDirector.title = this.title;
+		
+		// TODO: it would be better to make deep copies instead of flat ones of the OnixPartsBuilder objects
+		for (OnixPartsBuilder builder : this.requiredElements)
+		{
+			clonedDirector.requiredElements.add(builder);
+		}
+		
+		return clonedDirector;
 	}
 	
 	public void replaceMediaResource(String url)

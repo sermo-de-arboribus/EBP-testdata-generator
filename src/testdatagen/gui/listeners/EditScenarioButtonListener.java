@@ -11,10 +11,17 @@ import testdatagen.model.ScenarioTableModel;
 import testdatagen.model.TestScenario;
 import testdatagen.utilities.Utilities;
 
+/**
+ * A listener to trigger edits of test scenarios. Delegates the editing to the EditScenarioDialog class
+ */
 public class EditScenarioButtonListener implements ActionListener 
 {
 	private TestDataGeneratorMain programWindow;
-	
+
+	/**
+	 * Constructor
+	 * @param programWindow The main window of the program
+	 */
 	public EditScenarioButtonListener(final TestDataGeneratorMain programWindow)
 	{
 		this.programWindow = programWindow;

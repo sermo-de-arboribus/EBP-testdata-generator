@@ -1,9 +1,16 @@
 package testdatagen.model;
 
+/**
+ * This enumeration lists all valid product types
+ */
 public enum ProductType
 {
 	PDF, EPUB, WMPDF, WMEPUB, NDPDF, NDEPUB, ZIP, iBOOK, NDMOBI, WMMOBI, AUDIO;
 	
+	/**
+	 * Get the valid product types as a String array
+	 * @return String[] with all valid product types
+	 */
 	public static String[] productTypeNames()
 	{
 		ProductType[] productTypes = values();

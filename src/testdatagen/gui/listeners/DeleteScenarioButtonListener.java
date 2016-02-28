@@ -11,10 +11,17 @@ import testdatagen.model.ScenarioTableModel;
 import testdatagen.model.TestScenario;
 import testdatagen.utilities.Utilities;
 
+/**
+ * Listener to delete scenarios from the main program's test scenario table
+ */
 public class DeleteScenarioButtonListener implements ActionListener
 {
 	private TestDataGeneratorMain programWindow;
-	
+
+	/**
+	 * Constructor
+	 * @param programWindow The main window of the program
+	 */
 	public DeleteScenarioButtonListener(final TestDataGeneratorMain programWindow)
 	{
 		this.programWindow = programWindow;

@@ -7,31 +7,36 @@ import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.util.List;
 
-import javax.swing.JFileChooser;
-import javax.swing.JProgressBar;
-import javax.swing.JTable;
+import javax.swing.*;
 
 import org.apache.commons.io.FilenameUtils;
 
 import testdatagen.GeneratorThread;
 import testdatagen.TestDataGeneratorMain;
-import testdatagen.model.ScenarioTableModel;
-import testdatagen.model.TestScenario;
-import testdatagen.model.Title;
+import testdatagen.model.*;
 import testdatagen.utilities.Utilities;
 
+/**
+ * This listener handles clicks to the "Generate" button and updates the progress bar while the 
+ * file generation is running. A FileChooser is displayed to let the user select a destination directory
+ */
 public class GenerateDataButtonListener implements ActionListener, PropertyChangeListener
 {
 	private TestDataGeneratorMain programWindow;
 	private GeneratorThread genThread;
 	private File destDir;
 	
+	/**
+	 * Constructor
+	 * @param programWindow The main program window
+	 */
 	public GenerateDataButtonListener(TestDataGeneratorMain programWindow)
 	{
 		this.programWindow = programWindow;
 	}
 	
-	public void actionPerformed(ActionEvent evt)
+	@Override
+	public void actionPerformed(final ActionEvent evt)
 	{
 		JTable scenarioTable = programWindow.getScenarioTable();
 		// check if a row is selected
@@ -76,7 +81,8 @@ public class GenerateDataButtonListener implements ActionListener, PropertyChang
     	}
 	}
 	
-	public void propertyChange(PropertyChangeEvent evt)
+	@Override
+	public void propertyChange(final PropertyChangeEvent evt)
 	{
 		JProgressBar progressBar = programWindow.getProgressBar();
 		if(genThread.getProgress() == 0 && !evt.getNewValue().equals("DONE"))
@@ -93,7 +99,6 @@ public class GenerateDataButtonListener implements ActionListener, PropertyChang
 		else //(evt.getNewValue().equals("DONE"))
 		{
 			programWindow.getProgressLabel().setText("Generating files completed. Files saved in " + destDir.getPath());
-			// Utilities.showInfoPane("All files for this scenario have been generated and saved to " + destDir.getPath());
 		}
 	}
 }

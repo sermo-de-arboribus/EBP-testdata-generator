@@ -14,10 +14,17 @@ import testdatagen.TestDataGeneratorMain;
 import testdatagen.model.ScenarioTableModel;
 import testdatagen.utilities.Utilities;
 
+/**
+ * This listener handles the loading of saved scenarios
+ */
 public class LoadScenariosButtonListener implements ActionListener
 {
 	private TestDataGeneratorMain programWindow;
 	
+	/**
+	 * Constructor
+	 * @param mainFrame The main program window
+	 */
 	public LoadScenariosButtonListener(final TestDataGeneratorMain mainFrame)
 	{
 		this.programWindow = mainFrame;

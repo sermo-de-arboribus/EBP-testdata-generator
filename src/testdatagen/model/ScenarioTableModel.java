@@ -8,11 +8,12 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
+/**
+ * The ScenarioTableModel is used as a model behind a JTable. It manages the currently loaded and
+ * configured test senarios.
+ */
 public class ScenarioTableModel extends AbstractTableModel
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2L;
 
 	// names of the columns
@@ -24,6 +25,10 @@ public class ScenarioTableModel extends AbstractTableModel
 
 	private List<TestScenario> scenarios;
 	
+	/**
+	 * Constructor
+	 * @param scenarioList A list of of TestScenarios
+	 */
 	public ScenarioTableModel(final List<TestScenario> scenarioList)
 	{
 		scenarios = new ArrayList<>(scenarioList);
@@ -35,6 +40,7 @@ public class ScenarioTableModel extends AbstractTableModel
 		return COLUMN_NAMES.length;
 	}
 
+	@Override
 	public String getColumnName(final int colIndex)
 	{
 		return COLUMN_NAMES[colIndex];
@@ -47,7 +53,7 @@ public class ScenarioTableModel extends AbstractTableModel
 	}
 
 	@Override
-	public Object getValueAt(int rowIndex, int colIndex)
+	public Object getValueAt(final int rowIndex, final int colIndex)
 	{
 		TestScenario scenario = scenarios.get(rowIndex);
 		
@@ -59,22 +65,39 @@ public class ScenarioTableModel extends AbstractTableModel
 		throw new IndexOutOfBoundsException("Invalid columnIndex: " + colIndex);
 	}
 	
-	public TestScenario getScenarioFromRow(int row)
+	/**
+	 * Get the TestScenario object represented by a certain table row
+	 * @param row integer row number
+	 * @return selected TestScenario object
+	 */
+	public TestScenario getScenarioFromRow(final int row)
 	{
 		return scenarios.get(row);
 	}
 	
-	public void addScenario(TestScenario scenario)
+	/**
+	 * Add a scenario to the model and notify listeners
+	 * @param scenario The TestScenario to be added
+	 */
+	public void addScenario(final TestScenario scenario)
 	{
 		scenarios.add(scenario);
 		fireTableDataChanged();
 	}
 	
+	/**
+	 * Get a copy of the TestScenario list represented by this model
+	 * @return ArrayList<TestScenario>
+	 */
 	public ArrayList<TestScenario> getScenarioList()
 	{
 		return new ArrayList<TestScenario>(scenarios);
 	}
 	
+	/**
+	 * Remove a selected Scenario from the model / table and notify listeners
+	 * @param selectedScenario
+	 */
 	public void removeScenario(final TestScenario selectedScenario)
 	{
 		scenarios.remove(selectedScenario);
