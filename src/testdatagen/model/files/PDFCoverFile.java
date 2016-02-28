@@ -98,7 +98,7 @@ public class PDFCoverFile extends GraphicFile
 			
 			// print title
 			contentStream.setFont(largeFont, largeFontSize);
-			contentStream.moveTextPositionByAmount(100f, (pageDimension.getHeight() / 10f) * 8.5f);
+			contentStream.moveTextPositionByAmount(pageDimension.getWidth() / 10f, (pageDimension.getHeight() / 10f) * 8.5f);
 			contentStream.drawString(title.getName());
 			
 			// print author
