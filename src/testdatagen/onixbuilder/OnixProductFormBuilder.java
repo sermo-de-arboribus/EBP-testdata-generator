@@ -16,14 +16,14 @@ public class OnixProductFormBuilder extends OnixPartsBuilder
 		};
 	private static final int SEQUENCE_NUMBER = 500;
 
-	public OnixProductFormBuilder(HashMap<String, String> args)
+	public OnixProductFormBuilder(final HashMap<String, String> args)
 	{
 		super(args);
 		elementDefinitions = PRODUCT_FORM_DEFINITIONS;
 	}
 	
 	@Override
-	public Element build(String onixVersion, int tagType)
+	public Element build(final String onixVersion, final int tagType)
 	{
 		initialize(onixVersion, tagType);
 		

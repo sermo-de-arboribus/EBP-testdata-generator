@@ -306,7 +306,14 @@ public class OnixPartsDirector implements Serializable
 		root.addAttribute(new Attribute("release", "2.1"));
 
 		// first add specific ONIX 2.1 elements
-		replaceProductForm("DG");
+		if(ProductType.valueOf(title.getFormat()) == ProductType.AUDIO)
+		{
+			replaceProductForm("AJ");
+		}
+		else
+		{
+			replaceProductForm("DG");
+		}
 		
 		// then sort the list of required elements
 		Collections.sort(requiredElements);
@@ -367,7 +374,14 @@ public class OnixPartsDirector implements Serializable
 		Element product = null;
 		
 		// first add specific ONIX 3.0 element
-		replaceProductForm("ED");
+		if(ProductType.valueOf(title.getFormat()) == ProductType.AUDIO)
+		{
+			replaceProductForm("AJ");
+		}
+		else
+		{
+			replaceProductForm("ED");
+		}
 		
 		// then sort the list of required elements
 		Collections.sort(requiredElements);
@@ -460,9 +474,15 @@ public class OnixPartsDirector implements Serializable
 		return root;
 	}
 
+	public void changeFormatToAudio()
+	{
+		replaceOnix2EpubType(null, true);
+		removeOnixTechnicalProtectionBuilders();
+	}
+	
 	public void changeFormatToZip()
 	{
-		replaceOnix2EpubType("099");
+		replaceOnix2EpubType("099", false);
 		
 		// add EpubTypeDescription for Onix 2.1
 		HashMap<String, String> epubTypeDescArgs = new HashMap<>();
@@ -484,6 +504,11 @@ public class OnixPartsDirector implements Serializable
 		return clonedDirector;
 	}
 	
+	public void removeOnixTechnicalProtectionBuilders()
+	{
+		removeBuilders(OnixTechnicalProtectionBuilder.class);
+	}
+	
 	public void replaceMediaResource(String url)
 	{
 		removeBuilders(OnixMediaResourceBuilder.class);
@@ -499,12 +524,23 @@ public class OnixPartsDirector implements Serializable
 		requiredElements.add(new OnixNotificationTypeBuilder(notiTypeArgs));
 	}
 	
-	public void replaceOnix2EpubType(String epubType)
+	/**
+	 * Replaces the <EpubType> and <ProductFormDetail> elements of Onix 2.1 with a new value (or uses the default value for <EpubType>, if the epubType parameter is null). 
+	 * @param epubType The new value as a String
+	 */
+	public void replaceOnix2EpubType(final String epubType, boolean isAudioProduct)
 	{
 		removeBuilders(OnixProductFormDetailBuilder.class);
 		
 		HashMap<String, String> productFormArgs = new HashMap<String, String>();
-		productFormArgs.put("epubtype", epubType);
+		if(epubType != null)
+		{
+			productFormArgs.put("epubtype", epubType);	
+		}
+		if(isAudioProduct)
+		{
+			productFormArgs.put("productformdetail", "A103");
+		}
 		requiredElements.add(new OnixProductFormDetailBuilder(productFormArgs));
 	}
 	
@@ -520,6 +556,7 @@ public class OnixPartsDirector implements Serializable
 	
 	public void replaceProductForm(String productFormCode)
 	{
+System.out.println("Asked to replace ProductForm with " + productFormCode);
 		removeBuilders(OnixProductFormBuilder.class);
 
 		HashMap<String, String> productFormArgs = new HashMap<String, String>();

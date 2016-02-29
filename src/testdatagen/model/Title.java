@@ -98,10 +98,12 @@ public class Title implements Serializable
 		for(File origFile : this.getFiles())
 		{
 			// TODO: It would be better to make a deep file copy rather than a flat reference copy
+			// However, currently File objects are not modified after being instantiated, they are read-only.
+			// Therefore it is ok to use flat copies for the moment.
 			clonedTitle.addFile(origFile);
 		}
 		
-		// TODO: It would be better to make a deep copy of the OnixPartsDirector, too
+		// TODO: It would be better to make a deep copy of the OnixPartsDirector, too. See comment above.
 		clonedTitle.onixPartsDirector = this.onixPartsDirector;
 		
 		clonedTitle.basePrice = this.basePrice;

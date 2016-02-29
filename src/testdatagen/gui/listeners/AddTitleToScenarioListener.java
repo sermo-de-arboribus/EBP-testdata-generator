@@ -35,7 +35,6 @@ public class AddTitleToScenarioListener implements ActionListener
 		this.parentDialog = parentDialog;
 	}
 	
-	// TODO: This method has a very high cyclomatic complexity... Should it be refactored or is that OK?
 	@Override
 	public void actionPerformed(final ActionEvent evt)
 	{
@@ -73,6 +72,11 @@ public class AddTitleToScenarioListener implements ActionListener
 			if(ProductType.valueOf(format) == ProductType.ZIP)
 			{
 				newTitle.getOnixPartsDirector().changeFormatToZip();
+			}
+			// if product format is "AUDIO" it also needs some special Onix settings
+			if(ProductType.valueOf(format) == ProductType.AUDIO)
+			{
+				newTitle.getOnixPartsDirector().changeFormatToAudio();
 			}
 			
 			// additional product identifiers required in ONIX file?

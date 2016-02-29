@@ -1,8 +1,22 @@
 Test Data Generator release notes / history
 *-------------*
+*Version 0.8.1*
+*-------------*
+Released February 29th, 2016
+
+Improvements:
+- AUDIO product Zip files are now also generated / exported
+- AUDIO products are now output with reasonable ONIX settings
+
+The version also includes minor bug fixes and some internal code refactorings:
+- "Clear prices" button in the title configuration window is now working
+- Text positioning in PDF cover files improved
+- etc... 
+
+*-------------*
 *Version 0.8.0*
 *-------------*
-Released January 25th, 2015
+Released January 25th, 2016
 
 Improvements:
 - added configuration option for publishers
@@ -16,10 +30,10 @@ Minor changes:
 *-------------*
 *Version 0.7.4*
 *-------------*
-Released January 23rd, 2015
+Released January 23rd, 2016
 
 Improvements:
-- default price of type 42-DE-EUR added; further prices can now be configures
+- default price of type 42-DE-EUR added; further prices can now be configured
 - ZIP products implemented (dummy zip assets, ONIX for ZIP products)
 - dummy iBook file assets implemented
 
