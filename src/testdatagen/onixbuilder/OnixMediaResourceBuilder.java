@@ -5,6 +5,11 @@ import java.util.HashMap;
 import nu.xom.Element;
 import nu.xom.Text;
 
+/**
+ * This OnixPartsBuilder is responsible for the media resources (<MediaFile> in Onix 2.1, <SupportingResource> in Onix 3.0).
+ * If it has been possible to upload a cover file to a Dropbox online storage account, the URL will also
+ * be listed here, in a <ResourceLink> / <MediaFileLink> element.
+ */
 public class OnixMediaResourceBuilder extends OnixPartsBuilder
 {
 	/* 
@@ -67,14 +72,18 @@ public class OnixMediaResourceBuilder extends OnixPartsBuilder
 				put("0628", "01");
 			}};
 	
-	public OnixMediaResourceBuilder(HashMap<String, String> args)
+	/**
+	 * Constructor
+	 * @param args The arguments as a key-value HashMap
+	 */
+	public OnixMediaResourceBuilder(final HashMap<String, String> args)
 	{
 		super(args);
 		elementDefinitions = MEDIA_RESOURCE_ELEMENT_DEFINITIONS;
 	}
 	
 	@Override
-	public Element build(String onixVersion, int tagType)
+	public Element build(final String onixVersion, final int tagType)
 	{
 		initialize(onixVersion, tagType);
 		

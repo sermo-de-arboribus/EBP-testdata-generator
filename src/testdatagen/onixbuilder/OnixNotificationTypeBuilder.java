@@ -5,6 +5,9 @@ import java.util.HashMap;
 import nu.xom.Element;
 import nu.xom.Text;
 
+/**
+ * OnixBuilder class to handle <NotificationType> elements in Onix messages
+ */
 public class OnixNotificationTypeBuilder extends OnixPartsBuilder 
 {
 	public static final String DEFAULT_NOTIFICATION_TYPE = "03";
@@ -16,15 +19,19 @@ public class OnixNotificationTypeBuilder extends OnixPartsBuilder
 			{"a002", "NotificationType", "a002", "NotificationType", "notificationtype", DEFAULT_NOTIFICATION_TYPE},
 		};
 	private static final int SEQUENCE_NUMBER = 300;
-	
-	public OnixNotificationTypeBuilder(HashMap<String, String> args)
+
+	/**
+	 * Constructor
+	 * @param args The arguments as a key-value HashMap
+	 */
+	public OnixNotificationTypeBuilder(final HashMap<String, String> args)
 	{
 		super(args);
 		elementDefinitions = NOTIFY_TYPE_DEFINITIONS;
 	}
 	
 	@Override
-	public Element build(String onixVersion, int tagType)
+	public Element build(final String onixVersion, final int tagType)
 	{
 		initialize(onixVersion, tagType);
 		

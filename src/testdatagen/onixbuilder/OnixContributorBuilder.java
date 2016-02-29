@@ -5,6 +5,10 @@ import java.util.HashMap;
 import nu.xom.Element;
 import nu.xom.Text;
 
+/**
+ * The <Contributor> node of an Onix file represents the information about the author or other 
+ * persons who contributed to a book
+ */
 public class OnixContributorBuilder extends OnixPartsBuilder
 {
 	/* 
@@ -37,15 +41,19 @@ public class OnixContributorBuilder extends OnixPartsBuilder
 		/*22 */	{"b295", "WebsiteLink", "b295", "WebsiteLink", "websitelink", "http://www.kno-va.de"}
 		};
 	private static final int SEQUENCE_NUMBER = 1000;
-	
-	public OnixContributorBuilder (HashMap<String, String> args)
+
+	/**
+	 * Constructor
+	 * @param args The arguments as a key-value HashMap
+	 */
+	public OnixContributorBuilder (final HashMap<String, String> args)
 	{
 		super(args);
 		elementDefinitions = CONTRIBUTOR_ELEMENT_DEFINITIONS;
 	}
 	
 	@Override
-	public Element build(String onixVersion, int tagType)
+	public Element build(final String onixVersion, final int tagType)
 	{
 		initialize(onixVersion, tagType);
 		

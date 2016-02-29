@@ -5,6 +5,9 @@ import java.util.HashMap;
 import nu.xom.Element;
 import nu.xom.Text;
 
+/**
+ * The class that represents the Onix <CountryOfPublication> element
+ */
 public class OnixCountryOfPublicationBuilder extends OnixPartsBuilder
 {
 	/* 
@@ -16,14 +19,18 @@ public class OnixCountryOfPublicationBuilder extends OnixPartsBuilder
 		};
 	private static final int SEQUENCE_NUMBER = 2300;
 
-	public OnixCountryOfPublicationBuilder(HashMap<String, String> args)
+	/**
+	 * Constructor
+	 * @param args The arguments as a key-value HashMap
+	 */
+	public OnixCountryOfPublicationBuilder(final HashMap<String, String> args)
 	{
 		super(args);
 		elementDefinitions = COUNTRY_DEFINITIONS;
 	}
 	
 	@Override
-	public Element build(String onixVersion, int tagType)
+	public Element build(final String onixVersion, final int tagType)
 	{
 		initialize(onixVersion, tagType);
 		

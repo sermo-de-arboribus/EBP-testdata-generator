@@ -9,19 +9,29 @@ import java.util.*;
 import testdatagen.model.*;
 import testdatagen.utilities.*;
 
+/**
+ * The Onix parts director holds a list of required Onix elements for a certain product. The constructor
+ * sets up an Onix file with default values. The OnixPartsDirector also offers methods to add, change or 
+ * remove certain elements. The buildOnix2() and buildOnix3() methods order the OnixPartsBuilder objects
+ * in Onix document sequence and then call each builder's build method. The returned XML elements are
+ * then added to the XML DOM.
+ */
 public class OnixPartsDirector implements Serializable
 {
 	private static final long serialVersionUID = 2L;
 	
 	private LinkedList<OnixPartsBuilder> requiredElements;
 	private Title title;
-	/*
+	
+	/**
+	 * Constructor
 	 * The OnixPartsDirector class maintains a pattern for an ONIX file to be generated. 
 	 * When an object of the OnixPartsDirector class is instantiated, a default pattern for an ONIX file
 	 * is created. After creation of the default file, the default settings can be modified by
-	 * calling specific methods on the OnixPartsDirector object. 
+	 * calling specific methods on the OnixPartsDirector object.
+	 * @title The product Title object that this Onix file belongs to. 
 	 */
-	public OnixPartsDirector(Title title)
+	public OnixPartsDirector(final Title title)
 	{
 		this.title = title;
 		Random random = new Random();
@@ -211,20 +221,32 @@ public class OnixPartsDirector implements Serializable
 		requiredElements = new LinkedList<OnixPartsBuilder>();
 	}
 	
-	public void addMediaResource(String url)
+	/**
+	 * Add a media resource, usually a URL for downloading a cover file
+	 * @param url The URL where the media resource can be downloaded
+	 */
+	public void addMediaResource(final String url)
 	{
 		HashMap<String, String> mediaArgs = new HashMap<String, String>();
 		mediaArgs.put("resourcelink", url);
 		requiredElements.add(new OnixMediaResourceBuilder(mediaArgs));
 	}
 	
-	public void addProductFormDetail(String code)
+	/**
+	 * Add another <ProductFormDetail> element to the Onix tree
+	 * @param code The code to be used inside the <ProductFormDetail> element
+	 */
+	public void addProductFormDetail(final String code)
 	{
 		HashMap<String, String> productFormDetailArgs = new HashMap<>();
 		productFormDetailArgs.put("productformdetail", code);
 		requiredElements.add(new OnixProductFormDetailBuilder(productFormDetailArgs));
 	}
 	
+	/**
+	 * Remove a <ProductFormDetail> element from the Onix tree
+	 * @param code The code that is used inside the <ProductFormDetail> element which is meant to be removed
+	 */
 	public void removeProductFormDetail(String code)
 	{
 		HashMap<String, String> productFormDetailArgs = new HashMap<>();

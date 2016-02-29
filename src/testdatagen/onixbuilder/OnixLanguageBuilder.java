@@ -5,6 +5,9 @@ import java.util.HashMap;
 import nu.xom.Element;
 import nu.xom.Text;
 
+/**
+ * This OnixPartsBuilder handles the <Language> node of Onix files
+ */
 public class OnixLanguageBuilder extends OnixPartsBuilder
 {
 	/* 
@@ -17,7 +20,11 @@ public class OnixLanguageBuilder extends OnixPartsBuilder
 			{"b252", "LanguageCode", "b252", "LanguageCode", "languagecode", "ger"}
 		};
 	private static final int SEQUENCE_NUMBER = 1300;
-	
+
+	/**
+	 * Constructor
+	 * @param args The arguments as a key-value HashMap
+	 */
 	public OnixLanguageBuilder(final HashMap<String, String> args)
 	{
 		super(args);

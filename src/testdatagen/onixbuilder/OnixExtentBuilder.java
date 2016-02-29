@@ -5,6 +5,10 @@ import java.util.HashMap;
 import nu.xom.Element;
 import nu.xom.Text;
 
+/**
+ * This OnixPartsBuilder generates extent information: On the one hand this is represented in 
+ * the <Extent> node, on the other hand (in Onix 2.1) by the explicit page number elements
+ */
 public class OnixExtentBuilder extends OnixPartsBuilder
 {
 	/* 
@@ -23,7 +27,11 @@ public class OnixExtentBuilder extends OnixPartsBuilder
 			{"", "", "b255", "PagesArabic", "pagesarabic", "188"}
 		};
 	private static final int SEQUENCE_NUMBER = 1400;
-	
+
+	/**
+	 * Constructor
+	 * @param args The arguments as a key-value HashMap
+	 */
 	public OnixExtentBuilder(final HashMap<String, String> args)
 	{
 		super(args);
@@ -31,7 +39,7 @@ public class OnixExtentBuilder extends OnixPartsBuilder
 	}
 	
 	@Override
-	public Element build(String onixVersion, int tagType)
+	public Element build(final String onixVersion, final int tagType)
 	{
 		initialize(onixVersion, tagType);
 		

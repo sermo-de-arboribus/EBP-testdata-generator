@@ -5,6 +5,9 @@ import java.util.HashMap;
 import nu.xom.Element;
 import nu.xom.Text;
 
+/**
+ * This OnixPartsBuilder handles <EpubTypeDescription> nodes
+ */
 public class OnixEpubTypeDescriptionBuilder extends OnixPartsBuilder
 {
 	/* 
@@ -15,15 +18,19 @@ public class OnixEpubTypeDescriptionBuilder extends OnixPartsBuilder
 			{"", "", "b213", "EpubTypeDescription", "epubtypedescription", "Zip(Win)"}
 		};
 	private static final int SEQUENCE_NUMBER = 610;
-	
-	public OnixEpubTypeDescriptionBuilder(HashMap<String, String> args)
+
+	/**
+	 * Constructor
+	 * @param args The arguments as a key-value HashMap
+	 */
+	public OnixEpubTypeDescriptionBuilder(final HashMap<String, String> args)
 	{
 		super(args);
 		elementDefinitions = EPUB_TYPE_DEFINITIONS;
 	}
 	
 	@Override
-	public Element build(String onixVersion, int tagType)
+	public Element build(final String onixVersion, final int tagType)
 	{
 		initialize(onixVersion, tagType);
 		Element returnElement = null;

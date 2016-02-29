@@ -9,6 +9,17 @@ import testdatagen.utilities.TitleUtils;
 import testdatagen.utilities.Utilities;
 import nu.xom.Element;
 
+/**
+ * OnixPartsBuilder is the abstract base class for all concrete OnixBuilder classes. Every OnixPartsBuilder 
+ * subclass takes an arguments HashMap in its constructor, which allows key/value pairs for passing
+ * configuration values. A concrete OnixPartsBuilder also knows which Onix elements it has to handle
+ * and how to generate them. (These Onix elements are stored in the two-dimensional String array 
+ * elementDefinitions.)
+ * This abstract class provides implementations for determining Onix element names, based on an index into
+ * elementDefinitions (see getTageName() method) and for filling the element's content (see method
+ * determineElementContent()). It also forces sub-classes to return a sequence number, which is used 
+ * to sort the OnixBuilder objects in the order they are supposed to appear in an Onix file.
+ */
 public abstract class OnixPartsBuilder implements Comparable<OnixPartsBuilder>, Serializable
 {
 	protected static final long serialVersionUID = 1L;
@@ -20,7 +31,7 @@ public abstract class OnixPartsBuilder implements Comparable<OnixPartsBuilder>, 
 	protected int tagType = 0;
 	protected HashMap<String, String> arguments;
 	
-	/* This String array contains information on how to create ONIX elements.
+	/** This String array contains information on how to create ONIX elements.
 	 * Every row represents one ONIX element.
 	 * The columns represent: ONIX 3 short name | ONIX 3 ref name | ONIX 2.1 short name | ONIX 2.1 ref name | argument name | default value
 	 * "argument name" is the key name in the arguments HashMap, which is passed to the constructor of OnixHeaderBuilder
@@ -30,7 +41,7 @@ public abstract class OnixPartsBuilder implements Comparable<OnixPartsBuilder>, 
 	 */
 	protected String[][] elementDefinitions;
 	
-	/*
+	/**
 	 * Constructor validates onix version and tag type arguments
 	 * @onixVersion String: accepted version strings are "2.1" or "3.0"
 	 * @tagType int: accepted values are SHORTTAG and REFERENCETAG
@@ -42,17 +53,26 @@ public abstract class OnixPartsBuilder implements Comparable<OnixPartsBuilder>, 
 		arguments = args;
 	}
 	
-	/*
+	/**
 	 * build() is the main worker method to create a chunk of ONIX elements.
+	 * @onixVersion The Onix version (2.1 / 3.0)
+	 * @tagType The tag type to be used (SHORT / REFERENCE)
+	 * @return An XML element
 	 */
-	public abstract Element build(String onixVersion, int tagType);
+	public abstract Element build(final String onixVersion, final int tagType);
 	
-	/*
+	/**
 	 * To enforce an order on the sequence of ONIX elements, every subclass needs to 
 	 * be able to return a (statically determined) sequence number.
+	 * @return An integer value that indicates the position where built ONIX elements are
+	 * to be put into DOM tree
 	 */
 	public abstract int getSequenceNumber();
-	
+
+	/**
+	 * Compares OnixBuilders based on their sequence numbers, and thus orders them according to the Onix schema
+	 */
+	@Override
 	public int compareTo(final OnixPartsBuilder otherBuilder)
 	{
 		if(this.getSequenceNumber() < otherBuilder.getSequenceNumber())
@@ -69,7 +89,12 @@ public abstract class OnixPartsBuilder implements Comparable<OnixPartsBuilder>, 
 		}
 	}
 	
-	public static String getTagTypeString(int tagType)
+	/**
+	 * Returns a String with the tag type
+	 * @param tagType The tag type to give a string for
+	 * @return A String for the tag type
+	 */
+	public static String getTagTypeString(final int tagType)
 	{
 		switch(tagType)
 		{
@@ -79,21 +104,31 @@ public abstract class OnixPartsBuilder implements Comparable<OnixPartsBuilder>, 
 		}
 	}
 	
-	/*
+	/**
 	 * gets an argument value from the arguments HashMap that was passed to the constructor
 	 * @arg String: key to the hash map.
 	 */
-	protected String getArgument(String arg)
+	protected String getArgument(final String arg)
 	{
 		return arguments.get(arg);
 	}
-	
-	protected boolean hasArgument(String arg)
+
+	/**
+	 * Checks whether this OnixPartsBuilder has an argument key in its arguments map. This is used to 
+	 * determine if the argument or the default value is supposed to be used for an Onix element's content.
+	 * @param arg
+	 * @return
+	 */
+	protected boolean hasArgument(final String arg)
 	{
 		return arguments.containsKey(arg);
 	}
 	
-	protected void validateTagType(int tagType)
+	/**
+	 * Validates the tag type, only the constant integer values SHORTTAG / REFERENCETAG are allowed
+	 * @param tagType
+	 */
+	protected void validateTagType(final int tagType)
 	{
 		if(!(tagType == SHORTTAG || tagType == REFERENCETAG))
 		{
@@ -101,7 +136,11 @@ public abstract class OnixPartsBuilder implements Comparable<OnixPartsBuilder>, 
 		}
 	}
 	
-	protected void validateOnixVersion(String onixVersion)
+	/**
+	 * Validates the Onix version string that is passed in as an argument. Only "2.1" and "3.0" are allowed
+	 * @param onixVersion The String representing the Onix version
+	 */
+	protected void validateOnixVersion(final String onixVersion)
 	{
 		if(!(onixVersion.equals("2.1") || onixVersion.equals("3.0")))
 		{
@@ -109,14 +148,14 @@ public abstract class OnixPartsBuilder implements Comparable<OnixPartsBuilder>, 
 		}
 	}
 	
-	/*
+	/**
 	 * The text content for an element is determined in three steps:
 	 * 1. If the OnixPartsBuilder object's argument hash map has a value matching the current element's key, then this argument value is used.
 	 * 2. If the elementDefinitions dictionary indicates that an element content shall be calculated by some function, the function is determined and called.
 	 *    (A function call is indicated by a default value from elementDefinitions, which is enclosed in curly brackets and starts with a dollar: {$...}.)
 	 * 3. If neither an argument is given nor a function to be called, then the default value from the elementDefinitions array is used literally.
 	 */
-	protected String determineElementContent(int row)
+	protected String determineElementContent(final int row)
 	{
 		String argName = elementDefinitions[row][4];
 		String defValue = elementDefinitions[row][5];
@@ -163,8 +202,14 @@ public abstract class OnixPartsBuilder implements Comparable<OnixPartsBuilder>, 
 		}
 		return elementContent;
 	}
-	
-	protected String getTagName(int row)
+
+	/**
+	 * Uses the integer row index to the two-dimensional elementsDefinitions variable to get the 
+	 * Onix element's name.
+	 * @param row The row index for the two-dimensional elementsDefinitions variable
+	 * @return A String representing the element name
+	 */
+	protected String getTagName(final int row)
 	{
 		int col = onixVersion.equals("2.1") ? 1 : -1;
 		col += tagType;
@@ -177,7 +222,12 @@ public abstract class OnixPartsBuilder implements Comparable<OnixPartsBuilder>, 
 			throw new IndexOutOfBoundsException("OnixPartsBuilder tried to read a tagname outside of elementDefinitions' array bounds!");
 		}
 	}
-	
+
+	/**
+	 * Initializes this OnixPartsBuilder by setting up the onixVersion and tagType
+	 * @param onixVersion String of the Onix version ("2.1" / "3.0")
+	 * @param tagType The tag type (integer constants SHORTTAG / REFERENCETAG)
+	 */
 	protected void initialize(String onixVersion, int tagType)
 	{
 		validateTagType(tagType);

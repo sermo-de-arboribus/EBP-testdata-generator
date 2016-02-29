@@ -5,6 +5,9 @@ import java.util.HashMap;
 import nu.xom.Element;
 import nu.xom.Text;
 
+/**
+ * This OnixPartsBuilder takes care of the <Header> and its child elements
+ */
 public class OnixHeaderBuilder extends OnixPartsBuilder
 {
 	/* 
@@ -23,15 +26,19 @@ public class OnixHeaderBuilder extends OnixPartsBuilder
 			{"m186", "DefaultCurrencyCode", "m186", "DefaultCurrencyCode", "defaultcurrency", "{$randomCurrencyCode}"}
 		};
 	private static final int SEQUENCE_NUMBER = 100;
-	
-	public OnixHeaderBuilder(HashMap<String, String> args)
+
+	/**
+	 * Constructor
+	 * @param args The arguments as a key-value HashMap
+	 */
+	public OnixHeaderBuilder(final HashMap<String, String> args)
 	{
 		super(args);
 		elementDefinitions = HEADER_ELEMENT_DEFINITIONS;
 	}
 	
 	@Override
-	public Element build(String onixVersion, int tagType)
+	public Element build(final String onixVersion, final int tagType)
 	{
 		initialize(onixVersion, tagType);
 		
