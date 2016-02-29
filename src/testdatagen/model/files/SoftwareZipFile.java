@@ -1,6 +1,5 @@
 package testdatagen.model.files;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Random;
@@ -12,22 +11,32 @@ import org.apache.commons.io.FilenameUtils;
 import testdatagen.model.Title;
 import testdatagen.utilities.Utilities;
 
+/**
+ * SoftwareZipFile represents and generates zip files with dummy content that conceptually represent 
+ * downloadable software products 
+ */
 public class SoftwareZipFile extends EBookFile
 {
 	private static final long serialVersionUID = 2L;
 	
+	/**
+	 * Constructor
+	 * @param title The product Title object that this file belongs to
+	 * @param demoFlag This boolean flag indicates, if the product is meant as a demo or sample file (which has an influence on file naming).
+	 */
 	public SoftwareZipFile(final Title title, final boolean demoFlag)
 	{
 		super(title, demoFlag);
 	}
 	
+	@Override
 	public String toString()
 	{
 		return "SoftwareZip["+ title.getIsbn13() +"]";
 	}
 
 	@Override
-	public File generate(final File destDir) 
+	public java.io.File generate(final java.io.File destDir) 
 	{
 		String destPath = FilenameUtils.concat(destDir.getPath(), buildFileName());
 		Random random = new Random();
@@ -48,7 +57,7 @@ public class SoftwareZipFile extends EBookFile
 				out.write(randomBytes);
 				out.closeEntry();
 			}
-			return new File(destPath);
+			return new java.io.File(destPath);
 		}
 		catch(IOException exc)
 		{

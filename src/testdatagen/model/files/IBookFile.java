@@ -10,30 +10,39 @@ import org.apache.commons.io.FilenameUtils;
 import testdatagen.model.Title;
 import testdatagen.utilities.Utilities;
 
+/**
+ * A file that represents an e-book in Apple's proprietary iBook format. As this format is proprietary,
+ * the Testdata Generator does not generate real iBook files. It just writes a random byte sequence with 
+ * a file extension of .ibook
+ */
 public class IBookFile extends EBookFile
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2L;
 	
+	/**
+	 * Constructor
+	 * @param title The product Title object that this iBook file belongs to.
+	 * @param demoFlag This boolean flag indicates, if the product is meant as a demo or sample file (which has an influence on file naming).
+	 */
 	public IBookFile(final Title title, final boolean demoFlag)
 	{
 		super(title, demoFlag);
 	}
 	
+	@Override
 	public String toString()
 	{
 		return "iBook[" + title.getIsbn13() + "]";
 	}
 
 	@Override
-	public File generate(final File destDir)
+	public java.io.File generate(final java.io.File destDir)
 	{
 		Random random = new Random();
 		String destPath = FilenameUtils.concat(destDir.getPath(), buildFileName());
 		FileOutputStream out = null;
 		
+		// write random byte sequence to disk
 		try
 		{
 			out = new FileOutputStream(destPath);

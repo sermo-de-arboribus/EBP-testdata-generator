@@ -17,20 +17,24 @@ import testdatagen.model.Title;
 import testdatagen.utilities.CoverUtils;
 import testdatagen.utilities.ISBNUtils;
 
+/**
+ * A class that represents PDF files as cover files (i.e. a graphic file which technically is a PDF)
+ */
 public class PDFCoverFile extends GraphicFile
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2L;
-		
-	public PDFCoverFile(Title title)
+
+	/**
+	 * Constructor
+	 * @param title The product Title object that this file belongs to
+	 */
+	public PDFCoverFile(final Title title)
 	{
 		super(title, GraphicFile.Type.COVER);
 	}
 	
 	@Override
-	public java.io.File generate(java.io.File destFolder)
+	public java.io.File generate(final java.io.File destFolder)
 	{
 		Dimension coverDimension = CoverUtils.getRandomCoverDimension();
 		
@@ -79,7 +83,9 @@ public class PDFCoverFile extends GraphicFile
 		return "CoverPDF[" + title.getIsbn13() + "]";
 	}
 	
-	void writeCoverToPage(PDDocument coverDoc, PDPage coverPage)
+	// helper method which is also used by testdatagen.model.files.PDFFile, so it is "package-private"
+	// Writes cover information (author, title, ...) into the PDPage object which is passed in as an argument
+	void writeCoverToPage(final PDDocument coverDoc, final PDPage coverPage)
 	{
 		PDRectangle pageDimension = coverPage.getMediaBox();
 		PDFont largeFont = PDType1Font.TIMES_BOLD;

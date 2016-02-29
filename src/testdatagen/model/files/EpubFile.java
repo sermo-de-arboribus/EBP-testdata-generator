@@ -2,52 +2,54 @@ package testdatagen.model.files;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import nu.xom.Attribute;
-import nu.xom.DocType;
-import nu.xom.Document;
-import nu.xom.Element;
-import nu.xom.Serializer;
-import nu.xom.Text;
+import nu.xom.*;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 
 import testdatagen.model.Title;
-import testdatagen.templates.EBookChapterTemplate;
-import testdatagen.templates.EPUBCoverPageTemplate;
-import testdatagen.templates.EPUBTitlePageTemplate;
+import testdatagen.templates.*;
 import testdatagen.utilities.Utilities;
 
+/**
+ * This concrete class represents and generates E-Book files in the EPUB format (see http://idpf.org/epub).
+ * EPUB files can be full product files, samples/demos of the product, or booklets (for audio books).
+ */
 public class EpubFile extends EBookFile
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2L;
 	private boolean isBooklet;
-	// prepare a byte array with the ASCII codes for "application/epub+zip" without EOL/EOF marker
+	// prepare a byte array with the ASCII codes for the String "application/epub+zip" without EOL/EOF marker
 	private static byte[] mimetypeASCII = new byte[]{0x61, 0x70, 0x70, 0x6C, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6F, 0x6E, 0x2F, 0x65, 0x70, 0x75, 0x62, 0x2B, 0x7A, 0x69, 0x70};
 	
+	/**
+	 * Convenience Constructor, sets the isBooklet flag (see below) to false
+	 * @param title The product Title object that this EPUB file belongs to.
+	 * @param demoFlag This boolean flag indicates, if the product is meant as a demo or sample file (which has an influence on file naming).
+	 */
 	public EpubFile(final Title title, final boolean demoFlag)
 	{
 		super(title, demoFlag);
 		isBooklet = false;
 	}
 	
+	/**
+	 * Constructor
+	 * @param title The product Title object that this EPUB file belongs to.
+	 * @param demoFlag This boolean flag indicates, if the product is meant as a demo or sample file (which has an influence on file naming).
+	 * @param isBooklet This boolean flag indicates, if the EPUB is used as a booklet for an AUDIO product.
+	 */
 	public EpubFile(final Title title, final boolean demoFlag, final boolean isBooklet)
 	{
 		this(title, demoFlag);
 		this.isBooklet = isBooklet;
 	}
-	
+
+	@Override
 	public java.io.File generate(final java.io.File destFolder)
 	{
 		java.io.File tempDir = Utilities.getTempDir();	
@@ -133,7 +135,7 @@ public class EpubFile extends EBookFile
 		content.addAttribute(new Attribute("src", "text/Title.xhtml"));
 		navPoint.appendChild(content);
 		
-		// add chapters
+		// add book chapters
 		Iterator<java.io.File> iterator = chapterFiles.iterator();
 		int counter = 2;
 		while(iterator.hasNext())
@@ -362,11 +364,15 @@ public class EpubFile extends EBookFile
 		return new java.io.File(destPath);
 	}
 	
+	/**
+	 * @return Returns "true" is this EPUB represents the booklet of an audio product
+	 */
 	public boolean isBooklet()
 	{
 		return isBooklet;
 	}
 	
+	@Override
 	public String toString()
 	{
 		String fileString = "Epub";
@@ -381,11 +387,13 @@ public class EpubFile extends EBookFile
 		return fileString + "[" + title.getIsbn13() + "]";
 	}
 	
+	@Override
 	protected String buildFileName()
 	{
 		return Long.toString(title.getIsbn13()) + (isDemoFile() ? "_Extract" : "") + (isBooklet() ? "_Booklet" : "") +  ".epub";
 	}
-	
+
+	// Helper method to put all temporary files into a zip container as required by the EPUB specification
 	private void zipEpub(String zipFileName, String dir)
 	{
 		try
@@ -413,6 +421,8 @@ public class EpubFile extends EBookFile
 		}
 	}
 
+	// Helper method to add all files in a given directory to a zip container. The method works recursively
+	// through all child directories.
 	private void addDir(String basePath, java.io.File dirObj, ZipOutputStream out) throws IOException
 	{
 		java.io.File[] files = dirObj.listFiles();
@@ -439,7 +449,8 @@ public class EpubFile extends EBookFile
 	      in.close();
 	    }
 	}
-	
+
+	// Helper method to write out HTML pages (passed in as a String) to a file
 	private void saveHtmlFile(java.io.File HTMLPagePath, String HTMLPage)
 	{
 		HTMLPagePath.getParentFile().mkdirs();

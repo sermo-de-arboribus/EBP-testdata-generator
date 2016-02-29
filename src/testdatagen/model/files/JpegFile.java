@@ -20,20 +20,34 @@ import testdatagen.utilities.CoverUtils;
 import testdatagen.utilities.ISBNUtils;
 import testdatagen.utilities.Utilities;
 
+/**
+ * This class represents JPG file, which can be used in the E-Book-Plant as a cover, a back cover, 
+ * a square cover, a screenshot or a packshot
+ */
 public class JpegFile extends GraphicFile
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2L;
 	private int sequenceNumber;
-	
+
+	/**
+	 * Constructor for covers (there can only be one of each cover types - (front) cover, square cover, back cover -
+	 * per product, so this constructor takes no sequenceNumber argument).
+	 * @param title The product Title object that this file belongs to
+	 * @param type The type of the graphic file (e.g. COVER, SCREENSHOT, BACKCOVER, ...) 
+	 */
 	public JpegFile(final Title title, final GraphicFile.Type type)
 	{
 		super(title, type);
 		sequenceNumber = 0;
 	}
 	
+	/**
+	 * Constructor for screenshots or packshots. There can be several of such files for each product, 
+	 * so this constructor uses a sequence number for numbering the screenshot or packshot files.
+	 * @param title The product Title object that this file belongs to
+	 * @param type The type of the graphic file (e.g. COVER, SCREENSHOT, BACKCOVER, ...) 
+	 * @param sequNo The sequence number that will be part of the filename to differentiate screenshot or packshot files.
+	 */
 	public JpegFile(final Title title, final GraphicFile.Type type, int sequNo)
 	{
 		super(title, type);
@@ -41,7 +55,7 @@ public class JpegFile extends GraphicFile
 	}
 	
 	@Override
-	public java.io.File generate(java.io.File destPath)
+	public java.io.File generate(final java.io.File destPath)
 	{
 		BufferedImage coverImage = paintCover(title);
 		java.io.File storedFile = new java.io.File(FilenameUtils.concat(destPath.getPath(), buildFileName()));
@@ -71,14 +85,16 @@ public class JpegFile extends GraphicFile
 	{
 		return Long.toString(title.getIsbn13()) + "_" + type.toString().toLowerCase() + getSequenceString() + ".jpg";
 	}
-	
+
+	// Helper method for painting the image file; uses a JpegCover object internally (see below)
 	private BufferedImage paintCover(Title title)
 	{
 		Dimension coverDimension = CoverUtils.getRandomCoverDimension();
 		BufferedImage bufImg = new JpegCover(title, (int) coverDimension.getWidth(), (int) coverDimension.getHeight());
 		return bufImg;
 	}
-	
+
+	// Helper method for formatting the sequence number in the filename.
 	private String getSequenceString()
 	{
 		String sequenceString = "";
@@ -90,7 +106,8 @@ public class JpegFile extends GraphicFile
 	}
 }
 
-// non-public helper class for painting a cover
+// Non-public helper class for painting a cover. It writes text into some java.awt components.
+// Many properties like font, font size, pixel dimensions and colours are randomized. 
 class JpegCover extends BufferedImage
 {	
 	JpegCover(Title title, int width, int height)

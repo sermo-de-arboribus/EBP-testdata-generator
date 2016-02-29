@@ -13,12 +13,22 @@ import testdatagen.model.Title;
 import testdatagen.onixbuilder.*;
 import testdatagen.utilities.Utilities;
 
+/**
+ * Class for representing Onix files. The actual generation of Onix XML elements is handled by the classes
+ * in testdatagen.onixbuilder. This ONIXFile class only saves the generated XML tree to disk.
+ */
 public class ONIXFile extends File
 {
 	private String version;
 	private int tagType;
 	
-	public ONIXFile(final Title title, int tagType, String version)
+	/**
+	 * Constructor
+	 * @param title The product Title object that this ONIXFile belongs to
+	 * @param tagType The tagtype of the generated Onix file (SHORTTAG / REFERENCETAG)
+	 * @param version The Onix version to be used (2.1 / 3.0)
+	 */
+	public ONIXFile(final Title title, final int tagType, final String version)
 	{
 		super(title);
 		this.version = version;
@@ -26,7 +36,7 @@ public class ONIXFile extends File
 	}
 	
 	@Override
-	public java.io.File generate(java.io.File destDir)
+	public java.io.File generate(final java.io.File destDir)
 	{
 		Element ONIXroot;
 		if(version.equals("2.1"))

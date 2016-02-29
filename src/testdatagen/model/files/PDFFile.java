@@ -1,6 +1,5 @@
 package testdatagen.model.files;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
 
@@ -16,17 +15,26 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import testdatagen.model.Title;
 import testdatagen.templates.EBookChapterTemplate;
 
+/**
+ * Class that represents a PDF file as an e-book file (i.e. conceptually it is an E-Book and technically it's a PDF).
+ */
 public class PDFFile extends EBookFile
 {
 	private static final long serialVersionUID = 2L;
 	private static final float POINTS_PER_INCH = 72;
 	private static final float MM_PER_INCH = 1 / (10 * 2.54f) * POINTS_PER_INCH;
-	
+
+	/**
+	 * Constructor
+	 * @param title The product Title object that this file belongs to
+	 * @param demoFlag This boolean flag indicates, if the product is meant as a demo or sample file (which has an influence on file naming).
+	 */
 	public PDFFile(final Title title, final boolean demoFlag)
 	{
 		super(title, demoFlag);
 	}
 	
+	@Override
 	public String toString()
 	{
 		String fileString = "PDF";
@@ -38,7 +46,7 @@ public class PDFFile extends EBookFile
 	}
 
 	@Override
-	public File generate(File destDir)
+	public java.io.File generate(final java.io.File destDir)
 	{
 		// TODO: For convenience we just use a PDF cover file for generating the first page and then add additional pages later 
 		PDFCoverFile pcf = new PDFCoverFile(title);
@@ -50,6 +58,7 @@ public class PDFFile extends EBookFile
 		pdfDoc.addPage(coverPage);
 		pdfDoc.addPage(chapterPage);
 		
+		// The E-Book PDF also includes a cover page, so use the writeCoverToPage method defined in testdatagen.model.files.PDFCoverFile
 		pcf.writeCoverToPage(pdfDoc, coverPage);
 		writeChapterToPage(pdfDoc, chapterPage);
 		
@@ -85,11 +94,13 @@ public class PDFFile extends EBookFile
 		return storedFile;
 	}
 	
+	@Override
 	protected String buildFileName()
 	{
 		return Long.toString(title.getIsbn13()) + (isDemoFile() ? "_Extract" : "" ) + ".pdf";
 	}
-	
+
+	// helper method to write a chapter content page to the the PDDocument object
 	private void writeChapterToPage(PDDocument pdfDoc, PDPage chapterPage)
 	{
 		PDRectangle pageDimension = chapterPage.getMediaBox();

@@ -18,15 +18,28 @@ import testdatagen.config.ConfigurationRegistry;
 import testdatagen.model.Title;
 import testdatagen.utilities.Utilities;
 
+/**
+ * Class that represents a Mobi file. Mobi is a proprietary format of Amazon (see https://www.amazon.com/gp/feature.html?docId=1000765211).
+ * The Testdata Generator uses an EpubMobi internally (see testdatagen.model.files.EpubMobiFile).
+ * For licence reasons the KindleGen tool of Amazon is not bundled with the Testdata Generator.
+ * However, if the TDG user downloads the KindleGen tool herself, the TDG can generate Mobi files out of
+ * EpubMobiFiles. The user will be prompted with a FileChooser to tell the TDG where the KindleGen.exe tool can be found.
+ */
 public class MobiFile extends EBookFile
 {
 	private static final long serialVersionUID = 2L;
 	
+	/**
+	 * Constructor
+	 * @param title The product Title object that this iBook file belongs to.
+	 * @param demoFlag This boolean flag indicates, if the product is meant as a demo or sample file (which has an influence on file naming).
+	 */
 	public MobiFile(final Title title, boolean demoFlag)
 	{
 		super(title, demoFlag);
 	}
 	
+	@Override
 	public String toString()
 	{
 		String fileString = "Mobi";
@@ -38,7 +51,7 @@ public class MobiFile extends EBookFile
 	}
 
 	@Override
-	public File generate(final File destFolder)
+	public java.io.File generate(final java.io.File destFolder)
 	{
 		// first generate an EpubMobi file as the base
 		EpubMobiFile epubMobi = new EpubMobiFile(title, this.isDemoFile());
@@ -153,11 +166,13 @@ public class MobiFile extends EBookFile
 		
 	}
 	
+	@Override
 	protected String buildFileName()
 	{
 		return Long.toString(title.getIsbn13()) + (isDemoFile() ? "_Extract" : "" ) + ".mobi";
 	}
 	
+	// helper class for selecting the filepath to the KindleGen.exe tool
 	class KindleGenChooser extends JFileChooser
 	{
         public JDialog createDialog(Component parent) throws HeadlessException
