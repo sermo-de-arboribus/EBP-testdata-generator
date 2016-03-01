@@ -5,6 +5,9 @@ import java.util.HashMap;
 import nu.xom.Element;
 import nu.xom.Text;
 
+/**
+ * This OnixPartsBuilder handles <PublishingStatus> elements
+ */
 public class OnixPublishingStatusBuilder extends OnixPartsBuilder
 {
 	/* 
@@ -16,14 +19,18 @@ public class OnixPublishingStatusBuilder extends OnixPartsBuilder
 		};
 	private static final int SEQUENCE_NUMBER = 2400;
 	
-	public OnixPublishingStatusBuilder(HashMap<String, String> args)
+	/**
+	 * Constructor
+	 * @param args The arguments as a key-value HashMap
+	 */
+	public OnixPublishingStatusBuilder(final HashMap<String, String> args)
 	{
 		super(args);
 		elementDefinitions = PUBLISHING_STATUS_DEFINITIONS;
 	}
 	
 	@Override
-	public Element build(String onixVersion, int tagType)
+	public Element build(final String onixVersion, final int tagType)
 	{
 		initialize(onixVersion, tagType);
 		

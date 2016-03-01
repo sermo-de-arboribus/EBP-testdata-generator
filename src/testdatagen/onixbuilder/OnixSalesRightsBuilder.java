@@ -6,6 +6,9 @@ import nu.xom.Element;
 import nu.xom.Text;
 import testdatagen.onixbuilder.OnixPartsBuilder;
 
+/**
+ * This OnixPartsBuilder handles <SalesRights> nodes and its child elements
+ */
 public class OnixSalesRightsBuilder extends OnixPartsBuilder
 {
 	/* 
@@ -21,14 +24,18 @@ public class OnixSalesRightsBuilder extends OnixPartsBuilder
 		};
 	private static final int SEQUENCE_NUMBER = 2600;
 
-	public OnixSalesRightsBuilder(HashMap<String, String> args)
+	/**
+	 * Constructor
+	 * @param args The arguments as a key-value HashMap
+	 */
+	public OnixSalesRightsBuilder(final HashMap<String, String> args)
 	{
 		super(args);
 		elementDefinitions = SALES_RIGHTS_DEFINITIONS;
 	}
 	
 	@Override
-	public Element build(String onixVersion, int tagType)
+	public Element build(final String onixVersion, final int tagType)
 	{
 		initialize(onixVersion, tagType);
 		

@@ -244,24 +244,21 @@ public class OnixPartsDirector implements Serializable
 	}
 	
 	/**
-	 * Remove a <ProductFormDetail> element from the Onix tree
-	 * @param code The code that is used inside the <ProductFormDetail> element which is meant to be removed
+	 * Add an additional <Price> node to the Onix XML tree
+	 * @param newPrice The Price object that represents the additional price data
 	 */
-	public void removeProductFormDetail(String code)
-	{
-		HashMap<String, String> productFormDetailArgs = new HashMap<>();
-		productFormDetailArgs.put("productformdetail", code);
-		requiredElements.remove(new OnixProductFormDetailBuilder(productFormDetailArgs));
-	}
-	
-	public void addPrice(Price newPrice)
+	public void addPrice(final Price newPrice)
 	{
 		HashMap<String, String> newPriceArgs = new HashMap<>();
 		newPrice.addPriceArguments(newPriceArgs);
 		requiredElements.add(new OnixPriceBuilder(newPriceArgs));
 	}
 	
-	public void addProductIdentifier(String type)
+	/**
+	 * Add a <ProductIdentifier> node to the Onix XML tree
+	 * @param type The additional <ProductIdentifier> value as a String
+	 */
+	public void addProductIdentifier(final String type)
 	{
 		String productIdValue;
 		switch(type)
@@ -282,7 +279,11 @@ public class OnixPartsDirector implements Serializable
 		requiredElements.add(new OnixProductIdentifierBuilder(productIdArgs));
 	}
 	
-	public void addSubject(Subject newSubject)
+	/**
+	 * Add a <Subject> node to the Onix XML tree
+	 * @param newSubject The additional Subject data, wrapped in a Subject object
+	 */
+	public void addSubject(final Subject newSubject)
 	{
 		HashMap<String, String> subjectArgs = new HashMap<String, String>();
 		subjectArgs.put("subjectcode", newSubject.getSubjectcode());
@@ -301,7 +302,12 @@ public class OnixPartsDirector implements Serializable
 		
 	}
 	
-	public void addTitle(String titleType)
+	/**
+	 * Add a <Title> node to the Onix XML tree. The node has no <Subtitle> child element.
+	 * @param titleType The additional Onix title type code as a String - the rest of the title
+	 *    information will be drawn from the product Title object
+	 */
+	public void addTitle(final String titleType)
 	{
 		HashMap<String, String> titleArgs = new HashMap<>();
 		titleArgs.put("titletext", determineTitleStringByType(titleType, title));
@@ -310,7 +316,12 @@ public class OnixPartsDirector implements Serializable
 		requiredElements.add(otb); 
 	}
 	
-	public void addTitleWithSubtitle(String titleType)
+	/**
+	 * Add a <Title> node to the Onix XML tree. The node has a <Subtitle> child element. 
+	 * @param titleType The additional Onix title type code as a String - the rest of the title
+	 *    information will be drawn from the product Title object
+	 */
+	public void addTitleWithSubtitle(final String titleType)
 	{
 		HashMap<String, String> titleArgs = new HashMap<>();
 		titleArgs.put("titletext", determineTitleStringByType(titleType, title));
@@ -320,14 +331,19 @@ public class OnixPartsDirector implements Serializable
 		requiredElements.add(otb); 
 	}
 	
-	public Element buildOnix2(int tagType)
+	/**
+	 * The main worker method for generating the XML tree for Onix 2.1 messages
+	 * @param tagType Indicates which element naming style to use: SHORTTAG / REFERENCETAG
+	 * @return Returns the root element of the Onix XML tree: <ONIXMessage> / <ONIXmessage>
+	 */
+	public Element buildOnix2(final int tagType)
 	{
 		String rootElementName = getRootName(tagType);
 		Element root = new Element(rootElementName);
 		Element parent = root;
 		root.addAttribute(new Attribute("release", "2.1"));
 
-		// first add specific ONIX 2.1 elements
+		// first add specific ONIX 2.1 builders to the required elements configuration
 		if(ProductType.valueOf(title.getFormat()) == ProductType.AUDIO)
 		{
 			replaceProductForm("AJ");
@@ -387,7 +403,12 @@ public class OnixPartsDirector implements Serializable
 		return root;
 	}
 	
-	public Element buildOnix3(int tagType)
+	/**
+	 * The main worker method for generating the XML tree for Onix 3.0 messages
+	 * @param tagType Indicates which element naming style to use: SHORTTAG / REFERENCETAG
+	 * @return Returns the root element of the Onix XML tree: <ONIXMessage> / <ONIXmessage>
+	 */
+	public Element buildOnix3(final int tagType)
 	{
 		String rootElementName = getRootName(tagType);
 		Element root = new Element(rootElementName);
@@ -395,7 +416,7 @@ public class OnixPartsDirector implements Serializable
 		Element parent = root;
 		Element product = null;
 		
-		// first add specific ONIX 3.0 element
+		// first add specific ONIX 3.0 builders to the required elements configuration
 		if(ProductType.valueOf(title.getFormat()) == ProductType.AUDIO)
 		{
 			replaceProductForm("AJ");
@@ -496,12 +517,20 @@ public class OnixPartsDirector implements Serializable
 		return root;
 	}
 
+	/**
+	 * If the Onix message represents a downloadable audio product, we need to exchange / remove the 
+	 * <EpubType> and the technical protection info.
+	 */
 	public void changeFormatToAudio()
 	{
 		replaceOnix2EpubType(null, true);
 		removeOnixTechnicalProtectionBuilders();
 	}
 	
+	/**
+	 * If the Onix message represents a downloadable software product in a Zip container, we need to exchange 
+	 * the <EpubType> and add <EpubTypeDescription>
+	 */
 	public void changeFormatToZip()
 	{
 		replaceOnix2EpubType("099", false);
@@ -510,7 +539,12 @@ public class OnixPartsDirector implements Serializable
 		HashMap<String, String> epubTypeDescArgs = new HashMap<>();
 		requiredElements.add(new OnixEpubTypeDescriptionBuilder(epubTypeDescArgs));
 	}
-	
+
+	/**
+	 * The method produces a clone of the current OnixPartsDirector object. 
+	 * The requiredElements List is copied flatly, which is acceptable as OnixPartsBuilder objects are
+	 * not modified anymore after instantiation. 
+	 */
 	public OnixPartsDirector clone()
 	{
 		// use the private, parameter-less constructor
@@ -526,18 +560,40 @@ public class OnixPartsDirector implements Serializable
 		return clonedDirector;
 	}
 	
+	/**
+	 * Removes information that is associated with technical protection.
+	 */
 	public void removeOnixTechnicalProtectionBuilders()
 	{
 		removeBuilders(OnixTechnicalProtectionBuilder.class);
 	}
 	
-	public void replaceMediaResource(String url)
+	/**
+	 * Remove a <ProductFormDetail> element from the Onix tree
+	 * @param code The code that is used inside the <ProductFormDetail> element which is meant to be removed
+	 */
+	public void removeProductFormDetail(final String code)
+	{
+		HashMap<String, String> productFormDetailArgs = new HashMap<>();
+		productFormDetailArgs.put("productformdetail", code);
+		requiredElements.remove(new OnixProductFormDetailBuilder(productFormDetailArgs));
+	}
+	
+	/**
+	 * Replaces the <MediaFile> / <SupportingResource> element builders
+	 * @param url The new URL to be used for pointing to a media file / supporting resource in the generated Onix
+	 */
+	public void replaceMediaResource(final String url)
 	{
 		removeBuilders(OnixMediaResourceBuilder.class);
 		addMediaResource(url);
 	}
 	
-	public void replaceNotificationType(String newType)
+	/**
+	 * Replaces the OnixPartsBuilder that is responsible for generating <NotificationType> elements
+	 * @param newType The new <NotificationType> value to replace the old one.
+	 */
+	public void replaceNotificationType(final String newType)
 	{
 		removeBuilders(OnixNotificationTypeBuilder.class);
 		
@@ -566,7 +622,12 @@ public class OnixPartsDirector implements Serializable
 		requiredElements.add(new OnixProductFormDetailBuilder(productFormArgs));
 	}
 	
-	public void replaceProductAvailability(String availCode, String prodAvail)
+	/**
+	 * Replaces the <ProductAvailability> element builder
+	 * @param availCode The new <AvailabilityCode> to be used
+	 * @param prodAvail The new <ProductAvailability> code to be used
+	 */
+	public void replaceProductAvailability(final String availCode, final String prodAvail)
 	{
 		removeBuilders(OnixProductAvailabilityBuilder.class);
 		
@@ -576,9 +637,12 @@ public class OnixPartsDirector implements Serializable
 		requiredElements.add(new OnixProductAvailabilityBuilder(prodAvailArgs));
 	}
 	
-	public void replaceProductForm(String productFormCode)
+	/**
+	 * Replaces the builder that is responsible for the <ProductForm> code in the output Onix
+	 * @param productFormCode The new <ProductForm> code as a String
+	 */
+	public void replaceProductForm(final String productFormCode)
 	{
-System.out.println("Asked to replace ProductForm with " + productFormCode);
 		removeBuilders(OnixProductFormBuilder.class);
 
 		HashMap<String, String> productFormArgs = new HashMap<String, String>();
@@ -586,6 +650,12 @@ System.out.println("Asked to replace ProductForm with " + productFormCode);
 		requiredElements.add(new OnixProductFormBuilder(productFormArgs));
 	}
 	
+	/**
+	 * Replace the builder that is responsible for the <Publisher> node in the generated Onix
+	 * @param namecodetype The code type of the new publisher to be used
+	 * @param namecodevalue The actual code of the publisher
+	 * @param publishername The name of the publisher
+	 */
 	public void replacePublisher(String namecodetype, String namecodevalue, String publishername)
 	{
 		removeBuilders(OnixPublisherBuilder.class);
@@ -608,7 +678,8 @@ System.out.println("Asked to replace ProductForm with " + productFormCode);
 		return buffer.toString();
 	}
 	
-	private Element createElement(int tagType, String name)
+	// Helper method to instantiate a new XML element with a given element name
+	private Element createElement(final int tagType, String name)
 	{
 		if(tagType == OnixPartsBuilder.SHORTTAG)
 		{
@@ -617,10 +688,8 @@ System.out.println("Asked to replace ProductForm with " + productFormCode);
 		return new Element(name);
 	}
 	
-	/*
-	 * Private helper method; returns the name of the ONIX file's root element based on the tag type (short tag / reference tag)
-	 */
-	private String getRootName(int tagType)
+	// Private helper method; returns the name of the ONIX file's root element based on the tag type (short tag / reference tag)
+	private String getRootName(final int tagType)
 	{
 		String rootElementName;
 		switch(tagType)
@@ -637,7 +706,8 @@ System.out.println("Asked to replace ProductForm with " + productFormCode);
 		return rootElementName;
 	}
 	
-	private String determineTitleStringByType(String titleType, Title title)
+	// Helper for building product title Strings
+	private String determineTitleStringByType(final String titleType, final Title title)
 	{
 		// split titleString into main title and subtitle, if titleString contains a full-stop.
 		String titleString = title.getName();
@@ -678,6 +748,7 @@ System.out.println("Asked to replace ProductForm with " + productFormCode);
 		}
 	}
 	
+	// Helper for removing OnixPartsBuilders of a certain type
 	private void removeBuilders(Class<?> builderClass)
 	{
 		Iterator<OnixPartsBuilder> iterator = requiredElements.iterator();

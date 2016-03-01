@@ -5,6 +5,9 @@ import java.util.HashMap;
 import nu.xom.Element;
 import nu.xom.Text;
 
+/**
+ * This OnixPartsBuilder class handles price nodes in the output Onix.
+ */
 public class OnixPriceBuilder extends OnixSupplyDetailPartsBuilder
 {
 	private static final String[][] PRICE_ELEMENT_DEFINITIONS = 
@@ -34,6 +37,10 @@ public class OnixPriceBuilder extends OnixSupplyDetailPartsBuilder
 		};
 	private static final int SEQUENCE_NUMBER = 3300;
 
+	/**
+	 * Constructor.
+	 * @param args The key-value Map for the arguments defining the output price element
+	 */
 	public OnixPriceBuilder(final HashMap<String, String> args)
 	{
 		super(args);
@@ -129,7 +136,8 @@ public class OnixPriceBuilder extends OnixSupplyDetailPartsBuilder
 		return SEQUENCE_NUMBER + weight;
 	}
 	
-	private void appendElementsFromTo(Element parent, int from, int to)
+	// Helper method to instantiate and append a range of elements (the range is defined with index numbers into the elementDefinitions String[][]
+	private void appendElementsFromTo(final Element parent, final int from, final int to)
 	{
 		for(int i = from; i <= to; i++)
 		{

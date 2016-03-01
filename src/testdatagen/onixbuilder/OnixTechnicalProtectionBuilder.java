@@ -5,6 +5,9 @@ import java.util.HashMap;
 import nu.xom.Element;
 import nu.xom.Text;
 
+/**
+ * This OnixPartsBuilder handles information about technical protection (like watermarking or digital rights management)
+ */
 public class OnixTechnicalProtectionBuilder extends OnixPartsBuilder
 {
 	/* 
@@ -16,14 +19,18 @@ public class OnixTechnicalProtectionBuilder extends OnixPartsBuilder
 		};
 	private static final int SEQUENCE_NUMBER = 700;
 
-	public OnixTechnicalProtectionBuilder(HashMap<String, String> args)
+	/**
+	 * Constructor
+	 * @param args The arguments as a key-value HashMap
+	 */
+	public OnixTechnicalProtectionBuilder(final HashMap<String, String> args)
 	{
 		super(args);
 		elementDefinitions = TECHNICAL_PROTECTION_DEFINITIONS;
 	}
 	
 	@Override
-	public Element build(String onixVersion, int tagType)
+	public Element build(final String onixVersion, final int tagType)
 	{
 		initialize(onixVersion, tagType);
 		

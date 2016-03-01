@@ -5,6 +5,9 @@ import java.util.HashMap;
 import nu.xom.Element;
 import nu.xom.Text;
 
+/**
+ * OnixPartsBuilder for generating <PublishingDate> (Onix 3.0) or <PublicationDate> (Onix 2.1) elements
+ */
 public class OnixPublishingDateBuilder extends OnixPartsBuilder
 {
 	/* 
@@ -18,14 +21,18 @@ public class OnixPublishingDateBuilder extends OnixPartsBuilder
 		};
 	private static final int SEQUENCE_NUMBER = 2400;
 	
-	public OnixPublishingDateBuilder(HashMap<String, String> args)
+	/**
+	 * Constructor
+	 * @param args The arguments as a key-value HashMap
+	 */
+	public OnixPublishingDateBuilder(final HashMap<String, String> args)
 	{
 		super(args);
 		elementDefinitions = PUBLISHING_DATE_DEFINITIONS;
 	}
 
 	@Override
-	public Element build(String onixVersion, int tagType)
+	public Element build(final String onixVersion, final int tagType)
 	{
 		initialize(onixVersion, tagType);
 		

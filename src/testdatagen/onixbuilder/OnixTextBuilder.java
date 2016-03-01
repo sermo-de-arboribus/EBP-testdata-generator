@@ -6,6 +6,9 @@ import nu.xom.Attribute;
 import nu.xom.Element;
 import nu.xom.Text;
 
+/**
+ * This OnixPartsBuilder class build descriptive text nodes for the output Onix
+ */
 public class OnixTextBuilder extends OnixPartsBuilder
 {
 	/* 
@@ -20,14 +23,18 @@ public class OnixTextBuilder extends OnixPartsBuilder
 		};
 	private static final int SEQUENCE_NUMBER = 1800;
 	
-	public OnixTextBuilder(HashMap<String, String> args)
+	/**
+	 * Constructor
+	 * @param args The arguments as a key-value HashMap
+	 */
+	public OnixTextBuilder(final HashMap<String, String> args)
 	{
 		super(args);
 		elementDefinitions = TEXT_ELEMENT_DEFINITIONS;
 	}
 	
 	@Override
-	public Element build(String onixVersion, int tagType) 
+	public Element build(final String onixVersion, final int tagType) 
 	{
 		initialize(onixVersion, tagType);
 		

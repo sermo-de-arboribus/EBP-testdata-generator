@@ -5,6 +5,10 @@ import java.util.HashMap;
 import nu.xom.Element;
 import nu.xom.Text;
 
+/**
+ * This builder handles <SupplyDate> nodes (Onix 3.0) or appends <OnSaleDate> / <ExpectedShipDate> elements to the
+ * parent <SupplyDetail> node.
+ */
 public class OnixSupplyDateBuilder extends OnixSupplyDetailPartsBuilder
 {
 	private static final String[][] SUPPLY_DATE_DEFINITIONS = 
@@ -17,6 +21,10 @@ public class OnixSupplyDateBuilder extends OnixSupplyDetailPartsBuilder
 		};
 	private static final int SEQUENCE_NUMBER = 3200;
 	
+	/**
+	 * Constructor
+	 * @param args The arguments as a key-value HashMap
+	 */
 	public OnixSupplyDateBuilder(final HashMap<String, String> args)
 	{
 		super(args);

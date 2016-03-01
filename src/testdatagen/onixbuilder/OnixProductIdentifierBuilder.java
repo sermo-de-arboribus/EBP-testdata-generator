@@ -6,6 +6,9 @@ import testdatagen.utilities.OnixUtils;
 import nu.xom.Element;
 import nu.xom.Text;
 
+/**
+ * OnixPartsBuilder class to handle <ProductIdentifier> elements
+ */
 public class OnixProductIdentifierBuilder extends OnixPartsBuilder
 {
 	/* 
@@ -20,14 +23,18 @@ public class OnixProductIdentifierBuilder extends OnixPartsBuilder
 		};
 	private static final int SEQUENCE_NUMBER = 400;
 	
-	public OnixProductIdentifierBuilder(HashMap<String, String> args)
+	/**
+	 * Constructor
+	 * @param args The arguments as a key-value HashMap
+	 */
+	public OnixProductIdentifierBuilder(final HashMap<String, String> args)
 	{
 		super(args);
 		elementDefinitions = PRODUCT_IDENTIFIER_DEFINITIONS;
 	}
 	
 	@Override
-	public Element build(String onixVersion, int tagType)
+	public Element build(final String onixVersion, final int tagType)
 	{
 		initialize(onixVersion, tagType);
 		
@@ -50,7 +57,7 @@ public class OnixProductIdentifierBuilder extends OnixPartsBuilder
 	}
 	
 	@Override
-	protected String determineElementContent(int row)
+	protected String determineElementContent(final int row)
 	{
 		String argName = elementDefinitions[row][4];
 		String defValue = elementDefinitions[row][5];
@@ -79,12 +86,14 @@ public class OnixProductIdentifierBuilder extends OnixPartsBuilder
 		return elementContent;
 	}
 	
+	// helper method to get a name String for a given ProductIDType
 	private String getNameForIDType(String idType)
 	{
 		// names for ID types can be found in ONIX code list 5
 		return OnixUtils.getCodeListDescription(5, idType);
 	}
 	
+	// helper method to determine the ProductIDType
 	private String getProductIDType()
 	{
 		String idType = "";
@@ -101,5 +110,4 @@ public class OnixProductIdentifierBuilder extends OnixPartsBuilder
 		
 		return idType;
 	}
-
 }

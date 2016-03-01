@@ -5,6 +5,9 @@ import java.util.HashMap;
 import nu.xom.Element;
 import nu.xom.Text;
 
+/**
+ * This OnixPartsBuilder takes care of the <AvailabiliyCode> (Onix 2.1 only) and <ProductAvailability> elements
+ */
 public class OnixProductAvailabilityBuilder extends OnixSupplyDetailPartsBuilder
 {
 	public static final String DEFAULT_AVAILABILITY_CODE = "IP";
@@ -16,6 +19,10 @@ public class OnixProductAvailabilityBuilder extends OnixSupplyDetailPartsBuilder
 		};
 	private static final int SEQUENCE_NUMBER = 3100;
 	
+	/**
+	 * Constructor
+	 * @param args The arguments as a key-value HashMap
+	 */
 	public OnixProductAvailabilityBuilder(final HashMap<String, String> args)
 	{
 		super(args);

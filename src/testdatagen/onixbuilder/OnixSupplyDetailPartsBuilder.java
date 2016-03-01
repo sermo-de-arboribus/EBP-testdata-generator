@@ -4,23 +4,31 @@ import java.util.HashMap;
 
 import nu.xom.Element;
 
+/**
+ * The OnixSupplyDetailPartsBuilder is an abstract class that extends the OnixPartsBuilder. A "normal" OnixPartsBuilder is 
+ * used through its build() method and returns the root XML element of the elements being built. 
+ * However, for the <SupplyDetail> node of Onix there is a complication with this approach, because of 
+ * nesting differences between Onix 2.1 and Onix 3.0. Therefore the concrete classes derived from 
+ * OnixSupplyDetailPartsBuilder use a different strategy: The parent node is passed in as an argument and 
+ * the builder appends the required elements to this parent node. It is the OnixPartsDirector's job to call
+ * appendElementsTo() instead of build() for the Onix elements inside the <SupplyDetail> node.
+ */
 public abstract class OnixSupplyDetailPartsBuilder extends OnixPartsBuilder
 {
-	/*
-	 * This abstract class extends OnixPartsBuilder, because for the ONIX elements under the <SupplyDetail> node
-	 * the build() function works a bit differently. The build() function of OnixPartsBuilder has no side effects,
-	 * but just returns a freshly built node. The build() function of OnixSupplyDetailPartBuilder works on
-	 * a supplyDetail node which is passed in as an argument. 
+	/**
+	 * Constructor
+	 * @param args The arguments as a key-value HashMap
 	 */
-	public OnixSupplyDetailPartsBuilder(HashMap<String, String> args)
+	public OnixSupplyDetailPartsBuilder(final HashMap<String, String> args)
 	{
 		super(args);
 	}
 	
-	/*
+	/**
 	 * build() just returns an empty SupplyDetail node.
 	 */
-	public Element build(String onixVersion, int tagType)
+	@Override
+	public Element build(final String onixVersion, final int tagType)
 	{
 		if(tagType == OnixPartsBuilder.REFERENCETAG)
 		{
@@ -32,6 +40,12 @@ public abstract class OnixSupplyDetailPartsBuilder extends OnixPartsBuilder
 		}
 	}
 	
+	/**
+	 * This method instantiates the required child elements and appends them to the parentNode which is passed in 
+	 * as an argument
+	 * @param parentNode The parent node to append to
+	 * @param onixVersion The Onix version to be used (Onix 2.1 / 3.0)
+	 * @param tagType The tag type (SHORTTAG / REFERENCETAG)
+	 */
 	public abstract void appendElementsTo(Element parentNode, String onixVersion, int tagType);
-
 }

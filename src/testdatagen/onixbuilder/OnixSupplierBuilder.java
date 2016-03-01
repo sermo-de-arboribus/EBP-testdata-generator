@@ -5,6 +5,10 @@ import java.util.HashMap;
 import nu.xom.Element;
 import nu.xom.Text;
 
+/**
+ * The OnixSupplierBuilder generates <Supplier> nodes (Onix 3.0) or appends the supplier information 
+ * directly to the <SupplyDetail> parent node (Onix 2.1)
+ */
 public class OnixSupplierBuilder extends OnixSupplyDetailPartsBuilder
 {
 	/* 
@@ -22,6 +26,10 @@ public class OnixSupplierBuilder extends OnixSupplyDetailPartsBuilder
 		};
 	private static final int SEQUENCE_NUMBER = 3000;
 	
+	/**
+	 * Constructor
+	 * @param args The arguments as a key-value HashMap
+	 */
 	public OnixSupplierBuilder(final HashMap<String, String> args)
 	{
 		super(args);

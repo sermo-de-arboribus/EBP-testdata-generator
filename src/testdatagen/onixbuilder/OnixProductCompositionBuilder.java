@@ -5,6 +5,9 @@ import java.util.HashMap;
 import nu.xom.Element;
 import nu.xom.Text;
 
+/**
+ * This OnixPartsBuilder takes care of the <ProductComposition> (Onix 3.0 only) element
+ */
 public class OnixProductCompositionBuilder extends OnixPartsBuilder
 {
 	/* 
@@ -16,14 +19,18 @@ public class OnixProductCompositionBuilder extends OnixPartsBuilder
 		};
 	private static final int SEQUENCE_NUMBER = 450;
 
-	public OnixProductCompositionBuilder(HashMap<String, String> args)
+	/**
+	 * Constructor
+	 * @param args The arguments as a key-value HashMap
+	 */
+	public OnixProductCompositionBuilder(final HashMap<String, String> args)
 	{
 		super(args);
 		elementDefinitions = PRODUCT_COMPOSITION_DEFINITIONS;
 	}
 	
 	@Override
-	public Element build(String onixVersion, int tagType)
+	public Element build(final String onixVersion, final int tagType)
 	{
 		initialize(onixVersion, tagType);
 		

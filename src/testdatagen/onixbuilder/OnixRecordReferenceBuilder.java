@@ -5,6 +5,9 @@ import java.util.HashMap;
 import nu.xom.Element;
 import nu.xom.Text;
 
+/**
+ * This OnixPartsBuilder handles <RecordReference>
+ */
 public class OnixRecordReferenceBuilder extends OnixPartsBuilder
 {
 	/* 
@@ -16,14 +19,18 @@ public class OnixRecordReferenceBuilder extends OnixPartsBuilder
 		};
 	private static final int SEQUENCE_NUMBER = 200;
 	
-	public OnixRecordReferenceBuilder(HashMap<String, String> args)
+	/**
+	 * Constructor
+	 * @param args The arguments as a key-value HashMap
+	 */
+	public OnixRecordReferenceBuilder(final HashMap<String, String> args)
 	{
 		super(args);
 		elementDefinitions = recReferenceDefinitions;
 	}
 
 	@Override
-	public Element build(String onixVersion, int tagType)
+	public Element build(final String onixVersion, final int tagType)
 	{
 		initialize(onixVersion, tagType);
 		

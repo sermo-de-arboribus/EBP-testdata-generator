@@ -5,6 +5,9 @@ import java.util.HashMap;
 import nu.xom.Element;
 import nu.xom.Text;
 
+/**
+ * This OnixPartsBuilder generates <TitleDetail> (Onix 3.0) or <Title> (Onix 2.1) nodes and their child elements
+ */
 public class OnixTitleBuilder extends OnixPartsBuilder
 {
 	/* 
@@ -21,14 +24,18 @@ public class OnixTitleBuilder extends OnixPartsBuilder
 		};
 	private static final int SEQUENCE_NUMBER = 900;
 	
-	public OnixTitleBuilder(HashMap<String, String> args)
+	/**
+	 * Constructor 
+	 * @param args The arguments as a key-value HashMap
+	 */
+	public OnixTitleBuilder(final HashMap<String, String> args)
 	{
 		super(args);
 		elementDefinitions = TITLE_DEFINITIONS;
 	}
 	
 	@Override
-	public Element build(String onixVersion, int tagType)
+	public Element build(final String onixVersion, final int tagType)
 	{
 		initialize(onixVersion, tagType);
 		
@@ -38,7 +45,7 @@ public class OnixTitleBuilder extends OnixPartsBuilder
 		titleType.appendChild(new Text(determineElementContent(1)));
 		titleComposite.appendChild(titleType);
 		
-		// from here we need to distinguish between ONIX 2.1 and ONIX 3.0
+		// from here on we need to distinguish between ONIX 2.1 and ONIX 3.0
 		Element parentElement;
 		if(onixVersion.equals("2.1"))
 		{

@@ -5,6 +5,9 @@ import java.util.HashMap;
 import nu.xom.Element;
 import nu.xom.Text;
 
+/**
+ * This OnixPartsBuilder generates <Subject> nodes
+ */
 public class OnixSubjectBuilder extends OnixPartsBuilder
 {
 	/* 
@@ -25,26 +28,35 @@ public class OnixSubjectBuilder extends OnixPartsBuilder
 		};
 	private static final int SEQUENCE_NUMBER = 1500;
 
-	// constants defined for ONIX tag types
+	// constants defined for ONIX subject types
 	public static final int SUBJECTTYPE_MAIN = 1;
 	public static final int SUBJECTTYPE_NORMAL = 2;
 	
 	private int subjectType;
 	
-	public OnixSubjectBuilder(int subjectType, HashMap<String, String> args)
+	/**
+	 * Constructor
+	 * @param subjectType The subject type (main subject / normal subject)
+	 * @param args The arguments as a key-value HashMap
+	 */
+	public OnixSubjectBuilder(final int subjectType, final HashMap<String, String> args)
 	{
 		super(args);
 		elementDefinitions = SUBJECT_ELEMENT_DEFINITIONS;
 		this.subjectType = subjectType;
 	}
 	
-	public OnixSubjectBuilder(HashMap<String, String> args)
+	/**
+	 * Convenience constructor for a "normal" <Subject> node (not "main subject")
+	 * @param args The arguments as a key-value HashMap
+	 */
+	public OnixSubjectBuilder(final HashMap<String, String> args)
 	{
 		this(SUBJECTTYPE_NORMAL, args);
 	}
 	
 	@Override
-	public Element build(String onixVersion, int tagType)
+	public Element build(final String onixVersion, final int tagType)
 	{
 		initialize(onixVersion, tagType);
 		

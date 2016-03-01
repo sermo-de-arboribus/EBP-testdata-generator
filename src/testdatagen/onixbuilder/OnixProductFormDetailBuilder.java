@@ -5,6 +5,9 @@ import java.util.HashMap;
 import nu.xom.Element;
 import nu.xom.Text;
 
+/**
+ * This OnixPartsBuilder handles the generation of <ProductFormDetail> elements (plus <EpubType> for Onix 2.1)
+ */
 public class OnixProductFormDetailBuilder extends OnixPartsBuilder
 {
 	/* 
@@ -17,14 +20,18 @@ public class OnixProductFormDetailBuilder extends OnixPartsBuilder
 		};
 	private static final int SEQUENCE_NUMBER = 600;
 	
-	public OnixProductFormDetailBuilder(HashMap<String, String> args)
+	/**
+	 * Constructor
+	 * @param args The arguments as a key-value HashMap
+	 */
+	public OnixProductFormDetailBuilder(final HashMap<String, String> args)
 	{
 		super(args);
 		elementDefinitions = PRODUCT_FORM_DETAIL_DEFINITIONS;
 	}
 	
 	@Override
-	public Element build(String onixVersion, int tagType)
+	public Element build(final String onixVersion, final int tagType)
 	{
 		initialize(onixVersion, tagType);
 		Element returnElement;
@@ -92,6 +99,7 @@ public class OnixProductFormDetailBuilder extends OnixPartsBuilder
 		return SEQUENCE_NUMBER + (isEpubTypeProductFormDetail() ? 1 : 0);
 	}
 
+	// helper method to check, if an <EpubType> argument has been explicitly passed in
 	private boolean isEpubTypeProductFormDetail()
 	{		
 		if(!hasArgument(elementDefinitions[0][4]))
@@ -105,6 +113,8 @@ public class OnixProductFormDetailBuilder extends OnixPartsBuilder
 		}
 	}
 	
+	// helper method to check if a <ProductFormDetail> value has been passed in as an argument which needs to
+	// be treated as an <EpubType> in Onix 2.1
 	private boolean isPfdArgEpubType(String pfdArg)
 	{
 		switch(pfdArg)
