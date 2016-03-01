@@ -5,8 +5,15 @@ import java.util.Random;
 
 import testdatagen.config.ConfigurationRegistry;
 
+/**
+ * This is a class with static helper methods concerning cover images 
+ */
 public class CoverUtils
 {
+	/**
+	 * Returns random cover dimensions, which are within certain bounds, stored in the ConfigurationRegistry
+	 * @return A Dimension object, giving pixel dimensions for a cover image
+	 */
 	public static Dimension getRandomCoverDimension()
 	{
 		// get reference to configuration registry
@@ -26,7 +33,13 @@ public class CoverUtils
 		int height = (int) (width * ratio);
 		return new Dimension(width, height);
 	}
-	
+
+	/**
+	 * This method lets a pseudo-random generator decide, if the cover for a title should be produced 
+	 * in JPEG or PDF format. The likeliness for using PDF as a cover format is taken from the 
+	 * ConfigurationRegistry
+	 * @return A String representing the cover format to be used
+	 */
 	public static String getRandomCoverFormat()
 	{
 		Random random = new Random();

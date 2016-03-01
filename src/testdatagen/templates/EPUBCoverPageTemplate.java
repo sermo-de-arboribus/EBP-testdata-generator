@@ -5,12 +5,21 @@ import java.util.Locale;
 
 import testdatagen.config.ConfigurationRegistry;
 
+/**
+ * This template returns an HTML string representing an HTML cover page to be embededed in an e-book 
+ * file in EPUB format.
+ */
 public class EPUBCoverPageTemplate extends TextTemplate
 {
-	ConfigurationRegistry registry;
-	String coverPath;
+	private ConfigurationRegistry registry;
+	private String coverPath;
 	
-	public EPUBCoverPageTemplate(Locale loc, String coverPath)
+	/**
+	 * Constructor
+	 * @param loc Locale to be used with this template
+	 * @param coverPath The path to the cover image file
+	 */
+	public EPUBCoverPageTemplate(final Locale loc, final String coverPath)
 	{
 		super(loc);
 		registry = ConfigurationRegistry.getRegistry();

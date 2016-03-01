@@ -18,9 +18,17 @@ import org.apache.commons.io.FilenameUtils;
 
 import testdatagen.config.ConfigurationRegistry;
 
+/**
+ * General utility class with uncategorized static helper methods.
+ */
 public final class Utilities
 {
-	public static Dimension getScreenDimensions(Component component)
+	/**
+	 * Get the screen dimensions of the environment the test data generator is running in
+	 * @param component The awt Component to determine the screen dimensions with 
+	 * @return A Dimension object for the screen dimensions, minus the task bar
+	 */
+	public static Dimension getScreenDimensions(final Component component)
 	{
     	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     	Insets scnMax = Toolkit.getDefaultToolkit().getScreenInsets(component.getGraphicsConfiguration());
@@ -29,6 +37,10 @@ public final class Utilities
     	return new Dimension((int) (screenSize.width * 0.8), (int) ((screenSize.height - taskBarSize) * 0.6));
 	}
 	
+	/**
+	 * Get the File path to the configuration directory
+	 * @return A java.file.IO object representing the configuration directory
+	 */
 	public static File getConfigDir()
 	{
 		// get the directory where the executable file is located
@@ -57,7 +69,11 @@ public final class Utilities
 		}
 		return configDir;
 	}
-	
+
+	/**
+	 * Get a random ISO country code
+	 * @return A string with an ISO country code
+	 */
 	public static String getCountryForONIX()
 	{
 		ConfigurationRegistry registry = ConfigurationRegistry.getRegistry();
@@ -67,13 +83,23 @@ public final class Utilities
 		return codeList.substring(index * 3, index * 3 + 2);
 	}
 	
-	public static String getDateForONIX2(Date date)
+	/**
+	 * Format a date in the yyyyMMddHHmm format
+	 * @param date The date that needs to be formatted
+	 * @return The formatted date String
+	 */
+	public static String getDateForONIX2(final Date date)
 	{
 		String DATE_FORMAT = "yyyyMMddHHmm";
 		SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
 		return sdf.format(date);
 	}
-	
+
+	/**
+	 * Format a date in the yyyyMMdd'T'HHmm format
+	 * @param date The date that needs to be formatted
+	 * @return The formatted date String
+	 */
 	public static String getDateTimeForONIX3(Date date)
 	{
 		String DATE_FORMAT = "yyyyMMdd'T'HHmm";
@@ -81,6 +107,10 @@ public final class Utilities
 		return sdf.format(date);
 	}
 	
+	/**
+	 * Get a temporary working directory with a unique filename
+	 * @return A java.io.File representing the unique temp directory
+	 */
 	public static File getTempDir()
 	{
 		Random random = new Random();
@@ -90,39 +120,22 @@ public final class Utilities
 		return tempDir;
 	}
 	
-	// TODO: Refactor - this method belongs into the Title class
-	public static String formatToFileType(String prodType)
-	{
-		switch(prodType)
-		{
-			case "PDF":
-			case "WMPDF":
-			case "NDPDF":
-				return "PDF";
-			case "EPUB":
-			case "WMEPUB":
-			case "NDEPUB":
-				return "Epub";
-			case "iBOOK":
-				return "IBook";
-			case "ZIP":
-				return "SoftwareZip";
-			case "AUDIO":
-				return "AudioZip";
-			case "WMMOBI":
-			case "NDMOBI":
-				return "Mobi";
-			default:
-				throw new IllegalArgumentException("Invalid product type given: " + prodType);
-		}
-	}
-	
+	/**
+	 * Helper method to compare two objects with a check for null values
+	 * @param obj1 The first object to be compared
+	 * @param obj2 The second object to be compared
+	 * @return Returns true, if both objects are equal, otherwise false
+	 */
 	public static boolean nullSafeEquals(final Object obj1, final Object obj2)
 	{
 		return (obj1 == obj2) || (obj1 != null && obj1.equals(obj2));
 	}
 	
-	public static void safeClose(Closeable str)
+	/**
+	 * Close an output stream safely, within a try/catch blok
+	 * @param str The Stream to be closed
+	 */
+	public static void safeClose(final Closeable str)
 	{
 		try
 		{
@@ -133,17 +146,30 @@ public final class Utilities
     		showErrorPane("Error: could not save file\n",e);
 	    }
 	}
-	
-	public static void showErrorPane(String errorMessage, Exception e)
+
+	/**
+	 * Display an error message in a Swing pop-up window
+	 * @param errorMessage The error message to be displayed
+	 * @param e The exception object associated with the error 
+	 */
+	public static void showErrorPane(final String errorMessage, final Exception e)
 	{
 		JOptionPane.showMessageDialog(null, errorMessage + " " + e.toString(), "Error", JOptionPane.ERROR_MESSAGE);
 	}
 	
-	public static void showInfoPane(String infoMessage)
+	/**
+	 * Display an info message in a Swing pop-up window
+	 * @param infoMessage The info message to be displayed
+	 */
+	public static void showInfoPane(final String infoMessage)
 	{
 		JOptionPane.showMessageDialog(null, infoMessage, "Info", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
+	/**
+	 * Display an warning message in a Swing pop-up window
+	 * @param warnMessage The warning message to be displayed
+	 */
 	public static void showWarnPane(String warnMessage)
 	{
 		JOptionPane.showMessageDialog(null, warnMessage, "Warning", JOptionPane.WARNING_MESSAGE);

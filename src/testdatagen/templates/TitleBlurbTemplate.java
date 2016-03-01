@@ -5,10 +5,18 @@ import java.util.Locale;
 
 import testdatagen.config.ConfigurationRegistry;
 
+/**
+ * The TitleBlurbTemplate produces promotional texts about e-book products in three configurable lengths.
+ */
 public class TitleBlurbTemplate extends TextTemplate
 {
-	ConfigurationRegistry registry;
+	private ConfigurationRegistry registry;
 	
+	/**
+	 * Constructor
+	 * @param loc The Locale to be used for the template
+	 * @param type The TitleBlurbTeplateType (LONG / MEDIUM / SHORT)
+	 */
 	public TitleBlurbTemplate(Locale loc, TitleBlurbTemplateType type)
 	{
 		super(loc);

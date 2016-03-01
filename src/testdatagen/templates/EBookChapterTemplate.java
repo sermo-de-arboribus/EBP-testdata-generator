@@ -10,12 +10,22 @@ import nu.xom.*;
 import testdatagen.config.ConfigurationRegistry;
 import testdatagen.utilities.Utilities;
 
+/**
+ * This template class generates e-book chapter content strings. The template is expected to contain 
+ * HTML tags within its text, which is useful for e-books in EPUB format, which uses HTML internally.
+ * However, the class also offers a fillWithPlainText() method to strip the HTML tags.
+ */
 public class EBookChapterTemplate extends TextTemplate
 {
 	ConfigurationRegistry registry;
 	int chapterNumber;
-	
-	public EBookChapterTemplate(Locale loc, int chapterNumber)
+
+	/**
+	 * Constructor
+	 * @param loc Locale object for the template
+	 * @param chapterNumber Number of the chapter to be generated
+	 */
+	public EBookChapterTemplate(final Locale loc, final int chapterNumber)
 	{
 		super(loc);
 		registry = ConfigurationRegistry.getRegistry();
@@ -67,6 +77,10 @@ public class EBookChapterTemplate extends TextTemplate
 		return templateBuffer.toString();
 	}
 	
+	/**
+	 * Returns a chapter text without HTML text.
+	 * @return chapter text as string without HTML tags.
+	 */
 	public String fillWithPlainText()
 	{
 		String htmlText = this.fillWithText();

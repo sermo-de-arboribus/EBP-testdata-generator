@@ -6,12 +6,20 @@ import java.util.Locale;
 import testdatagen.config.ConfigurationRegistry;
 import testdatagen.model.Title;
 
+/**
+ * Template for generating an EPUB file's title page, with book title, author, publisher, etc...
+ */
 public class EPUBTitlePageTemplate extends TextTemplate
 {
-	ConfigurationRegistry registry;
-	Title title;
+	private ConfigurationRegistry registry;
+	private Title title;
 	
-	public EPUBTitlePageTemplate(Locale loc, Title title)
+	/**
+	 * Constructor
+	 * @param loc The Locale to use for this template
+	 * @param title The product Title object this template is used with
+	 */
+	public EPUBTitlePageTemplate(final Locale loc, final Title title)
 	{
 		super(loc);
 		registry = ConfigurationRegistry.getRegistry();

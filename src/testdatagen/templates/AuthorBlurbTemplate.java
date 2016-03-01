@@ -7,12 +7,20 @@ import java.util.Random;
 import testdatagen.config.ConfigurationRegistry;
 import testdatagen.model.Title;
 
+/**
+ * The author blurb template generates configuration-based random promotional texts about authors.
+ */
 public class AuthorBlurbTemplate extends TextTemplate
 {
-	ConfigurationRegistry registry;
-	Title title;
+	private ConfigurationRegistry registry;
+	private Title title;
 	
-	public AuthorBlurbTemplate(Locale loc, Title title)
+	/**
+	 * Constructor
+	 * @param loc Locale to be used for the template
+	 * @param title product Title object that this author promo is meant for
+	 */
+	public AuthorBlurbTemplate(final Locale loc, final Title title)
 	{
 		super(loc);
 		registry = ConfigurationRegistry.getRegistry();
