@@ -8,6 +8,7 @@ import testdatagen.model.files.File;
 import testdatagen.model.files.GraphicFile;
 import testdatagen.onixbuilder.*;
 import testdatagen.templates.*;
+import testdatagen.utilities.TitleUtils;
 import testdatagen.utilities.Utilities;
 
 /**
@@ -487,7 +488,7 @@ public class Title implements Serializable
     	if(isValidFormat(formatString))
     	{
     		format = formatString;
-    		setEpubType(Utilities.formatToFileType(formatString));
+    		setEpubType(TitleUtils.formatToFileType(formatString));
     		if(formatString.startsWith("ND") || formatString.equals("ZIP"))
     		{
     			protection = "ND";

@@ -180,7 +180,7 @@ public class AddTitleToScenarioListener implements ActionListener
 			// instantiate selected ebook file types and add them to the title object
 			EBookFileFactory eff = EBookFileFactory.getInstance();
 
-			EBookFile ebookFile = eff.generateFile(Utilities.formatToFileType(format), newTitle);
+			EBookFile ebookFile = eff.generateFile(TitleUtils.formatToFileType(format), newTitle);
 			newTitle.addFile(ebookFile);
 
 			// check for optional product content files and generate if needed
@@ -191,7 +191,7 @@ public class AddTitleToScenarioListener implements ActionListener
 			}
 			if(Boolean.parseBoolean(formDataMap.get("extracts")))
 			{
-				EBookFile extractFile = eff.generateDemoFile(Utilities.formatToFileType(format), newTitle);
+				EBookFile extractFile = eff.generateDemoFile(TitleUtils.formatToFileType(format), newTitle);
 				newTitle.addFile(extractFile);
 			}
 
