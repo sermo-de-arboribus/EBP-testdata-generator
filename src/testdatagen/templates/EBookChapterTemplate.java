@@ -85,6 +85,6 @@ public class EBookChapterTemplate extends TextTemplate
 	{
 		String htmlText = this.fillWithText();
 		htmlText = htmlText.replaceFirst("\\<head>.+\\</head>", "");
-		return htmlText.replaceAll("\\<[^>]*>","");
+		return htmlText.replaceAll("\\<[^>]*>","").trim();
 	}
 }

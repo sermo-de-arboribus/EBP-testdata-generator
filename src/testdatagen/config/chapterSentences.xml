@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<quotes>
+<?xml-stylesheet type="text/css" href="quotes.css"?>
+<quotes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="quotes-schema.xsd">
     <quote>
         <version xml:lang="fr-FR" status="original">
             <text>Une œuvre où il y a des théories est comme un objet sur lequel on laisse la marque du prix.</text>
@@ -2407,4 +2409,336 @@
         </version>
         <author>Kleinhage, Esther</author>
     </quote>
+    <quote>
+        <version status="translation" xml:lang="de-DE">
+            <text>Das Schönste ist die Gerechtigkeit, das Beste Gesundsein.
+            Aber das Süßeste ist, wenn man erlangt, was man liebt.</text>
+            <source>
+                <title>Delisches Epigramm</title>
+            </source>
+        </version>
+        <author>Anonym</author>
+    </quote>
+    <quote>
+        <version status="translation" xml:lang="de-DE">
+            <text>[...] denn man wird nicht gelobt, wenn man sich fürchtet oder wenn man zornig wird, und nicht getadelt, wenn man einfach zornig wird, sondern wenn es auf bestimmte Weise geschieht.</text>
+            <source>
+                <title>Nikomachische Ethik</title>
+                <idref>100</idref>
+            </source>
+        </version>
+        <author>Aristoteles</author>
+    </quote>
+    <quote>
+        <version status="translation" xml:lang="de-DE">
+            <text>Ein Kind zu haben, bedeutet absolute Zustimmung zum Menschen. Habe ich ein Kind, ist es, als sagte ich: ich bin geboren worden, habe das Leben gekostet und festgestellt, es ist so gut, daß es verdient, wiederholt zu werden.</text>
+            <source>
+                <title>Abschiedswalzer</title>
+                <idref>1705</idref>
+            </source>
+        </version>
+        <author>Kundera, Milan</author>
+    </quote>
+    <quote>
+        <version status="translation" xml:lang="de-DE">
+            <text>Offensichtlich ist der Nationalismus in Deutschland keine ausschließliche Angelegenheit der Nationalisten.</text>
+            <source>
+                <title>Lügendetektor</title>
+                <idref>2321</idref>
+            </source>
+        </version>
+        <author>Padover, Saul K.</author>
+    </quote>
+    <quote>
+        <version status="translation" xml:lang="de-DE">
+            <text>Liebe aber und Freundschaft gewinnt kaum einer durch eine Tugend so sehr wie der Freigebige, da er sich nützlich erweist. Das geschieht aber durch Geben.</text>
+            <source>
+                <title>Nikomachische Ethik</title>
+                <idref>100</idref>
+            </source>
+        </version>
+        <author>Aristoteles</author>
+    </quote>
+    <quote>
+        <version status="translation" xml:lang="de-DE">
+            <text>Es ist leichter zu hoffen und dabei zu wissen, daß man enttäuscht wird, als überhaupt nicht zu hoffen.</text>
+            <source>
+                <title>Vergeblichkeit</title>
+                <idref>1050</idref>
+            </source>
+        </version>
+        <author>Gerhardie, William Alexander</author>
+    </quote>
+    <quote>
+        <version status="translation" xml:lang="de-DE">
+            <text>Und deshalb bitte ich euch, liebe Kumpane, inständigst, wenn ihr eine findet, die das Hosenabknöpfen wert ist, nur immer frisch drauf und führt sie mir zu.</text>
+            <source>
+                <title>Gargantua und Pantagruel</title>
+                <idref>2429</idref>
+            </source>
+        </version>
+        <author>Rabelais, François</author>
+    </quote>
+    <quote>
+        <version status="translation" xml:lang="de-DE">
+            <text>Messer, sahst du nicht, daß Gott dich gemacht hat, um in mehr als eine Scheide zu passen? Und dich Scheide, um mehr als ein Messer zuzulassen? Ihr schaltet gewisse Thoren, die das Gelübde thaten, allen Scheiden zu entsagen, und gewisse Scheiden Thörinnen, die das Gelübde ablegten, sich allen Messern zu verschließen: und ihr überlegt nicht, daß ihr fast ebenso thöricht handeltet, als ihr euch schwurt, du Scheide dich an einem einzigen Messer, und du Messer, dich an einer einzigen Scheide zu begnügen!</text>
+            <source>
+                <title>Jakob und sein Herr</title>
+                <idref>694</idref>
+            </source>
+        </version>
+        <author>Diderot, Denis</author>
+    </quote>
+    <quote>
+        <version status="translation" xml:lang="de-DE">
+            <text>Schlechte Väter sind diejenigen, welche die Fehler ihrer Jugend vergessen haben.</text>
+            <source>
+                <title>Jakob und sein Herr</title>
+                <idref>694</idref>
+            </source>
+        </version>
+        <author>Diderot, Denis</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="de-DE">
+            <text>Frauen öffnen Briefe nicht und gehen nicht ans Telefon. Sie können so etwas.</text>
+            <source>
+                <title>Die Geschäfte der Liebe</title>
+            </source>
+        </version>
+        <author>Westphalen, Joseph von</author>
+    </quote>
+    <quote>
+        <version status="translation" xml:lang="de-DE">
+            <text>[...] um Luzifer daranzulegen, als er dereinst nach dem Genuß einer frikassierten Gendarmenseele einen schrecklichen Anfall von Kolik hatte.</text>
+            <source>
+                <title>Gargantua und Pantagruel</title>
+                <idref>2429</idref>
+            </source>
+        </version>
+        <author>Rabelais, François</author>
+    </quote>
+    <quote>
+        <version status="translation" xml:lang="de-DE">
+            <text>Die wilden Pfauen riefen ängstlich in der Ferne: &#8222;Die haben Angst vor der Nacht,&#8220; erklärte der Vater, &#8222;die haben Angst, sie könnten Träumen&#8220;</text>
+            <source>
+                <title>Die Vögel kommen zurück</title>
+                <idref>91</idref>
+            </source>
+        </version>
+        <author>Antunes, Antonio Lobo</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="de-DE">
+            <text>Faul bin ich übrigens wie die Sünde und habe mir ordentlich instinktmäßig ein kleines Blat genommen, um nicht zu viel zu schreiben.</text>
+            <source>
+                <title>Brief an Clemens Brentano, Juli 1812, zit. n. Arnim / Brentano: Freundschaftsbriefe.</title>
+                <idref>106</idref>
+            </source>
+        </version>
+        <author>Arnim, Achim von</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="de-DE">
+            <text>Wer A sagt, muß auch Schloch sagen.</text>
+            <source>
+                <title>Einbildungsroman</title>
+                <idref>307</idref>
+            </source>
+        </version>
+        <author>Blumenfeld, Erwin</author>
+    </quote>
+    <quote>
+        <version status="translation" xml:lang="de-DE">
+            <text>Die einzige genuin gefährliche und unmoralische Form des Trinkens besteht darin, Wein als Arznei zu trinken.</text>
+            <source>
+                <title>Ketzer</title>
+                <idref>561</idref>
+            </source>
+        </version>
+        <author>Chesterton, Gilbert Keith</author>
+    </quote>
+    <quote>
+        <version status="translation" xml:lang="de-DE">
+            <text>Jede Zivilisation, in der es nicht allgemein üblich ist, wie wild zu tanzen, scheint mir aus der Sicht des entwickelten Menschen eher mangelhaft.</text>
+            <source>
+                <title>Ketzer</title>
+                <idref>561</idref>
+            </source>
+        </version>
+        <author>Chesterton, Gilbert Keith</author>
+    </quote>
+    <quote>
+        <version status="translation" xml:lang="de-DE">
+            <text>Heißt es nicht, sich eines Freundes unwürdig zu zeigen, wenn man vierzig Leute Freunde nennt?</text>
+            <source>
+                <title>Pariser Nahaufnahmen</title>
+                <idref>2123</idref>
+            </source>
+        </version>
+        <author>Mercier, Louis-Sébastien</author>
+    </quote>
+    <quote>
+        <version status="translation" xml:lang="de-DE">
+            <text>Die sich früher einmal liebten, sind unversöhnlich,
+            wenn sie sich hassen.</text>
+            <source>
+                <title>Medea</title>
+                <idref>842</idref>
+            </source>
+        </version>
+        <author>Euripides</author>
+    </quote>
+    <quote>
+        <version status="translation" xml:lang="de-DE">
+            <text>[...] denn Aufrichtigkeit geht mir so zu Herzen, daß ich glaube, ich wäre zwar traurig, wenn mir meine Geliebte oder gar meine Frau ihre Neigung für einen anderen gestände, aber ich fühlte keine Bitterkeit. Ich gäbe meine Rolle als Liebhaber oder Ehemann auf, um ihr zu raten und sie zu bedauern.</text>
+            <source>
+                <title>Die Prinzessin von Clèves</title>
+                <idref>1731</idref>
+            </source>
+        </version>
+        <author>Lafayette, Marie-Madeleine de</author>
+    </quote>
+    <quote>
+        <version status="translation" xml:lang="de-DE">
+            <text>Wenn wir lieben, dann suchen wir gewöhnlich nicht nach Verbündeten, sondern betrachten gerade die, die mit uns lieben, als Rivalen und Rechtsverletzer. Aber wenn wir hassen, dann suchen wir immer nach Verbündeten.</text>
+            <source>
+                <title>Der Fanatiker</title>
+                <idref>1349</idref>
+            </source>
+        </version>
+        <author>Hoffer, Eric</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="de-DE">
+            <text>Du mußt immer wieder hingehn, wo dein Schmerz ist, damit er sich verändert.</text>
+            <source>
+                <title>Ein Gospel mehr</title>
+            </source>
+        </version>
+        <author>Rossmy, Tilman</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="de-DE">
+     --
+            ++++++++++++++++<text>Ein' Gems auf dem Stein,
+                ein' Vogel im Flug,
+                ein Mädel, das klug,
+                kein Bursch holt die ein.
+            </text>
+            <source>
+                <title>Übermut, zit. n. Werke in einem Band</title>
+                <idref>779</idref>
+            </source>
+        </version>
+        <author>Eichendorff, Joseph von</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="de-DE">
+            <text>Kafka! Wallfahrtsziel aller Sinnhuber.</text>
+            <source>
+                <title>Die Sau rauslassen, zit. n. Wilh. Busch: Da grunzte das Schwein, die Englein sangen</title>
+                <idref>458</idref>
+            </source>
+        </version>
+        <author>Gernhardt, Robert</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="de-DE">
+            <text>Daß ihre Katzen Kunstwerke waren, wußte nur sie.</text>
+            <source>
+                <title>Der Lebenslauf der Liebe</title>
+            </source>
+        </version>
+        <author>Walser, Martin</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="de-CH">
+            <text>Man kann alles erzählen, nur nicht sein wirkliches Leben.</text>
+            <source>
+                <title>Stiller</title>
+                <idref>974</idref>
+            </source>
+        </version>
+        <author>Frisch, Max</author>
+    </quote>
+    <quote>
+        <version status="translation" xml:lang="de-DE">
+            <text>Menschen sind wie Flüsse: das Wasser ist in allen das gleiche und ein und dasselbe, aber jeder Fluß ist einmal schmal und einmal breit, einmal still, einmal rein, einmal kalt, einmal trübe, einmal warm.</text>
+            <source>
+                <title>Auferstehung</title>
+                <idref>2961</idref>
+            </source>
+        </version>
+        <author>Lev Nikolaevič Tolstoj</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="de-DE">
+            <text>Ich lernte bei einer der Parties zu Hause einmal einen Parteimenschen kennen, der in einem Ausschuß zur Bekämpfung der Prostitution saß und sich bei mir flüsternd über den Nuttenmangel in Bonn beklagte.</text>
+            <source>
+                <title>Ansichten eines Clowns</title>
+            </source>
+        </version>
+        <author>Böll, Heinrich</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="de-DE">
+            <text>Zwang ist der unzertrennliche Gefährte jeder Gesellschaft, und jede fordert Opfer, die um so schwerer fallen, je bedeutender die eigene Individualität.</text>
+            <source>
+                <title>?</title>
+            </source>
+        </version>
+        <author>Schopenhauer, Arthur</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="de-DE">
+            <text>Die Liebe eines Mannes ist immer zum größten Teil das Ergebnis einer Volksbefragung.</text>
+            <source>
+                <title>Halbzeit</title>
+                <idref>3111</idref>
+            </source>
+        </version>
+        <author>Walser, Martin</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="de-DE">
+            <text>Das Leben ist schwer zu tragen: aber so tut mir doch nicht so zärtlich! Wir sind allesamt hübsche lastbare Esel und Eselinnen.</text>
+            <source>
+                <title>Also sprach Zarathustra</title>
+                <idref>2272</idref>
+            </source>
+        </version>
+        <author>Nietzsche, Friedrich</author>
+    </quote>
+    <quote>
+        <version status="translation" xml:lang="de-DE">
+            <text>Früh krümmt sich, was ein Gürkchen werden will.</text>
+            <source>
+                <title>Null</title>
+                <idref>367</idref>
+            </source>
+        </version>
+        <author>Brandão, Ignácio de Loyola</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="de-DE">
+            <text>Wenn man unsere deutsche Sprache mit einem Gebäude vergleichen wollte, so könnte man sagen, in Sachsen habe es durchs Dach geregnet.</text>
+            <source>
+                <title>Drei Männer im Schnee</title>
+                <idref>1525</idref>
+            </source>
+        </version>
+        <author>Kästner, Erich</author>
+    </quote>
+    <quote>
+        <version status="translation" xml:lang="de-DE">
+            <text>Rammelt wie abgesattelte Esel, aber gestattet mir, daß ich rammeln sage.</text>
+            <source>
+                <title>Jakob und sein Herr</title>
+                <idref>694</idref>
+            </source>
+        </version>
+        <author>Diderot, Denis</author>
+    </quote>
+    
 </quotes>
