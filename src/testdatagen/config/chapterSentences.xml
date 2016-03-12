@@ -2740,5 +2740,26 @@
         </version>
         <author>Diderot, Denis</author>
     </quote>
-    
+    <quote>
+        <version status="translation" xml:lang="de-DE">
+            <text>Wozu braucht man heutzutage,da jeder Kirchgänger auf irgendeine Uhr sehen kann, noch Glocken? Schämt sich die Kirche nicht, sich auf diese Wiese in Erinnerung bringen zu müssen?</text>
+            <source>
+                <title>Der rote Schal</title>
+            </source>
+        </version>
+        <author>Collins, Wilkie</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="de-DE">
+            <text>Auf das Wohlsein der Poeten,
+            Die nicht schillern und nicht göthen,
+            Durch die Welt in Lust und Nöten
+            Segelnd frisch auf eignen Böten.</text>
+            <source>
+                <title>Tafellieder, zit. n. Werke in einem Band</title>
+                <idref>779</idref>
+            </source>
+        </version>
+        <author>Eichendorff, Joseph von</author>
+    </quote>
 </quotes>
