@@ -1,5 +1,13 @@
 Test Data Generator release notes / history
 *-------------*
+* Version 1.1 *
+*-------------*
+Released .....
+
+Improvements: 
+- Added PrimaryContentType (ONIX 3) and ProductContentType (both ONIX versions) to the exported ONIX
+
+*-------------*
 *Version 0.8.1*
 *-------------*
 Released February 29th, 2016

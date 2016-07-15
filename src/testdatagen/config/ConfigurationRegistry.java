@@ -56,9 +56,14 @@ public class ConfigurationRegistry
 		 regMap.put("iso3166-1.countryCodes", "AD AE AF AG AI AL AM AN AO AQ AR AS AT AU AW AX AZ BA BE BF BG CA CH CM CN CR CU CV CY CZ DE DK EC EE EG FR GB GR GT HK HR HU JP LB LI LT LU LY MA MC MD ME MG MT NL PK PR PT PW RW SA SD SN SR TG TR TW VA YE ZW");
 		 regMap.put("kindleGenPath", "");
 		 
+		 Locale deLocale = new Locale("de");
+		 Locale enLocale = new Locale("en");
+		 Locale frLocale = new Locale("fr");
+		 Locale csLocale = new Locale("cs");
+		 Locale zhLocale = new Locale("zh");
 		 localeTextMap = new ConcurrentHashMap<Locale, Map<String, String[]>>();
 		 Map<String, String[]> germanTextMap = new ConcurrentHashMap<String, String[]>();
-		 Locale deLocale = new Locale("de");
+		 
 		 localeTextMap.put(deLocale, germanTextMap);
 		
 		 // values for the AuthorBlurbTemplate
@@ -109,6 +114,10 @@ public class ConfigurationRegistry
 		 
 		 // values for the EbookChapterTemplate
 		 putLocalizedText(deLocale, "chapterTemplate", "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?><!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\"><html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>Kapitel {$chapternumber}</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/></head><body><h1>Kapitel {$chapternumber}</h1><div><br/></div><div>{$chaptertext}</div></body></html>");
+		 putLocalizedText(enLocale, "chapterTemplate", "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?><!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\"><html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>Chapter {$chapternumber}</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/></head><body><h1>Chapter {$chapternumber}</h1><div><br/></div><div>{$chaptertext}</div></body></html>");
+		 putLocalizedText(frLocale, "chapterTemplate", "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?><!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\"><html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>Chapitre {$chapternumber}</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/></head><body><h1>Chapitre {$chapternumber}</h1><div><br/></div><div>{$chaptertext}</div></body></html>");
+		 putLocalizedText(csLocale, "chapterTemplate", "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?><!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\"><html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>Kapitola {$chapternumber}</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/></head><body><h1>Kapitola {$chapternumber}</h1><div><br/></div><div>{$chaptertext}</div></body></html>");
+		 putLocalizedText(zhLocale, "chapterTemplate", "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?><!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\"><html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>{$chapternumber} 卷</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/></head><body><h1>{$chapternumber} 卷</h1><div><br/></div><div>{$chaptertext}</div></body></html>");
 		 
 		 onixCodeListMap = new ConcurrentHashMap<Integer, Map<String, String>>();
 		 

@@ -33,10 +33,10 @@ public class OnixPartsDirector implements Serializable
 	 */
 	public OnixPartsDirector(final Title title)
 	{
+		this();
+		
 		this.title = title;
 		Random random = new Random();
-		
-		requiredElements = new LinkedList<OnixPartsBuilder>();
 		
 		// add default header
 		requiredElements.add(new OnixHeaderBuilder(new HashMap<String, String>()));
@@ -60,6 +60,9 @@ public class OnixPartsDirector implements Serializable
 		// add product form detail
 		addProductFormDetail(title.getEpubTypeForProductFormDetail());
 
+		// add primary content type
+		requiredElements.add(new OnixPrimaryContentTypeBuilder(new HashMap<String, String>()));
+		
 		// add protection type
 		HashMap<String, String> protectionArgs = new HashMap<>();
 		protectionArgs.put("technicalprotection", title.getProtectionTypeForONIX());
@@ -255,6 +258,16 @@ public class OnixPartsDirector implements Serializable
 	}
 	
 	/**
+	 * Add an additional <ProductContentType> element to the Onix XML tree
+	 * @param typeCode The typeCode from Onix List 81
+	 */
+	public void addProductContentType(final String typeCode)
+	{
+		HashMap<String, String> productContentTypeArgs = new HashMap<>();
+		productContentTypeArgs.put("productcontenttype", typeCode);
+		requiredElements.add(new OnixProductContentTypeBuilder(productContentTypeArgs));
+	}
+	/**
 	 * Add a <ProductIdentifier> node to the Onix XML tree
 	 * @param type The additional <ProductIdentifier> value as a String
 	 */
@@ -337,7 +350,7 @@ public class OnixPartsDirector implements Serializable
 	 * @return Returns the root element of the Onix XML tree: <ONIXMessage> / <ONIXmessage>
 	 */
 	public Element buildOnix2(final int tagType)
-	{
+	{		
 		String rootElementName = getRootName(tagType);
 		Element root = new Element(rootElementName);
 		Element parent = root;
@@ -351,6 +364,11 @@ public class OnixPartsDirector implements Serializable
 		else
 		{
 			replaceProductForm("DG");
+		}
+		
+		for(OnixPartsBuilder builder : requiredElements)
+		{
+			builder.initialize("2.1", tagType);
 		}
 		
 		// then sort the list of required elements
@@ -367,7 +385,7 @@ public class OnixPartsDirector implements Serializable
 			// The first element that uses an OnixSupplyDetailPartsBuilder has the static sequence number 3000.
 			if(builder.getSequenceNumber() < 3000)
 			{
-				Element nextElement = builder.build("2.1", tagType);
+				Element nextElement = builder.build();
 				// Builders that product elements that are only valid in ONIX 3 might return null
 				// when called on with onixVersion 2.1
 				if(nextElement != null)
@@ -375,7 +393,7 @@ public class OnixPartsDirector implements Serializable
 					parent.appendChild(nextElement);	
 				}
 				
-				// if we have just built the header, then create a <product> node an make it the
+				// if we have just built the header, then create a <product> node and make it the
 				// parent element for all the following elements
 				if(builder.getSequenceNumber() == 100)
 				{
@@ -386,7 +404,7 @@ public class OnixPartsDirector implements Serializable
 			}
 			else if (builder.getSequenceNumber() == 3000)
 			{
-				Element supplyDetailNode = builder.build("2.1", tagType);
+				Element supplyDetailNode = builder.build();
 				parent.appendChild(supplyDetailNode);
 				parent = supplyDetailNode;
 				
@@ -409,7 +427,7 @@ public class OnixPartsDirector implements Serializable
 	 * @return Returns the root element of the Onix XML tree: <ONIXMessage> / <ONIXmessage>
 	 */
 	public Element buildOnix3(final int tagType)
-	{
+	{	
 		String rootElementName = getRootName(tagType);
 		Element root = new Element(rootElementName);
 		root.addAttribute(new Attribute("release", "3.0"));
@@ -424,6 +442,11 @@ public class OnixPartsDirector implements Serializable
 		else
 		{
 			replaceProductForm("ED");
+		}
+		
+		for(OnixPartsBuilder builder : requiredElements)
+		{
+			builder.initialize("3.0", tagType);
 		}
 		
 		// then sort the list of required elements
@@ -491,7 +514,7 @@ public class OnixPartsDirector implements Serializable
 			// here we're adding the next element that is not a predecessor of <supplydetail>
 			if(builder.getSequenceNumber() < 3000)
 			{
-				Element nextElement = builder.build("3.0", tagType);
+				Element nextElement = builder.build();
 				if(nextElement != null)
 				{
 					parent.appendChild(nextElement);	
@@ -500,7 +523,7 @@ public class OnixPartsDirector implements Serializable
 			// this is the <supplydetail> node
 			else if (builder.getSequenceNumber() == 3000)
 			{
-				Element supplyDetailNode = builder.build("3.0", tagType);
+				Element supplyDetailNode = builder.build();
 				parent.appendChild(supplyDetailNode);
 				parent = supplyDetailNode;
 				
@@ -746,6 +769,23 @@ public class OnixPartsDirector implements Serializable
 			case "distinctivetitle":
 			default: return mainTitle;
 		}
+	}
+	
+	private List<Integer> getIndicesOfProductFormDetail()
+	{
+		List<Integer> indices = new ArrayList<Integer>();
+		
+		Iterator<OnixPartsBuilder> iterator = requiredElements.iterator();
+		while(iterator.hasNext())
+		{
+			OnixPartsBuilder currentElement = iterator.next();
+			if(currentElement instanceof OnixProductFormDetailBuilder)
+			{
+				indices.add(requiredElements.indexOf(currentElement));
+			}
+		}
+		
+		return indices;
 	}
 	
 	// Helper for removing OnixPartsBuilders of a certain type

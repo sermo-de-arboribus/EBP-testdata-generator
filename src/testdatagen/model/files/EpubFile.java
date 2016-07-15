@@ -78,7 +78,8 @@ public class EpubFile extends EBookFile
 		List<java.io.File> chapterFiles = new ArrayList<java.io.File>();
 		for(int i = 1; i < 13; i++)
 		{
-			EBookChapterTemplate chapterTemplate = new EBookChapterTemplate(new Locale("de"), i);
+			Locale locale = getRandomLocale();
+			EBookChapterTemplate chapterTemplate = new EBookChapterTemplate(locale, i);
 			String HTMLChapterPage = chapterTemplate.fillWithText();
 			java.io.File HTMLChapterFile = new java.io.File(FilenameUtils.concat(tempDir.getPath(), "OEBPS/text/Chapter" + i + ".xhtml"));
 			chapterFiles.add(HTMLChapterFile);
@@ -450,6 +451,20 @@ public class EpubFile extends EBookFile
 	    }
 	}
 
+	private Locale getRandomLocale()
+	{
+		Random random = new Random();
+		int rnd = random.nextInt(18);
+		switch(rnd)
+		{
+			case 1: case 2: return new Locale("en");
+			case 3: case 4: return new Locale("fr");
+			case 5: return new Locale("cs");
+			case 6: return new Locale("zh");
+			default: return new Locale("de");
+		}
+	}
+	
 	// Helper method to write out HTML pages (passed in as a String) to a file
 	private void saveHtmlFile(java.io.File HTMLPagePath, String HTMLPage)
 	{

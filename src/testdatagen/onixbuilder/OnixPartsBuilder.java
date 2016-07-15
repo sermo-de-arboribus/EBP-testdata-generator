@@ -55,11 +55,11 @@ public abstract class OnixPartsBuilder implements Comparable<OnixPartsBuilder>, 
 	
 	/**
 	 * build() is the main worker method to create a chunk of ONIX elements.
-	 * @onixVersion The Onix version (2.1 / 3.0)
+	 * Before calling build(), the caller is expected to have called initialize() to set the required OnixType and tagType
 	 * @tagType The tag type to be used (SHORT / REFERENCE)
 	 * @return An XML element
 	 */
-	public abstract Element build(final String onixVersion, final int tagType);
+	public abstract Element build();
 	
 	/**
 	 * To enforce an order on the sequence of ONIX elements, every subclass needs to 
@@ -122,6 +122,18 @@ public abstract class OnixPartsBuilder implements Comparable<OnixPartsBuilder>, 
 	protected boolean hasArgument(final String arg)
 	{
 		return arguments.containsKey(arg);
+	}
+	
+	protected boolean isInitialized()
+	{
+		if(tagType == 0 || onixVersion == null)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
 	}
 	
 	/**
@@ -224,11 +236,12 @@ public abstract class OnixPartsBuilder implements Comparable<OnixPartsBuilder>, 
 	}
 
 	/**
-	 * Initializes this OnixPartsBuilder by setting up the onixVersion and tagType
+	 * Initializes this OnixPartsBuilder by setting up the onixVersion and tagType.
+	 * It should be called by the OnixPartsDirector before calling "build"
 	 * @param onixVersion String of the Onix version ("2.1" / "3.0")
 	 * @param tagType The tag type (integer constants SHORTTAG / REFERENCETAG)
 	 */
-	protected void initialize(String onixVersion, int tagType)
+	public void initialize(String onixVersion, int tagType)
 	{
 		validateTagType(tagType);
 		validateOnixVersion(onixVersion);

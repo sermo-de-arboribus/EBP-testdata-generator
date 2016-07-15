@@ -39,9 +39,12 @@ public class OnixExtentBuilder extends OnixPartsBuilder
 	}
 	
 	@Override
-	public Element build(final String onixVersion, final int tagType)
+	public Element build()
 	{
-		initialize(onixVersion, tagType);
+		if(!isInitialized())
+		{
+			throw new IllegalStateException("This builder object is not initialized. Please call initialize() before calling build().");
+		}
 		
 		// if any of the arguments numberofpages, pagesroman or pagesarabic is defined, 
 		// assume that the caller just wants to receive an ONIX 2.1 single element,

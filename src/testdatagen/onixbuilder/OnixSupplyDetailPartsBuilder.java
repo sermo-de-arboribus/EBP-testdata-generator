@@ -28,7 +28,7 @@ public abstract class OnixSupplyDetailPartsBuilder extends OnixPartsBuilder
 	 * build() just returns an empty SupplyDetail node.
 	 */
 	@Override
-	public Element build(final String onixVersion, final int tagType)
+	public Element build()
 	{
 		if(tagType == OnixPartsBuilder.REFERENCETAG)
 		{

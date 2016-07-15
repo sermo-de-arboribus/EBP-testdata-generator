@@ -33,7 +33,7 @@ public class TitleForm extends JDialog
 	// additional title type checkboxes
 	private JCheckBox tittyp03, tittyp06, tittyp08, tittyp11, tittyp13;
 	// availability and notification type elements
-	private JTextField notificationTypeField, availabilityCodeField, productAvailabilityField;
+	private JTextField notificationTypeField, availabilityCodeField, productAvailabilityField, productContentTypeField;
 	// set of configured subjects
 	private Set<Subject> configuredSubjects;
 	// additional price nodes
@@ -63,7 +63,6 @@ public class TitleForm extends JDialog
 		Border purpleLineBorder = BorderFactory.createLineBorder(new Color(153, 0, 153));
 		
 		// Group form elements in left panel
-		// JPanel titleOptionsPanel = new JPanel(new GridLayout(0,1));
 		JPanel titleOptionsPanel = new JPanel();
 		titleOptionsPanel.setLayout(new BoxLayout(titleOptionsPanel, BoxLayout.Y_AXIS));
 		JPanel productTypeSelectionPanel = new JPanel(new FlowLayout());
@@ -139,6 +138,17 @@ public class TitleForm extends JDialog
 		titlePanelOptions.add(tittyp08);
 		titlePanelOptions.add(tittyp11);
 		titlePanelOptions.add(tittyp13);
+		
+		// ProductContentType options
+		JPanel productContentTypePanel = new JPanel(new GridLayout(0,1));
+		detailOptionsPanel.add(productContentTypePanel);
+		productContentTypePanel.setBorder(BorderFactory.createTitledBorder(blueLineBorder, "Additional product content types"));
+		
+		JPanel numberOfProductContentTypes = new JPanel(new FlowLayout());
+		numberOfProductContentTypes.setBorder(BorderFactory.createTitledBorder(purpleLineBorder, "Number of extra elements"));
+		numberOfProductContentTypes.add(productContentTypeField);
+		productContentTypePanel.add(numberOfProductContentTypes);
+		productContentTypePanel.add(Box.createHorizontalGlue());
 		
 		// Subject options
 		JPanel subjectsPanel = new JPanel(new GridLayout(1,0));
@@ -217,7 +227,7 @@ public class TitleForm extends JDialog
 		this.add(splitPane, BorderLayout.CENTER);
 		this.add(submitbtn, BorderLayout.SOUTH);
 		this.setLocation(100,100);
-		this.setSize(800, 600);
+		this.setSize(1000, 800);
 	}
 	
 	/**
@@ -272,6 +282,7 @@ public class TitleForm extends JDialog
 		formDataMap.put(notificationTypeField.getName(), notificationTypeField.getText());
 		formDataMap.put(availabilityCodeField.getName(), availabilityCodeField.getText());
 		formDataMap.put(productAvailabilityField.getName(), productAvailabilityField.getText());
+		formDataMap.put(productContentTypeField.getName(), productContentTypeField.getText());
 		
 		return formDataMap;
 	}
@@ -371,6 +382,9 @@ public class TitleForm extends JDialog
 		productAvailabilityField = new JTextField(OnixProductAvailabilityBuilder.DEFAULT_PRODUCT_AVAILABILITY);
 		productAvailabilityField.setName("productavailability");
 		productAvailabilityField.setColumns(8);
+		productContentTypeField = new JTextField("0");
+		productContentTypeField.setName("productcontenttypenumber");
+		productContentTypeField.setColumns(2);
 		
 		configuredPrices = new HashSet<Price>();
 	}

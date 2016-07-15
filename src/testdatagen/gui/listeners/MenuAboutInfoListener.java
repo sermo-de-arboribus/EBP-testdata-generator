@@ -44,16 +44,17 @@ public class MenuAboutInfoListener implements ActionListener
 			"    <title>About the Testdata Generator</title>\n" +
 			"  </head>\n" +
 			"  <body>\n" +
-			"    <h1>About the Testdata Generator 0.7</h1>\n" +
-			"    <p>This is a beta version of the Testdata Generator for the E-Book Plant.</p>\n" +
+			"    <h1>About the Testdata Generator 1.1</h1>\n" +
+			"    <p>This is version 1.1 of the Testdata Generator for e-books and metadata.</p>\n" +
 			"    <p>If you have questions, ideas, suggestions, bug reports, please contact" +
-			"       Kai.Weber@knv.de</p>" +
-			"    <p>Although options for all file types are already given in the title configuration," +
-			"       the Testdata Generator can currently only produce PDF and EPUB files. Mobi, iBooks, " +
-			"       and Zip files output is not implemented yet. (However, at least for iBooks and Mobi" +
-			"       you'll get valid ONIX files.)</p>" +
+			"       Kai.Weber@kno-va.de</p>" +
 			"    <p>Please let me know, what would be your most urgent or most interesting configuration" +
 			"       options that should be implemented as soon as possible.</p>" +
+			"    <p>The current roadmap for future releases is:" + 
+			"    <ul><li>Implement further ONIX 3 elements</li>"
+			+ "      <li>Adjust publisher selection to make it configurable per scenario<li>"
+			+ "      <li>Enable a distinction between titles with publication date in the future and those in the past</li>"
+			+ "      <li>Add price effective elements</li></ul></p>" +
 			"  </body>\n" +
 			"</html>";
 }

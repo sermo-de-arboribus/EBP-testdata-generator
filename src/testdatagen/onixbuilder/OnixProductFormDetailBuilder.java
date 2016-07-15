@@ -31,9 +31,12 @@ public class OnixProductFormDetailBuilder extends OnixPartsBuilder
 	}
 	
 	@Override
-	public Element build(final String onixVersion, final int tagType)
+	public Element build()
 	{
-		initialize(onixVersion, tagType);
+		if(!isInitialized())
+		{
+			throw new IllegalStateException("This builder object is not initialized. Please call initialize() before calling build().");
+		}
 		Element returnElement;
 		// In ONIX 2.1 we need to produce <b211> / <EpubType> for some information,
 		// In ONIX 3.0 all information is handled by <b333> / <ProductFormDetail>
@@ -95,8 +98,8 @@ public class OnixProductFormDetailBuilder extends OnixPartsBuilder
 	public int getSequenceNumber()
 	{
 		// we need to enforce a sequence, because in ONIX 2.1 <EpubType> elements need to 
-		// be placed after <ProductFormDetail> elements.
-		return SEQUENCE_NUMBER + (isEpubTypeProductFormDetail() ? 1 : 0);
+		// be placed after <ProductContentType> elements.
+		return SEQUENCE_NUMBER + (isEpubTypeProductFormDetail() && onixVersion.equals("2.1") ? 30 : 0);
 	}
 
 	// helper method to check, if an <EpubType> argument has been explicitly passed in
