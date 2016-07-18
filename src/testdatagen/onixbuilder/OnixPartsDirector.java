@@ -68,7 +68,7 @@ public class OnixPartsDirector implements Serializable
 		protectionArgs.put("technicalprotection", title.getProtectionTypeForONIX());
 		requiredElements.add(new OnixTechnicalProtectionBuilder(protectionArgs));
 		
-		// TODO: implement Series / Collection 
+		// Series / Collection handled by addCollection() , if checkbox in GUI selected
 		
 		// add a title
 		addTitleWithSubtitle("01");
@@ -222,6 +222,14 @@ public class OnixPartsDirector implements Serializable
 	private OnixPartsDirector()
 	{
 		requiredElements = new LinkedList<OnixPartsBuilder>();
+	}
+	
+	public void addCollection()
+	{
+		HashMap<String, String> collectionArgs = new HashMap<String, String>();
+		collectionArgs.put("titletext", title.getSeriesTitle());
+		collectionArgs.put("titlestatement", title.getSeriesTitle());
+		requiredElements.add(new OnixCollectionSeriesBuilder(collectionArgs));
 	}
 	
 	/**

@@ -359,6 +359,12 @@ public class Title implements Serializable
 		}
 	}
 	
+	public synchronized String getSeriesTitle()
+	{
+		SeriesTemplate template = new SeriesTemplate(new Locale("de"));
+		return template.fillWithText();
+	}
+	
 	/**
 	 * Get a short promo text for this product
 	 * @return A String with a short random promo text

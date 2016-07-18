@@ -61,11 +61,20 @@ public class ConfigurationRegistry
 		 Locale frLocale = new Locale("fr");
 		 Locale csLocale = new Locale("cs");
 		 Locale zhLocale = new Locale("zh");
+		 
 		 localeTextMap = new ConcurrentHashMap<Locale, Map<String, String[]>>();
 		 Map<String, String[]> germanTextMap = new ConcurrentHashMap<String, String[]>();
+		 Map<String, String[]> englishTextMap = new ConcurrentHashMap<String, String[]>();
+		 Map<String, String[]> frenchTextMap = new ConcurrentHashMap<String, String[]>();
+		 Map<String, String[]> czechTextMap = new ConcurrentHashMap<String, String[]>();
+		 Map<String, String[]> chineseTextMap = new ConcurrentHashMap<String, String[]>();
 		 
 		 localeTextMap.put(deLocale, germanTextMap);
-		
+		 localeTextMap.put(enLocale, englishTextMap);
+		 localeTextMap.put(frLocale, frenchTextMap);
+		 localeTextMap.put(csLocale, czechTextMap);
+		 localeTextMap.put(zhLocale, chineseTextMap);
+		 
 		 // values for the AuthorBlurbTemplate
 		 putLocalizedText(deLocale, "authorBlurbTemplate", "{$authorname} wurde {$birthyear} in {$birthplace} geboren. Mit {$bookgenre} über {$topic} eroberte sie oder er eine riesige Fangemeinde und wurde {$when} mit „{$booktitle}“ für {$prize} nominiert. Die Autorin oder der Autor lebt {$residence}.");
 		 putLocalizedText(deLocale, "birthplace", new String[]{"Ransbach-Baumbach", "Bietigheim-Bissingen", "Pirna-Niedervogelgesang", "Kobern-Gondorf", "Treis-Karden", "Solingen-Ohligs", "Bernkastel-Kues", "Traben-Trarbach", "Castrop-Rauxel", "Mettlach-Orscholz", "Moers", "Unna", "Dessau", "Dresden", "Mauritius", "Dnjepropetrowsk", "Jindřichův Hradec", "České Budějovice", "Falun", "Ouagadougou", "Shangri-La", "Madras", "Isfahan", "Kuşadası", "Horní Plana", "Wladiwostok", "Harbin", "einer Almhütte", "einem Flugzeug auf dem Weg von Chicago nach San Antonio", "Cartagena", "Guatemala", "Luanda", "einem Bergsteigerzelt auf dem Kilimandscharo", "Pleurtuit in der Bretagne", "der Nähe des Polarkreises bei Sonnenaufgang", "in der Wortspielhölle", "in Metapontion", "bei Hempels unterm Sofa"});
@@ -90,19 +99,25 @@ public class ConfigurationRegistry
 		 putLocalizedText(deLocale, "longTitleBlurbTemplate", "Die {$female-protagonist} ist {$mtbt-adj1}, {$mtbt-adj2} und {$mtbt-adj3}. Ihrem {$partner}, für den sie {$emotion1}, aber nicht {$emotion2} empfindet, bleibt sie über seinen Tod hinaus treu, obwohl sie in {$mtbt-adj4} {$emotion3} für einen {$lover} entbrannt ist. Sie widersteht dessen hartnäckigem {$courting}, denn umgeben von den {$surrounding} {$location} strebt sie nach {$striving-for} – und fasst einen unerhörten Entschluss … ");
 		 putLocalizedText(deLocale, "mediumTitleBlurbTemplate", "Die {$female-protagonist} ist {$mtbt-adj1} und {$mtbt-adj3}. Ihrem {$partner}, bleibt sie über seinen Tod hinaus treu, obwohl sie in {$emotion3} für einen {$lover} entbrannt ist. Sie widersteht – und fasst einen unerhörten Entschluss … ");
 		 putLocalizedText(deLocale, "female-protagonist", new String[]{"Prinzessin von Braunschweig", "Prinzessin von Hintertupfingen", "Prinzessin auf der Erbse", "erfolgsverwöhnte Tennisspielerin Klara", "Unterschicht-Angehörige Denise", "Boulevardblatt-Journalistin Karla", "päpstliche Kammerzofe Diana", "graue Maus"});
-		 putLocalizedText(deLocale, "mtbt-adj1", new String[]{"jung", "blutjung", "immer noch jung", "unerfahren"});
+		 putLocalizedText(deLocale, "mtbt-adj1", new String[]{"jung", "blutjung", "immer noch jung", "unerfahren", "abgebrüht", "schüchtern"});
 		 putLocalizedText(deLocale, "mtbt-adj2", new String[]{"schön", "hübsch", "intelligent", "aufgeweckt", "aufbrausend", "sozial"});
 		 putLocalizedText(deLocale, "mtbt-adj3", new String[]{"wohlhabend", "reich", "klug", "selbstbewusst", "komplexbehaftet", "starrsinnig", "starrköpfig"});
 		 putLocalizedText(deLocale, "mtbt-adj4", new String[]{"leidenschaftlicher", "bedingungsloser", "kopfloser", "außergewöhnlicher", "wahnsinniger"});
-		 putLocalizedText(deLocale, "partner", new String[]{"Ehemann", "Verlobten", "Schoßhund", "Lieblingskater", "Gemahl"});
+		 putLocalizedText(deLocale, "partner", new String[]{"Ehemann", "Verlobten", "Schoßhund", "Lieblingskater", "Gemahl", "Bettgenossen"});
 		 putLocalizedText(deLocale, "emotion1", new String[]{"Sympathie", "Zuneigung", "Mitgefühl", "Mitleid", "Zärtlichkeit"});
 		 putLocalizedText(deLocale, "emotion2", new String[]{"Liebe", "tiefe Zuneigung", "innige Verbundenheit", "eheliche Gefühle"});
 		 putLocalizedText(deLocale, "emotion3", new String[]{"Liebe", "Zuneigung", "Verbundenheit", "Haßliebe", "Geschmeidigkeit"});
-		 putLocalizedText(deLocale, "lover", new String[]{"anderen Mann", "nordischen Gott", "wahren Adonis", "verschrumpelten Alten", "schönen Grünschnabel", "Herzensbrecher", "schüchternen Fleischereifachverkäufer"});
+		 putLocalizedText(deLocale, "lover", new String[]{"anderen Mann", "nordischen Gott", "wahren Adonis", "verschrumpelten Alten", "schönen Grünschnabel", "Herzensbrecher", "schüchternen Fleischereifachverkäufer", "Hollywoodstar", "Bollywoodstar", "Hipster mit Bart"});
 		 putLocalizedText(deLocale, "courting", new String[]{"Werben", "Buhlen", "Drängen", "Zureden", "Einschmeicheln", "Flirten"});
-		 putLocalizedText(deLocale, "surrounding", new String[]{"Intrigen und Eitelkeiten", "Kabalen und Lieben", "Dekadenzen", "Sphärenklängen", "dreckigen Tricks", "Ungeheuerlichkeiten"});
+		 putLocalizedText(deLocale, "surrounding", new String[]{"Intrigen und Eitelkeiten", "Kabalen und Lieben", "Dekadenzen", "Sphärenklängen", "dreckigen Tricks", "Ungeheuerlichkeiten", "Spannungen"});
 		 putLocalizedText(deLocale, "location", new String[]{"des französischen Hofes", "des römischen Palastes", "der deutschen Gesellschaft ihrer Zeit", "der Bourgeoisie", "des Lumpenproletariats", "der Mehrheitsgesellschaft", "der Leitkultur"});
-		 putLocalizedText(deLocale, "striving-for", new String[]{"einer anderen Art von Glück", "der ultimativen Erkenntnis", "Erfüllung weniger greifbarer Bedürfnisse", "subtilster Rache"});
+		 putLocalizedText(deLocale, "striving-for", new String[]{"einer anderen Art von Glück", "der ultimativen Erkenntnis", "Erfüllung weniger greifbarer Bedürfnisse", "subtilster Rache", "Erdbeereis bis zum Abwinken", "dem Weltfrieden"});
+		 
+		 // values for SeriesTemplate
+		 putLocalizedText(deLocale, "seriesTemplate", "{$series-subject1}-{$series-subject2}-{$series-word}");
+		 putLocalizedText(deLocale, "series-subject1", new String[]{"Hafenkanten", "Jodel", "Rheinschiffahrts", "Blumengießer", "Glocken", "Nachtwächter", "Turmwärter", "Meuchelpuffer", "Wagnis", "Schimmer", "Maus", "Wüstlings", "Mordbuben", "Analogkäse", "Gülleorgel", "Posaunen"});
+		 putLocalizedText(deLocale, "series-subject2", new String[]{"Ohnmacht", "Kummer", "Kulturschock", "Speeddating", "Silberdistel", "Maulwurfsbarbie", "Spaziergang", "Gemüse", "Lagebeurteilung", "Legendenbildung", "Bergsattel", "Demut", "Mannigfaltigkeit", "Schwungsucht", "Orientalismus"});
+		 putLocalizedText(deLocale, "series-word", new String[]{"Reihe", "Bildungsromane", "Serie", "Taschenbücher", "Handbücher", "Hefte", "Stinkblumen", "Werke", "Beulwerte", "Publikationen", "Minis", "Maxis"});
 		 
 		 // values for the ONIXTitlePageTemplate
 		 putLocalizedText(deLocale, "ONIXTitlePageTemplate", "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?><!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\"><html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>Titelseite {$title}</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/></head><body style=\"text-align:center\"><h1>{$title}</h1><div><br/></div><h2>von {$author}</h2><div><br/></div><div>erschienen im</div><div><br/></div><div><br/></div><div>{$publishername}</div><div>{$publisherlocation}</div><div>{$year}</div><div><br/></div><div>ISBN {$isbn}</div></body></html>");

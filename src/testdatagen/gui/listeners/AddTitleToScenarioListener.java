@@ -154,6 +154,11 @@ public class AddTitleToScenarioListener implements ActionListener
 				// if we can't parse the value, just don't add any further <ProductContentType>
 			}
 
+			// series / collection required?
+			if(Boolean.parseBoolean(formDataMap.get("collection")))
+			{
+				newTitle.getOnixPartsDirector().addCollection();
+			}
 			
 			// additional subjects required in ONIX file?
 			if(!subjectSet.isEmpty())

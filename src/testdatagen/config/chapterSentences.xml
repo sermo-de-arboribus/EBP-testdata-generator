@@ -954,7 +954,7 @@
     </quote>
     <quote>
         <version status="original" xml:lang="cs-CZ">
-            <text>Ať mně přijde Neruda ještě jednou s nějakou 'povídkou malostranskou'!</text>
+            <text>Ať mně přijde Neruda ještě jednou s nějakou „povídkou malostranskou”!</text>
             <source>
                 <title>Povídky malostranské</title>
                 <idref>3732</idref>
@@ -962,14 +962,14 @@
             </source>
         </version>
         <version status="unpublished" xml:lang="de-DE">
-            <text>Dieser Neruda soll mir bloß noch mal mit so einer 'Kleinseitner Geschichte' kommen!</text>
+            <text>Dieser Neruda soll mir bloß noch mal mit so einer „Kleinseitner Geschichte” kommen!</text>
             <source>
                 <title>Kleinseitner Geschichten</title>
                 <translator>Weber, Kai</translator>
             </source>
         </version>
         <version status="translation" xml:lang="en-GB">
-        	<text>Let Neruda come to me just once more with one of his 'Tales of the Little Quarter'!</text>
+        	<text>Let Neruda come to me just once more with one of his ‘Tales of the Little Quarter’!</text>
         	<source>
         		<title>Tales of the Little Quarter</title>
         		<translator>Pargeter, Edith</translator>
@@ -996,6 +996,10 @@
         </version>
         <version status="unpublished" xml:lang="fr-DE">
         	<text>Pardieu, on devrait toujours attacher une mappemonde sur le mur, afin qu'on mémorise l'Europe comme le cap du NO déchiqueté de l'Asie; et une photo de football pour la culture du Occident chrétien, où ils assomment l'arbitre après le jeu.</text>
+            <source>
+                <title>Les déplacés</title>
+                <translator>Weber, Kai</translator>
+            </source>
         </version>
         <author>Schmidt, Arno</author>
     </quote>
@@ -1152,7 +1156,7 @@ The so-called elites of our country have made no progress at all since Lu Xun's 
             <source>
                 <title>H₂O y las aguas del olvido</title>
                 <page>22</page>
-                <translation>Shert, José María</translation>
+                <translator>Shert, José María</translator>
             </source>
         </version>
         <!-- Es gibt eine frz. Übersetzung von Maud Sissung, ISBN 2867051177, aber kein Snippetview online zu finden, geprüft 2016-07-15  -->
@@ -1226,25 +1230,34 @@ The so-called elites of our country have made no progress at all since Lu Xun's 
                 <translator>Rechel-Mertens, Eva</translator>
             </source>
         </version>
+        <version status="translation" xml:lang="en-GB">
+        	<text>Similarly, our intonations embody our philosophy of life, what a person says to himself about things at any given moment.</text>
+        	<source>
+        		<title>In Search of Lost Time</title>
+        		<translator>Moncrieff, Charles Kenneth Scott</translator>
+        	</source>
+        </version>
         <author>Proust, Marcel</author>
     </quote>
     <quote>
-        <version status="translation" xml:lang="de-DE">
-            <text>Ich werde nie mehr durch Bars ziehen, um fremde Raumschiffe mit Leuchtspurgeschossen zu zertrümmern, bis das Monster mich zertrümmert. Hier ist es schöner, hier kann man Gedanken zertrümmern. Der Bildschirm ist eine Galaxie von Tausenden und Abertausenden von Asteroiden, säuberlich aufgereiht, weiß oder grün, und du bist es, der sie erschafft.</text>
-            <source>
-                <title>Das Foucaultsche Pendel</title>
-            </source>
-        </version>
-        <version status="translation" xml:lang="it-IT">
+        <version status="original" xml:lang="it-IT">
             <text>Non andrò mai più per baretti a disintegrare navicelle aliene con proiettili traccianti sino a che il mostro non disintegra te. Qui è più bello, disintegri pensieri. È una galassia di migliaia e migliaia di asteroidi, tutti in fila, bianchi o verdi, e li crei tu.</text>
             <source>
                 <title>Il pendolo di Foucault</title>
             </source>
         </version>
-        <version status="translation" xml:lang="en">
+        <version status="translation" xml:lang="de-DE">
+            <text>Ich werde nie mehr durch Bars ziehen, um fremde Raumschiffe mit Leuchtspurgeschossen zu zertrümmern, bis das Monster mich zertrümmert. Hier ist es schöner, hier kann man Gedanken zertrümmern. Der Bildschirm ist eine Galaxie von Tausenden und Abertausenden von Asteroiden, säuberlich aufgereiht, weiß oder grün, und du bist es, der sie erschafft.</text>
+            <source>
+                <title>Das Foucaultsche Pendel</title>
+                <translator>Kroeber, Burkhart</translator>
+            </source>
+        </version>
+        <version status="translation" xml:lang="en-US">
             <text>Never again will I go from one bar to another, disintegrating alien spacecraft with tracer bullets, until the invader monster disintegrates me. This is far more beautiful: here you disintegrate thoughts instead of aliens. The screen is a galaxy of thousands and thousands of asteroids, all in a row, white or green, and you have created them yourself.</text>
             <source>
                 <title>Foucault's Pendulum</title>
+                <translator>Weaver, William</translator>
             </source>
         </version>
         <author>Eco, Umberto</author>
@@ -1256,6 +1269,13 @@ The so-called elites of our country have made no progress at all since Lu Xun's 
                 <title>A Defense of Patriotism</title>
             </source>
         </version>
+        <version status="translation" xml:lang="de-DE">
+        	<text>„Mein Land, im Recht oder Unrecht“, ist etwas, was einem Patrioten nie einfiele zu sagen, höchstens in einem verzweifelten Falle. Als ob man sagte: „Meine Mutter, betrunken oder nüchtern.“ Kein Zweifel, wenn eines anständigen Mannes Mutter sich dem Trunk ergäbe, er würde ihre Sorgen bis zuletzt teilen; aber zu reden, als ob er in einem Zustande heiterer Gleichgültigkeit wäre, ob seine Mutter sich dem Trunk ergäbe oder nicht, ist sicher nicht die Sprache von Menschen, die das große Geheimnis kennen.</text>
+        	<source>
+        		<title>Verteidigung des Patriotismus, aus: Verteidigung des Unsinns, der Demut, des Schundromans und anderer missachteter Dinge</title>
+        		<translator>Anonymus</translator>
+        	</source>
+        </version>
         <author>Chesterton, Gilbert Keith</author>
     </quote>
     <quote>
@@ -1265,19 +1285,34 @@ The so-called elites of our country have made no progress at all since Lu Xun's 
                 <title>Vierundzwanzig Stunden aus dem Leben einer Frau</title>
             </source>
         </version>
+        <version status="translation" xml:lang="en-GB">
+            <text>Gratitude is so seldom found, and those who are most grateful cannot express it, are silent in their confusion, or ashamed, or sometimes seem ungracious just to conceal their feelings.</text>
+            <source>
+                <title>Twenty-Four Hours in the Life of a Woman</title>
+                <translator>Bell, Anthea</translator>
+            </source>
+        </version>
         <author>Zweig, Stefan</author>
     </quote>
     <quote>
         <version status="original" xml:lang="fr-FR">
             <text>Mais je me figure que l'enfer, vu par un soupirail, devrait être plus effrayant que si, d'un seul et planant regard, on pouvait l'embrasser tout entier.</text>
             <source>
-                <title>Le dessous de cartes d'une partie de whist</title>
+                <title>Le dessous de cartes d'une partie de whist, en: Les Diaboliques</title>
             </source>
         </version>
-        <version status="translation" xml:lang="en">
+        <version status="translation" xml:lang="de-DE">
+            <text>Ich bildete mir ein: Die Hölle, mit einem Male überschaut, kann lange nicht so grässlich sein wie ein Einblick in sie, getan durch ein Kellerloch.</text>
+            <source>
+                <title>Hinter den Karten, in: Die Teuflischen</title>
+                <translator>Schurig, Arthur</translator>
+            </source>
+        </version>
+        <version status="translation" xml:lang="en-IE">
             <text>Would not hell glimpsed through some small window be far more terrifying than if beheld in its entirety in a single sweeping glance?</text>
             <source>
                 <title>The She-Devils</title>
+                <translator>Boyd, Ernest Augustus</translator>
             </source>
         </version>
         <author>Barbey d'Aurevilly, Jules Amédéee</author>
@@ -1289,6 +1324,14 @@ The so-called elites of our country have made no progress at all since Lu Xun's 
                 <title>Der Knoten und der Nagel</title>
                 <idref>2817</idref>
                 <page>248</page>
+                <translator>Kögler, Walter</translator>
+            </source>
+        </version>
+        <version status="unpublished" xml:lang="en-DE">
+            <text>Differences between the average income affect morals and social behaviour; hypothetical differences between IQs don't.</text>
+            <source>
+                <title>The knot and the nail</title>
+                <translator>Weber, Kai</translator>
             </source>
         </version>
         <author>Sofri, Adriano</author>
@@ -1300,27 +1343,49 @@ The so-called elites of our country have made no progress at all since Lu Xun's 
                 <title>The Man Who Was Thursday</title>
             </source>
         </version>
+        <version status="translation" xml:lang="de-DE">
+            <text>Der Poet entflammt sich einzig am Chaos. Wenn dem nicht so wäre, dann wäre das poetischste Ding von der Welt die Untergrundbahn.</text>
+            <source>
+                <title>Der Mann, der Donnerstag war</title>
+                <translator>Lautensack, Heinrich</translator>
+            </source>
+        </version>
         <author>Chesterton, Gilbert Keith</author>
     </quote>
     <quote>
         <version status="original" xml:lang="fr-FR">
-            <text>Ne sois pas lascif et peureux
-                Comme le lièvre e l'amoureux.
-                Mais que toujours ton cerveau soit
-                La hase pleine qui conçoit.</text>
+            <text>
+Ne sois pas lascif et peureux
+Comme le lièvre et l'amoureux.
+Mais que toujours ton cerveau soit
+La hase pleine qui conçoit.</text>
             <source>
                 <title>Poetische Werke</title>
                 <page>24</page>
             </source>
         </version>
         <version status="translation" xml:lang="de-DE">
-            <text>Nicht ängstlich und geil stell dich an
-                Wie der Hase und der Galan.
-                Nur dein Hirn, gleich der Häsin Becken,
-                Sollte ständig empfangen und hecken.</text>
+            <text>
+Nicht ängstlich und geil stell dich an
+Wie der Hase und der Galan.
+Nur dein Hirn, gleich der Häsin Becken,
+Sollte ständig empfangen und hecken.</text>
             <source>
                 <title>Poetische Werke</title>
                 <page>24</page>
+                <translator>Krolow, Karl</translator>
+            </source>
+        </version>
+        <version status="translation" xml:lang="en-US">
+            <text>
+Don’t leap guiltily for cover
+Like the buck hare and his lover,
+But let your mind forever lie
+Like the fat doe hare and fructify.</text>
+            <source>
+                <title>The Bestiary, or Procession of Orpheus</title>
+                <page>17</page>
+                <translator>Kennedy, X. J.</translator>
             </source>
         </version>
         <author>Apollinaire, Guillaume</author>
@@ -1344,6 +1409,13 @@ The so-called elites of our country have made no progress at all since Lu Xun's 
                 <title>One Month in Goettingen, http://www.goethe.de/ins/cn/lp/kul/mag/lit/en11224307.htm</title>
             </source>
         </version>
+        <version status="unpublished" xml:lang="fr-DE">
+            <text>La culture est comme une tresse au beurre, qui se roulotte par préservation et adaptation: Mais n'importe comment on dresse ce tresse, il sera toujours aromatique.</text>
+            <source>
+                <title>Un mois à Göttingen</title>
+                <translator>Weber, Kai</translator>
+            </source>
+        </version>
         <author>Bi Feiyu</author>
         <author>毕飞宇</author>
     </quote>
@@ -1354,6 +1426,13 @@ The so-called elites of our country have made no progress at all since Lu Xun's 
                 <title>Der Turmbau von Babel</title>
                 <idref>347</idref>
                 <page>1792</page>
+            </source>
+        </version>
+        <version status="unpublished" xml:lang="en-DE">
+            <text>On an individual level history may be fragmentary, language unclear, the people parochial; reflection of the connections teaches us that it is worth to persevere in our hard-pressed existence. You won't gain paradise on earth, but you'll evade hell on earth, if you liberally reconcile yourself with human mediocrity.</text>
+            <source>
+                <title>The tower of Babel</title>
+                <translator>Weber, Kai</translator>
             </source>
         </version>
         <author>Borst, Arno</author>
@@ -1367,6 +1446,13 @@ The so-called elites of our country have made no progress at all since Lu Xun's 
                 <page>259</page>
             </source>
         </version>
+        <version status="unpublished" xml:lang="en-DE">
+            <text>Journalists do not mind so much, how to divide the guilt, but rather that they are ones, who are responsible for it.</text>
+            <source>
+                <title>The substance the deputy is made of</title>
+                <translator>Weber, Kai</translator>
+            </source>
+        </version>
         <author>Brunold, Georg</author>
     </quote>
     <quote>
@@ -1375,6 +1461,13 @@ The so-called elites of our country have made no progress at all since Lu Xun's 
             <source>
                 <title>The Man Who Was Thursday</title>
                 <idref>562</idref>
+            </source>
+        </version>
+        <version status="translation" xml:lang="de-DE">
+            <text>„Meine teuere Miss Gregory“, sagte Syme verbindlich, „es gibt Aufrichtigkeit und es gibt Unaufrichtigkeit. Es gibt aber auch solche Aufrichtigkeit und solche &#8210; und solche Unaufrichtigkeit und andere. Wenn Sie für das Salzfass etwa danke sagen: Meinen Sie da auch, was Sie sagen? Nein. Wenn Sie sagen, die Welt ist rund, meinen Sie da auch, was Sie sagen? Nein. Es ist allemal etwas Wahres; &#8210; aber Sie meinen es nicht. Nun denn: ein Mann wie Ihr Bruder findet zuweilen in der Tat ein Ding, das er meint. Es braucht nur ein halbwahr, viertelwahr, zehntelwahr Ding zu sein; aber dann sagt er mehr als er meint &#8210; vor lauter Meinen-müssen.“</text>
+            <source>
+                <title>Der Mann, der Donnerstag war</title>
+                <translator>Lautensack, Heinrich</translator>
             </source>
         </version>
         <author>Chesterton, Gilbert Keith</author>
@@ -1386,16 +1479,38 @@ The so-called elites of our country have made no progress at all since Lu Xun's 
                 <title>Der Knoten und der Nagel</title>
                 <idref>2817</idref>
                 <page>199</page>
+                <translator>Kögler, Walter</translator>
+            </source>
+        </version>
+        <version status="unpublished" xml:lang="en-DE">
+            <text>Those, who blame ideologies for wickedness and stupidity, were astonished; but wickedness and stupidity will find the ideologies that suit them all by themselves.</text>
+            <source>
+                <title>The knot and the nail</title>
+                <translator>Weber, Kai</translator>
             </source>
         </version>
         <author>Sofri, Adriano</author>
     </quote>
     <quote>
-        <version status="original" xml:lang="la">
+        <version status="original" xml:lang="la-DE">
             <text>Praeterea cibus &amp; potus huc multum faciunt, quapropter bibaces populus ut plurimum tardius loqui ceteris, observamus.</text>
             <source>
                 <title>Schediasma philologica de initio discrepantiae linguarum</title>
                 <page>VIII</page>
+            </source>
+        </version>
+        <version status="translation" xml:lang="de-DE">
+            <text>Trinkfreudige Völker sprechen z.B. langsamer als nüchterne.</text>
+            <source>
+                <title>Der Turmbau von Babel</title>
+                <translator>Borst, Arno</translator>
+            </source>
+        </version>
+        <version status="unpublished" xml:lang="de-DE">
+            <text>Dort, wo sie viel zu Essen und zu Trinken haben, können wir beobachten, dass trinkfreudige Völker viel langsamer als andere sprechen.</text>
+            <source>
+                <title>Philologische Skizze über den Ursprung der sprachlichen Unterschiede</title>
+                <translator>Weber, Kai</translator>
             </source>
         </version>
         <author>Egenolff, Johann Augustin</author>
@@ -1409,13 +1524,31 @@ The so-called elites of our country have made no progress at all since Lu Xun's 
                 <page>5</page>
             </source>
         </version>
+        <version status="unpublished" xml:lang="de-DE">
+            <text>Das soll heißen, ich finde es interessanter eine echte Gabel als ein Gemälde zu verwenden als ein Gemälde als eine echte Gabel zu benutzen.</text>
+            <source>
+                <title>MusiCage</title>
+                <translator>Weber, Kai</translator>
+            </source>
+        </version>
         <author>Cage, John</author>
     </quote>
     <quote>
+        <version status="original" xml:lang="fr-FR">
+            <text>Rien de plus sot que de parler des leçons de l'histoire. L'histoire ne n[ou]s apprend que les historiens, s'ils ont du style, de l'esprit etc. Il faut sourire de ceux qui se prennent au sérieux.</text>
+            <source>
+                <title>Cahiers 1894-1914</title>
+                <page>214</page>
+            </source>
+        </version>
         <version status="translation" xml:lang="de-DE">
             <text>Es gibt kaum etwas Dümmeres, als von Lektionen der Geschichte zu sprechen. Von der Geschichte erfahren wir nur etwas über die Historiker, ob sie Stil haben usw. Und über jene, die sich ernst nehmen, müssen wir lächeln.</text>
             <source>
                 <title>Cahiers</title>
+                <translator>Köhler, Hartmut</translator>
+                <translator>Schmidt-Radefeldt, Jürgen</translator>
+                <translator>Boeschenstein, Bernhard</translator>
+                <translator>Huschke, Reinhard</translator>
             </source>
         </version>
         <author>Valéry, Paul</author>
@@ -1435,22 +1568,38 @@ The so-called elites of our country have made no progress at all since Lu Xun's 
                 <page>40</page>
             </source>
         </version>
+        <!-- Es gibt eine offizielle, veröffentlichte Übersetzung, aber die zitierte Passage konnte ich online nicht finden -->
+        <version status="unpublished" xml:lang="en-DE">
+            <text>This is the nationalism of China's young generation: on the outside bragging and on the inside active cowardice.</text>
+            <source>
+                <title>No Enemies, no Hatred</title>
+                <translator>Weber, Kai</translator>
+            </source>
+        </version>
         <author>Liu Xiaobo</author>
     </quote>
     <quote>
         <version status="translation" xml:lang="de-DE">
-            <text>[...] sein Gesicht, das funkelnde Auge jemandes, der im Haus der Wörter lebt und oft Hausputz macht, da sieht man frisch aus, wie neu. [Über Hans Magnus Enzensberger]</text>
+            <text>[Hans Magnus Enzensbergers] Gesicht, das funkelnde Auge jemandes, der im Haus der Wörter lebt und oft Hausputz macht, da sieht man frisch aus, wie neu.</text>
             <source>
                 <title>Ingrid Caven</title>
                 <idref>2661</idref>
                 <page>132</page>
             </source>
         </version>
-        <version status="translation" xml:lang="en">
-            <text>[...] his face, the bright eye of someone who lives in the house of words and often does the housework there, it gives you an air of being like new.</text>
+        <version status="unpublished" xml:lang="cs-DE">
+            <text>... tvář Hanse Magnuse Enzensbergera, lesknoucí okno muže, který žije v domu slov a často tam uklízí, tak se vypadá čerstvě, jako nový.</text>
+            <source>
+                <title>Ingrid Caven</title>
+                <translator>Weber, Kai</translator>
+            </source>
+        </version>
+        <version status="translation" xml:lang="en-GB">
+            <text>[Hans Magnus Enzensberger's] face, the bright eye of someone who lives in the house of words and often does the housework there, it gives you an air of being like new.</text>
             <source>
                 <title>Ingrid Caven: A Novel</title>
                 <page>104</page>
+                <translator>Pye, Michael</translator>
             </source>
         </version>
         <author>Schuhl, Jean-Jacques</author>
@@ -1462,14 +1611,17 @@ The so-called elites of our country have made no progress at all since Lu Xun's 
                 <title>Middlemarch</title>
             </source>
         </version>
-        <version status="translation" xml:lang="de-DE">
+        <version status="translation" xml:lang="de-CH">
             <text>Die schwierige Aufgabe, eine fremde Seele zu erkennen, ist nichts für junge Leute, deren Bewußtsein hauptsächlich aus den eigenen Wünschen besteht.</text>
             <source>
                 <title>Middlemarch</title>
                 <idref>787</idref>
                 <page>168/69</page>
+                <translator>Leisi, Ilse</translator>
             </source>
         </version>
+        <!-- Der Satz fehlt in der ersten französischen Übersetzung von  M.-J. M., hg. v. Calmann Lévy -->
+        <!-- Vermutlich ist er in der Übersetzung von Sylvère Monod bei Gallimard enthalten; dieser konnte online aber nicht gefunden werden (Suche 17.7.16) -->
         <author>Eliot, George</author>
     </quote>
     <quote>
@@ -1481,12 +1633,20 @@ The so-called elites of our country have made no progress at all since Lu Xun's 
                 <page>88</page>
             </source>
         </version>
-        <version status="original" xml:lang="en-CN">
+        <version status="unpublished" xml:lang="de-DE">
+            <text>In der Welt gibt es fünf Arten von Getreide, die ausreichen, um satt zu machen. Warum dann Menschen essen, um zu überleben?</text>
+            <source>
+                <title>Die Reise nach Westen</title>
+                <translator>Weber, Kai</translator>
+            </source>
+        </version>
+        <version status="original" xml:lang="en-GB">
             <text>There are five kinds of of food-grains, and they are sufficient to assuage hunger, so why eat people to keep alive?</text>
             <source>
                 <title>The Journey to the West</title>
                 <idref>3237</idref>
                 <page>105</page>
+                <translator>Jenner, William John Francis</translator>
             </source>
         </version>
         <author>吴承恩</author>
@@ -1498,17 +1658,19 @@ The so-called elites of our country have made no progress at all since Lu Xun's 
                 <title>Identität und Hysterie</title>
                 <idref>1669</idref>
                 <page>9</page>
+                <translator>Paetzke, Hans-Henning</translator>
+            </source>
+        </version>
+        <version status="unpublished" xml:lang="en-DE">
+            <text>Identity, that is the mental prosthesis of the moderately intelligent. You heave a block of text into your brain.</text>
+            <source>
+                <title>Identity and hysteria</title>
+                <translator>Weber, Kai</translator>
             </source>
         </version>
         <author>Konrád, György</author>
     </quote>
     <quote>
-        <version status="translation" xml:lang="de-DE">
-            <text>Wie ich es auch anstelle, mich interessiert alles.</text>
-            <source>
-                <title>Cahiers</title>
-            </source>
-        </version>
         <version status="original" xml:lang="fr-FR">
             <text>J'ai beau faire, tout m'intéresse.</text>
             <source>
@@ -1516,22 +1678,41 @@ The so-called elites of our country have made no progress at all since Lu Xun's 
                 <page>21</page>
             </source>
         </version>
+        <version status="translation" xml:lang="de-DE">
+            <text>Wie ich es auch anstelle, mich interessiert alles.</text>
+            <source>
+                <title>Cahiers</title>
+                <translator>Köhler, Hartmut</translator>
+                <translator>Schmidt-Radefeldt, Jürgen</translator>
+                <translator>Boeschenstein, Bernhard</translator>
+                <translator>Huschke, Reinhard</translator>
+            </source>
+        </version>
         <author>Valéry, Paul</author>
     </quote>
     <quote>
+        <version status="original" xml:lang="zh-CN">
+            <text>当年的红卫兵变成今天的大毒枭，跨国革命变成了跨国犯罪，准确地表现了两个时代之间的差别，也同样准确地勾画出国人的劣根性：统治天下的权力野心和为达目的而不择手段。</text>
+            <source>
+                <title>单刃毒剑</title>
+            </source>
+        </version>
         <version status="translation" xml:lang="de-DE">
             <text>[D]er Rotgardist von einst ist der Drogendealer von heute, aus der grenzübergreifenden Revolution ist grenzüberschreitende Kriminalität geworden, worin sich der ganze Unterschied der beiden Epochen zeigt und gleichzeitig die schlechten Wurzeln von uns allen: das Machtstreben, alles unter dem Himmel zu beherrschen und nicht wählerisch zu sein in den Mitteln, mit denen man dieses Ziel verfolgt.</text>
             <source>
                 <title>Die Verpöbelung und Martialisierung des Patriotismus, in: Ich habe keine Feinde, ich kenne keinen Hass.</title>
                 <idref>3741</idref>
                 <page>75</page>
+                <translator>Betz, Karin</translator>
+                <translator>Hoffmann, Hans Peter</translator>
             </source>
         </version>
-        <version status="original" xml:lang="zh-CN">
-            <text>当年的红卫兵变成今天的大毒枭，跨国革命变成了跨国犯罪，准确地表现了两个时代之间的差别，
-                也同样准确地勾画出国人的劣根性：统治天下的权力野心和为达目的而不择手段。</text>
+        <version status="translation" xml:lang="en-US">
+            <text>[Y]esterday's Red Guard is today's big drug dealer, and yesterday's transnational revolution is today's transnational crime. But certain things are the same: the lust for power, the ambition to rule the world, and no scruples about means in reaching one's goals.</text>
             <source>
-                <title>单刃毒剑</title>
+                <title>No Enemies, No Hatred</title>
+                <translator>Duke, Michael S.</translator>
+                <translator>Chiu-Duke, Josephine</translator>
             </source>
         </version>
         <author>Liu Xiaobo</author>
@@ -1547,12 +1728,14 @@ The so-called elites of our country have made no progress at all since Lu Xun's 
             <text>Und Sie wundern sich, Herr Professor, daß Sie, sowie Sie einen Fuß an's Land setzen, Wilde darauf antreffen? Wo giebt's denn nicht Wilde?</text>
             <source>
                 <title>Zwanzigtausend Meilen unter dem Meer</title>
+                <translator>Anonymus</translator>
             </source>
         </version>
-        <version status="translation" xml:lang="en">
+        <version status="translation" xml:lang="en-US">
             <text>So you are astonished, Professor, at having set foot on a strange land and finding savages? Savages! where are there not any?</text>
             <source>
                 <title>Twentythousand leagues under the sea</title>
+                <translator>Anonymus</translator>
             </source>
         </version>
         <author>Verne, Jules</author>
@@ -1561,49 +1744,49 @@ The so-called elites of our country have made no progress at all since Lu Xun's 
         <version status="original" xml:lang="en-US">
             <text>It is not irritating to be where one is. It is only irritating to think one would like to be somewhere else.</text>
             <source>
-                <title>Lectore on Nothing, in: Silence</title>
+                <title>Lecture on Nothing, in: Silence</title>
                 <idref>473</idref>
                 <page>119</page>
+            </source>
+        </version>
+        <version status="translation" xml:lang="de-AT">
+            <text>Es ist nicht irritierend zu sein wo man ist. Es ist nur irritierend zu denken, man wäre gern irgendwo anders.</text>
+            <source>
+                <title>Silence</title>
+                <idref>474</idref>
+                <translator>Jandl, Ernst</translator>
             </source>
         </version>
         <author>Cage, John</author>
     </quote>
     <quote>
-        <version status="translation" xml:lang="de-DE">
-            <text>Wenn ihr Leibschmerzen habt, ob König oder Straßenkehrer, großer Dichter, Gelehrter oder kleines Individuum - ihr seid dann nur ein Leib, der schmerzt. Dergleichen seid ihr im Genuß identisch. Und ebenso im tiefen Schlaf. Die Unterschiede tun sich erst in den gemäßigten Zonen der Sensibilität kund &#8211; fern den Polen und dem Äquator.</text>
-            <source>
-                <title>Ich grase meine Gehirnwiese ab</title>
-                <idref>3457</idref>
-                <page>211</page>
-            </source>
-        </version>
         <version status="original" xml:lang="fr-FR">
-            <text>Si vous avez mal au ventre, que vous soyez le roi ou l'homme qui balaie la rue, ou tel grand poète ou savant ou bien un individu sans valeur — vous n'êtes alors qu'un ventre qui souffre. Et de même, dans la jouissance - êtes-vous identiques. Et de même dans le sommeil profond. Les différences se manifestent dans les phases tempérées de la sensibilité — loin des pôles et de l'équateur.</text>
+            <text>Si vous avez mal au ventre, que vous soyez le roi ou l'homme qui balaie la rue, ou tel grand poète ou savant ou bien un individu sans valeur — vous n'êtes alors qu'un ventre qui souffre. Et de même, dans la jouissance &#8210; êtes-vous identiques. Et de même dans le sommeil profond. Les différences se manifestent dans les phases tempérées de la sensibilité — loin des pôles et de l'équateur.</text>
             <source>
                 <title>Cahiers, PL II</title>
                 <page>1442</page>
             </source>
         </version>
+        <version status="translation" xml:lang="de-DE">
+            <text>Wenn ihr Leibschmerzen habt, ob König oder Straßenkehrer, großer Dichter, Gelehrter oder kleines Individuum &#8210; ihr seid dann nur ein Leib, der schmerzt. Dergleichen seid ihr im Genuß identisch. Und ebenso im tiefen Schlaf. Die Unterschiede tun sich erst in den gemäßigten Zonen der Sensibilität kund &#8211; fern den Polen und dem Äquator.</text>
+            <source>
+                <title>Ich grase meine Gehirnwiese ab</title>
+                <idref>3457</idref>
+                <page>211</page>
+                <translator>Köhler, Hartmut</translator>
+                <translator>Schmidt-Radefeldt, Jürgen</translator>
+                <translator>Boeschenstein, Bernhard</translator>
+                <translator>Huschke, Reinhard</translator>
+            </source>
+        </version>
+        <version status="unpublished" xml:lang="en-DE">
+            <text>If you've got stomach-ache, be you king or scavenger, great poet, scholar or an insignificant individual &#8210; you're then nothing but a stomach that suffers. Also you're identical in your pleasure. And also in tight sleep. Th differences only become manifest in the temperate zones of sensibility &#8210; far from the poles and the equator.</text>
+            <source>
+                <title>Notebooks</title>
+                <translator>Weber, Kai</translator>
+            </source>
+        </version>
         <author>Valéry, Paul</author>
-    </quote>
-    <quote>
-        <version status="original" xml:lang="zh-CN">
-            <text>世有五谷，尽能济饥，为何吃人度日？</text>
-            <source>
-                <title>西游记</title>
-                <idref>3237</idref>
-                <page>88</page>
-            </source>
-        </version>
-        <version status="translation" xml:lang="en">
-            <text>There are the five kinds of food-grains, and they are sufficient to assuage hunger, so why eat people to keep alive?</text>
-            <source>
-                <title>Journey to the West</title>
-                <idref>3237</idref>
-                <page>105</page>
-            </source>
-        </version>
-        <author>Wu Cheng'en</author>
     </quote>
     <quote>
         <version status="translation" xml:lang="de-DE">
@@ -1614,6 +1797,13 @@ The so-called elites of our country have made no progress at all since Lu Xun's 
                 <page>98</page>
             </source>
         </version>
+        <version status="unpublished" xml:lang="en-DE">
+        	<text>Still the notion of literary beauty is influenced by the feelings of a monkey in front of a mirror.</text>
+        	<source>
+        		<title>The New Encyclopedia</title>
+        		<translator>Weber, Kai</translator>
+        	</source>
+        </version>
         <author>Savinio, Alberto</author>
     </quote>
     <quote>
@@ -1622,6 +1812,13 @@ The so-called elites of our country have made no progress at all since Lu Xun's 
             <source>
                 <title>Ministerium des Innern (Hörspiel)</title>
             </source>
+        </version>
+        <version status="unpublished" xml:lang="en-DE">
+        	<text>At some moment in time thoughts fell off from feelings in the Occident.</text>
+        	<source>
+        		<title>Ministry of the Interior</title>
+        		<translator>Weber, Kai</translator>
+        	</source>
         </version>
         <author>Palzer, Thomas</author>
     </quote>
@@ -1634,6 +1831,9 @@ The so-called elites of our country have made no progress at all since Lu Xun's 
                 <page>121</page>
             </source>
         </version>
+        <version status="unpublished" xml:lang="en-DE">
+        	<text>Fear humbles you. And because that's what it is meant to do, I am not willing to accept it: Fear is a bad adviser.</text>
+        </version>
         <author>Dath, Dietmar</author>
     </quote>
     <quote>
@@ -1644,9 +1844,31 @@ The so-called elites of our country have made no progress at all since Lu Xun's 
                 <page>81</page>
             </source>
         </version>
+        <version status="translation" xml:lang="en-GB">
+        	<text>When the gods throw stones at each other, either these stones must injure the gods, or we imagine that we see only naughty boys who are pelting each other with lumps of earth.</text>
+        	<source>
+        		<title>Laocoon</title>
+        		<page>133</page>
+        		<translator>Phillimore, Robert</translator>
+        	</source>
+        </version>
+        <version status="translation" xml:lang="en-US">
+        	<text>If gods throw stones at one another, the stones must be able to hurt them, or they are like silly boys pelting each other with earth.</text>
+        	<source>
+        		<title>Laocoon: An Essay upon the Limits of Painting and Poetry</title>
+        		<page>227</page>
+        		<translator>Frothingham, Ellen</translator>
+        	</source>
+        </version>
         <author>Lessing, Gotthold Ephraim</author>
     </quote>
     <quote>
+        <version status="original" xml:lang="it-IT">
+            <text>Rinunciamo dunque a un ritorno alla omogeneità delle idee, ossia a un tipo passato di civiltà, e adoperiamoci a far convivere nella maniera meno cruenta le idee più disparate, ivi comprese le idee più disperate.</text>
+            <source>
+                <title>Nuova enciclopedia</title>
+            </source>
+        </version>
         <version status="translation" xml:lang="de-DE">
             <text>Verzichten wir also auf eine Rückkehr zur Homogenität der Ideen, das heißt, zu einem vergangenen Zivilisationstyp, und bemühen wir uns, die disparatesten Ideen, einbegriffen die desperatesten, auf weniger blutige Weise miteinander leben zu lassen.</text>
             <source>
@@ -1655,27 +1877,28 @@ The so-called elites of our country have made no progress at all since Lu Xun's 
                 <page>100</page>
             </source>
         </version>
-        <version status="original" xml:lang="it-IT">
-            <text>Rinunciamo dunque a un ritorno alla omogeneità delle idee, ossia a un tipo passato di civiltà, e adoperiamoci a far convivere nella maniera meno cruenta le idee più disparate, ivi comprese le idee più disperate.</text>
-            <source>
-                <title>Nuova enciclopedia</title>
-            </source>
+        <version status="unpublished" xml:lang="en-DE">
+        	<text>Let's give up on returning to the homogeneity of ideas, i.e. on a past type of civilization, and let us strive to let our ideas, even the most disparate and most desparate ones, cohabit in a less gory way.</text>
+        	<source>
+        		<title>The New Encyclopedia</title>
+        		<translator>Weber, Kai</translator>
+        	</source>
         </version>
         <author>Savinio, Alberto</author>
     </quote>
     <quote>
+        <version status="original" xml:lang="zh-CN">
+            <text>当爱国与暴力语言、与胡搅蛮缠、与泼粪之类言行同流合污之时，丑陋的"流氓爱国主义"就不可避免。爱国主义不止是恶棍们的最后避难所，而且已经沦为恶棍们手中挥舞的利器和大棒，成为邪恶对人性的讨伐，而与大是大非完全无关。</text>
+            <source>
+                <title>我看回归十年的香港</title>
+            </source>
+        </version>
         <version status="translation" xml:lang="de-DE">
             <text>Da, wo die Liebe zum Vaterland sich im Pfuhl von verrohter Sprache, nervtötender Propaganda und schmutzigen Worten und Taten suhlt, kann nur noch von einem widerwärtigen Hooligan-Patriotismus die Rede sein. Der Patriotismus wird nicht nur zum letzten Refugium von Gangstern und Halunken, er wird zu einer Waffe, einem großen Knüppel, den sie drohend über die Menschheit schwingen. Mit Recht und Unrecht hat das nichts zu tun. Das Böse bedient sich des Patriotismus, um die Menschlichkeit auszurotten.</text>
             <source>
                 <title>Zehn Jahre Rückgabe Hongkongs an China aus meiner Sicht, in: Ich habe keine Feinde, ich kenne keinen Hass.</title>
                 <idref>3741</idref>
                 <page>163</page>
-            </source>
-        </version>
-        <version status="original" xml:lang="zh-CN">
-            <text>当爱国与暴力语言、与胡搅蛮缠、与泼粪之类言行同流合污之时，丑陋的"流氓爱国主义"就不可避免。爱国主义不止是恶棍们的最后避难所，而且已经沦为恶棍们手中挥舞的利器和大棒，成为邪恶对人性的讨伐，而与大是大非完全无关。</text>
-            <source>
-                <title>我看回归十年的香港</title>
             </source>
         </version>
         <author>Liu Xiaoboo</author>
@@ -2185,7 +2408,7 @@ The so-called elites of our country have made no progress at all since Lu Xun's 
                 <title>Abschied von Prag (für Jaroslav Seifert)</title>
             </source>
         </version>
-        <author>Olly Komenda-Soentgerath</author>
+        <author>Komenda-Soentgerath, Olly</author>
     </quote>
     <quote>
         <version status="original" xml:lang="fr-FR">
@@ -2250,7 +2473,7 @@ The so-called elites of our country have made no progress at all since Lu Xun's 
     </quote>
     <quote>
         <version status="translation" xml:lang="de-DE">
-            <text>Allemal ist das Schmutzblatt[BILD] eine Quelle von Stammtisch-Geilheit.</text>
+            <text>Allemal ist das Schmutzblatt [BILD] eine Quelle von Stammtisch-Geilheit.</text>
             <source>
                 <title>Zeugen der Anklage</title>
                 <idref>3105</idref>
@@ -2394,7 +2617,7 @@ The so-called elites of our country have made no progress at all since Lu Xun's 
                 <page>84</page>
             </source>
         </version>
-        <author>Hanewald, Robert</author>
+        <author>Hanewald, Roland</author>
     </quote>
     <quote>
         <version status="translation" xml:lang="de-DE">
@@ -2548,10 +2771,11 @@ The so-called elites of our country have made no progress at all since Lu Xun's 
     </quote>
     <quote>
         <version status="original" xml:lang="de-AT">
-            <text>Der Huszar von Kecskemét
-        ist gerne gegen Damen nett.
-        Sind Damen aber, bitte, schiach,
-        dann wird der Huszar, bitte, Viech"</text>
+            <text>
+Der Huszar von Kecskemét
+ist gerne gegen Damen nett.
+Sind Damen aber, bitte, schiach,
+dann wird der Huszar, bitte, Viech</text>
             <source>
                 <title>Baby Wallenstein oder Prinz Hamlet der Osterhase oder Selawi</title>
             </source>
@@ -2583,9 +2807,10 @@ The so-called elites of our country have made no progress at all since Lu Xun's 
     </quote>
     <quote>
         <version status="original" xml:lang="de-DE">
-            <text>Vielen
-                Frauen ist ein Weichling erwünscht, wie Anchises, der blonde,
-                Oder Endymion gar, der nur als Schläfer geliebt ward.</text>
+            <text>
+Vielen
+Frauen ist ein Weichling erwünscht, wie Anchises, der blonde,
+Oder Endymion gar, der nur als Schläfer geliebt ward.</text>
             <source>
                 <title>Achilleis</title>
                 <page>528</page>
@@ -2716,7 +2941,7 @@ The so-called elites of our country have made no progress at all since Lu Xun's 
                 <page>20</page>
             </source>
         </version>
-        <author>Joaquim Maria Machado de Assis</author>
+        <author>Machado de Assis, Joaquim Maria</author>
     </quote>
     <quote>
         <version status="translation" xml:lang="de-DE">
@@ -2727,7 +2952,7 @@ The so-called elites of our country have made no progress at all since Lu Xun's 
                 <page>88/89</page>
             </source>
         </version>
-        <author>Joaquim Maria Machado de Assis</author>
+        <author>Machado de Assis, Joaquim Maria</author>
     </quote>
     <quote>
         <version status="original" xml:lang="de-DE">
@@ -2917,7 +3142,7 @@ The so-called elites of our country have made no progress at all since Lu Xun's 
     </quote>
     <quote>
         <version status="translation" xml:lang="de-DE">
-            <text>Die wilden Pfauen riefen ängstlich in der Ferne: &#8222;Die haben Angst vor der Nacht,&#8220; erklärte der Vater, &#8222;die haben Angst, sie könnten Träumen&#8220;</text>
+            <text>Die wilden Pfauen riefen ängstlich in der Ferne: &#8222;Die haben Angst vor der Nacht,&#8220; erklärte der Vater, &#8222;die haben Angst, sie könnten träumen&#8220;.</text>
             <source>
                 <title>Die Vögel kommen zurück</title>
                 <idref>91</idref>
@@ -3832,6 +4057,33 @@ Ihre Kuhigkeit verblüffte meine Menschlichkeit so sehr — so spannungsgeladen 
     		</source>
     	</version>
     	<author>Gombrowicz, Witold</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="de-DE">
+            <text>Freiheit ist Freiheit, den Unfreien zu helfen.</text>
+            <source>
+                <title>Staatsangehörigkeit: deutsch</title>
+            </source>
+        </version>
+        <author>Enzensberger, Hans Magnus</author>
+    </quote>
+    <quote>
+        <version status="translation" xml:lang="de">
+            <text>Er hatte schon erfahren, daß sich Frauen heute den Tod wünschen und schon morgen wieder somunter waren wie junge Fohlen, wenn sie nur ein anderer in die Wange kniff.</text>
+            <source>
+                <title>Leutnant Hornblower</title>
+            </source>
+        </version>
+        <author>Forester, Cecil Scott</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="de-DE">
+            <text>Man paßte eigentlich nicht zueinander. Man macht sich passend.</text>
+            <source>
+                <title>Der Lebenslauf der Liebe</title>
+            </source>
+        </version>
+        <author>Walser, Martin</author>
     </quote>
     
 </quotes>

@@ -32,6 +32,8 @@ public class TitleForm extends JDialog
 	private JCheckBox a103, e200, e201, e202, e203;
 	// additional title type checkboxes
 	private JCheckBox tittyp03, tittyp06, tittyp08, tittyp11, tittyp13;
+	// checkbox for collection / series information
+	private JCheckBox requireCollectionBox;
 	// availability and notification type elements
 	private JTextField notificationTypeField, availabilityCodeField, productAvailabilityField, productContentTypeField;
 	// set of configured subjects
@@ -141,14 +143,24 @@ public class TitleForm extends JDialog
 		
 		// ProductContentType options
 		JPanel productContentTypePanel = new JPanel(new GridLayout(0,1));
-		detailOptionsPanel.add(productContentTypePanel);
 		productContentTypePanel.setBorder(BorderFactory.createTitledBorder(blueLineBorder, "Additional product content types"));
 		
 		JPanel numberOfProductContentTypes = new JPanel(new FlowLayout());
 		numberOfProductContentTypes.setBorder(BorderFactory.createTitledBorder(purpleLineBorder, "Number of extra elements"));
 		numberOfProductContentTypes.add(productContentTypeField);
 		productContentTypePanel.add(numberOfProductContentTypes);
-		productContentTypePanel.add(Box.createHorizontalGlue());
+		
+		// Collection / series options
+		JPanel collectionPanel = new JPanel(new GridLayout(0,1));
+		collectionPanel.setBorder(BorderFactory.createTitledBorder(blueLineBorder, "Include series/collection"));
+		collectionPanel.add(requireCollectionBox);
+		
+		// group ProductContentType and Collection options together
+		JPanel contentTypeAndCollectionPanel = new JPanel(new GridLayout(0,1));
+		contentTypeAndCollectionPanel.add(productContentTypePanel);
+		contentTypeAndCollectionPanel.add(collectionPanel);
+
+		detailOptionsPanel.add(contentTypeAndCollectionPanel);
 		
 		// Subject options
 		JPanel subjectsPanel = new JPanel(new GridLayout(1,0));
@@ -263,6 +275,7 @@ public class TitleForm extends JDialog
 		formDataMap.put(extrBox.getName(), extrBox.isSelected() ? "true" : "false");
 		formDataMap.put(bkcBox.getName(), bkcBox.isSelected() ? "true" : "false");
 		formDataMap.put(epmoBox.getName(), epmoBox.isSelected() ? "true" : "false");
+		formDataMap.put(requireCollectionBox.getName(), requireCollectionBox.isSelected() ? "true" : "false");
 		formDataMap.put(namecodetype.getName(), namecodetype.getText());
 		formDataMap.put(namecodevalue.getName(), namecodevalue.getText());
 		formDataMap.put(publishername.getName(), publishername.getText());
@@ -311,6 +324,10 @@ public class TitleForm extends JDialog
 		
 		epmoBox = new JCheckBox("Add EpubMobi");
 		epmoBox.setName("epubmobi");
+		
+		requireCollectionBox = new JCheckBox("Include Series / Collection");
+		requireCollectionBox.setName("collection");
+		requireCollectionBox.setSelected(true);
 		
 		namecodetype = new JTextField("04");
 		namecodetype.setName("namecodetype");

@@ -5,7 +5,9 @@ Test Data Generator release notes / history
 Released .....
 
 Improvements: 
-- Added PrimaryContentType (ONIX 3) and ProductContentType (both ONIX versions) to the exported ONIX
+- Added PrimaryContentType (ONIX 3) and ProductContentType (both ONIX versions) to the exported ONIX: One <PrimaryContentType> / ProductContentType
+  is exported for every ONIX message. Further <ProductContentType> elements can be added by configuring the number in the GUI.
+- Added Collection (ONIX 3) / Series. The element can be selected / unselected in the GUI.
 
 *-------------*
 *Version 0.8.1*

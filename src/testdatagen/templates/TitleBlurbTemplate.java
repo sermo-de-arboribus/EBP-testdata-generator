@@ -33,7 +33,6 @@ public class TitleBlurbTemplate extends TextTemplate
 		default:
 			templateText = registry.getLocalizedText(loc, "titleBlurbTemplate")[0];
 		}
-		
 	}
 
 	@Override
