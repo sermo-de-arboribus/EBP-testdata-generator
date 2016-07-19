@@ -18,7 +18,7 @@ import testdatagen.onixbuilder.OnixProductAvailabilityBuilder;
 public class TitleForm extends JDialog
 {
 	// Definitions of constants for selections
-	private static final String[] COVER_OPTIONS = {"Media file link", "Cover upload"};
+	private static final String[] COVER_OPTIONS = {"Cover upload", "Media file link"};
 	private static final long serialVersionUID = 2L;
 	
 	// This form keeps the state of its combo and check boxes and makes the values available in some data structure
@@ -33,7 +33,7 @@ public class TitleForm extends JDialog
 	// additional title type checkboxes
 	private JCheckBox tittyp03, tittyp06, tittyp08, tittyp11, tittyp13;
 	// checkbox for collection / series information
-	private JCheckBox requireCollectionBox;
+	private JCheckBox requireCollectionBox, requireCorporateContributor;
 	// availability and notification type elements
 	private JTextField notificationTypeField, availabilityCodeField, productAvailabilityField, productContentTypeField;
 	// set of configured subjects
@@ -162,6 +162,12 @@ public class TitleForm extends JDialog
 
 		detailOptionsPanel.add(contentTypeAndCollectionPanel);
 		
+		// contributor options
+		JPanel contributorsPanel = new JPanel(new GridLayout(0,1));
+		contributorsPanel.setBorder(BorderFactory.createTitledBorder(blueLineBorder, "Contributor options"));
+		contributorsPanel.add(requireCorporateContributor);
+		detailOptionsPanel.add(contributorsPanel);
+		
 		// Subject options
 		JPanel subjectsPanel = new JPanel(new GridLayout(1,0));
 		subjectsPanel.setBorder(BorderFactory.createTitledBorder(blueLineBorder, "Additional subjects"));
@@ -276,6 +282,7 @@ public class TitleForm extends JDialog
 		formDataMap.put(bkcBox.getName(), bkcBox.isSelected() ? "true" : "false");
 		formDataMap.put(epmoBox.getName(), epmoBox.isSelected() ? "true" : "false");
 		formDataMap.put(requireCollectionBox.getName(), requireCollectionBox.isSelected() ? "true" : "false");
+		formDataMap.put(requireCorporateContributor.getName(), requireCorporateContributor.isSelected() ? "true" : "false");
 		formDataMap.put(namecodetype.getName(), namecodetype.getText());
 		formDataMap.put(namecodevalue.getName(), namecodevalue.getText());
 		formDataMap.put(publishername.getName(), publishername.getText());
@@ -328,6 +335,10 @@ public class TitleForm extends JDialog
 		requireCollectionBox = new JCheckBox("Include Series / Collection");
 		requireCollectionBox.setName("collection");
 		requireCollectionBox.setSelected(true);
+		
+		requireCorporateContributor = new JCheckBox("Include a corporate contributor");
+		requireCorporateContributor.setName("corporatecontributor");
+		requireCorporateContributor.setSelected(true);
 		
 		namecodetype = new JTextField("04");
 		namecodetype.setName("namecodetype");

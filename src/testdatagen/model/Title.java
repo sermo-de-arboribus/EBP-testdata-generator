@@ -130,6 +130,16 @@ public class Title implements Serializable
 	}
 	
 	/**
+	 * Get a promo text about the author of this product
+	 * @return String of a random promo text about the author of this product
+	 */
+	public synchronized String getAuthorBlurb()
+	{
+		AuthorBlurbTemplate template = new AuthorBlurbTemplate(new Locale("de"), this);
+		return template.fillWithText();
+	}
+	
+	/**
 	 * Get the author's first name
 	 * @return String of the author's first name.
 	 */
@@ -161,6 +171,12 @@ public class Title implements Serializable
 		}
 	}
 	
+	public synchronized String getCorporateContributor()
+	{
+		CorporateNameTemplate template = new CorporateNameTemplate(new Locale("de"));
+		return template.fillWithText();
+	}
+	
 	/**
 	 * getCoverFiles returns all GraphicFiles that are of the front cover, square cover or back cover type.
 	 * Other types of GraphicFiles are not considered to be cover files.
@@ -181,16 +197,6 @@ public class Title implements Serializable
 			}
 		}
 		return returnList;
-	}
-	
-	/**
-	 * Get a promo text about the author of this product
-	 * @return String of a random promo text about the author of this product
-	 */
-	public synchronized String getAuthorBlurb()
-	{
-		AuthorBlurbTemplate template = new AuthorBlurbTemplate(new Locale("de"), this);
-		return template.fillWithText();
 	}
 	
 	/**

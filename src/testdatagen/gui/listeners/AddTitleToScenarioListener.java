@@ -160,6 +160,12 @@ public class AddTitleToScenarioListener implements ActionListener
 				newTitle.getOnixPartsDirector().addCollection();
 			}
 			
+			// corporate contributor required?
+			if(Boolean.parseBoolean(formDataMap.get("corporatecontributor")))
+			{
+				newTitle.getOnixPartsDirector().addCorporateContributor();
+			}
+			
 			// additional subjects required in ONIX file?
 			if(!subjectSet.isEmpty())
 			{

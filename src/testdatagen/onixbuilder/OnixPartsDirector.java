@@ -37,9 +37,11 @@ public class OnixPartsDirector implements Serializable
 		
 		this.title = title;
 		Random random = new Random();
+		// an empty HashMap to be used whever we want to pass an empty Map without arguments
+		HashMap<String, String> noArguments = new EmptyHashMap();
 		
 		// add default header
-		requiredElements.add(new OnixHeaderBuilder(new HashMap<String, String>()));
+		requiredElements.add(new OnixHeaderBuilder(noArguments));
 		
 		// add record reference
 		HashMap<String, String> recRefArgs = new HashMap<String, String>();
@@ -47,10 +49,10 @@ public class OnixPartsDirector implements Serializable
 		requiredElements.add(new OnixRecordReferenceBuilder(recRefArgs));
 		
 		// add notification Type
-		requiredElements.add(new OnixNotificationTypeBuilder(new HashMap<String, String>()));
+		requiredElements.add(new OnixNotificationTypeBuilder(noArguments));
 		
 		// add product composition
-		requiredElements.add(new OnixProductCompositionBuilder(new HashMap<String, String>()));
+		requiredElements.add(new OnixProductCompositionBuilder(noArguments));
 		
 		// add default product Identifier (type 15: ISBN-13)
 		addProductIdentifier("15");
@@ -61,7 +63,7 @@ public class OnixPartsDirector implements Serializable
 		addProductFormDetail(title.getEpubTypeForProductFormDetail());
 
 		// add primary content type
-		requiredElements.add(new OnixPrimaryContentTypeBuilder(new HashMap<String, String>()));
+		requiredElements.add(new OnixPrimaryContentTypeBuilder(noArguments));
 		
 		// add protection type
 		HashMap<String, String> protectionArgs = new HashMap<>();
@@ -84,11 +86,14 @@ public class OnixPartsDirector implements Serializable
 		authorArgs.put("deathdate", "20131228");
 		requiredElements.add(new OnixContributorBuilder(authorArgs));
 		
-		// TODO: add a corporate contributor? Add the option of adding further authors?
-		// TODO: do we want to implement EditionNumber / EditionStatement?
+		// TODO: Add the option of adding further authors?
+		
+		requiredElements.add(new OnixEditionTypeBuilder(noArguments));
+		requiredElements.add(new OnixEditionNumberBuilder(noArguments));
+		requiredElements.add(new OnixEditionStatementBuilder(noArguments));
 		
 		// add a default language node
-		requiredElements.add(new OnixLanguageBuilder(new HashMap<String, String>()));
+		requiredElements.add(new OnixLanguageBuilder(noArguments));
 		
 		// add number of pages (in ONIX 2.1)
 		HashMap<String, String> extentArgs = new HashMap<String, String>();
@@ -96,7 +101,12 @@ public class OnixPartsDirector implements Serializable
 		requiredElements.add(new OnixExtentBuilder(extentArgs));
 		
 		// add a default extent element
-		requiredElements.add(new OnixExtentBuilder (new HashMap<String, String>()));
+		requiredElements.add(new OnixExtentBuilder(noArguments));
+		
+		// add illustration info
+		requiredElements.add(new OnixNumberOfIllustrationsBuilder(noArguments));
+		requiredElements.add(new OnixIllustrationsNoteBuilder(noArguments));
+		requiredElements.add(new OnixAncillaryContentBuilder(noArguments));
 		
 		// add main subject element
 		HashMap<String, String> mainSubjectArgs = new HashMap<String, String>();
@@ -129,14 +139,14 @@ public class OnixPartsDirector implements Serializable
 		requiredElements.add(new OnixImprintBuilder(new HashMap<String,String>()));
 		
 		// add publisher information
-		requiredElements.add(new OnixPublisherBuilder(new HashMap<String, String>()));
+		requiredElements.add(new OnixPublisherBuilder(noArguments));
 		
 		// add place and country of publication
-		requiredElements.add(new OnixCityOfPublicationBuilder(new HashMap<String, String>()));
-		requiredElements.add(new OnixCountryOfPublicationBuilder(new HashMap<String, String>()));
+		requiredElements.add(new OnixCityOfPublicationBuilder(noArguments));
+		requiredElements.add(new OnixCountryOfPublicationBuilder(noArguments));
 		
 		// add publishing status
-		requiredElements.add(new OnixPublishingStatusBuilder(new HashMap<String, String>()));
+		requiredElements.add(new OnixPublishingStatusBuilder(noArguments));
 		
 		// add publication date
 		HashMap<String, String> pubDateArgs = new HashMap<String, String>();
@@ -177,10 +187,10 @@ public class OnixPartsDirector implements Serializable
 		requiredElements.add(new OnixRelatedProductBuilder(relatedProductArgs));
 		
 		// add supply detail
-		requiredElements.add(new OnixSupplierBuilder(new HashMap<String, String>()));
+		requiredElements.add(new OnixSupplierBuilder(noArguments));
 		
 		// add product availability node
-		requiredElements.add(new OnixProductAvailabilityBuilder(new HashMap<String, String>()));
+		requiredElements.add(new OnixProductAvailabilityBuilder(noArguments));
 		
 		// add an expected ship date
 		HashMap<String, String> expectedShipDateArgs = new HashMap<String, String>();
@@ -230,6 +240,13 @@ public class OnixPartsDirector implements Serializable
 		collectionArgs.put("titletext", title.getSeriesTitle());
 		collectionArgs.put("titlestatement", title.getSeriesTitle());
 		requiredElements.add(new OnixCollectionSeriesBuilder(collectionArgs));
+	}
+	
+	public void addCorporateContributor()
+	{
+		HashMap<String, String> contributorArgs = new HashMap<String, String>();
+		contributorArgs.put("corporatename", title.getCorporateContributor());
+		requiredElements.add(new OnixContributorBuilder(contributorArgs));
 	}
 	
 	/**
@@ -808,5 +825,21 @@ public class OnixPartsDirector implements Serializable
 				iterator.remove();
 			}
 		}
+	}
+}
+
+class EmptyHashMap extends HashMap<String, String>
+{
+	@Override
+	public String put(String key, String value)
+	{
+		// don't do anything, we don't want elements to be added to this class
+		return null;
+	}
+	
+	@Override
+	public void putAll(Map<? extends String, ? extends String> m)
+	{
+		// don't do anything, we don't want elements to be added to this class
 	}
 }

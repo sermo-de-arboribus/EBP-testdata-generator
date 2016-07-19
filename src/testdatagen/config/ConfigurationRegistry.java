@@ -119,6 +119,12 @@ public class ConfigurationRegistry
 		 putLocalizedText(deLocale, "series-subject2", new String[]{"Ohnmacht", "Kummer", "Kulturschock", "Speeddating", "Silberdistel", "Maulwurfsbarbie", "Spaziergang", "Gemüse", "Lagebeurteilung", "Legendenbildung", "Bergsattel", "Demut", "Mannigfaltigkeit", "Schwungsucht", "Orientalismus"});
 		 putLocalizedText(deLocale, "series-word", new String[]{"Reihe", "Bildungsromane", "Serie", "Taschenbücher", "Handbücher", "Hefte", "Stinkblumen", "Werke", "Beulwerte", "Publikationen", "Minis", "Maxis"});
 		 
+		 // value for CorporateNameTemplate
+		 putLocalizedText(deLocale, "contributorTemplate", "{$ct-adj} {$ct-compound1}-{$ct-compound2}");
+		 putLocalizedText(deLocale, "ct-adj", new String[]{"Internationale", "Bodenständige", "Handgearbeitete", "Wohltätige", "Fotografische", "Kalte", "Vorsichtige", "Sozialwissenschaftliche", "Sophisticated", "Allgemeine", "Stuttgarter", "Tübinger", "Reutlinger", "Ludwigsburger", "Echterdinger", "Individuelle"});
+		 putLocalizedText(deLocale, "ct-compound1", new String[]{"Business", "Glut", "Motoren", "Sand", "Recherche", "Glocken", "Schokoladen", "Lebensmittel", "Werbungs", "Journalismus", "Individual", "Schulbuch"});
+		 putLocalizedText(deLocale, "ct-compound2", new String[]{"Maschinen", "Werke", "Dienste", "Services", "Lagerhallen", "Werkstätten", "Dienstleistungen", "Druckerei", "Individualisten", "Verlagsauslieferung"});
+		 
 		 // values for the ONIXTitlePageTemplate
 		 putLocalizedText(deLocale, "ONIXTitlePageTemplate", "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?><!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\"><html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>Titelseite {$title}</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/></head><body style=\"text-align:center\"><h1>{$title}</h1><div><br/></div><h2>von {$author}</h2><div><br/></div><div>erschienen im</div><div><br/></div><div><br/></div><div>{$publishername}</div><div>{$publisherlocation}</div><div>{$year}</div><div><br/></div><div>ISBN {$isbn}</div></body></html>");
 		 putLocalizedText(deLocale, "publisherlocation", new String[]{"Stuttgart", "Stuttgart-Vaihingen", "Stuttgart-Möhringen", "Stuttgart-Kaltental", "Stuttgart-Rohr"});

@@ -1893,6 +1893,12 @@ Like the fat doe hare and fructify.</text>
                 <title>我看回归十年的香港</title>
             </source>
         </version>
+        <version status="original" xml:lang="zh-HK">
+        	<text>當愛國與暴力語言、與胡攪蠻纏、與潑糞之類言行同流合污之時，醜陋的「流氓愛國主義」就不可避免。愛國主義不止是惡棍們的最後避難所，而且已經淪為惡棍們手中揮舞的利器和大棒，成為邪惡對人性的討伐，而與大是大非完全無關。</text>
+        	<source>
+        		<title>我看回歸十年的香港</title>
+        	</source>
+        </version>
         <version status="translation" xml:lang="de-DE">
             <text>Da, wo die Liebe zum Vaterland sich im Pfuhl von verrohter Sprache, nervtötender Propaganda und schmutzigen Worten und Taten suhlt, kann nur noch von einem widerwärtigen Hooligan-Patriotismus die Rede sein. Der Patriotismus wird nicht nur zum letzten Refugium von Gangstern und Halunken, er wird zu einer Waffe, einem großen Knüppel, den sie drohend über die Menschheit schwingen. Mit Recht und Unrecht hat das nichts zu tun. Das Böse bedient sich des Patriotismus, um die Menschlichkeit auszurotten.</text>
             <source>
@@ -1901,27 +1907,48 @@ Like the fat doe hare and fructify.</text>
                 <page>163</page>
             </source>
         </version>
+        <version status="translation" xml:lang="en-US">
+        	<text>[T]he regime has incited its toadies and their media hacks in Hong Kong into a savage mudslinging campaign that accuses democracy advocates of a lack of "patriotism." Their tactics have descended into ad hominem attack and character assassination and might be called "hooligan-patriotism." Such abuse of the term "patriotism" has nothing to do with ethical principles; on the contrary, it is a bludgeon in an assault on common human values.</text>
+        	<source>
+        		<title>No Enemies, no Hatred</title>
+        		<translator>Chou, Eva S.</translator>
+        	</source>
+        </version>
         <author>Liu Xiaoboo</author>
     </quote>
     <quote>
         <version status="original" xml:lang="de-DE">
-            <text>Das Verhältnis Gottes zu den uns ungläubig Erscheinenden ist unserer Außerbetrachtung jedenfalls prinzipiell verschlossen.</text>
+            <text>Das Verhältnis Gottes zu den uns ungläubig Erscheinenden ist unserer Außenbetrachtung jedenfalls prinzipiell verschlossen.</text>
             <source>
                 <title>Martin Luther</title>
                 <idref>1671</idref>
                 <page>83</page>
             </source>
         </version>
+        <version status="unpublished" xml:lang="en-DE">
+        	<text>God's relationship with those who seem to be infidel in our eyes is concealed from our external observation as a matter of principle.</text>
+        	<source>
+        		<title>Martin Luther</title>
+        		<translator>Weber, Kai</translator>
+        	</source>
+        </version>
         <author>Korsch, Dietrich</author>
     </quote>
     <quote>
         <version status="original" xml:lang="de-DE">
-            <text>...denn das Schreiben von Gedichten ist immer auch Trauerarbeit.</text>
+            <text>... denn das Schreiben von Gedichten ist immer auch Trauerarbeit.</text>
             <source>
                 <title>Anstiftung; in: Haslinger/Treichel: Wie werde ich ein verdammt guter Schriftsteller?</title>
                 <idref>1250</idref>
                 <page>19</page>
             </source>
+        </version>
+        <version status="unpublished" xml:lang="en-DE">
+        	<text>... because writing poetry is always in part a work of mourning.</text>
+        	<source>
+        		<title>Instigation</title>
+        		<translator>Weber, Kai</translator>
+        	</source>
         </version>
         <author>Hummelt, Norbert</author>
     </quote>
@@ -1934,9 +1961,22 @@ Like the fat doe hare and fructify.</text>
                 <page>105</page>
             </source>
         </version>
+        <version status="unpublished" xml:lang="en-DE">
+        	<text>Fascism also tried to absorb socialism, however socialism got stuck in its throat.</text>
+        	<source>
+        		<title>The New Encyclopedia</title>
+        		<translator>Weber, Kai</translator>
+        	</source>
+        </version>
         <author>Savinio, Alberto</author>
     </quote>
     <quote>
+        <version status="original" xml:lang="zh-CN">
+            <text>不论现代西方人怎样对自己的理性主义进行批判，也不论西方的知识精英对自身的殖民扩张和白种人优越感进行过多么严酷的否定，西方人仍然对其它民族有一种根深蒂固的优越感。他们仍然自豪于自我批判的勇气和真诚。西方人能够坦然地接受自己对自己的批判，但是他们很难接受来自西方之外的批判。</text>
+            <source>
+                <title>中国政治与中国当代知识分子</title>
+            </source>
+        </version>
         <version status="translation" xml:lang="de-DE">
             <text>Westler haben anderen Völkern gegenüber noch immer ein tief verwurzeltes Gefühl der Überlegenheit. Sie bilden sich immer noch sehr viel auf ihren Mut zur Selbstkritik und ihre Wahrhaftigkeit ein. Westler sind in der Lage, der eigenen Kritik gegenüber aufgeschlossen zu sein, aber sie tun sich schwer, wenn die Kritik nicht von ihnen selbst kommt.</text>
             <source>
@@ -1945,11 +1985,13 @@ Like the fat doe hare and fructify.</text>
                 <page>199</page>
             </source>
         </version>
-        <version status="original" xml:lang="zh-CN">
-            <text>不论现代西方人怎样对自己的理性主义进行批判，也不论西方的知识精英对自身的殖民扩张和白种人优越感进行过多么严酷的否定，西方人仍然对其它民族有一种根深蒂固的优越感。他们仍然自豪于自我批判的勇气和真诚。西方人能够坦然地接受自己对自己的批判，但是他们很难接受来自西方之外的批判。</text>
-            <source>
-                <title>中国政治与中国当代知识分子</title>
-            </source>
+        <version status="translation" xml:lang="en-US">
+        	<text>[Western intellectuals] still maintain deep-rooted feelings of superiority toward non-Western peoples. They feel proud of the courage and sincerety with which they do self-criticisms. They easily offer criticisms that they make of themselves, but have trouble listening to criticisms that originate from outside the West.</text>
+        	<source>
+        		<title>No Enemies, No Hatred</title>
+        		<page>121-122</page>
+        		<translator>Mosher, Stacy</translator>
+        	</source>
         </version>
         <author>Liu Xiaobo</author>
     </quote>
@@ -1961,6 +2003,13 @@ Like the fat doe hare and fructify.</text>
                 <idref>3545</idref>
                 <page>10</page>
             </source>
+        </version>
+        <version status="unpublished" xml:lang="en-DE">
+        	<text>Sometime you're going to have a job, and you'll be sitting in a meeting, and your boss is delivering a brainless monologue, that just doesn't end, and you hate him for that, for not having enough substance to refrain from doing that, from abusing the employees as handkerchiefs, as cuspidors and for self-adulation, but then you think, that this hatred is an obstacle for your success, your progress. Although you yourself are this hatred, and it's not worth progressing if you can't take yourself with you.</text>
+        	<source>
+        		<title>Eyes as white as salt</title>
+        		<translator>Weber, Kai</translator>
+        	</source>
         </version>
         <author>Dath, Dietmar</author>
     </quote>
@@ -2015,7 +2064,7 @@ Like the fat doe hare and fructify.</text>
     <quote>
         <version status="original" xml:lang="cs-CZ">
             <text>Jak je víno sladké, když se pije,
-            tak je trpký život, když se žije</text>
+tak je trpký život, když se žije.</text>
             <source>
                 <title>Prosinec 1920</title>
             </source>
@@ -2775,7 +2824,7 @@ Like the fat doe hare and fructify.</text>
 Der Huszar von Kecskemét
 ist gerne gegen Damen nett.
 Sind Damen aber, bitte, schiach,
-dann wird der Huszar, bitte, Viech</text>
+dann wird der Huszar, bitte, Viech.</text>
             <source>
                 <title>Baby Wallenstein oder Prinz Hamlet der Osterhase oder Selawi</title>
             </source>

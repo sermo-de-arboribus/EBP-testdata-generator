@@ -5,7 +5,7 @@ import java.util.Locale;
 
 import testdatagen.config.ConfigurationRegistry;
 
-public class SeriesTemplate extends TextTemplate
+public class CorporateNameTemplate extends TextTemplate
 {
 	private ConfigurationRegistry registry;
 	
@@ -13,11 +13,11 @@ public class SeriesTemplate extends TextTemplate
 	 * Constructor
 	 * @param loc The Locale to be used for the template
 	 */
-	public SeriesTemplate(Locale loc)
+	public CorporateNameTemplate(Locale loc)
 	{
 		super(loc);
 		registry = ConfigurationRegistry.getRegistry();
-		templateText = registry.getLocalizedText(loc, "seriesTemplate")[0];
+		templateText = registry.getLocalizedText(loc, "contributorTemplate")[0];
 	}
 	
 	@Override

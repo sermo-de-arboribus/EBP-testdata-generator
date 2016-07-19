@@ -2,12 +2,18 @@ Test Data Generator release notes / history
 *-------------*
 * Version 1.1 *
 *-------------*
-Released .....
+Released July 19th, 2016
 
 Improvements: 
 - Added PrimaryContentType (ONIX 3) and ProductContentType (both ONIX versions) to the exported ONIX: One <PrimaryContentType> / ProductContentType
   is exported for every ONIX message. Further <ProductContentType> elements can be added by configuring the number in the GUI.
 - Added Collection (ONIX 3) / Series. The element can be selected / unselected in the GUI.
+- Added corporate Contributor. The element can be selected / unselected in the GUI.
+- Added EditionType element (not configurable, default value "REV").
+- Added EditionNumber element (not configurable, default value "2").
+- Added EditionStatement element (not configurable, default value "Zweite, revidierte Auflage").
+- Added NumberOfIllustrations element (not configurable, default value "64").
+- Added AncillaryContent / Illustrations element (not configurable, with default values).
 
 *-------------*
 *Version 0.8.1*
