@@ -137,6 +137,35 @@ public class AddTitleToScenarioListener implements ActionListener
 				newTitle.getOnixPartsDirector().addTitle("13");
 			}
 			
+			// additional product content types required in ONIX file?
+			try
+			{
+				int numberOfElements = Integer.parseInt(formDataMap.get("productcontenttypenumber"));
+				if(numberOfElements > 0)
+				{
+					for(int i = 0; i < numberOfElements; i++)
+					{
+						newTitle.getOnixPartsDirector().addProductContentType(String.format("%02d", (i % 39 + 1)));
+					}
+				}
+			}
+			catch(NumberFormatException exc)
+			{
+				// if we can't parse the value, just don't add any further <ProductContentType>
+			}
+
+			// series / collection required?
+			if(Boolean.parseBoolean(formDataMap.get("collection")))
+			{
+				newTitle.getOnixPartsDirector().addCollection();
+			}
+			
+			// corporate contributor required?
+			if(Boolean.parseBoolean(formDataMap.get("corporatecontributor")))
+			{
+				newTitle.getOnixPartsDirector().addCorporateContributor();
+			}
+			
 			// additional subjects required in ONIX file?
 			if(!subjectSet.isEmpty())
 			{

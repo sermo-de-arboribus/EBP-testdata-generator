@@ -27,7 +27,7 @@ public class OnixContributorBuilder extends OnixPartsBuilder
 		/* 8 */	{"b037", "PersonNameInverted", "b037", "PersonNameInverted", "invertedname", ""},
 		/* 9 */	{"b039", "NamesBeforeKey", "b039", "NamesBeforeKey", "namesbeforekey", ""},
 		/*10 */	{"b040", "KeyNames", "b040", "KeyNames", "keynames", ""},
-		/*11 */	{"b047", "CorporateName", "b047", "CorporateaName", "corporatename", "No corporate name"},
+		/*11 */	{"b047", "CorporateName", "b047", "CorporateName", "corporatename", "No corporate name"},
 		/*12 */	{"contributordate", "ContributorDate", "persondate", "PersonDate", "", ""},
 		/*13 */	{"x417", "ContributorDateRole", "b305", "PersonDateRole", "contributordaterole", "50"},
 		/*14 */	{"j260", "DateFormat", "j260", "DateFormat", "persondateformat", "00"},
@@ -53,9 +53,12 @@ public class OnixContributorBuilder extends OnixPartsBuilder
 	}
 	
 	@Override
-	public Element build(final String onixVersion, final int tagType)
+	public Element build()
 	{
-		initialize(onixVersion, tagType);
+		if(!isInitialized())
+		{
+			throw new IllegalStateException("This builder object is not initialized. Please call initialize() before calling build().");
+		}
 		
 		Element contributorNode = new Element(getTagName(0));
 

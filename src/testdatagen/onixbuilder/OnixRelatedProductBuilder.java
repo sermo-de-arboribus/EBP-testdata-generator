@@ -39,13 +39,20 @@ public class OnixRelatedProductBuilder extends OnixPartsBuilder
 	}
 	
 	@Override
-	public Element build(final String onixVersion, final int tagType)
+	public Element build()
 	{
-		initialize(onixVersion, tagType);
+		if(!isInitialized())
+		{
+			throw new IllegalStateException("This builder object is not initialized. Please call initialize() before calling build().");
+		}
 		
 		OnixProductIdentifierBuilder opib = new OnixProductIdentifierBuilder(arguments);
 		OnixProductFormBuilder opfb = new OnixProductFormBuilder(arguments);
 		OnixProductFormDetailBuilder opfdb = new OnixProductFormDetailBuilder(arguments);
+		
+		opib.initialize(onixVersion, tagType);
+		opfb.initialize(onixVersion, tagType);
+		opfdb.initialize(onixVersion, tagType);
 		
 		Element relatedProductNode = new Element(getTagName(0));
 		
@@ -53,9 +60,9 @@ public class OnixRelatedProductBuilder extends OnixPartsBuilder
 		productRelationCode.appendChild(new Text(determineElementContent(1)));
 		relatedProductNode.appendChild(productRelationCode);
 		
-		relatedProductNode.appendChild(opib.build(onixVersion, tagType));
-		relatedProductNode.appendChild(opfb.build(onixVersion, tagType));
-		relatedProductNode.appendChild(opfdb.build(onixVersion, tagType));
+		relatedProductNode.appendChild(opib.build());
+		relatedProductNode.appendChild(opfb.build());
+		relatedProductNode.appendChild(opfdb.build());
 		
 		return relatedProductNode;
 	}

@@ -39,9 +39,12 @@ public class OnixPublisherBuilder extends OnixPartsBuilder
 	}
 	
 	@Override
-	public Element build(final String onixVersion, final int tagType)
+	public Element build()
 	{
-		initialize(onixVersion, tagType);
+		if(!isInitialized())
+		{
+			throw new IllegalStateException("This builder object is not initialized. Please call initialize() before calling build().");
+		}
 		
 		Element publisherNode = new Element(getTagName(0));
 		

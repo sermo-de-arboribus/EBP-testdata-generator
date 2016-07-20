@@ -17,7 +17,7 @@ public class OnixEpubTypeDescriptionBuilder extends OnixPartsBuilder
 		{
 			{"", "", "b213", "EpubTypeDescription", "epubtypedescription", "Zip(Win)"}
 		};
-	private static final int SEQUENCE_NUMBER = 610;
+	private static final int SEQUENCE_NUMBER = 650;
 
 	/**
 	 * Constructor
@@ -30,9 +30,12 @@ public class OnixEpubTypeDescriptionBuilder extends OnixPartsBuilder
 	}
 	
 	@Override
-	public Element build(final String onixVersion, final int tagType)
+	public Element build()
 	{
-		initialize(onixVersion, tagType);
+		if(!isInitialized())
+		{
+			throw new IllegalStateException("This builder object is not initialized. Please call initialize() before calling build().");
+		}
 		Element returnElement = null;
 		
 		// this element only exists in ONIX 2.1

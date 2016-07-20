@@ -18,7 +18,7 @@ import testdatagen.onixbuilder.OnixProductAvailabilityBuilder;
 public class TitleForm extends JDialog
 {
 	// Definitions of constants for selections
-	private static final String[] COVER_OPTIONS = {"Media file link", "Cover upload"};
+	private static final String[] COVER_OPTIONS = {"Cover upload", "Media file link"};
 	private static final long serialVersionUID = 2L;
 	
 	// This form keeps the state of its combo and check boxes and makes the values available in some data structure
@@ -32,8 +32,10 @@ public class TitleForm extends JDialog
 	private JCheckBox a103, e200, e201, e202, e203;
 	// additional title type checkboxes
 	private JCheckBox tittyp03, tittyp06, tittyp08, tittyp11, tittyp13;
+	// checkbox for collection / series information
+	private JCheckBox requireCollectionBox, requireCorporateContributor;
 	// availability and notification type elements
-	private JTextField notificationTypeField, availabilityCodeField, productAvailabilityField;
+	private JTextField notificationTypeField, availabilityCodeField, productAvailabilityField, productContentTypeField;
 	// set of configured subjects
 	private Set<Subject> configuredSubjects;
 	// additional price nodes
@@ -63,7 +65,6 @@ public class TitleForm extends JDialog
 		Border purpleLineBorder = BorderFactory.createLineBorder(new Color(153, 0, 153));
 		
 		// Group form elements in left panel
-		// JPanel titleOptionsPanel = new JPanel(new GridLayout(0,1));
 		JPanel titleOptionsPanel = new JPanel();
 		titleOptionsPanel.setLayout(new BoxLayout(titleOptionsPanel, BoxLayout.Y_AXIS));
 		JPanel productTypeSelectionPanel = new JPanel(new FlowLayout());
@@ -139,6 +140,33 @@ public class TitleForm extends JDialog
 		titlePanelOptions.add(tittyp08);
 		titlePanelOptions.add(tittyp11);
 		titlePanelOptions.add(tittyp13);
+		
+		// ProductContentType options
+		JPanel productContentTypePanel = new JPanel(new GridLayout(0,1));
+		productContentTypePanel.setBorder(BorderFactory.createTitledBorder(blueLineBorder, "Additional product content types"));
+		
+		JPanel numberOfProductContentTypes = new JPanel(new FlowLayout());
+		numberOfProductContentTypes.setBorder(BorderFactory.createTitledBorder(purpleLineBorder, "Number of extra elements"));
+		numberOfProductContentTypes.add(productContentTypeField);
+		productContentTypePanel.add(numberOfProductContentTypes);
+		
+		// Collection / series options
+		JPanel collectionPanel = new JPanel(new GridLayout(0,1));
+		collectionPanel.setBorder(BorderFactory.createTitledBorder(blueLineBorder, "Include series/collection"));
+		collectionPanel.add(requireCollectionBox);
+		
+		// group ProductContentType and Collection options together
+		JPanel contentTypeAndCollectionPanel = new JPanel(new GridLayout(0,1));
+		contentTypeAndCollectionPanel.add(productContentTypePanel);
+		contentTypeAndCollectionPanel.add(collectionPanel);
+
+		detailOptionsPanel.add(contentTypeAndCollectionPanel);
+		
+		// contributor options
+		JPanel contributorsPanel = new JPanel(new GridLayout(0,1));
+		contributorsPanel.setBorder(BorderFactory.createTitledBorder(blueLineBorder, "Contributor options"));
+		contributorsPanel.add(requireCorporateContributor);
+		detailOptionsPanel.add(contributorsPanel);
 		
 		// Subject options
 		JPanel subjectsPanel = new JPanel(new GridLayout(1,0));
@@ -217,7 +245,7 @@ public class TitleForm extends JDialog
 		this.add(splitPane, BorderLayout.CENTER);
 		this.add(submitbtn, BorderLayout.SOUTH);
 		this.setLocation(100,100);
-		this.setSize(800, 600);
+		this.setSize(1000, 800);
 	}
 	
 	/**
@@ -253,6 +281,8 @@ public class TitleForm extends JDialog
 		formDataMap.put(extrBox.getName(), extrBox.isSelected() ? "true" : "false");
 		formDataMap.put(bkcBox.getName(), bkcBox.isSelected() ? "true" : "false");
 		formDataMap.put(epmoBox.getName(), epmoBox.isSelected() ? "true" : "false");
+		formDataMap.put(requireCollectionBox.getName(), requireCollectionBox.isSelected() ? "true" : "false");
+		formDataMap.put(requireCorporateContributor.getName(), requireCorporateContributor.isSelected() ? "true" : "false");
 		formDataMap.put(namecodetype.getName(), namecodetype.getText());
 		formDataMap.put(namecodevalue.getName(), namecodevalue.getText());
 		formDataMap.put(publishername.getName(), publishername.getText());
@@ -272,6 +302,7 @@ public class TitleForm extends JDialog
 		formDataMap.put(notificationTypeField.getName(), notificationTypeField.getText());
 		formDataMap.put(availabilityCodeField.getName(), availabilityCodeField.getText());
 		formDataMap.put(productAvailabilityField.getName(), productAvailabilityField.getText());
+		formDataMap.put(productContentTypeField.getName(), productContentTypeField.getText());
 		
 		return formDataMap;
 	}
@@ -300,6 +331,14 @@ public class TitleForm extends JDialog
 		
 		epmoBox = new JCheckBox("Add EpubMobi");
 		epmoBox.setName("epubmobi");
+		
+		requireCollectionBox = new JCheckBox("Include Series / Collection");
+		requireCollectionBox.setName("collection");
+		requireCollectionBox.setSelected(true);
+		
+		requireCorporateContributor = new JCheckBox("Include a corporate contributor");
+		requireCorporateContributor.setName("corporatecontributor");
+		requireCorporateContributor.setSelected(true);
 		
 		namecodetype = new JTextField("04");
 		namecodetype.setName("namecodetype");
@@ -371,6 +410,9 @@ public class TitleForm extends JDialog
 		productAvailabilityField = new JTextField(OnixProductAvailabilityBuilder.DEFAULT_PRODUCT_AVAILABILITY);
 		productAvailabilityField.setName("productavailability");
 		productAvailabilityField.setColumns(8);
+		productContentTypeField = new JTextField("0");
+		productContentTypeField.setName("productcontenttypenumber");
+		productContentTypeField.setColumns(2);
 		
 		configuredPrices = new HashSet<Price>();
 	}

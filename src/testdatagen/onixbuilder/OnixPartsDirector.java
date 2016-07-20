@@ -33,13 +33,15 @@ public class OnixPartsDirector implements Serializable
 	 */
 	public OnixPartsDirector(final Title title)
 	{
+		this();
+		
 		this.title = title;
 		Random random = new Random();
-		
-		requiredElements = new LinkedList<OnixPartsBuilder>();
+		// an empty HashMap to be used whever we want to pass an empty Map without arguments
+		HashMap<String, String> noArguments = new EmptyHashMap();
 		
 		// add default header
-		requiredElements.add(new OnixHeaderBuilder(new HashMap<String, String>()));
+		requiredElements.add(new OnixHeaderBuilder(noArguments));
 		
 		// add record reference
 		HashMap<String, String> recRefArgs = new HashMap<String, String>();
@@ -47,10 +49,10 @@ public class OnixPartsDirector implements Serializable
 		requiredElements.add(new OnixRecordReferenceBuilder(recRefArgs));
 		
 		// add notification Type
-		requiredElements.add(new OnixNotificationTypeBuilder(new HashMap<String, String>()));
+		requiredElements.add(new OnixNotificationTypeBuilder(noArguments));
 		
 		// add product composition
-		requiredElements.add(new OnixProductCompositionBuilder(new HashMap<String, String>()));
+		requiredElements.add(new OnixProductCompositionBuilder(noArguments));
 		
 		// add default product Identifier (type 15: ISBN-13)
 		addProductIdentifier("15");
@@ -60,12 +62,15 @@ public class OnixPartsDirector implements Serializable
 		// add product form detail
 		addProductFormDetail(title.getEpubTypeForProductFormDetail());
 
+		// add primary content type
+		requiredElements.add(new OnixPrimaryContentTypeBuilder(noArguments));
+		
 		// add protection type
 		HashMap<String, String> protectionArgs = new HashMap<>();
 		protectionArgs.put("technicalprotection", title.getProtectionTypeForONIX());
 		requiredElements.add(new OnixTechnicalProtectionBuilder(protectionArgs));
 		
-		// TODO: implement Series / Collection 
+		// Series / Collection handled by addCollection() , if checkbox in GUI selected
 		
 		// add a title
 		addTitleWithSubtitle("01");
@@ -81,11 +86,14 @@ public class OnixPartsDirector implements Serializable
 		authorArgs.put("deathdate", "20131228");
 		requiredElements.add(new OnixContributorBuilder(authorArgs));
 		
-		// TODO: add a corporate contributor? Add the option of adding further authors?
-		// TODO: do we want to implement EditionNumber / EditionStatement?
+		// TODO: Add the option of adding further authors?
+		
+		requiredElements.add(new OnixEditionTypeBuilder(noArguments));
+		requiredElements.add(new OnixEditionNumberBuilder(noArguments));
+		requiredElements.add(new OnixEditionStatementBuilder(noArguments));
 		
 		// add a default language node
-		requiredElements.add(new OnixLanguageBuilder(new HashMap<String, String>()));
+		requiredElements.add(new OnixLanguageBuilder(noArguments));
 		
 		// add number of pages (in ONIX 2.1)
 		HashMap<String, String> extentArgs = new HashMap<String, String>();
@@ -93,7 +101,12 @@ public class OnixPartsDirector implements Serializable
 		requiredElements.add(new OnixExtentBuilder(extentArgs));
 		
 		// add a default extent element
-		requiredElements.add(new OnixExtentBuilder (new HashMap<String, String>()));
+		requiredElements.add(new OnixExtentBuilder(noArguments));
+		
+		// add illustration info
+		requiredElements.add(new OnixNumberOfIllustrationsBuilder(noArguments));
+		requiredElements.add(new OnixIllustrationsNoteBuilder(noArguments));
+		requiredElements.add(new OnixAncillaryContentBuilder(noArguments));
 		
 		// add main subject element
 		HashMap<String, String> mainSubjectArgs = new HashMap<String, String>();
@@ -126,14 +139,14 @@ public class OnixPartsDirector implements Serializable
 		requiredElements.add(new OnixImprintBuilder(new HashMap<String,String>()));
 		
 		// add publisher information
-		requiredElements.add(new OnixPublisherBuilder(new HashMap<String, String>()));
+		requiredElements.add(new OnixPublisherBuilder(noArguments));
 		
 		// add place and country of publication
-		requiredElements.add(new OnixCityOfPublicationBuilder(new HashMap<String, String>()));
-		requiredElements.add(new OnixCountryOfPublicationBuilder(new HashMap<String, String>()));
+		requiredElements.add(new OnixCityOfPublicationBuilder(noArguments));
+		requiredElements.add(new OnixCountryOfPublicationBuilder(noArguments));
 		
 		// add publishing status
-		requiredElements.add(new OnixPublishingStatusBuilder(new HashMap<String, String>()));
+		requiredElements.add(new OnixPublishingStatusBuilder(noArguments));
 		
 		// add publication date
 		HashMap<String, String> pubDateArgs = new HashMap<String, String>();
@@ -174,10 +187,10 @@ public class OnixPartsDirector implements Serializable
 		requiredElements.add(new OnixRelatedProductBuilder(relatedProductArgs));
 		
 		// add supply detail
-		requiredElements.add(new OnixSupplierBuilder(new HashMap<String, String>()));
+		requiredElements.add(new OnixSupplierBuilder(noArguments));
 		
 		// add product availability node
-		requiredElements.add(new OnixProductAvailabilityBuilder(new HashMap<String, String>()));
+		requiredElements.add(new OnixProductAvailabilityBuilder(noArguments));
 		
 		// add an expected ship date
 		HashMap<String, String> expectedShipDateArgs = new HashMap<String, String>();
@@ -221,6 +234,21 @@ public class OnixPartsDirector implements Serializable
 		requiredElements = new LinkedList<OnixPartsBuilder>();
 	}
 	
+	public void addCollection()
+	{
+		HashMap<String, String> collectionArgs = new HashMap<String, String>();
+		collectionArgs.put("titletext", title.getSeriesTitle());
+		collectionArgs.put("titlestatement", title.getSeriesTitle());
+		requiredElements.add(new OnixCollectionSeriesBuilder(collectionArgs));
+	}
+	
+	public void addCorporateContributor()
+	{
+		HashMap<String, String> contributorArgs = new HashMap<String, String>();
+		contributorArgs.put("corporatename", title.getCorporateContributor());
+		requiredElements.add(new OnixContributorBuilder(contributorArgs));
+	}
+	
 	/**
 	 * Add a media resource, usually a URL for downloading a cover file
 	 * @param url The URL where the media resource can be downloaded
@@ -254,6 +282,16 @@ public class OnixPartsDirector implements Serializable
 		requiredElements.add(new OnixPriceBuilder(newPriceArgs));
 	}
 	
+	/**
+	 * Add an additional <ProductContentType> element to the Onix XML tree
+	 * @param typeCode The typeCode from Onix List 81
+	 */
+	public void addProductContentType(final String typeCode)
+	{
+		HashMap<String, String> productContentTypeArgs = new HashMap<>();
+		productContentTypeArgs.put("productcontenttype", typeCode);
+		requiredElements.add(new OnixProductContentTypeBuilder(productContentTypeArgs));
+	}
 	/**
 	 * Add a <ProductIdentifier> node to the Onix XML tree
 	 * @param type The additional <ProductIdentifier> value as a String
@@ -337,7 +375,7 @@ public class OnixPartsDirector implements Serializable
 	 * @return Returns the root element of the Onix XML tree: <ONIXMessage> / <ONIXmessage>
 	 */
 	public Element buildOnix2(final int tagType)
-	{
+	{		
 		String rootElementName = getRootName(tagType);
 		Element root = new Element(rootElementName);
 		Element parent = root;
@@ -351,6 +389,11 @@ public class OnixPartsDirector implements Serializable
 		else
 		{
 			replaceProductForm("DG");
+		}
+		
+		for(OnixPartsBuilder builder : requiredElements)
+		{
+			builder.initialize("2.1", tagType);
 		}
 		
 		// then sort the list of required elements
@@ -367,7 +410,7 @@ public class OnixPartsDirector implements Serializable
 			// The first element that uses an OnixSupplyDetailPartsBuilder has the static sequence number 3000.
 			if(builder.getSequenceNumber() < 3000)
 			{
-				Element nextElement = builder.build("2.1", tagType);
+				Element nextElement = builder.build();
 				// Builders that product elements that are only valid in ONIX 3 might return null
 				// when called on with onixVersion 2.1
 				if(nextElement != null)
@@ -375,7 +418,7 @@ public class OnixPartsDirector implements Serializable
 					parent.appendChild(nextElement);	
 				}
 				
-				// if we have just built the header, then create a <product> node an make it the
+				// if we have just built the header, then create a <product> node and make it the
 				// parent element for all the following elements
 				if(builder.getSequenceNumber() == 100)
 				{
@@ -386,7 +429,7 @@ public class OnixPartsDirector implements Serializable
 			}
 			else if (builder.getSequenceNumber() == 3000)
 			{
-				Element supplyDetailNode = builder.build("2.1", tagType);
+				Element supplyDetailNode = builder.build();
 				parent.appendChild(supplyDetailNode);
 				parent = supplyDetailNode;
 				
@@ -409,7 +452,7 @@ public class OnixPartsDirector implements Serializable
 	 * @return Returns the root element of the Onix XML tree: <ONIXMessage> / <ONIXmessage>
 	 */
 	public Element buildOnix3(final int tagType)
-	{
+	{	
 		String rootElementName = getRootName(tagType);
 		Element root = new Element(rootElementName);
 		root.addAttribute(new Attribute("release", "3.0"));
@@ -424,6 +467,11 @@ public class OnixPartsDirector implements Serializable
 		else
 		{
 			replaceProductForm("ED");
+		}
+		
+		for(OnixPartsBuilder builder : requiredElements)
+		{
+			builder.initialize("3.0", tagType);
 		}
 		
 		// then sort the list of required elements
@@ -491,7 +539,7 @@ public class OnixPartsDirector implements Serializable
 			// here we're adding the next element that is not a predecessor of <supplydetail>
 			if(builder.getSequenceNumber() < 3000)
 			{
-				Element nextElement = builder.build("3.0", tagType);
+				Element nextElement = builder.build();
 				if(nextElement != null)
 				{
 					parent.appendChild(nextElement);	
@@ -500,7 +548,7 @@ public class OnixPartsDirector implements Serializable
 			// this is the <supplydetail> node
 			else if (builder.getSequenceNumber() == 3000)
 			{
-				Element supplyDetailNode = builder.build("3.0", tagType);
+				Element supplyDetailNode = builder.build();
 				parent.appendChild(supplyDetailNode);
 				parent = supplyDetailNode;
 				
@@ -748,6 +796,23 @@ public class OnixPartsDirector implements Serializable
 		}
 	}
 	
+	private List<Integer> getIndicesOfProductFormDetail()
+	{
+		List<Integer> indices = new ArrayList<Integer>();
+		
+		Iterator<OnixPartsBuilder> iterator = requiredElements.iterator();
+		while(iterator.hasNext())
+		{
+			OnixPartsBuilder currentElement = iterator.next();
+			if(currentElement instanceof OnixProductFormDetailBuilder)
+			{
+				indices.add(requiredElements.indexOf(currentElement));
+			}
+		}
+		
+		return indices;
+	}
+	
 	// Helper for removing OnixPartsBuilders of a certain type
 	private void removeBuilders(Class<?> builderClass)
 	{
@@ -760,5 +825,21 @@ public class OnixPartsDirector implements Serializable
 				iterator.remove();
 			}
 		}
+	}
+}
+
+class EmptyHashMap extends HashMap<String, String>
+{
+	@Override
+	public String put(String key, String value)
+	{
+		// don't do anything, we don't want elements to be added to this class
+		return null;
+	}
+	
+	@Override
+	public void putAll(Map<? extends String, ? extends String> m)
+	{
+		// don't do anything, we don't want elements to be added to this class
 	}
 }
