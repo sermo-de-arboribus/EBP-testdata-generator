@@ -41,6 +41,13 @@
                 <translator>Weber, Kai</translator>
             </source>
         </version>
+        <version status="unpublished" xml:lang="fr-DE">
+            <text>« Si on voudrait comparer la langue allemande avec un bâtiment, » Hagedorn notait, « on pourrait dire qu'il pleuvait au travers du toit en Saxe. »</text>
+            <source>
+                <title>Trois hommes dans la neige</title>
+                <translator>Weber, Kai</translator>
+            </source>
+        </version>
         <author>Kästner, Erich</author>
     </quote>
     <quote>
@@ -188,6 +195,13 @@ Out of love for Penelope, Odysseus travels home. We do not know if she loves him
                 <page>437</page>
             </source>
         </version>
+        <version status="unpublished" xml:lang="en-DE">
+            <text>I am a philanthropic cultural pessimist through and through. That this is a paradox I hope and fear in smooth alternation.</text>
+            <source>
+                <title>Wiping lips and smiling</title>
+                <translator>Weber, Kai</translator>
+            </source>
+        </version>
         <author>Goldt, Max</author>
     </quote>
     <quote>
@@ -318,7 +332,7 @@ Aber stellen Sie sich mal für einen Moment eine Schule vor, die nach diesem Pri
         <author>Morgner, Irmtraud</author>
     </quote>
     <quote>
-        <version status="translation" xml:lang="en-GB">
+        <version status="original" xml:lang="en-GB">
             <text>My life lives in my love. And my love lives in my blindness.</text>
             <source>
                 <title>Poor Miss Finch</title>
@@ -396,6 +410,8 @@ Aber stellen Sie sich mal für einen Moment eine Schule vor, die nach diesem Pri
                 <title>Orthodoxie</title>
                 <idref>563</idref>
                 <page>99</page>
+                <translator>Enderwitz, Ulrich</translator>
+                <translator>Noll, Monika</translator>
             </source>
         </version>
         <version status="translation" xml:lang="fr-CA">
@@ -507,6 +523,7 @@ Like the fat doe hare and fructify.</text>
             <source>
                 <title>Der König der Felder</title>
                 <idref>2798</idref>
+                <translator>Baruch, Gertrud</translator>
             </source>
         </version>
         <version status="translation" xml:lang="en-US">
@@ -721,6 +738,7 @@ Like the fat doe hare and fructify.</text>
                 <title>Lucilla</title>
                 <idref>590</idref>
                 <page>280</page>
+                <translator>Schönfeld, Eva</translator>
             </source>
         </version>
         <version status="translation" xml:lang="fr-FR">
@@ -757,6 +775,7 @@ Like the fat doe hare and fructify.</text>
             <source>
                 <title>Lucilla</title>
                 <idref>590</idref>
+                <translator>Schönfeld, Eva</translator>
             </source>
         </version>
         <author>Collins, Wilkie</author>
@@ -1021,6 +1040,7 @@ Der Nutzer ist <em>nie</em> schuld. Man kann es nicht oft genug sagen. Wirklich 
             <source>
                 <title>Nikomachische Ethik</title>
                 <idref>100</idref>
+                <translator>Rolfes, Eugen</translator>
             </source>
         </version>
         <author>Aristoteles</author>
@@ -1255,6 +1275,7 @@ Der Nutzer ist <em>nie</em> schuld. Man kann es nicht oft genug sagen. Wirklich 
                 <title>Logik des Sinns</title>
                 <idref>664</idref>
                 <page>186</page>
+                <translator>Dieckmann, Bernhard</translator>
             </source>
         </version>
         <version status="translation" xml:lang="en-US">
@@ -1289,10 +1310,11 @@ Der Nutzer ist <em>nie</em> schuld. Man kann es nicht oft genug sagen. Wirklich 
         <author>Valéry, Paul</author>
     </quote>
     <quote>
-        <version status="translation" xml:lang="de-DE">
+        <version status="translation" xml:lang="de-JP">
             <text>Immerhin, jemand, dessen Geschlecht nicht so eindeutig ist, kennt sich in Frauen wie in Männern gleich gut aus. Man nennt das Psychologie.</text>
             <source>
                 <title>Tausend Kraniche</title>
+                <translator>Yatsushiro, Sachiko</translator>
             </source>
         </version>
         <!-- Ist dies dieselbe Passage in der englischen Übersetzung? -->
@@ -2025,6 +2047,7 @@ no lad can catch them.</text>
             <text>Wozu braucht man heutzutage,da jeder Kirchgänger auf irgendeine Uhr sehen kann, noch Glocken? Schämt sich die Kirche nicht, sich auf diese Weise in Erinnerung bringen zu müssen?</text>
             <source>
                 <title>Der rote Schal</title>
+                <translator>Schönfeld, Eva</translator>
             </source>
         </version>
         <author>Collins, Wilkie</author>
@@ -2479,6 +2502,7 @@ The so-called elites of our country have made no progress at all since Lu Xun's 
                 <title>Lob des Durchschnittsmenschen; zit. n. Ders.: Der geheime Grund</title>
                 <idref>1978</idref>
                 <page>88/89</page>
+                <translator>Meyer-Clason, Curt</translator>
             </source>
         </version>
         <author>Machado de Assis, Joaquim Maria</author>
@@ -7012,5 +7036,52 @@ Ich gab Gas.</text>
             </source>
         </version>
         <author>Sommer, Andreas Urs</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="cs-CZ">
+            <text>[...] vždyť nám chtěli znásilnit učitelku náboženství. Po čem všem se lidem nezasteskne!</text>
+            <source>
+                <title>Pan notář, in: Pábení</title>
+                <page>185</page>
+            </source>
+        </version>
+        <version status="translation" xml:lang="de-DE">
+            <text>[...] wollte doch einer unsere Religionslehrerin vergewaltigen. Auf was die Leute alles Appetit kriegen.</text>
+            <source>
+                <title>Der Herr Notar, in: Die Bafler</title>
+                <idref>1384</idref>
+                <translator>Künzel, Franz Peter</translator>
+            </source>
+        </version>
+        <author>Hrabal, Bohumil</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="ru-RU">
+            <text>Тупой и пригодный для политики человек. Говорить не умеет. Например, увидит тебя с женщиной и спрашивает: «Это ваша любимая женщина?» как-то не по-живому, вроде канцелярского: «имеющая быть посланной бумага». Не знаю ‒ понятно ли. Если не понятно, то идите разговаривать с Семеновым; от него вас не покоробит.</text>
+            <source>
+                <title>Сентиментальное путешествие.</title>
+            </source>
+        </version>
+        <version status="translation" xml:lang="de-RU">
+            <text>Ein geistloser Mensch und brauchbarer Politiker. Reden kann er nicht. Wenn er einen zum Beispiel mit einer Frau sieht, sagt er etwas wie: „Ist das die von Ihnen geliebte Frau?“ Es klingt irgendwie unlebendig, bürokratisch, wie „die zu überstellende Akte“. Ich weiß nicht, ob das verständlich ist. Wenn nicht, reden Sie mit Semjonow selber, er wird Ihnen gefallen.</text>
+            <source>
+                <title>Sentimentale Reise</title>
+                <idref>4260</idref>
+                <translator>Radetzkaja, Olga</translator>
+            </source>
+        </version>
+        <author>Šklovskij, Viktor</author>
+    </quote>
+    <quote>
+        <version status="translation" xml:lang="de-DE">
+            <text>„Ist es besser, mit einem Mann zusammenzuleben?“
+„Wenn zwei Männer das tun, sind sie Freunde, keine Feinde.“</text>
+            <source>
+                <title>Der König der Felder</title>
+                <idref>2798</idref>
+                <translator>Baruch, Gertrud</translator>
+            </source>
+        </version>
+        <author>Singer, Isaac Bashevis</author>
     </quote>
 </quotes>
