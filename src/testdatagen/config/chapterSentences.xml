@@ -61,11 +61,19 @@ Vor Liebe zu Penelope fährt Odysseus heim. Wir wissen nicht, ob sie ihn liebt.<
             </source>
         </version>
         <version status="translation" xml:lang="en-US">
-            <text>How can one get over – and around – what Heidegger called "Enframing" [Gestell]? In 2007, here and today? Can danger, as Hölderlin affirmed, rescue us? Yes and no. As long as we, beholden to corporations such as IBM and Microsoft, only design computers to operate from the top down, from Bill Gates' business strategy down to the machines' many, varied components, we (men, programming vassals, and Stanford students) are simply imitating – indeed, mimicking – that One God who thinks He can make do as Creator without any woman or any love at all. Therefore, we should not be surprised if computers take their revenge by developing bugs and lying. For if we were to design them more lovingly – from the bottom up – much would change. Even though we would no longer rake in money with the lie that is called "software", HAL would receive from us, his programmers – and strictly in keeping with Turing – senses, muscles, and a heart, one after the other. Computers would be embryos that (to use Homer's calculation) grow and batten for ten months in the maternal womb. Then we would free them, as the womb does the child.#
+            <text>How can one get over – and around – what Heidegger called "Enframing" [Gestell]? In 2007, here and today? Can danger, as Hölderlin affirmed, rescue us? Yes and no. As long as we, beholden to corporations such as IBM and Microsoft, only design computers to operate from the top down, from Bill Gates' business strategy down to the machines' many, varied components, we (men, programming vassals, and Stanford students) are simply imitating – indeed, mimicking – that One God who thinks He can make do as Creator without any woman or any love at all. Therefore, we should not be surprised if computers take their revenge by developing bugs and lying. For if we were to design them more lovingly – from the bottom up – much would change. Even though we would no longer rake in money with the lie that is called "software", HAL would receive from us, his programmers – and strictly in keeping with Turing – senses, muscles, and a heart, one after the other. Computers would be embryos that (to use Homer's calculation) grow and batten for ten months in the maternal womb. Then we would free them, as the womb does the child.
 Out of love for Penelope, Odysseus travels home. We do not know if she loves him.</text>
             <source>
                 <title>In the Wake of the Odyssey, in: The Truth of the Technological World</title>
                 <translator>Butler, Erik</translator>
+            </source>
+        </version>
+        <version status="unpublished" xml:lang="fr-FR">
+            <text>Comment peut-on surmonter le dispositif [Gestell] d'Heidegger? En 2007, ici et aujourd'hui. Le danger ‒ selon Hölderlin ‒ peut-il nous sauver? Oui non, non oui. Tant que nous concevons ‒ complètement acquises aux consortiums comme IBM et Microsoft ‒ des ordinateurs uniquement de haut en bas, du calcul économique de Bill Gates aux nombreuses pièces détachés, nous (hommes, valets programmeurs, étudiants de Stanford) seulement pratiquent la mimesis, même le mimétisme face à celui dieu là, qui croit s'accommoder en guise de Créateur sans femme et amour. N'étonnons-nous alors, si l'ordinateurs se vengent par bogues et mensonges. Nous les concevrions avec plus affectueusement de bas en haut, beaucoup de choses seraient différentes. Certes que nous nepouvions plus remuer l'argent à la pelle avec le mensonge appelé logiciel, mais HAL recevrait de nous programmeurs ‒ strictement selon Turing ‒ successivement des sens, des muscles et un cœur. Les ordinateurs seraient des embryons qui grandissent et se développent dans l'utérus (compter par Homère) pendant dix longues lunes. Ensuite, nous la relâchons - comme chaque sein maternel son enfant.
+Ulysse rentre à la maison à cause de son amour pour Pénélope. Nous ne savons pas si elle l'aime.</text>
+            <source>
+                <title>Suivre le sillon d'Ulysse, en: La vérité du monde technique</title>
+                <translator>Weber, Kai</translator>
             </source>
         </version>
         <author>Kittler, Friedrich</author>
@@ -78,11 +86,19 @@ Out of love for Penelope, Odysseus travels home. We do not know if she loves him
                 <idref>1278</idref>
             </source>
         </version>
-        <!-- offizielle Englische Übersetzung u.d.T. "Jamie and His Friends", übersetzt von Anthea Bell, ISBN 0-86264-213-2 -->
         <version status="unpublished" xml:lang="en-DE">
+            <!-- offizielle englische Übersetzung erhältlich u.d.T. "Jamie and His Friends", übersetzt von Anthea Bell, ISBN 0-86264-213-2, war mir nicht zugänglich -->
             <text>I must admit, Panadel, I envy you. Your hereditary peerage authorizes you to to visit all film shows in the orient for free.</text>
             <source>
                 <title>The Feral Horse under the tiled stove</title>
+                <translator>Weber, Kai</translator>
+            </source>
+        </version>
+        <version status="unpublished" xml:lang="fr-DE">
+            <!-- offizielle frz. Übersetzung erhältlich unter „Les grandes découvertes de Jacob“ (1987), ISBN 2-08-161897-4 -->
+            <text>Je dois admettre, Panadel, je vous envie. En effet, la pairie héréditaire vous autorise à visiter gratuitement toutes les séances de cinéma en Orient toute la vie.</text>
+            <source>
+                <title>Le cheval sauvage sous la poêle de faïence</title>
                 <translator>Weber, Kai</translator>
             </source>
         </version>
@@ -103,6 +119,14 @@ Out of love for Penelope, Odysseus travels home. We do not know if she loves him
  Monsters, man-eating seagulls, a killer buzzard, gruesome tarantulas, unmanned flight objects, an exploding sun – BILD always provides its readers with the most terrible terrors. Those who are afraid can be manipulated. Those who are threatened don't get to start thinking. Enlightenment – that's public enemy number one for BILD.</text>
             <source>
                 <title>Witnesses of the Prosecution</title>
+                <translator>Weber, Kai</translator>
+            </source>
+        </version>
+        <version status="unpublished" xml:lang="fr-DE">
+            <text>BILD, être aussi loin d'un journal qui est obligé de l'information et des faits que la grande nébuleuse d'Andromède est de la terre, est le livre de contes de nos jours: Mais ici se ne promulgue pas les mythes libérateurs du peuple, crûs par le bas, qui expriment en plus d'angoisses aussi des espoirs et désirs et envisage le changement, ‒ ici se seulement montre la cloche à fromage étouffante d'un monde succédané et délirant, qui est coiffé sur des lecteurs du BILD.
+Des monstres, mouettes anthropophages, buses tueuses, mygales affreuses, missiles sans pilote, un soleil explosant ‒ BILD toujours tient la terreur plus terrible tout prêt pour ses lecteurs. La personne qui a peur est manipulable. Qui est effrayé, n'a pas du temps pour réflechir. L'éclaircissement ‒ c'est l'ennemi du peuple no. 1 pour BILD.</text>
+            <source>
+                <title>Témoin du Parquet</title>
                 <translator>Weber, Kai</translator>
             </source>
         </version>
@@ -240,9 +264,16 @@ Out of love for Penelope, Odysseus travels home. We do not know if she loves him
     </quote>
     <quote>
         <version status="original" xml:lang="de-DE">
-            <text>Freiheit ist Freiheit, den Unfreien zu helfen.</text>
+            <text>Freiheit ist Freiheit, den Unfreien zu helfen, oder sie taugt nicht viel.</text>
             <source>
                 <title>Staatsangehörigkeit: deutsch</title>
+            </source>
+        </version>
+        <version status="unpublished" xml:lang="en-DE">
+            <text>Freedom is freedom to help the unfree, or it isn't much good.</text>
+            <source>
+                <title>Citizenship: German</title>
+                <translator>Weber, Kai</translator>
             </source>
         </version>
         <author>Enzensberger, Hans Magnus</author>
@@ -253,6 +284,14 @@ Out of love for Penelope, Odysseus travels home. We do not know if she loves him
 Aber stellen Sie sich mal für einen Moment eine Schule vor, die nach diesem Prinzip funktioniert. Die Lehrer sind ständig bemüht, herauszufinden, wofür sich die Schüler gerade interessieren, und liefern ihnen genau diese Inhalte. Im Musikunterricht werden nur Songs von Justin Bieber gesungen. In Englisch geht es nur um die amerikanischen Wahlen und die Lächerlichkeit der republikanischen Kandidaten. Im Geschichtsunterricht werden nur die besonderen Knüller behandelt. Die Französische Revolution, mit all den rollenden Köpfen. Die Kreuzzüge. Die Reformation oder die Aufklärung werden ausgelassen. So absurd diese Vorstellung erscheinen mag, es ist die Lebensrealität von Erwachsenen. Denn es ist zwar allgemein bekannt, das der Mensch lernt, solange er lebt, praktische Konsequenzen haben wir daraus aber bisher nicht sonderlich viele gezogen.</text>
             <source>
                 <title>Wir nennen es Politik</title>
+            </source>
+        </version>
+        <version status="unpublished" xml:lang="en-DE">
+            <text>One thing nearly all media on the free market have in common: They generate content mainly based on your, the reader's, interest. No matter if it is measured by quota, clicks or print run, the media world is adapted to create interest and to be liked. And actually that would not necessarily bad. It's good not to be bored, but to receive the most fascinating in palatable bites.
+But imagein for a moment a school that works based on this principle. Teachers would be trying to find out all the time, what students are interested in right now and deliver just those contents. In music lessons only songs of Justin Bieber are sung. In the English class only the American elections would be dealt with and the ridiculousness of the Republican candidates. In history class only blockbusters would be treated. The French Revolutions, with all its chopped off heads. The crusades. Reformation and the age of enlightenment will be omitted. As absurd as this imagination may sound, it the reality of adult life. Though it is generally known that human beings learn as long as they live, yet we have not drawn many practical consequences from this fact.</text>
+            <source>
+                <title>We call it politics</title>
+                <translator>Weber, Kai</translator>
             </source>
         </version>
         <author>Weisband, Marina</author>
@@ -318,6 +357,13 @@ Aber stellen Sie sich mal für einen Moment eine Schule vor, die nach diesem Pri
             <source>
                 <title>Adam Mensch</title>
                 <page>361-362</page>
+            </source>
+        </version>
+        <version status="unpublished" xml:lang="en-DE">
+            <text>Once his inner life had been a wide, undivided stream that mirrored the whole universe. At that time it was easy for him to realise and to see through. By now his inner life has differentiated according to the natural law of psychic organ fission, and the great, wide, undivided stream inside him has splintered into uncountable rivers and rivulets, creeks and trickles, that reflect and allow to reconstruct only broken parts and particles of the universe. Where there once had been a single, great, collected interest that had to cause death if it was understood, triggered and put into practice in the right moment, there were now a thousand smaller particular interests that encased life. Yes! He had to live. He had missed death. He was sentenced to life.</text>
+            <source>
+                <title>Adam Man</title>
+                <translator>Weber, Kai</translator>
             </source>
         </version>
         <author>Conradi, Hermann</author>
@@ -2563,10 +2609,11 @@ Sie stellten die Ordnung wieder her mit dem Knochenmann. Wie andere den Kaspar l
         <author>Vogt, Günther</author>
     </quote>
     <quote>
-        <version status="translation" xml:lang="de">
+        <version status="translation" xml:lang="de-DE">
             <text>Er hatte schon erfahren, daß sich Frauen heute den Tod wünschen und schon morgen wieder somunter waren wie junge Fohlen, wenn sie nur ein anderer in die Wange kniff.</text>
             <source>
                 <title>Leutnant Hornblower</title>
+                <translator>Leutnant Hornblower</translator>
             </source>
         </version>
         <author>Forester, Cecil Scott</author>
@@ -3051,7 +3098,7 @@ Sich selbst Besiegender ist stark.</text>
         <author>Liu Xiaobo</author>
     </quote>
     <quote>
-        <version status="translation" xml:lang="de-DE">
+        <version status="original" xml:lang="de-DE">
             <text>Allemal ist das Schmutzblatt [BILD] eine Quelle von Stammtisch-Geilheit.</text>
             <source>
                 <title>Zeugen der Anklage</title>
@@ -3161,6 +3208,7 @@ Incurable, in each, the wounds they make.</text>
                 <title>Ingrid Caven</title>
                 <idref>2661</idref>
                 <page>132</page>
+                <translator>Aumüller, Uli</translator>
             </source>
         </version>
         <version status="unpublished" xml:lang="cs-DE">
@@ -4878,12 +4926,14 @@ plunges into the heart and is gone.</text>
             <text>Denn Kultur ist wie ein Hefezopf, der sich aus dem Beharren auf Althergebrachtem und der Absorption von Neuem formt. Ganz gleich, wie man den Zopf auch flechtet, er wird immer duften.</text>
             <source>
                 <title>Ein Monat in Göttingen, http://www.goethe.de/ins/cn/lp/kul/mag/lit/de11224307.htm</title>
+                <translator>N.N.</translator>
             </source>
         </version>
         <version status="translation" xml:lang="en-DE">
             <text>Culture is like a pretzel, twisted by preservation and adaptation: no matter how much it is twisted, it is still delicious.</text>
             <source>
                 <title>One Month in Goettingen, http://www.goethe.de/ins/cn/lp/kul/mag/lit/en11224307.htm</title>
+                <translator>N.N.</translator>
             </source>
         </version>
         <version status="unpublished" xml:lang="fr-DE">
@@ -5223,6 +5273,8 @@ plunges into the heart and is gone.</text>
                 <title>Krieg und Frieden</title>
                 <idref>2965</idref>
                 <page>251/52</page>
+                <translator>Röhl, Hermann</translator>
+                <translator>Kasack, Wolfgang</translator>
             </source>
         </version>
         <version status="translation" xml:lang="en-GB">
@@ -5244,22 +5296,23 @@ plunges into the heart and is gone.</text>
                 <page>32</page>
             </source>
         </version>
-        <version status="translation" xml:lang="en">
-            <text>I was walking along a eucalyptus-lined avenue when a cow sauntered out from behind a tree. I stopped and we looked each other in the eye. Her cowness shocked my humanness to such a degree — the moment our eyes met was so tense — I stopped dead in my tracks and lost my bearings as a man, that is, as a member of the human species. The strange feeling that I was apparently discovering for the first time was the shame of a man come face-to-face with an animal. I allowed her to look and see me — this made us equal — and resulted in my also becoming an animal — but a strange even forbidden one, I would say. I continued my walk, but I felt uncomfortable... in nature, surrounding me on all sides, as if it were... watching me.</text>
-            <source>
-                <title>Diary 1957-1961</title>
-                <page>24</page>
-            </source>
-        </version>
         <version status="translation" xml:lang="de-DE">
             <text>Ich spaziere auf einer Eukalyptusallee, da tritt plötzlich eine Kuh hinter einem Baum hervor.
-Ich blieb stehen, und wir sahen uns in die Augen.
-Ihre Kuhigkeit verblüffte meine Menschlichkeit so sehr — so spannungsgeladen war dieser Moment, da unsere Blick sich trafen — daß ich als Mensch, d. h. in meiner Gattung als Mensch, aus der Fassung geriet. Ein seltsames Gefühl, das ich wohl zum ersten Mal erfuhr — diese Scham des Menschen vor dem Tier. Ich ließ es zu, daß sie mich ansah und mich betrachtete — das macht uns gleich — infolgedessen wurde auch ich zum Tier — aber einem merkwürdigen, ich würde sogar sagen, unzulässigen. Ich nahm den unterbrochenen Spaziergang wieder auf und ging weiter, aber mir war nicht recht geheuer... in der Natur, die mich von allen Seiten umgab und mich gleichsam... betrachtete.</text>
+                Ich blieb stehen, und wir sahen uns in die Augen.
+                Ihre Kuhigkeit verblüffte meine Menschlichkeit so sehr — so spannungsgeladen war dieser Moment, da unsere Blick sich trafen — daß ich als Mensch, d. h. in meiner Gattung als Mensch, aus der Fassung geriet. Ein seltsames Gefühl, das ich wohl zum ersten Mal erfuhr — diese Scham des Menschen vor dem Tier. Ich ließ es zu, daß sie mich ansah und mich betrachtete — das macht uns gleich — infolgedessen wurde auch ich zum Tier — aber einem merkwürdigen, ich würde sogar sagen, unzulässigen. Ich nahm den unterbrochenen Spaziergang wieder auf und ging weiter, aber mir war nicht recht geheuer... in der Natur, die mich von allen Seiten umgab und mich gleichsam... betrachtete.</text>
             <source>
                 <title>Sakrilegien</title>
                 <idref>1119</idref>
                 <page>109</page>
                 <translator>Kühl, Olaf</translator>
+            </source>
+        </version>
+        <version status="translation" xml:lang="en-US">
+            <text>I was walking along a eucalyptus-lined avenue when a cow sauntered out from behind a tree. I stopped and we looked each other in the eye. Her cowness shocked my humanness to such a degree — the moment our eyes met was so tense — I stopped dead in my tracks and lost my bearings as a man, that is, as a member of the human species. The strange feeling that I was apparently discovering for the first time was the shame of a man come face-to-face with an animal. I allowed her to look and see me — this made us equal — and resulted in my also becoming an animal — but a strange even forbidden one, I would say. I continued my walk, but I felt uncomfortable... in nature, surrounding me on all sides, as if it were... watching me.</text>
+            <source>
+                <title>Diary 1957-1961</title>
+                <page>24</page>
+                <translator>Vallee, Lillian</translator>
             </source>
         </version>
         <author>Gombrowicz, Witold</author>
@@ -7083,5 +7136,15 @@ Ich gab Gas.</text>
             </source>
         </version>
         <author>Singer, Isaac Bashevis</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="de-DE">
+            <text>„Wo kommen wir hin“, sagte Katinka, „wenn wir für jede Heldentat gleich einen Imbiß verlangen!“</text>
+            <source>
+                <title>Das Wildpferd unterm Kachelofen</title>
+                <idref>1278</idref>
+            </source>
+        </version>
+        <author>Hein, Christoph</author>
     </quote>
 </quotes>
