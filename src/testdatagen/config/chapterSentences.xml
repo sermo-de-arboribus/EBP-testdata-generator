@@ -147,6 +147,14 @@ Des monstres, mouettes anthropophages, buses tueuses, mygales affreuses, missile
                 <translator>Heym, Stefan</translator>
             </source>
         </version>
+        <!-- frz. Übersetzung v. Germaine Pinaud u. d. T. „Otages“ erschien 1946, war mir bisher nicht zugänglich -->
+        <version status="unpublished" xml:lang="fr-DE">
+            <text>S'ils nous fusilleront demain, quelqu'un va écouter les coups. Dans les cœurs des bons gens les boulets ont un écho longue.</text>
+            <source>
+                <title>Otages</title>
+                <translator>Weber, Kai</translator>
+            </source>
+        </version>
         <author>Heym, Stefan</author>
     </quote>
     <quote>
@@ -373,6 +381,13 @@ But imagein for a moment a school that works based on this principle. Teachers w
             <text>Ein Schießeisen ist für die Aventüre nicht erforderlich. Einhörner werden mit Schimpfwörtern zur Strecke gebracht. Beatriz versicherte, daß sie über einen großen Schimpfwortschatz verfügte und vor Interpol keine Angst hätte.</text>
             <source>
                 <title>Leben und Abenteuer der Trobadora Beatriz nach Zeugnissen ihrer Spielfrau Laura</title>
+            </source>
+        </version>
+        <version status="translation" xml:lang="en-US">
+            <text>A gun is not required for the quest. Unicorns are brought down by swear words. Beatrice declared that she had a large supply of swear words at her disposal and was not afraid of Interpol.</text>
+            <source>
+                <title>The Life and Adventures of Trobadora Beatrice as Chronicled by Her Minstrel Laura</title>
+                <translator>Clausen, Jeanette</translator>
             </source>
         </version>
         <author>Morgner, Irmtraud</author>
@@ -2613,7 +2628,7 @@ Sie stellten die Ordnung wieder her mit dem Knochenmann. Wie andere den Kaspar l
             <text>Er hatte schon erfahren, daß sich Frauen heute den Tod wünschen und schon morgen wieder somunter waren wie junge Fohlen, wenn sie nur ein anderer in die Wange kniff.</text>
             <source>
                 <title>Leutnant Hornblower</title>
-                <translator>Leutnant Hornblower</translator>
+                <translator>Beulwitz, Eugen</translator>
             </source>
         </version>
         <author>Forester, Cecil Scott</author>
@@ -3975,7 +3990,7 @@ Dich hätte ich geliebt · dich die’s erkannt.</text>
         <author>Proust, Marcel</author>
     </quote>
     <quote>
-        <version status="original" xml:lang="en">
+        <version status="original" xml:lang="en-US">
             <text>A machine with too much capacity is like a botanist with a photographic memory who, when presented with a new tree, concludes that it is not a tree because it has a different number of leaves from anything she has seen before; a machine with too little capacity is like the botanist’s lazy brother, who declares that if it’s green, it’s a tree.</text>
             <source>
                 <title>A Tutorial on Support Vector Machines for Pattern Recognition</title>
@@ -5452,6 +5467,7 @@ plunges into the heart and is gone.</text>
             <text>Schwimmende Silos, die pro Tag 35000 Pud in sich hineinsaugen können. Man sollte an solch einen Sauger heranschwimmen und zu ihm sagen: 'Lieber Genosse, saug doch bitte die 35000 Liebesteufel aus mir heraus, die sich in meiner Seele eingenistet haben.</text>
             <source>
                 <title>Zoo oder Briefe nicht über die Liebe</title>
+                <translator>Kaempfe, Alexander</translator>
             </source>
         </version>
         <version status="translation" xml:lang="en-US">
@@ -6832,11 +6848,12 @@ Tacero sciam, de quibus tacerer satius est.</text>
                 <page>32</page>
             </source>
         </version>
-        <version status="translation" xml:lang="en">
+        <version status="translation" xml:lang="en-US">
             <text>I explained that an animal is not born to carry another animal on its back. A man on a horse is as weird as a rat riding a rooster, a chicken riding a camel, a monkey riding a cow, or a dog riding a buffalo. A man on a horse is a scandal, an upsetting of the natural order of things, violent artificiality, dissonance, ugliness.</text>
             <source>
                 <title>Diary 1957-1961</title>
                 <page>24</page>
+                <translator>Vallee, Lillian</translator>
             </source>
         </version>
         <version status="translation" xml:lang="de-DE">
@@ -7147,4 +7164,69 @@ Ich gab Gas.</text>
         </version>
         <author>Hein, Christoph</author>
     </quote>
+    <quote>
+        <version status="original" xml:lang="de-DE">
+            <text>Im Bayreuther Zweckverbandskrankenhaus [...] wurde die Station 13 in 12b umbenannt, was der Krankenhausleitung den hämischen Hinweis des Sektenbeauftragten der evangelischen Landeskirche eintrug, sie solle nun aber auch die Krankenhausbediensteten der Besoldungsgruppe 13 zurückstufen, um Unheil von ihnen zu wenden.</text>
+            <source>
+                <title>Unberufen toi, toi, toi</title>
+            </source>
+        </version>
+        <author>Hacke, Axel</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="ru-RU">
+            <text>ПуШкин, Толстой прошли в русской литературе вне сознания, а если бы осознали их, то не пропустили.</text>
+            <source>
+                <title>Сентиментальное путешествие.</title>
+            </source>
+        </version>
+        <version status="translation" xml:lang="de-DE">
+            <text>Puschkin und Tolstoj haben unbemerkt Eingang in die russische Literatur gefunden, hätte man sie bemerkt, man hätte sie nicht hereingelassen.</text>
+            <source>
+                <title>Sentimentale Reise</title>
+                <idref>4260</idref>
+                <page>284</page>
+                <translator>Radetzkaja, Olga</translator>
+            </source>
+        </version>
+        <author>Šklovskij, Viktor</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="ru-RU">
+            <text>Вы не думайте, что вам не нужны теоретики искуства.
+Человек живет не тем, что он ест, а тем, что переваривает. Искуство нужно, как фермент.</text>
+            <source>
+                <title>Сентиментальное путешествие.</title>
+            </source>
+        </version>
+        <version status="translation" xml:lang="de-DE">
+            <text>Glauben Sie nicht, die Welt bräuchte keine Kunsttheoretiker.
+Der Mensch lebt nicht von dem, was er isst, sondern von dem, was er verdaut. Er braucht die Kunst als Ferment.</text>
+            <source>
+                <title>Sentimentale Reise</title>
+                <idref>4260</idref>
+                <page>347</page>
+                <translator>Radetzkaja, Olga</translator>
+            </source>
+        </version>
+        <author>Šklovskij, Viktor</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="cs-CZ">
+            <text>Clověk nikdy nemůže vědět, co má chtít, protože žije jen jeden život a nemůže ho nijak porovnávat se svými předchozími životy, ani ho opravit v následujících životech.</text>
+            <source>
+                <title>Nesnesitelná lehkost bytí</title>
+            </source>
+        </version>
+        <version status="translation" xml:lang="de-CH">
+            <text>Man kann nie wissen, was man wollen soll, weil man nur ein Leben hat, das man weder früheren Leben vergleichen noch in späteren korrigieren kann.</text>
+            <source>
+                <title>Die unerträgliche Leichtigkeit des Seins</title>
+                <idref>1715</idref>
+                <translator>Roth, Susanna</translator>
+            </source>
+        </version>
+        <author>Kundera, Milan</author>
+    </quote>
+    
 </quotes>
