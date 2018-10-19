@@ -185,23 +185,26 @@ Des monstres, mouettes anthropophages, buses tueuses, mygales affreuses, missile
     </quote>
     <quote>
         <version status="original" xml:lang="en-US">
-            <text>There's no reason you have to choose between practicing Zen and enjoyment. We don't have to approach being a practitioner of Zen as an ascetic. I'm not talking about fun. I'm talking about <em>real</em> pleasure, elegant pleasure as opposed to the coarse, unfulfilling stuff that gives you a hangover. [...] The irony of this kind of teaching is that it's so much fun to sit around and laugh about it and so little fun to actually receive it. When you study, you spend a lot of time around your teacher. And nothing is less pleasant because it's not easy to learn things your ego doesn't want to learn. Nobody wants to hear that they should be doing things differently, or that what they just said was inappropriate, or that their understanding is not deep enough, or that they're not embodying the teaching.</text>
+            <text>There's no reason you have to choose between practicing Zen and enjoyment. We don't have to approach being a practitioner of Zen as an ascetic. I'm not talking about fun. I'm talking about <em>real</em> pleasure, elegant pleasure as opposed to the coarse, unfulfilling stuff that gives you a hangover.</text>
             <source>
                 <title>Wonderland. The Zen of Alice</title>
             </source>
         </version>
         <version status="translation" xml:lang="de-DE">
-            <text>Es gibt keinerlei Grund, sich zwischen Zen-Praxis und Genuss entscheiden zu müssen. Um sich im Zen üben zu können, brauchen wir keine Asketen zu werden. Dabei spreche ich allerdings nicht von <em>fun</em>, irgendwelchem Ulk, nein, ich meine das <em>echte</em>, elegante Vergnügen im Gegensatz zu dem derben, frustrierenden Zeug, von dem man nur Kopfschmerzen bekommt. [...] Die Ironie an dieser Art des Lehrens besteht darin, dass es sehr viel Spaß macht, einfach rumzusitzen und darüber zu lachen ‒ aber bedeutend weniger, etwas anzunehmen. Wenn Sie lernen, verbringen Sie viel Zeit mit Ihrem Lehrer. Und es macht selten Spaß, weil es nicht leicht ist Dinge zu lernen, die das Ego nicht akzeptieren will. Niemand hört gern, dass er etwas anders tun sollte oder dass eine Bemerkung von ihm unpassend war oder dass ein Verständnis nicht tief genug geht oder dass er die Lehre nicht verkörpert.</text>
+            <text>Es gibt keinerlei Grund, sich zwischen Zen-Praxis und Genuss entscheiden zu müssen. Um sich im Zen üben zu können, brauchen wir keine Asketen zu werden. Dabei spreche ich allerdings nicht von <em>fun</em>, irgendwelchem Ulk, nein, ich meine das <em>echte</em>, elegante Vergnügen im Gegensatz zu dem derben, frustrierenden Zeug, von dem man nur Kopfschmerzen bekommt.</text>
             <source>
                 <title>Zen und die Kunst, durch ein Loch zu fallen</title>
                 <translator>Weingart, Karin</translator>
             </source>
         </version>
+        <version status="unpublished" xml:lang="fr-DE">
+            <text>Il n'y a pas de raison qu'il faut choisir entre la pratique de zen et le plaisir. Nous ne devons pas approcher être un praticien de zen comme un ascète. Je ne parle pas de l'amusement. Je parle du <em>vrai</em> plaisir, un plaisir élégant à la différence des choses brutes et inabouties qui vous donnent le mal aux cheveux.</text>
+        </version>
         <author>Silberberg, Daniel Doen</author>
     </quote>
     <quote>
         <version status="original" xml:lang="fr-FR">
-            <text>Je vous prie par grâce, vous autres mes bons averlans, si d'icelles en trouvez que vaillent le débraguetter, montez dessus et me les amenez.</text>
+            <text>Je vous prie par grace, vous aultres mes bons averlans, si d'icelles en trouvez que vaillent le desbraguetter, montez dessus et me les amenez.</text>
             <source>
                 <title>Gargantua et Pantagruel, Livre I (Arvensa Editions, 2015)</title>
                 <page>17</page>
@@ -221,6 +224,13 @@ Des monstres, mouettes anthropophages, buses tueuses, mygales affreuses, missile
                 <idref>2429</idref>
                 <translator>Gelbcke, Horst</translator>
                 <translator>Heinze, Edith</translator>
+            </source>
+        </version>
+        <version status="translation" xml:lang="en-US">
+            <text>I ask you as a favor, my good fellow topers, if you find any of these who are worth opening your codpiece for, climb aboard and bring them to me.</text>
+            <source>
+                <title>The Complete Works of François Rabelais</title>
+                <translator>Frame, Donald M.</translator>
             </source>
         </version>
         <author>Rabelais, François</author>
