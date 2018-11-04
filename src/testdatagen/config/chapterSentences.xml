@@ -199,6 +199,10 @@ Des monstres, mouettes anthropophages, buses tueuses, mygales affreuses, missile
         </version>
         <version status="unpublished" xml:lang="fr-DE">
             <text>Il n'y a pas de raison qu'il faut choisir entre la pratique de zen et le plaisir. Nous ne devons pas approcher être un praticien de zen comme un ascète. Je ne parle pas de l'amusement. Je parle du <em>vrai</em> plaisir, un plaisir élégant à la différence des choses brutes et inabouties qui vous donnent le mal aux cheveux.</text>
+            <source>
+                <title>Zen et l'art de tomber dans un trou</title>
+                <translator>Weber, Kai</translator>
+            </source>
         </version>
         <author>Silberberg, Daniel Doen</author>
     </quote>
@@ -248,6 +252,13 @@ Des monstres, mouettes anthropophages, buses tueuses, mygales affreuses, missile
             <text>I am a philanthropic cultural pessimist through and through. That this is a paradox I hope and fear in smooth alternation.</text>
             <source>
                 <title>Wiping lips and smiling</title>
+                <translator>Weber, Kai</translator>
+            </source>
+        </version>
+        <version status="unpublished" xml:lang="fr-DE">
+            <text>Je suis un pessimiste culturel profondément philanthropique. Que c’est un paradoxe, j’espère et crains sous une alternance souple.</text>
+            <source>
+                <title>Essuyer les lèvres et sourire</title>
                 <translator>Weber, Kai</translator>
             </source>
         </version>
@@ -7245,5 +7256,24 @@ Der Mensch lebt nicht von dem, was er isst, sondern von dem, was er verdaut. Er 
         </version>
         <author>Kundera, Milan</author>
     </quote>
-    
+    <quote>
+        <version status="original" xml:lang="cs-CZ">
+            <text>Potom bylo obvyklé „Dreimal hoch!“a vojsko nasedlo opět do vlaku, jaksi zaraženo. Místo patnácti deka ementálského sýra mají na krku válku s Itálií.</text>
+            <source>
+                <!-- Kapitel: V Budapešti, Ende des ersten Abschnitts -->
+                <title>Osudy dobrého vojáka Švejka</title>
+            </source>
+        </version>
+        <author>Hašek, Jaroslav</author>
+    </quote>
+    <quote>
+        <version status="translation" xml:lang="de-DE">
+            <text>Nicht die Schnelligkeit ist zu gering, sondern das Meer ist zu groß!</text>
+            <source>
+                <title>Reise zum Mittelpunkt der Erde</title>
+                <translator>N.N.</translator>
+            </source>
+        </version>
+        <author>Verne, Jules</author>
+    </quote>    
 </quotes>
