@@ -279,6 +279,13 @@ Des monstres, mouettes anthropophages, buses tueuses, mygales affreuses, missile
                 <translator>Weber, Kai</translator>
             </source>
         </version>
+        <version status="unpublished" xml:lang="fr-DE">
+            <text>De plus les sols ont des qualités qu'il portent grâce à leur surface. Étonnamment, c'est la qualité que la société honore le plus. Un emplacement pour une voiture coûte généralement beaucoup plus cher que le blé qui pourrait être produit au-dessus ou même le bois d’épicéa.</text>
+            <source>
+                <title>Traits d'esprit</title>
+                <translator>Weber, Kai</translator>
+            </source>
+        </version>
         <author>Stahr, Karl</author>
     </quote>
     <quote>
@@ -296,6 +303,13 @@ Des monstres, mouettes anthropophages, buses tueuses, mygales affreuses, missile
                 <translator>Kuhn, Tom</translator>
             </source>
         </version>
+        <version status="unpublished" xml:lang="fr-FR">
+            <text>Bien sûr j'ai toujours connu, que chaque Allemand à peu près normal peut écrire un poème et ça ne prouve rien contre l'autre.</text>
+            <source>
+                <title>Bref report sur 400 poètes jeunes</title>
+                <translator>Weber, Kai</translator>
+            </source>
+        </version>
         <author>Brecht, Bertolt</author>
     </quote>
     <quote>
@@ -309,6 +323,13 @@ Des monstres, mouettes anthropophages, buses tueuses, mygales affreuses, missile
             <text>Freedom is freedom to help the unfree, or it isn't much good.</text>
             <source>
                 <title>Citizenship: German</title>
+                <translator>Weber, Kai</translator>
+            </source>
+        </version>
+        <version status="unpublished" xml:lang="fr-DE">
+            <text>La liberté est liberté d'aider les non-libres, ou alors elle ne vaut rien.</text>
+            <source>
+                <title>Nationalité: Allemand</title>
                 <translator>Weber, Kai</translator>
             </source>
         </version>
@@ -446,6 +467,11 @@ But imagein for a moment a school that works based on this principle. Teachers w
                 <title>Der Stechlin</title>
             </source>
         </version>
+        <!-- Englische Übersetzung: The Stechlin. Transl. with an introd. and notes by William L. Zwiebel. ISBN 1-57113-024-1 / 1-57113-573-1 the quote should be on page 174, but that page was blocked in Google's book search -->
+        <!-- Französische Übersetzung von Jacques Legrand ersch. unter 2-253-93295-7 und  2-01-006503-4 -->
+        <!-- Italien. Übersetzung: Il signore di Stechlin Trad. dal tedesco di Carla Becagli Calami. -->
+        <!-- Span. Übesretzung: El Stechlin. Madrid: Alfaguara 1988. 84-204-2490-0 -->
+        <!-- Niederländ. Übers.: Stechlin. Met een nawoord van Hans Ester. [Vertaald door Wilfred Oranje]. ISBN 90-351-1846-4 -->
         <author>Fontane, Theodor</author>
     </quote>
     <quote>
@@ -7275,5 +7301,100 @@ Der Mensch lebt nicht von dem, was er isst, sondern von dem, was er verdaut. Er 
             </source>
         </version>
         <author>Verne, Jules</author>
-    </quote>    
+    </quote>
+    <quote>
+        <version status="original" xml:lang="de-DE">
+            <text>Die psychologische Wurzel des Krieges liegt nach meiner Ansicht in einer biologisch begründeten aggressiven Eigenart des männlichen Geschöpfes.</text>            
+            <source>
+                <title>Meine Meinung über den Krieg</title>
+            </source>
+        </version>
+        <author>Einstein, Albert</author>
+    </quote>
+    <quote>
+        <version status="translation" xml:lang="de-DE">
+            <text>In einem Menschen, der, einem Impuls folgend, Kaviar ißt, steckt mehr Schlichtheit als in jemandem, der aus Prinzip Traubenkerne ißt.</text>
+            <source>
+                <title>Ketzer</title>
+                <idref>561</idref>
+                <translator>Noll, Monika</translator>
+                <translator>Enderwitz, Ulrich</translator>
+            </source>            
+        </version>
+        <author>Chesterton, Gilbert Keith</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="fr-HT">
+            <text>La mer sortit sa robe verte des grands jours et s'enveloppa de châles de dentelles d'écume.</text>
+            <source>
+                <title>Compère Général Soleil</title>
+                <idref>4169</idref>
+                <page>85</page>
+            </source>
+        </version>
+        <author>Alexis, Jacques Stephen</author>
+    </quote>
+    <quote>
+        <version status="translation" xml:lang="de-DE">
+            <text>Überdies zu argumentieren, daß eine Sünde unendlich ist, weil sie sich an Gott, der ein unendliches Wesen ist, vergreift, läuft auf dasselbe hinaus, wie sie heilig zu nennen, weil Gott heilig ist, oder sich einzubilden, die Kränkungen, die man einem Tiger zufügt, müßten gestreift sein.</text>
+            <source>
+                <title>Die Dauer der Hölle, in: Eine neue Widerlegung der Zeit</title>
+                <idref>340</idref>
+                <page>47</page>
+                <translator>Horst, Karl August</translator>
+                <translator>Haefs, Gisbert</translator>
+            </source>
+        </version>
+        <author>Borges, Jorge Luis</author>
+    </quote>
+    <quote>
+        <version status="translation" xml:lang="de-DE">
+            <text>Wenn mein Fleisch rohes Lammfleisch assimilieren kann, wer sollte den menschlichen Geist hindern, menschliche Geisteszustände zu assimilieren?</text>
+            <source>
+                <title>Die Lehre von den Zyklen, in: Eine neue Widerlegung der Zeit</title>
+                <idref>340</idref>
+                <page>86</page>
+                <translator>Horst, Karl August</translator>
+                <translator>Haefs, Gisbert</translator>
+            </source>
+        </version>
+        <author>Borges, Jorge Luis</author>
+    </quote>
+    <quote>
+        <version status="translation" xml:lang="de-DE">
+            <text>Es ist statthaft, zu bemerken (mit der solchen Bemerkungen eigenen Leichtfertigkeit und Brutalität), daß die Philosophen Englands und Frankreichs das Universum unmittelbar interessiert, oder ein bestimmter Zug des Universums, während die Deutschen dazu neigen, den Kosmos als simple Anregung, als bloßen materiellen Anlaß ihrer ungeheuren dialektischen Bauwerke zu betrachten, die immer ohne Fundament, aber immer grandios sind. Der feinen Symmetrie der Systeme gilt ihr Trachten, nicht ihrer möglichen Übereinstimmung mit dem unreinen und ungeordneten Universum.</text>
+            <source>
+                <title>Oswald Spengler, in: Eine neue Widerlegung der Zeit</title>
+                <idref>340</idref>
+                <page>128</page>
+                <translator>Haefs, Gisbert</translator>
+            </source>
+        </version>
+        <author>Borges, Jorge Luis</author>
+    </quote>
+    <quote>
+        <version status="translation" xml:lang="de-DE">
+            <text>Wie Shakespeare, wie Quevedo, wie Goethe, wie kein anderer Autor ist Joyce weniger ein Literat denn eine Literatur. Und unglaublicherweise ist er eine Literatur innerhalb eines einzigen Bandes.</text>
+            <source>
+                <title>Fragment über Joyce, in: Eine neue Widerlegung der Zeit</title>
+                <idref>340</idref>
+                <page>176/77</page>
+                <translator>Haefs, Gisbert</translator>
+            </source>
+        </version>
+        <author>Borges, Jorge Luis</author>
+    </quote>
+    <quote>
+        <version status="translation" xml:lang="de-DE">
+            <text>Sich verlieben heißt eine Religion schaffen, deren Gott fehlbar ist.</text>
+            <source>
+                <title>Neun danteske Essays, in: Eine neue Widerlegung der Zeit</title>
+                <idref>340</idref>
+                <page>246</page>
+                <translator>Haefs, Gisbert</translator>
+            </source>
+        </version>
+        <author>Borges, Jorge Luis</author>
+    </quote>
+    
 </quotes>
