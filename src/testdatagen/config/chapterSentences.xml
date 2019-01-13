@@ -345,9 +345,17 @@ Aber stellen Sie sich mal für einen Moment eine Schule vor, die nach diesem Pri
         </version>
         <version status="unpublished" xml:lang="en-DE">
             <text>One thing nearly all media on the free market have in common: They generate content mainly based on your, the reader's, interest. No matter if it is measured by quota, clicks or print run, the media world is adapted to create interest and to be liked. And actually that would not necessarily bad. It's good not to be bored, but to receive the most fascinating in palatable bites.
-But imagein for a moment a school that works based on this principle. Teachers would be trying to find out all the time, what students are interested in right now and deliver just those contents. In music lessons only songs of Justin Bieber are sung. In the English class only the American elections would be dealt with and the ridiculousness of the Republican candidates. In history class only blockbusters would be treated. The French Revolutions, with all its chopped off heads. The crusades. Reformation and the age of enlightenment will be omitted. As absurd as this imagination may sound, it the reality of adult life. Though it is generally known that human beings learn as long as they live, yet we have not drawn many practical consequences from this fact.</text>
+But imagine for a moment a school that works based on this principle. Teachers would be trying to find out all the time, what students are interested in right now and deliver just those contents. In music lessons only songs of Justin Bieber are sung. In the English class only the American elections would be dealt with and the ridiculousness of the Republican candidates. In history class only blockbusters would be treated. The French Revolutions, with all its chopped off heads. The crusades. Reformation and the age of enlightenment will be omitted. As absurd as this imagination may sound, it the reality of adult life. Though it is generally known that human beings learn as long as they live, yet we have not drawn many practical consequences from this fact.</text>
             <source>
                 <title>We call it politics</title>
+                <translator>Weber, Kai</translator>
+            </source>
+        </version>
+        <version status="unpublished" xml:lang="fr-DE">
+            <text>Presque tous les médias sur le marché libre ont une chose en commun: ils créent du contenu principalement selon que cela vous intéresse ou non. Qu'il soit mesuré en quotas, en clics ou en tirages, le monde des médias est parfaitement accordé à intéresser et à faire du plaisir. Et en fait, ce ne serait rien de grave. C'est bien si vous ne vous ennuyez pas, mais que vous recevez des choses captivantes à la façon agréable.
+Mais imaginons un instant une école qui fonctionne sur ce principe. Les enseignants essaient constamment de découvrir ce qui intéresse les élèves tout à l'heure et de leur fournir exactement ce contenu. Dans les cours de musique, seules les chansons de Justin Bieber sont chantées. L'anglais est tout au sujet des élections américaines et du ridicule des candidats républicains. Dans les cours d'histoire, seuls les scoops spéciaux sont traités. La Révolution française, avec toutes les têtes qui tombent. Les croisades. La Réforme protestante ou les Lumières sont omis. Aussi absurde que cette idée puisse paraître, c'est la réalité de la vie des adultes. Parce qu’il est bien connu que l’homme apprend aussi longtemps qu’il vit, mais nous n’en avons pas tirons pas des conséquences pratiques.</text>
+            <source>
+                <title>Nous l'appelons politique</title>
                 <translator>Weber, Kai</translator>
             </source>
         </version>
@@ -367,6 +375,13 @@ But imagein for a moment a school that works based on this principle. Teachers w
                 <idref>1269</idref>
                 <page>91</page>
                 <translator>Nirumand, Bahman</translator>
+            </source>
+        </version>
+        <version status="translation" xml:lang="en-GB">
+            <text>The butcher ran his greasy hand over his moustache and appraised the carcases with a buyer's eye. Then, with an effort, he carried two of them across and hung them from the hook at the entrance to the shop. I saw him pat their legs. I have no doubt that when he stroked his wife's body at night he would think of the sheep and reflect how much he could make if he were to kill his wife.</text>
+            <source>
+                <title>The Blind Owl</title>
+                <translator>Costello, D. P.</translator>
             </source>
         </version>
         <author>Hedayat, Sadeq</author>
@@ -545,6 +560,13 @@ But imagein for a moment a school that works based on this principle. Teachers w
                 <title>Fast eine Kindheit</title>
                 <idref>236</idref>
                 <page>55</page>
+            </source>
+        </version>
+        <version status="translation" xml:lang="en-GB">
+            <text>Another new thing was that there were now two Germanies, quarreling over who had started the split. Father Christoph said it was Adenauer, because he couldn't abide the Prussians, and the Western powers kept him on a short leash, although it was a little longer than the one that Stalin allowed Ulbricht, and everyone knew what happened when two dogs held on leashes met in the street. As their masters were not keen for them to bite each other, they would have to negotiate for a very long time before letting them loose at the same moment, and meanwhile the dogs' barking would have made them so aggressive that they couldn't be let loose at all.</text>
+            <source>
+                <title>Almost a Childhood. Growing up among the Nazis</title>
+                <translator>Bell, Anthea</translator>
             </source>
         </version>
         <author>Behr, Hans-Georg</author>
@@ -5867,6 +5889,7 @@ dann wird der Huszar, bitte, Viech.</text>
                 <title>Die geistige Landschaft in posttotalitärer Zeit, in: Ich habe keine Feinde, ich kenne keinen Hass.</title>
                 <idref>3741</idref>
                 <page>40</page>
+                <translator>Hoffmann, Hans Peter</translator>
             </source>
         </version>
         <!-- Es gibt eine offizielle, veröffentlichte Übersetzung, aber die zitierte Passage konnte ich online nicht finden -->
@@ -6004,6 +6027,8 @@ dann wird der Huszar, bitte, Viech.</text>
                 <title>Orthodoxie</title>
                 <idref>563</idref>
                 <page>44</page>
+                <translator>Enderwitz, Ulrich</translator>
+                <translator>Noll, Monika</translator>
             </source>
         </version>
         <version status="translation" xml:lang="fr-CA">
@@ -7395,6 +7420,34 @@ Der Mensch lebt nicht von dem, was er isst, sondern von dem, was er verdaut. Er 
             </source>
         </version>
         <author>Borges, Jorge Luis</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="de-DE">
+            <text>Kunst dem Volke ? ! : den slogan lasse man Nazis und Kommunisten : umgekehrt ists : das Volk (Jeder !) hat sich gefälligst zur Kunst hin zu bemühen ! ‒</text>
+            <source>
+                <title>Brand's Haide, in: Bargfelder Ausgabe, Werkgruppe 1, Band 1</title>
+                <page>137</page>
+            </source>
+        </version>
+        <author>Schmidt, Arno</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="en-GB">
+            <text>The changes of a fevered room are slow and fluctuating; but the changes of the fevered world are rapid and irrevocable.</text>
+            <source>
+                <title>Little Dorrit</title>
+                <idref>687</idref>
+                <page>721</page>
+            </source>
+        </version>
+        <version status="translation" xml:lang="de-DE">
+            <text>Die Veränderungen im Zimmer eines Fieberkranken sind langsam und wechselvoll; aber die Veränderungen in der fiebernden Welt sind rasch und unwiderruflich.</text>
+            <source>
+                <title>Klein Dorrit, Band 2</title>
+                <translator>Busch, Moritz</translator>
+            </source>
+        </version>
+        <author>Dickens, Charles</author>
     </quote>
     
 </quotes>
