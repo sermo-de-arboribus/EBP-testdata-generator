@@ -402,6 +402,13 @@ Mais imaginons un instant une école qui fonctionne sur ce principe. Les enseign
                 <translator>Weber,Kai</translator>
             </source>
         </version>
+        <version status="translation" xml:lang="fr-FR">
+            <text>L'homme moderne est isolé dans son milieu artificiel, non parce que l'artificiel comme tel est un mal, mais parce que cet homme ne sait pas comprendre les forces qui expliquent le milieu en question, les principes qui relient ses appareils domestiques aux forces de la nature, à l'ordre universel. Ce n'est pas le chauffage central qui rend son existence « artificielle », mais le refus de s'intéresser aux principes du chauffage. Totalement dépendant de la science, et s'interdisant de la comprendre, il vit en barbare urbanisé.</text>
+            <source>
+                <title>Le cri d'Archimède. La découverte de l'Art et l'art de la Découverte</title>
+                <translator>Fradier, Georges</translator>
+            </source>
+        </version>
         <author>Koestler, Arthur</author>
     </quote>
     <quote>
@@ -421,6 +428,14 @@ Mais imaginons un instant une école qui fonctionne sur ce principe. Les enseign
                 <translator>Vetter, Hermann</translator>
             </source>
         </version>
+        <!-- frz. Übersetzung von Didier Machu erschien 2001 unter dem Titel „L'Amérique, un projet inachevé : la pensée de gauche dans l'Amérique du vingtième sièccle“, (2908930730) war mir aber nicht zugänglich -->
+        <version status="unpublished" xml:lang="fr-DE">
+            <text>La gauche, le parti de l'espoir, considère que l'identité morale de notre pays reste à achever et non à préserver. La droite pense que notre pays a déjà une identité morale et espère de préserver cette identité. Les faveurs et le changement de sens du changement sont importants. Elle craint les changements économiques et politiques et devient en conséquence facilement le gage des riches et des puissants – des peuples dont les intérêts personnels sont servis par la prévention de tels changements.</text>
+            <source>
+                <title>L'Amérique, un projet inachevé</title>
+                <translator>Weber, Kai</translator>
+            </source>            
+        </version>
         <author>Rorty, Richard</author>
     </quote>
     <quote>
@@ -435,6 +450,13 @@ Mais imaginons un instant une école qui fonctionne sur ce principe. Les enseign
             <text>Once his inner life had been a wide, undivided stream that mirrored the whole universe. At that time it was easy for him to realise and to see through. By now his inner life has differentiated according to the natural law of psychic organ fission, and the great, wide, undivided stream inside him has splintered into uncountable rivers and rivulets, creeks and trickles, that reflect and allow to reconstruct only broken parts and particles of the universe. Where there once had been a single, great, collected interest that had to cause death if it was understood, triggered and put into practice in the right moment, there were now a thousand smaller particular interests that encased life. Yes! He had to live. He had missed death. He was sentenced to life.</text>
             <source>
                 <title>Adam Man</title>
+                <translator>Weber, Kai</translator>
+            </source>
+        </version>
+        <version status="unpublished" xml:lang="fr-DE">
+            <text>Jadis sa vie spirituelle avait été un large courant non partagée dans lequel l'univers tout entier se reflétait. À cette époque il avait beau jeu à reconnaître et à voir à travers. Maintenant, selon la loi naturelle de la division des organes mentaux, sa vie spirituelle avait été différenciée, et le grand et large courant non partagé de son intérieur s’était brisé et dissous en innombrables rivières et écoulements, ruisseaux et filets d'eau, dans lesquels ne se reflètent et ne se trouvaient que des parties et des particules brisées de l’univers. Là où autrefois dominait un seul et grand intérêt réuni, qui devait conditionner la mort, quand il était compris, déclenché et mis en œuvre au bon moment, il régnait maintenant un millier d’intérêts particuliers plus petits qui impliquaient la vie. Oui! Il devait vivre. Il avait raté la mort. Il a été condamné à la vie.</text>
+            <source>
+                <title>Adam l'homme</title>
                 <translator>Weber, Kai</translator>
             </source>
         </version>
@@ -454,6 +476,9 @@ Mais imaginons un instant une école qui fonctionne sur ce principe. Les enseign
                 <translator>Clausen, Jeanette</translator>
             </source>
         </version>
+        <!-- Vie et aventures de la trobairitz Béatrice d'après les témoignages de sa ménestrelle Laura, ISBN 2721002538 (1983), übers. Evelyne Sinnassamy -->
+        <!-- Život a dobrodružství trabadúry Beatrice, podle toho, co o nich vypověděla hudkyně její Laura : román o 13 knihách, jakož i 7 intermezzech, Mladá fronta 1981, übers. Hanuš Karlach & Josef Hochman -->
+        <!-- Život i pustolovine trubadurke Beatriz prema svjedočanstvima njezine žonglerke Laure, Zagreb: Globus 1985, übers. Nedeljka Paravić -->
         <author>Morgner, Irmtraud</author>
     </quote>
     <quote>
@@ -471,6 +496,14 @@ Mais imaginons un instant une école qui fonctionne sur ce principe. Les enseign
                 <idref>590</idref>
                 <page>438</page>
                 <translator>Schönfeld, Eva</translator>
+            </source>
+        </version>
+        <version status="translation" xml:lang="fr-FR">
+            <text>Mon amour, c'est ma vie, et mon amour lié à ma cécité.</text>
+            <source>
+                <title>Pauvre Miss Finch</title>
+                <translator>Anonyme</translator>
+                <translator>Klein, Frédéric</translator>
             </source>
         </version>
         <author>Collins, Wilkie</author>
@@ -7448,6 +7481,141 @@ Der Mensch lebt nicht von dem, was er isst, sondern von dem, was er verdaut. Er 
             </source>
         </version>
         <author>Dickens, Charles</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="de-DE">
+            <text>Pfahl hatte plötzlich verstanden, was Friebe ihm die ganze Zeit hatte sagen wollen: Dass die menschliche Intelligenz womöglich gar nicht dafür optimiert sei, die Welt zu verstehen, dass sie womöglich Besseres und Wichtigeres zu tun hätte. Denn das Substrat, in dem sie sich realisiert, ist ein dem Tod geweihter menschlicher Körper und es ist anzunehmen, dass sie solidarisch ist mit diesem Körper. Somit sind zwei Dinge ihr eingeschrieben von allem Anfang an. Erstens: Sie will leben. Zweitens: Sie wird sterben.</text>
+            <source>
+                <title>Der Chor der Zwölf</title>
+                <idref>4239</idref>
+                <page>126</page>
+            </source>
+        </version>
+        <author>Dury, Andreas</author>
+    </quote>    
+    <quote>
+        <version status="original" xml:lang="de-DE">
+            <text>Ein Autofahrer fuhr aus unbekannten Gründen gegen eine Bahnschranke : was mag der wohl für „Gründe“ gehabt haben ? ! (Wenn die Leute schon nich Schopenhauer, sollten sie doch das Wörtlein „Ursache“ kennen).</text>
+            <source>
+                <title>Seelandschaft mit Pocahontas, in: Bargfelder Ausgabe, Werkgruppe 1, Band 1</title>
+                <page>432</page>
+            </source>
+        </version>
+        <author>Schmidt, Arno</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="en-US">
+            <text>Methinks we have hugely mistaken this matter of Life and Death. Methinks that what they call my shadow here on earth is my true substance. Methinks that in looking at things spiritual, we are too much like oysters observing the sun through the water, and thinking that thick water the thinnest of air.</text>
+            <source>
+                <title>Moby-Dick, or The Whale</title>
+                <page>40</page>
+            </source>
+        </version>
+        <author>Melville, Herman</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="en-US">
+            <text>But no doubt the first man that ever murdered an ox was regarded as a murderer; perhaps he was hung; and if he had been put on his trial by oxen, he certainly would have; and he certainly deserved it if any murderer does. Go to the meat-market of a Saturday night and see the crowds of live bipeds staring up at the long rows of dead quadrupeds.Does not that sight take a tooth out of the cannibal's jaw? Cannibals? who is not a cannibal? I tell you it will be more tolerable for the Fejee that salted down a lean missionary in his cellar against a coming famine; it will be more tolerable for that provident Fejee, I say, in the day of judgment, than for thee, civilized and enlightened gourmand, who nailest geese to the ground and feastest on their bloated livers in thy paté-de-foie-gras.</text>
+            <source>
+                <title>Moby-Dick, or The Whale</title>
+                <page>335</page>
+            </source>
+        </version>
+        <author>Melville, Herman</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="es-ES">
+            <text>Es la soledad como un gran pensamiento de luz.
+De vez en cuando, Platero deja de comer y me mira… Yo, de vez en cuando, dejo de leer, y miro a Platero…</text>
+            <source>
+                <title>Platero y yo</title>
+                <page>131</page>
+            </source>
+        </version>
+        <version status="translation" xml:lang="de-DE">
+            <text>Die Einsamkeit ist wie ein großer Gedanke aus lauter Licht.
+Von Zeit zu Zeit hört Platero auf zu weiden und schaut nach mir.
+Von Zeit zu Zeit höre ich auf zu lesen und blicke nach Platero.</text>
+            <source>
+                <title>Platero und ich</title>
+                <page>162</page>
+                <translator>Deinhard, Doris</translator>
+            </source>
+        </version>
+        <version status="translation" xml:lang="en-US">
+            <text>The solitude is like a great thought of light.
+Now and then Platero stops eating and looks at me.
+I, now and then, stop reading and look at Platero.</text>
+            <source>
+                <title>Platero and I</title>
+                <page>33</page>
+                <translator></translator>
+            </source>
+        </version>
+        <author>Jiménez, Juan Ramón</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="es-ES">
+            <text>Los habares mandan al pueblo mensajes de fragancia tierna, cual en una libre adolescencia candorosa y desnuda.</text>
+            <source>
+                <title>Platero y yo</title>
+                <page>86</page>
+                <translator>Antonio T. de Nicolás</translator>
+            </source>
+        </version>
+        <version status="translation" xml:lang="de-DE">
+            <text>Die Bohnenfelder senden dem Dorf zartduftende Botschaften, wie von einer freimütigen, nackten Jugend.</text>
+            <source>
+                <title>Platero und ich</title>
+                <page>165</page>
+                <translator>Deinhard, Doris</translator>
+            </source>
+        </version>
+        <version status="translation" xml:lang="en-US">
+            <text>The fields send the town messages of tender fragrance in candorous, naked adolescence.</text>
+            <source>
+                <title>Platero and I</title>
+                <page>39</page>
+                <translator>Antonio T. de Nicolás</translator>
+            </source>
+        </version>
+        <author>Jiménez, Juan Ramón</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="de-AT">
+            <text>Und in dem Schweigen, das nun wieder zwischen ihm und dem Knaben lag, überkam es ihn, wie wenig wir einander von den verschiedenen Stufen des Lebens übermitteln können: will man eine Erfahrung hinunterreichen – der Inhalt fließt dabei aus, nur das Gefäß bleibt, Wort und Form; und dieses Gefäß muß jener, der noch unten steht, selbst wieder füllen.</text>
+            <source>
+                <title>Falsche Erwartungen, in: Die sibirische Klarheit</title>
+                <idref>4280</idref>
+                <page>112</page>
+            </source>
+        </version>
+        <version status="unpublished" xml:lang="en-DE">
+            <text>And in the silence that once again lay between him and the boy he had the sudden insight, how few we can transmit of the different stages of life to each other: if you want to pass down an experience - the content is spilled in the process, only the vessel remains, word and form; and this vessel has to be re-filled by the person standing below.</text>
+            <source>
+                <title>Wrong expectations, in: The Siberian Clarity</title>
+                <translator>Weber, Kai</translator>
+            </source>
+        </version>
+        <author>Doderer, Heimito von</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="en-GB">
+            <text>[...] for it is a madness to be sober alone, while the nation continues drunk[.]</text>
+            <source>
+                <title>The Preface to Religio Laici; or, a Layman's Faith</title>
+            </source>
+        </version>
+        <author>Dryden, John</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="en-GB">
+            <text>A man is to be cheated into passion, but to be reasoned into truth.</text>
+            <source>
+                <title>The Preface to Religio Laici; or, a Layman's Faith</title>
+            </source>
+        </version>
+        <author>Dryden, John</author>
     </quote>
     
 </quotes>
