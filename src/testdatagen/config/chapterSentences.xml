@@ -538,6 +538,13 @@ Mais imaginons un instant une école qui fonctionne sur ce principe. Les enseign
                 <translator>Weber, Kai</translator>
             </source>
         </version>
+        <version status="unpublished" xml:lang="fr-DE">
+            <text>Un jour ou l'autre tu auras avoir un emploi, et puis tu seras dans une conférence et votre patron tiendra un monologue décérébré, qui ne s'arrêtera pas, et tu le détesteras pour ne pas avoir assez de format pour laisser ça, cet abus des employés comme mouchoirs, crachoirs et pour réflexions sur soi-même, mais tu penses que cette haine t'empêche de réussir, de s'avancer. Pourtant c'est toi-même, cette haine, et cela ne vaut pas la peine d'avancer, si tu ne peux pas emmener toi-même.</text>
+            <source>
+                <title>Les yeux blancs comme le sel</title>
+                <translator>Weber, Kai</translator>
+            </source>
+        </version>
         <author>Dath, Dietmar</author>
     </quote>
     <quote>
@@ -6706,7 +6713,7 @@ je meist sterben, desto mehr leben wir</text>
             </source>
         </version>
         <version status="translation" xml:lang="de-DE">
-            <text>Und wenn wir unser Hirn auf den Erdboden verspritzten, so hätten wir damit noch nicht ein Zehntausendstel unserer Dankesschuld an den Himmelssohn - tausend Herbste möge er leben! - abgetragen.</text>
+            <text>Solches Glück ist nächst der kaiserlichen Gnade und dem unerforschlichen Walten der Natur zweifellos auch dem segensreichen Einfluss unserer Ahnen zu danken. [...] Und wenn wir unser Hirn auf den Erdboden verspritzten, so hätten wir damit noch nicht ein Zehntausendstel unserer Dankesschuld an den Himmelssohn - tausend Herbste möge er leben! - abgetragen.</text>
             <source>
                 <title>Der Traum der roten Kammer</title>
                 <idref>501</idref>
@@ -6715,7 +6722,7 @@ je meist sterben, desto mehr leben wir</text>
             </source>
         </version>
         <version status="translation" xml:lang="en-GB">
-            <text>And although we may besmear our liver and brain in the mire, how could we show our gratitude, even to so slight a degree as one ten-thousandth part.</text>
+            <text>Moreover, the present emperor, bearing in mind the great bounty shewn by heaven and earth in promoting a ceaseless succession, has vouchsafed a more generous act of grace than has ever been displayed from old days to the present. And although we may besmear our liver and brain in the mire, how could we show our gratitude, even to so slight a degree as one ten-thousandth part.</text>
             <source>
                 <title>The Dream of the Red Chamber</title>
                 <translator>Joly, Henry Bencraft</translator>
@@ -7621,7 +7628,7 @@ I, now and then, stop reading and look at Platero.</text>
         <version status="original" xml:lang="de-AT">
             <text>"Blech reden" ist ein mit Genie erfundenes Wort. Es enthält: das Glänzende, das nicht Gold ist; den durchdringend unangenehmen Klang; das Lebhafte, das Auswalzbare. Würde man "Blech schreiben" sagen, wie viele wichtige zeitgenössische Erscheinungen liessen sich damit erklären! Aber der Gebrauch dieses Worts ist in Abnahme begriffen. Irgendwann wird es wie "Aar" und "hehr" sein. Spätere Schriftstellergenerationen werden dann in Festreden sagen: "Die Väter haben Blech geschrieben", und ein ungläubiger Schauer wird die Zuhörer ergreifen.</text>
             <source>
-                <title>Nachlass VI/1/1</text>
+                <title>Nachlass VI/1/1</title>
             </source>
         </version>
         <author>Musil, Robert</author>
