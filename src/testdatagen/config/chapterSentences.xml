@@ -7643,4 +7643,77 @@ I, now and then, stop reading and look at Platero.</text>
         </version>
         <author>Hrabal, Bohumil</author>
     </quote>
+    <quote>
+        <version status="translation" xml:lang="de-DE">
+            <text>Die Monotonie des Bürolebens wurde ihnen verhaßt. Ständig Rasiermesser und Sandarak, immer dieselben Tintenfässer, dieselben Federn und dieselben Kollegen! Sie begannen sie für stumpfsinnig zu halten und sprachen immer seltener mit ihnen. Das trug ihnen Hänseleien ein. Sie kamen Tag für Tag zu spät und mußten sich Ermahnungen gefallen lassen.
+Früher hatten sie sich beinahe glücklich gefühlt. Jetzt aber demütigte sie ihr Beruf, seit sie ihren Eigenwert höher einzuschätzen gelernt hatten; – und sie bestärkten sich in diesem Abscheu, feierten sich gegenseitig und schmeichelten sich selbst.</text>
+            <source>
+                <title>Bouvard und Pécuchet</title>
+                <idref>894</idref>
+                <page>19</page>
+                <translator>Henschen, Hans-Horst</translator>
+            </source>
+        </version>
+        <version status="original" xml:lang="fr-FR">
+            <text>La monotonie du bureau leur devenait odieuse. Continuellement le grattoir et la sandaraque, le même encrier, les mêmes plumes et les mêmes compagnons! Les jugeant stupides, ils leur parlaient de moins en moins; cela leur valut des taquineries. Ils arrivaient tous les jours après l'heure, et reçurent des semonces.
+Autrefois, ils se trouvaient presque heureux. Mais leur métier les humiliait depuis qu'ils s'estimaient davantage; – et ils se renforçaient dans ce dégoût, s'exaltaient mutuellement, se gâtaient.</text>
+            <source>
+                <title>Bouvard et Pécuchet</title>
+            </source>
+        </version>
+        <author>Flaubert, Gustave</author>
+    </quote>
+    <quote>
+        <version status="translation" xml:lang="de-DE">
+            <text>Sie [die keltischen Druiden] brachten den Griechen die Metaphysik bei, den Persern die Zauberei, den Etruskern die Wahrsagekunst – und den Römern das Verzinnen von Kupfer und den Handel mit Schinken.</text>
+            <source>
+                <title>Bouvard und Pécuchet</title>
+                <idref>894</idref>
+                <page>145</page>
+                <translator>Henschen, Hans-Horst</translator>
+            </source>
+        </version>
+        <version status="original" xml:lang="fr-FR">
+            <text>Ils apprirent la métaphysique aux Grecs, la sorcellerie aux Persans, l'aruspicine aux Étrusques — et aux Romains, l'étamage du cuivre et le commerce des jambons.</text>
+            <source>
+                <title>Bouvard et Pécuchet</title>
+            </source>
+        </version>
+        <author>Flaubert, Gustave</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="de-DE">
+            <text>Äußerste Reaktion neben äußerstem Fortschritt, äußerster Absolutismus neben äußerster Demokratie, der größte Unterschied der Stände neben dem größten Streben sie gleichzumachen, der fabelhafteste Reichthum neben der grenzenlosesten Armuth, die höchste Bildung neben der tiefsten Unwissenheit, die höchste Freiheit der Geister neben ihrer tiefsten Sklaverei, Orthodoxie, Pietismus und Fanatismus in allen Gestalten neben Unglaube, Atheismus und äußerster Toleranz der Meinung, reißender Fortschritt der Wissenschaft neben der kecksten Verleugnung und Verachtung ihrer Resultate, Aufklärung neben Verdummung, Kühnheit neben Zopfthum, rastlose Forschung neben rastloser Unterdrückung, Licht neben Finsterniß.</text>
+            <source>
+                <title>Der Gottesbegriff und seine Bedeutung für die Gegenwart. In: Aus Natur und Wissenschaft. Studien, Kritiken und Abhandlungen, Band 1</title>
+                <page>6</page>
+            </source>
+        </version>
+        <version status="translation" xml:lang="fr-FR">
+            <text>L'excès de réaction en face de l'excès du progrès, l'excès d'absolutisme en face de l'excès de démocratie, la différence la plus grande entre les classes en face de la tendance la plus grande à atteindre l'égalité, la richesse la plus fabuleuse en face de la pauvreté la plus illimitée, la civilisation la plus élevée en face de l'ignorance la plus profonde, la liberté la plus grande de l'esprit en face de l'esclavage le plus complet, l'orthodoxie, le piétisme, le fanatisme sous toutes les formes en face de l'incrédulité de l'athéisme et de la tolérance d'opinions la plus excessive, le progrès rapide des sciences en face de la négation et du mépris le plus éhonté de ses résultats, la production de la lumière en face de la production de l'obscurité, la témérité en face de la pusillanimité, le progrès incessant des connaissances en face de la dépression incessante du niveau de l'intelligence la lumière en face de l'obscurité.</text>
+            <source>
+                <title>De l'idée de dieu et de sa signification dans l'époque actuelle, dans:Science et nature. Essais de philosophie et de science naturelle.</title>
+                <page>9/10</page>
+                <translator>Delondre, Augustin</translator>
+            </source>
+        </version>
+        <author>Büchner, Ludwig</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="de-DE">
+            <text>Was noch einmal die Naturwissenschaften betrifft, so bekämpfen sie nicht die <em>Philosophie</em>, sondern die <em>Philosophen</em> und deren spekulativen Dünkel, welcher sich nicht um Thatsachen und um Erfahrung kümmern will, wie man ja wahrlich auf jeder Seite bei ihnen lesen kann.</text>
+            <source>
+                <title>Der Gottesbegriff und seine Bedeutung für die Gegenwart. In: Aus Natur und Wissenschaft. Studien, Kritiken und Abhandlungen, Band 1</title>
+            </source>
+        </version>
+        <version status="translation" xml:lang="fr-FR">
+            <text>Encore une fois, en ce qui concerne les sciences naturelles, elles combattent, non la philosophie, mais les philosophes et leur obscurité spéculative, qui ne paraissent pas se soucier des faits, ni de l'expérience ainsi qu'on peut le lire en réalité à chaque page des ouvrages philosophiques.</text>
+            <source>
+                <title>De l'idée de dieu et de sa signification dans l'époque actuelle, dans:Science et nature. Essais de philosophie et de science naturelle.</title>
+                <page>9/10</page>
+                <translator>Delondre, Augustin</translator>
+            </source>
+        </version>
+        <author>Büchner, Ludwig</author>
+    </quote>
 </quotes>
