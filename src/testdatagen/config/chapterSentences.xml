@@ -377,6 +377,14 @@ Mais imaginons un instant une école qui fonctionne sur ce principe. Les enseign
                 <translator>Nirumand, Bahman</translator>
             </source>
         </version>
+        <version status="translation" xml:lang="fr-FR">
+            <text>Le boucher passa sa main graisseuse sur ses moustaches; il examina ses moutons d'un regard intéressé puis, avec effort, il en porta deux jusqu'à sa boutique. Il les suspendit au croc, leur caressa les cuises. Il devait penser à ses moutons, la nuit, en caressant sa femme et calculer ce qu'il gagnerait à l'abattre.</text>
+            <source>
+                <title>La chouette aveugle, in: La Revue du Caire No. 152 (Septembre 1952)</title>
+                <page>245</page>
+                <translator>Lescot, Roger</translator>
+            </source>
+        </version>
         <version status="translation" xml:lang="en-GB">
             <text>The butcher ran his greasy hand over his moustache and appraised the carcases with a buyer's eye. Then, with an effort, he carried two of them across and hung them from the hook at the entrance to the shop. I saw him pat their legs. I have no doubt that when he stroked his wife's body at night he would think of the sheep and reflect how much he could make if he were to kill his wife.</text>
             <source>
@@ -561,6 +569,13 @@ Mais imaginons un instant une école qui fonctionne sur ce principe. Les enseign
             <source>
                 <title>Das Paradies der Diebe</title>
                 <translator>Meitner, Clarisse</translator>
+            </source>
+        </version>
+        <version status="translation" xml:lang="fr-FR">
+            <text>Pour être assez intelligent pour gagner tout cet argent, un homme doit être assez bête pour le vouloir.</text>
+            <source>
+                <title>Le Paradis des voleurs, dans: La sagesse du Père Brown</title>
+                <translator>André, Yves</translator>
             </source>
         </version>
         <author>Chesterton, Gilbert Keith</author>
@@ -7742,5 +7757,31 @@ Formerly they had been almost happy, but their occupation humiliated them since 
             </source>
         </version>
         <author>Eliot, George</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="de-DE">
+            <text>Ach, Männe, hör doch mal eben,
+Was ist doch bei Gustav Mahler der Knalleffekt,
+Die Musik als tragisches Erleben
+Oder als Schrei im Plusquamperfekt.</text>
+            <source>
+                <title>Sogenannte Intellektuelle, in: Denn in jeder Leiche ist ein Kind versteckt. Kabarettistische Texte</title>
+                <page>27</page>
+            </source>
+        </version>
+        <author>Hüsch, Hanns Dieter</author>
+    </quote>
+        <quote>
+        <version status="original" xml:lang="de-DE">
+            <text>Denn in jeder Leiche ist ein Kind versteckt
+Das nach Zukunft fragt
+Und nach Frühling schmeckt
+Und sich dann erschreckt</text>
+            <source>
+                <title>Obduktion im Café Größenwahn, in: Denn in jeder Leiche ist ein Kind versteckt. Kabarettistische Texte</title>
+                <page>132</page>
+            </source>
+        </version>
+        <author>Hüsch, Hanns Dieter</author>
     </quote>
 </quotes>
