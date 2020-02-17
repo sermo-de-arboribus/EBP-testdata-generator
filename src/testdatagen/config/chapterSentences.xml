@@ -589,6 +589,14 @@ Mais imaginons un instant une école qui fonctionne sur ce principe. Les enseign
                 <page>207</page>
             </source>
         </version>
+        <version status="translation" xml:lang="cs-CZ">
+            <text>Tradice znamená dát hlasovací právo nejzanedbanější ze všech tříd, našim předkům. Je to demokracie mrtvých.</text>
+            <source>
+                <title>Ortodoxie</title>
+                <page>41</page>
+                <translator>Čulík, Jan</translator>
+            </source>
+        </version>
         <version status="translation" xml:lang="de-DE">
             <text>Tradition ist Demokratie für die Toten.</text>
             <source>
@@ -624,23 +632,16 @@ Mais imaginons un instant une école qui fonctionne sur ce principe. Les enseign
                 <translator>Bell, Anthea</translator>
             </source>
         </version>
-        <author>Behr, Hans-Georg</author>
-    </quote>
-    <quote>
-        <version status="original" xml:lang="de-DE">
-            <text>Frauen öffnen Briefe nicht und gehen nicht ans Telefon. Sie können so etwas.</text>
+        <version status="unpublished" xml:lang="fr-DE">
+            <text>Ce qui était nouveau, c'est qu'il y avait maintenant deux pays allemands, et ils se disputent qui l'avait commencé en premier. Le père Christoph a dit que c'était Adenauer parce qu'il n'aimait pas les Prussiens et parce que les puissances occidentales ont tenu la bride serrée à lui, ce qui était un peu plus lâche que la bride de Staline à Ulbricht, et vous saviez ce qui se passerait si deux chiens tenus en laisse se sont rencontrés dans la rue. Leurs maîtres ne voulaient pas vraiment qu'ils mordent, alors ils devraient négocier très longtemps pour les laisser partir en même temps, et sur ces entrefaites les clébards seraient si agressifs de leurs jappements qu'ils ne pourraient plus être libérés.</text>
             <source>
-                <title>Die Geschäfte der Liebe</title>
-            </source>
-        </version>
-        <version status="unpublished" xml:lang="en-DE">
-            <text>Women don't open letters and don't answer the phone. They are capable of something like that.</text>
-            <source>
-                <title>The business of love</title>
+                <title>Presque une enfance</title>
                 <translator>Weber, Kai</translator>
             </source>
         </version>
-        <author>Westphalen, Joseph von</author>
+        <!-- italien. Übersetung „Quasi un'infanzia”, Einaudi 2006, ISBN 9788806176327, übers. v. Silvia Bortoli -->
+        <!-- poln. Übersetung „Prawie dzieciństwo”, Wydawnictwo Literackie 2009, ISBN 9788308039939, übers. v. Katarzyna Zimmerer -->
+        <author>Behr, Hans-Georg</author>
     </quote>
     <quote>
         <version status="original" xml:lang="de-AT">
@@ -1047,6 +1048,13 @@ Like the fat doe hare and fructify.</text>
                 <title>Adam Stvořitel</title>
                 <idref>3727</idref>
                 <page>131</page>
+            </source>
+        </version>
+        <version status="unpublished" xml:lang="de-DE">
+            <text>Die Wahrheit ist das, was abgestimmt wurde. Es genügt eine einfache Mehrheit, um alles beliebige zur Wahrheit werden zu lassen.</text>
+            <source>
+                <title>Adam der Schöpfer</title>
+                <translator>Weber, Kai</translator>
             </source>
         </version>
         <author>Čapek, Josef</author>
