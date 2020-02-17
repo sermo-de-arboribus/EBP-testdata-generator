@@ -7767,6 +7767,17 @@ Formerly they had been almost happy, but their occupation humiliated them since 
         <author>Eliot, George</author>
     </quote>
     <quote>
+        <version status="original" xml:lang="en-GB">
+            <text>[...] if you are inclined to be severe on his severity, remember that the responsibility of tolerance lies with those who have the wider vision.</text>
+            <source>
+                <title>The Mill on the Floss</title>
+                <idref>788</idref>
+                <page>512</page>
+            </source>
+        </version>
+        <author>Eliot, George</author>
+    </quote>
+    <quote>
         <version status="original" xml:lang="de-DE">
             <text>Ach, Männe, hör doch mal eben,
 Was ist doch bei Gustav Mahler der Knalleffekt,
@@ -7779,7 +7790,7 @@ Oder als Schrei im Plusquamperfekt.</text>
         </version>
         <author>Hüsch, Hanns Dieter</author>
     </quote>
-        <quote>
+    <quote>
         <version status="original" xml:lang="de-DE">
             <text>Denn in jeder Leiche ist ein Kind versteckt
 Das nach Zukunft fragt
@@ -7791,5 +7802,28 @@ Und sich dann erschreckt</text>
             </source>
         </version>
         <author>Hüsch, Hanns Dieter</author>
+    </quote>
+    <quote>
+        <version status="original" xml:lang="cs-CZ">
+            <text>Pták usedl v růžích a zlomil křídlo
+Kdysi jste se učili od těchto ptáků
+ale pták usedl v růžích zlomil křídlo a mlčí
+naslouchaje zvukům křídlovek</text>
+            <source>
+                <title>Srdce hracích hodin, in: Pantomima</title>
+                <page>125</page>
+            </source>
+        </version>
+        <version status="unpublished" xml:lang="de-DE">
+            <text>Ein Vogel setzte sich in die Rosen und brach sich den Flügel
+Einst habt ihr von diesen Vögeln gelernt
+aber der Vogel setzte sich in die Rosen brach sich den Flügel und schwieg
+den Klängen der Flügelhörner lauschend</text>
+            <source>
+                <title>Das Herz der Spieluhr</title>
+                <translator>Weber, Kai</translator>
+            </source>
+        </version>
+        <author>Nezval, Vítězslav</author>
     </quote>
 </quotes>
