@@ -132,7 +132,7 @@ public final class Utilities
 	}
 	
 	/**
-	 * Close an output stream safely, within a try/catch blok
+	 * Close an output stream safely, within a try/catch block
 	 * @param str The Stream to be closed
 	 */
 	public static void safeClose(final Closeable str)
